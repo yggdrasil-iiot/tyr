@@ -1,0 +1,1 @@
+Synthetic motor-b-speed = D3100 (one UInt16 word).

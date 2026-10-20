@@ -1,0 +1,24 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "array-shape-stride",
+  "patternId": "MP06",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "base": 1000,
+    "shape": [
+      3,
+      2
+    ],
+    "storageUnit": "word16",
+    "elementWords": 2,
+    "index": [
+      1,
+      1
+    ]
+  },
+  "expect": {
+    "address": 1006,
+    "lengthWords": 2
+  }
+}

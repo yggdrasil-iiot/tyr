@@ -1,0 +1,212 @@
+{
+  "kind": "mapping-proposal",
+  "schemaVersion": "2.0.0",
+  "id": "local-workspace",
+  "version": "2.0.0",
+  "baseRelease": null,
+  "files": [
+    {
+      "path": "evidence/0.json",
+      "kind": "evidence-artifact",
+      "id": "manual-array-pressures-ab",
+      "version": "1.0.0",
+      "sha256": "ef692b8cbc8d4875b8f93843f38fff4ddc6372b690cc48dc735acb9bcc4230ec"
+    },
+    {
+      "path": "evidence/2.json",
+      "kind": "evidence-artifact",
+      "id": "manual-array-pressures-db",
+      "version": "1.0.0",
+      "sha256": "df10baabb8a4c49116b8912e6b348ed7746a90ec39075f45adc026760d06e269"
+    },
+    {
+      "path": "evidence/3.json",
+      "kind": "evidence-artifact",
+      "id": "manual-array-pressures-melsec",
+      "version": "1.0.0",
+      "sha256": "cb6d9b0eeb620dfe53c4d86e9044334e2827a6c9eb1e2711c510c27ab9e90ff9"
+    },
+    {
+      "path": "evidence/1.json",
+      "kind": "evidence-artifact",
+      "id": "manual-array-pressures-ua",
+      "version": "1.0.0",
+      "sha256": "c4c8258a1fba78f5cc20b1b4471828e6e10c06a3a2cf80a8ecc093060a0d40a5"
+    },
+    {
+      "path": "mappings/0.json",
+      "kind": "mapping-set",
+      "id": "array-ab-first-mapping",
+      "version": "1.0.0",
+      "sha256": "9ecf8ba7fad3d33476af3c52bf7411d872e45b7b4fabfafbcf458978517af5de"
+    },
+    {
+      "path": "mappings/1.json",
+      "kind": "mapping-set",
+      "id": "array-ab-last-mapping",
+      "version": "1.0.0",
+      "sha256": "10e688be14dad41d2bf6a667736f4c40dc2e0c6f2fda4684a6a6a433e1de3572"
+    },
+    {
+      "path": "mappings/4.json",
+      "kind": "mapping-set",
+      "id": "array-db-first-mapping",
+      "version": "1.0.0",
+      "sha256": "51e1d9f4240c43212fcd384c1cf1df9b8bf7152764644b2c4f23ba242bac3e9f"
+    },
+    {
+      "path": "mappings/5.json",
+      "kind": "mapping-set",
+      "id": "array-db-last-mapping",
+      "version": "1.0.0",
+      "sha256": "f6c57c54d5f9f74aae1ce855d843bb2d4e6585a3cdb8bf3c42ef5e8d1248dde3"
+    },
+    {
+      "path": "mappings/6.json",
+      "kind": "mapping-set",
+      "id": "array-melsec-first-mapping",
+      "version": "1.0.0",
+      "sha256": "c9483b1fab53fe9c9f15682067d7de1fda19fb0bdba6595b18f150ea8e482f80"
+    },
+    {
+      "path": "mappings/7.json",
+      "kind": "mapping-set",
+      "id": "array-melsec-last-mapping",
+      "version": "1.0.0",
+      "sha256": "7104d9457ec008c26fa5535a0802e997b083be7581a6a7bca8fb474389b4c0e4"
+    },
+    {
+      "path": "mappings/2.json",
+      "kind": "mapping-set",
+      "id": "array-ua-first-mapping",
+      "version": "1.0.0",
+      "sha256": "5421be8f973ce6c0399ea8df66555f5da1d53fc8c58723f9cc7b51346367bcd9"
+    },
+    {
+      "path": "mappings/3.json",
+      "kind": "mapping-set",
+      "id": "array-ua-last-mapping",
+      "version": "1.0.0",
+      "sha256": "a41243d4a4d131c00d69d80b3c26112ae897a0249bf8c58c4d1c55a311e9f045"
+    },
+    {
+      "path": "semantics/0.json",
+      "kind": "semantic-definition",
+      "id": "array-pressure-channel",
+      "version": "1.0.0",
+      "sha256": "ba00ef694e7fc961c689ea3de49641cf9506999fff2c550cb54d1609b2bf0f08"
+    },
+    {
+      "path": "sources/0.json",
+      "kind": "source-definition",
+      "id": "array-pressures-ab",
+      "version": "1.0.0",
+      "sha256": "e7a3dea8f70a73aacf60b7305edceb5976196bc02c696df0baebf8035ad00a14"
+    },
+    {
+      "path": "sources/2.json",
+      "kind": "source-definition",
+      "id": "array-pressures-db",
+      "version": "1.0.0",
+      "sha256": "ae4d0f732418df937e30da670d96b7722a26d7861c350468532851c4aa338e81"
+    },
+    {
+      "path": "sources/3.json",
+      "kind": "source-definition",
+      "id": "array-pressures-melsec",
+      "version": "1.0.0",
+      "sha256": "2ee757f51fa41e1c2bb10a53d8d729f18cb1ed98f7c6a793bb1434ae56782d1a"
+    },
+    {
+      "path": "sources/1.json",
+      "kind": "source-definition",
+      "id": "array-pressures-ua",
+      "version": "1.0.0",
+      "sha256": "ddf40b59dd3260b9a4d3f27508b12e237bf81f5d3391145d65bc20be3063ab6c"
+    },
+    {
+      "path": "targets/0.json",
+      "kind": "target-instance",
+      "id": "array-ab-first",
+      "version": "1.0.0",
+      "sha256": "f11c7d3406f0b0d4a898b3e712b80eb6cd6cc50ce0b1f5cad5a721bb73405baf"
+    },
+    {
+      "path": "targets/1.json",
+      "kind": "target-instance",
+      "id": "array-ab-last",
+      "version": "1.0.0",
+      "sha256": "7eda338a386c264327661d864140073b2142d98cbe10821456941e1f5f983366"
+    },
+    {
+      "path": "targets/4.json",
+      "kind": "target-instance",
+      "id": "array-db-first",
+      "version": "1.0.0",
+      "sha256": "bb10581b70c596d5ab7db907af8dac73e9d4e811feb1c4b05f5eecd04b84d795"
+    },
+    {
+      "path": "targets/5.json",
+      "kind": "target-instance",
+      "id": "array-db-last",
+      "version": "1.0.0",
+      "sha256": "c10a78d966a8b5e00cd977ba8809c43b1a3848655c8546c83e95f4d770ab78ef"
+    },
+    {
+      "path": "targets/6.json",
+      "kind": "target-instance",
+      "id": "array-melsec-first",
+      "version": "1.0.0",
+      "sha256": "f80851948b85ae7491631d6915f30d4937058168333beb8c8dfb78fe6bce0fab"
+    },
+    {
+      "path": "targets/7.json",
+      "kind": "target-instance",
+      "id": "array-melsec-last",
+      "version": "1.0.0",
+      "sha256": "b5613a3659875dff09927f06292fc2451ee467c61ec16a65da7b881471648520"
+    },
+    {
+      "path": "targets/2.json",
+      "kind": "target-instance",
+      "id": "array-ua-first",
+      "version": "1.0.0",
+      "sha256": "7af17a273475cef96dbc04c2a2e8cd0c7bae2d509e46571df580465cee4a16f6"
+    },
+    {
+      "path": "targets/3.json",
+      "kind": "target-instance",
+      "id": "array-ua-last",
+      "version": "1.0.0",
+      "sha256": "6c391452dc8c1c39f82f8b0ddf85a52ca1e0ec0f5b9f5bce070bbc0d06a6738b"
+    },
+    {
+      "path": "graphs/0.json",
+      "kind": "value-graph",
+      "id": "array-ab-graph",
+      "version": "1.0.0",
+      "sha256": "5b2f45b8d7563907dce3c7a4f74cec3e0f73de272fab1d34ab5a463f8c1923b4"
+    },
+    {
+      "path": "graphs/2.json",
+      "kind": "value-graph",
+      "id": "array-db-graph",
+      "version": "1.0.0",
+      "sha256": "1bf25c7f5fe7a970edafa85ed7789a9c7f1ff48f1f4e5b4735492c0db0c8c280"
+    },
+    {
+      "path": "graphs/3.json",
+      "kind": "value-graph",
+      "id": "array-melsec-graph",
+      "version": "1.0.0",
+      "sha256": "36595d0cf9d4ea38e776d6dc2cdb381d19e56f103d35b2a5028fe64e8ed5f2d6"
+    },
+    {
+      "path": "graphs/1.json",
+      "kind": "value-graph",
+      "id": "array-ua-graph",
+      "version": "1.0.0",
+      "sha256": "1cdeac09a156e4dffa9781ff78b90bbb84a2e2dd3e5ad960f4cac006670c0ffd"
+    }
+  ]
+}

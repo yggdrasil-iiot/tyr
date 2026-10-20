@@ -1,0 +1,71 @@
+{
+  "kind": "value-graph",
+  "schemaVersion": "2.4.0",
+  "id": "array-ua-graph",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-ua",
+  "nodes": [
+    {
+      "nodeId": "first",
+      "op": "array-element",
+      "inputs": {
+        "value": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "array-pressures-ua",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "indices": [
+        0,
+        0
+      ],
+      "valueType": "Float32",
+      "unit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ua",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "nodeId": "last",
+      "op": "array-element",
+      "inputs": {
+        "value": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "array-pressures-ua",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "indices": [
+        1,
+        2
+      ],
+      "valueType": "Float32",
+      "unit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ua",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "scope": "Independent fixed scalar array values/index oracles; no native structures or device communication",
+  "cases": [
+    {
+      "id": "ab-first",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "good",
+        "result": "100",
+        "codes": []
+      }
+    },
+    {
+      "id": "ab-last",
+      "prefix": "ab",
+      "node": "last",
+      "expect": {
+        "quality": "good",
+        "result": "220",
+        "codes": []
+      }
+    },
+    {
+      "id": "ua-first",
+      "prefix": "ua",
+      "node": "first",
+      "expect": {
+        "quality": "good",
+        "result": "100",
+        "codes": []
+      }
+    },
+    {
+      "id": "ua-last",
+      "prefix": "ua",
+      "node": "last",
+      "expect": {
+        "quality": "good",
+        "result": "220",
+        "codes": []
+      }
+    },
+    {
+      "id": "db-first",
+      "prefix": "db",
+      "node": "first",
+      "expect": {
+        "quality": "good",
+        "result": "100",
+        "codes": []
+      }
+    },
+    {
+      "id": "db-last",
+      "prefix": "db",
+      "node": "last",
+      "expect": {
+        "quality": "good",
+        "result": "220",
+        "codes": []
+      }
+    },
+    {
+      "id": "melsec-first",
+      "prefix": "melsec",
+      "node": "first",
+      "expect": {
+        "quality": "good",
+        "result": "100",
+        "codes": []
+      }
+    },
+    {
+      "id": "melsec-last",
+      "prefix": "melsec",
+      "node": "last",
+      "expect": {
+        "quality": "good",
+        "result": "220",
+        "codes": []
+      }
+    },
+    {
+      "id": "below-lower",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.index-range"
+        ]
+      },
+      "indices": [
+        -1,
+        0
+      ]
+    },
+    {
+      "id": "at-exclusive-upper",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.index-range"
+        ]
+      },
+      "indices": [
+        2,
+        0
+      ]
+    },
+    {
+      "id": "db-column-too-high",
+      "prefix": "db",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.index-range"
+        ]
+      },
+      "indices": [
+        1,
+        13
+      ]
+    },
+    {
+      "id": "wrong-rank",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.index-rank"
+        ]
+      },
+      "indices": [
+        0
+      ]
+    },
+    {
+      "id": "fraction-index",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.index-rank"
+        ]
+      },
+      "indices": [
+        0.5,
+        0
+      ]
+    },
+    {
+      "id": "typed-selected-missing",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.element-missing"
+        ]
+      },
+      "sample": {
+        "typedValues": [
+          null,
+          "110",
+          "120",
+          null,
+          "200",
+          "210",
+          "220"
+        ]
+      }
+    },
+    {
+      "id": "typed-short",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.sample-length"
+        ]
+      },
+      "sample": {
+        "typedValues": [
+          "100"
+        ]
+      }
+    },
+    {
+      "id": "typed-nested-not-guessed",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.sample-shape"
+        ]
+      },
+      "sample": {
+        "typedValues": [
+          [
+            "100",
+            "110"
+          ],
+          "110",
+          "120",
+          null,
+          "200",
+          "210",
+          "220"
+        ]
+      }
+    },
+    {
+      "id": "typed-wrong-scalar",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "sample.numeric"
+        ]
+      },
+      "sample": {
+        "typedValues": [
+          true,
+          "110",
+          "120",
+          null,
+          "200",
+          "210",
+          "220"
+        ]
+      }
+    },
+    {
+      "id": "typed-nonfinite",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "value.nonfinite"
+        ]
+      },
+      "sample": {
+        "typedValues": [
+          "NaN",
+          "110",
+          "120",
+          null,
+          "200",
+          "210",
+          "220"
+        ]
+      }
+    },
+    {
+      "id": "db-short",
+      "prefix": "db",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "array.sample-length"
+        ]
+      },
+      "sample": {
+        "bytesHex": "42c80000"
+      }
+    },
+    {
+      "id": "melsec-invalid-hex",
+      "prefix": "melsec",
+      "node": "first",
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "sample.hex"
+        ]
+      },
+      "sample": {
+        "bytesHex": "zz"
+      }
+    },
+    {
+      "id": "middle-slot",
+      "prefix": "ab",
+      "node": "first",
+      "expect": {
+        "quality": "good",
+        "result": "210",
+        "codes": []
+      },
+      "indices": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "nonzero-lower-middle",
+      "prefix": "melsec",
+      "node": "first",
+      "expect": {
+        "quality": "good",
+        "result": "210",
+        "codes": []
+      },
+      "indices": [
+        2,
+        11
+      ]
+    },
+    {
+      "id": "db-upper-inclusive",
+      "prefix": "db",
+      "node": "first",
+      "expect": {
+        "quality": "good",
+        "result": "220",
+        "codes": []
+      },
+      "indices": [
+        2,
+        12
+      ]
+    }
+  ]
+}

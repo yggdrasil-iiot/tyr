@@ -1,0 +1,17 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.1.0",
+  "id": "ev-motor-a-speed",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "data/motor-a-speed.txt",
+    "sha256": "8a255836e5a0ef0b41b0ea215c25de2414df9bd80d58066445196621335405d9",
+    "mediaType": "text/plain"
+  },
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "product": null,
+  "scope": [
+    "line-a-motor-melsec"
+  ]
+}

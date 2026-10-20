@@ -1,0 +1,16 @@
+{
+  "samples": {
+    "actual": 150,
+    "target": 50,
+    "gain": 2
+  },
+  "expectedQuotient": {
+    "pump-ab": 50,
+    "pump-ua": 100,
+    "pump-db": 50,
+    "pump-melsec": 50
+  },
+  "template": "pressure-kit",
+  "slotBoundary": "decoded-type-unit-stage",
+  "fieldPoV": "pending"
+}

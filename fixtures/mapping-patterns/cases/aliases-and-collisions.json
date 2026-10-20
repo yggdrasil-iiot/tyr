@@ -1,0 +1,13 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "aliases-and-collisions",
+  "patternId": "MP02",
+  "mode": "current",
+  "action": "names",
+  "input": {},
+  "expect": {
+    "speedNames": 4,
+    "pvMeaningCount": 2,
+    "statusMeaningCount": 2
+  }
+}

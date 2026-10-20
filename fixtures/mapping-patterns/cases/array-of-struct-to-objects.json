@@ -1,0 +1,27 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "array-of-struct-to-objects",
+  "patternId": "MP06",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "records": [
+      {
+        "id": "A",
+        "speed": "2400"
+      },
+      {
+        "id": "B",
+        "speed": "1800"
+      }
+    ],
+    "identityField": "id"
+  },
+  "expect": {
+    "identity": [
+      "A",
+      "B"
+    ],
+    "reorderChangesIdentity": false
+  }
+}

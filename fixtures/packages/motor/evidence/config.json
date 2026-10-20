@@ -1,0 +1,21 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.0.0",
+  "id": "ev-config",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "data/solution-export.json",
+    "sha256": "5c7bfcc1bad71e57a94fc083c94f53de47b2581e7d92482fecc55ac870baf11d",
+    "mediaType": "application/json"
+  },
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "product": {
+    "name": "fixture-only",
+    "version": "1.0.0"
+  },
+  "scope": [
+    "conveyor-c",
+    "conveyor-d"
+  ]
+}

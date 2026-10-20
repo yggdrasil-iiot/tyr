@@ -1,0 +1,2712 @@
+{
+  "equipment": [
+    {
+      "id": "line-a-motor-ab",
+      "label": "조립 이송 모터 · AB"
+    },
+    {
+      "id": "line-a-motor-ua",
+      "label": "검사 이송 모터 · S7-1500"
+    },
+    {
+      "id": "line-a-motor-db",
+      "label": "포장 이송 모터 · S7-300"
+    },
+    {
+      "id": "line-a-motor-melsec",
+      "label": "배출 이송 모터 · MELSEC"
+    }
+  ],
+  "connections": [
+    {
+      "id": "logical-ab",
+      "label": "가상 AB",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "accessProfileRef": "ab-logix-symbol-v1"
+    },
+    {
+      "id": "logical-ua",
+      "label": "가상 UA",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "logical-db",
+      "label": "가상 DB",
+      "equipmentInstanceId": "line-a-motor-db",
+      "accessProfileRef": "s7-300-db-v1"
+    },
+    {
+      "id": "logical-melsec",
+      "label": "가상 MELSEC",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-actual-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.ActualSpeed",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.ActualSpeed"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-actual-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "ActualSpeed",
+      "note": "Synthetic motor memory map. ActualSpeed -> urn:tyr:concept:motor-actual-speed. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-target-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.SpeedSetpoint",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.SpeedSetpoint"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-target-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "SpeedSetpoint",
+      "note": "Synthetic motor memory map. SpeedSetpoint -> urn:tyr:concept:motor-target-speed. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-state",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.StatusWord",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.StatusWord"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-state",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "Status",
+      "note": "Synthetic motor memory map. Status -> urn:tyr:concept:motor-state. [{'op': 'enum-map', 'entries': [{'raw': '0', 'value': 'stopped'}, {'raw': '1', 'value': 'running'}, {'raw': '2', 'value': 'fault'}], 'onUnknown': 'bad-quality'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-alarm-active",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.AlarmActive",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.AlarmActive"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-alarm-active",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "Alarm",
+      "note": "Synthetic motor memory map. Alarm -> urn:tyr:concept:motor-alarm-active. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-alarm-code",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.AlarmCode",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.AlarmCode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-alarm-code",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "AlarmNo",
+      "note": "Synthetic motor memory map. AlarmNo -> urn:tyr:concept:motor-alarm-code. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-torque",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.TorquePV",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.TorquePV"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "N.m"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-torque",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "PV",
+      "note": "Synthetic motor memory map. PV -> urn:tyr:concept:motor-torque. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-temperature",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.WindingTemp",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.WindingTemp"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "Cel"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-temperature",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "WindingTemp",
+      "note": "Synthetic motor memory map. WindingTemp -> urn:tyr:concept:motor-temperature. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ab-cycle-count",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.Cycles",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.Cycles"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ab-cycle-count",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "Cycles",
+      "note": "Synthetic motor memory map. Cycles -> urn:tyr:concept:motor-cycle-count. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-actual-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.N_ACT",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.N_ACT"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float64"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1/s"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-actual-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "IstDrehzahl",
+      "note": "Synthetic motor memory map. IstDrehzahl -> urn:tyr:concept:motor-actual-speed. [{'op': 'unit-convert', 'from': '1/s', 'to': 'rpm'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-target-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.N_CMD",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.N_CMD"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float64"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1/s"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-target-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "SollDrehzahl",
+      "note": "Synthetic motor memory map. SollDrehzahl -> urn:tyr:concept:motor-target-speed. [{'op': 'unit-convert', 'from': '1/s', 'to': 'rpm'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-state",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Mode",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Mode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-state",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "DriveMode",
+      "note": "Synthetic motor memory map. DriveMode -> urn:tyr:concept:motor-state. [{'op': 'enum-map', 'entries': [{'raw': '10', 'value': 'stopped'}, {'raw': '20', 'value': 'running'}, {'raw': '30', 'value': 'fault'}], 'onUnknown': 'bad-quality'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-alarm-active",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Alarm",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Alarm"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-alarm-active",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "Status",
+      "note": "Synthetic motor memory map. Status -> urn:tyr:concept:motor-alarm-active. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-alarm-code",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.FaultCode",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.FaultCode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-alarm-code",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "FaultNumber",
+      "note": "Synthetic motor memory map. FaultNumber -> urn:tyr:concept:motor-alarm-code. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-torque",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Torque",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Torque"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "mN.m"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-torque",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "TorqueActual",
+      "note": "Synthetic motor memory map. TorqueActual -> urn:tyr:concept:motor-torque. [{'op': 'unit-convert', 'from': 'mN.m', 'to': 'N.m'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-temperature",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.TempK",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.TempK"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float64"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "K"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-temperature",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "MotorTempK",
+      "note": "Synthetic motor memory map. MotorTempK -> urn:tyr:concept:motor-temperature. [{'op': 'unit-convert', 'from': 'K', 'to': 'Cel'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "ua-cycle-count",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Cycles",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Cycles"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-ua-cycle-count",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "CycleCounter",
+      "note": "Synthetic motor memory map. CycleCounter -> urn:tyr:concept:motor-cycle-count. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-actual-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW20",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 20,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "unknown"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-actual-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "PV",
+      "note": "Synthetic motor memory map. PV -> urn:tyr:concept:motor-actual-speed. [{'op': 'linear', 'factor': '0.1', 'offset': '0'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-target-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW24",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 24,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "unknown"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-target-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "SP",
+      "note": "Synthetic motor memory map. SP -> urn:tyr:concept:motor-target-speed. [{'op': 'linear', 'factor': '0.1', 'offset': '0'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-state",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW40",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 40,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-state",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "MachineState",
+      "note": "Synthetic motor memory map. MachineState -> urn:tyr:concept:motor-state. [{'op': 'enum-map', 'entries': [{'raw': '0', 'value': 'stopped'}, {'raw': '4', 'value': 'running'}, {'raw': '8', 'value': 'fault'}], 'onUnknown': 'bad-quality'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-alarm-active",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW42.0",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 42,
+          "byteLength": 2,
+          "bitOffset": 0
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-alarm-active",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "AlarmActive",
+      "note": "Synthetic motor memory map. AlarmActive -> urn:tyr:concept:motor-alarm-active. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-alarm-code",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW44",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 44,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-alarm-code",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "AlarmCode",
+      "note": "Synthetic motor memory map. AlarmCode -> urn:tyr:concept:motor-alarm-code. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-torque",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW48",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 48,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "unknown"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-torque",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "TorquePV",
+      "note": "Synthetic motor memory map. TorquePV -> urn:tyr:concept:motor-torque. [{'op': 'linear', 'factor': '0.1', 'offset': '0'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-temperature",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBD52",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 52,
+          "byteLength": 4,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Float32",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "Cel"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-temperature",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "TempPV",
+      "note": "Synthetic motor memory map. TempPV -> urn:tyr:concept:motor-temperature. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "db-cycle-count",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBD56",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 56,
+          "byteLength": 4,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt32",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-db-cycle-count",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "TotalCycles",
+      "note": "Synthetic motor memory map. TotalCycles -> urn:tyr:concept:motor-cycle-count. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-actual-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D1000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "unknown"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-actual-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "速度実績",
+      "note": "Synthetic motor memory map. 速度実績 -> urn:tyr:concept:motor-actual-speed. [{'op': 'linear', 'factor': '0.1', 'offset': '0'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-target-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D2000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "unknown"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-target-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "速度指令",
+      "note": "Synthetic motor memory map. 速度指令 -> urn:tyr:concept:motor-target-speed. [{'op': 'linear', 'factor': '0.1', 'offset': '0'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-state",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-state",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "運転状態",
+      "note": "Synthetic motor memory map. 運転状態 -> urn:tyr:concept:motor-state. [{'op': 'enum-map', 'entries': [{'raw': '0', 'value': 'stopped'}, {'raw': '1', 'value': 'running'}, {'raw': '9', 'value': 'fault'}], 'onUnknown': 'bad-quality'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-alarm-active",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3001.0",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3001,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": 0
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-alarm-active",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "異常あり",
+      "note": "Synthetic motor memory map. 異常あり -> urn:tyr:concept:motor-alarm-active. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-alarm-code",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3002",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3002,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-alarm-code",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "異常コード",
+      "note": "Synthetic motor memory map. 異常コード -> urn:tyr:concept:motor-alarm-code. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-torque",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D4000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 4000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "unknown"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-torque",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "トルク実績",
+      "note": "Synthetic motor memory map. トルク実績 -> urn:tyr:concept:motor-torque. [{'op': 'linear', 'factor': '0.1', 'offset': '0'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-temperature",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D5000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 5000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "unknown"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-temperature",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "巻線温度",
+      "note": "Synthetic motor memory map. 巻線温度 -> urn:tyr:concept:motor-temperature. [{'op': 'linear', 'factor': '0.1', 'offset': '0'}]",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "melsec-cycle-count",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D6000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 6000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt32",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-melsec-cycle-count",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "完了回数",
+      "note": "Synthetic motor memory map. 完了回数 -> urn:tyr:concept:motor-cycle-count. []",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "1.1.0",
+      "id": "motor-drive",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "actual-speed",
+          "name": "actualSpeed",
+          "semanticId": "urn:tyr:concept:motor-actual-speed",
+          "description": "모터 축 실제 회전 속도. 목표값과 구분한다.",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "role": "measurement",
+          "range": {
+            "low": "0",
+            "high": "3000"
+          }
+        },
+        {
+          "memberId": "target-speed",
+          "name": "targetSpeed",
+          "semanticId": "urn:tyr:concept:motor-target-speed",
+          "description": "모터 축에 요구한 목표 회전 속도.",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "role": "setpoint",
+          "range": {
+            "low": "0",
+            "high": "3000"
+          }
+        },
+        {
+          "memberId": "state",
+          "name": "operatingState",
+          "semanticId": "urn:tyr:concept:motor-state",
+          "description": "운전 상태: stopped/running/fault. 현장별 코드는 매핑에서 해석한다.",
+          "valueType": "String",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "alarm-active",
+          "name": "alarmActive",
+          "semanticId": "urn:tyr:concept:motor-alarm-active",
+          "description": "현재 활성 알람 존재 여부. 알람 코드와 별개.",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "alarm-code",
+          "name": "alarmCode",
+          "semanticId": "urn:tyr:concept:motor-alarm-code",
+          "description": "현재 알람의 식별 코드. 0은 알람 없음.",
+          "valueType": "Int32",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "role": "status",
+          "range": {
+            "low": "0",
+            "high": "65535"
+          }
+        },
+        {
+          "memberId": "torque",
+          "name": "actualTorque",
+          "semanticId": "urn:tyr:concept:motor-torque",
+          "description": "모터 축 실제 토크. 속도와 다른 물리량.",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "role": "measurement",
+          "range": {
+            "low": "-500",
+            "high": "500"
+          }
+        },
+        {
+          "memberId": "temperature",
+          "name": "windingTemperature",
+          "semanticId": "urn:tyr:concept:motor-temperature",
+          "description": "모터 권선 온도.",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "role": "measurement",
+          "range": {
+            "low": "-40",
+            "high": "180"
+          }
+        },
+        {
+          "memberId": "cycle-count",
+          "name": "cycleCount",
+          "semanticId": "urn:tyr:concept:motor-cycle-count",
+          "description": "완료한 운전 사이클 수. Int32 초과 시 오류.",
+          "valueType": "Int32",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "role": "status",
+          "range": {
+            "low": "0",
+            "high": "2147483647"
+          }
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "1.1.0",
+      "id": "motor-object-ab",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "semanticDefinitionRef": {
+        "id": "motor-drive",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ab-actual-speed-binding",
+          "sourceRef": {
+            "id": "ab-actual-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "actual-speed",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-actual-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-target-speed-binding",
+          "sourceRef": {
+            "id": "ab-target-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "target-speed",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-target-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-state-binding",
+          "sourceRef": {
+            "id": "ab-state",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "state",
+          "transform": [
+            {
+              "op": "enum-map",
+              "entries": [
+                {
+                  "raw": "0",
+                  "value": "stopped"
+                },
+                {
+                  "raw": "1",
+                  "value": "running"
+                },
+                {
+                  "raw": "2",
+                  "value": "fault"
+                }
+              ],
+              "onUnknown": "bad-quality"
+            },
+            {
+              "op": "cast",
+              "to": "String",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-state",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-alarm-active-binding",
+          "sourceRef": {
+            "id": "ab-alarm-active",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-active",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-alarm-active",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-alarm-code-binding",
+          "sourceRef": {
+            "id": "ab-alarm-code",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-code",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-alarm-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-torque-binding",
+          "sourceRef": {
+            "id": "ab-torque",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "torque",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-torque",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-temperature-binding",
+          "sourceRef": {
+            "id": "ab-temperature",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "temperature",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-temperature",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-cycle-count-binding",
+          "sourceRef": {
+            "id": "ab-cycle-count",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "cycle-count",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ab-cycle-count",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "1.1.0",
+      "id": "motor-object-ua",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "semanticDefinitionRef": {
+        "id": "motor-drive",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ua-actual-speed-binding",
+          "sourceRef": {
+            "id": "ua-actual-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "actual-speed",
+          "transform": [
+            {
+              "op": "unit-convert",
+              "from": "1/s",
+              "to": "rpm"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-actual-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-target-speed-binding",
+          "sourceRef": {
+            "id": "ua-target-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "target-speed",
+          "transform": [
+            {
+              "op": "unit-convert",
+              "from": "1/s",
+              "to": "rpm"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-target-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-state-binding",
+          "sourceRef": {
+            "id": "ua-state",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "state",
+          "transform": [
+            {
+              "op": "enum-map",
+              "entries": [
+                {
+                  "raw": "10",
+                  "value": "stopped"
+                },
+                {
+                  "raw": "20",
+                  "value": "running"
+                },
+                {
+                  "raw": "30",
+                  "value": "fault"
+                }
+              ],
+              "onUnknown": "bad-quality"
+            },
+            {
+              "op": "cast",
+              "to": "String",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-state",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-alarm-active-binding",
+          "sourceRef": {
+            "id": "ua-alarm-active",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-active",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-alarm-active",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-alarm-code-binding",
+          "sourceRef": {
+            "id": "ua-alarm-code",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-code",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-alarm-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-torque-binding",
+          "sourceRef": {
+            "id": "ua-torque",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "torque",
+          "transform": [
+            {
+              "op": "unit-convert",
+              "from": "mN.m",
+              "to": "N.m"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-torque",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-temperature-binding",
+          "sourceRef": {
+            "id": "ua-temperature",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "temperature",
+          "transform": [
+            {
+              "op": "unit-convert",
+              "from": "K",
+              "to": "Cel"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-temperature",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-cycle-count-binding",
+          "sourceRef": {
+            "id": "ua-cycle-count",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "cycle-count",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-ua-cycle-count",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "1.1.0",
+      "id": "motor-object-db",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "semanticDefinitionRef": {
+        "id": "motor-drive",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "db-actual-speed-binding",
+          "sourceRef": {
+            "id": "db-actual-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "actual-speed",
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-actual-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-target-speed-binding",
+          "sourceRef": {
+            "id": "db-target-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "target-speed",
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-target-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-state-binding",
+          "sourceRef": {
+            "id": "db-state",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "state",
+          "transform": [
+            {
+              "op": "enum-map",
+              "entries": [
+                {
+                  "raw": "0",
+                  "value": "stopped"
+                },
+                {
+                  "raw": "4",
+                  "value": "running"
+                },
+                {
+                  "raw": "8",
+                  "value": "fault"
+                }
+              ],
+              "onUnknown": "bad-quality"
+            },
+            {
+              "op": "cast",
+              "to": "String",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-state",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-alarm-active-binding",
+          "sourceRef": {
+            "id": "db-alarm-active",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-active",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-alarm-active",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-alarm-code-binding",
+          "sourceRef": {
+            "id": "db-alarm-code",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-code",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-alarm-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-torque-binding",
+          "sourceRef": {
+            "id": "db-torque",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "torque",
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-torque",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-temperature-binding",
+          "sourceRef": {
+            "id": "db-temperature",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "temperature",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-temperature",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-cycle-count-binding",
+          "sourceRef": {
+            "id": "db-cycle-count",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "cycle-count",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-db-cycle-count",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "1.1.0",
+      "id": "motor-object-melsec",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "semanticDefinitionRef": {
+        "id": "motor-drive",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "melsec-actual-speed-binding",
+          "sourceRef": {
+            "id": "melsec-actual-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "actual-speed",
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-actual-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-target-speed-binding",
+          "sourceRef": {
+            "id": "melsec-target-speed",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "target-speed",
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-target-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-state-binding",
+          "sourceRef": {
+            "id": "melsec-state",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "state",
+          "transform": [
+            {
+              "op": "enum-map",
+              "entries": [
+                {
+                  "raw": "0",
+                  "value": "stopped"
+                },
+                {
+                  "raw": "1",
+                  "value": "running"
+                },
+                {
+                  "raw": "9",
+                  "value": "fault"
+                }
+              ],
+              "onUnknown": "bad-quality"
+            },
+            {
+              "op": "cast",
+              "to": "String",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-state",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-alarm-active-binding",
+          "sourceRef": {
+            "id": "melsec-alarm-active",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-active",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-alarm-active",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-alarm-code-binding",
+          "sourceRef": {
+            "id": "melsec-alarm-code",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "alarm-code",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-alarm-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-torque-binding",
+          "sourceRef": {
+            "id": "melsec-torque",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "torque",
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-torque",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-temperature-binding",
+          "sourceRef": {
+            "id": "melsec-temperature",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "temperature",
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-temperature",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-cycle-count-binding",
+          "sourceRef": {
+            "id": "melsec-cycle-count",
+            "version": "1.0.0"
+          },
+          "targetMemberId": "cycle-count",
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-melsec-cycle-count",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

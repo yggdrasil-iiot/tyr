@@ -1,0 +1,17 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "melsec-native-relay",
+  "patternId": "MP08",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "area": "M",
+    "address": 100,
+    "addressUnit": "bit",
+    "value": true
+  },
+  "expect": {
+    "result": true,
+    "storageWidthBits": 1
+  }
+}

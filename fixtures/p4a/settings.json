@@ -1,0 +1,101 @@
+{
+  "format": "tyr-config-v1",
+  "records": [
+    {
+      "id": "speed-ab",
+      "profile": "ab-logix-symbol-v1",
+      "address": "Motor.ActualSpeed",
+      "type": "Float32",
+      "unit": "rpm",
+      "stage": "already-engineered"
+    },
+    {
+      "id": "pressure-ua",
+      "profile": "s7-1500-opcua-v1",
+      "address": "Line.Pressure",
+      "namespaceUri": "urn:tyr:synthetic:line",
+      "identifierType": "string",
+      "type": "Float32",
+      "unit": "kPa",
+      "stage": "already-engineered"
+    },
+    {
+      "id": "pressure-db",
+      "profile": "s7-300-db-v1",
+      "address": "DB10.DBB64",
+      "type": "UInt16",
+      "width": 2,
+      "unit": "kPa",
+      "byteOrder": "big",
+      "wordOrder": "high-first",
+      "stage": "raw"
+    },
+    {
+      "id": "pressure-mel",
+      "profile": "melsec-device-v1",
+      "address": "D1000",
+      "type": "UInt16",
+      "width": 1,
+      "unit": "kPa",
+      "byteOrder": "little",
+      "wordOrder": "low-first",
+      "stage": "raw"
+    },
+    {
+      "id": "pump",
+      "kind": "template",
+      "profile": "melsec-device-v1",
+      "address": "D{offset}",
+      "base": 2000,
+      "stride": 10,
+      "count": 3,
+      "type": "UInt16",
+      "unit": "kPa",
+      "byteOrder": "little",
+      "wordOrder": "low-first",
+      "overrides": {
+        "1": {
+          "address": "D2050",
+          "label": "펌프 2 예외"
+        }
+      },
+      "stage": "raw"
+    },
+    {
+      "id": "pump-alias",
+      "kind": "alias",
+      "target": "pump-1"
+    },
+    {
+      "id": "pump-alias-chain",
+      "kind": "alias",
+      "target": "pump-alias"
+    },
+    {
+      "id": "cycle-a",
+      "kind": "alias",
+      "target": "cycle-b"
+    },
+    {
+      "id": "cycle-b",
+      "kind": "alias",
+      "target": "cycle-a"
+    },
+    {
+      "id": "missing-alias",
+      "kind": "alias",
+      "target": "absent"
+    },
+    {
+      "id": "opaque",
+      "profile": "melsec-device-v1",
+      "address": "D[index * 2]",
+      "type": "UInt16",
+      "vendorExpression": "PLC_POINTER()",
+      "stage": "raw"
+    }
+  ],
+  "vendorExtension": {
+    "custom": "must preserve exactly"
+  }
+}

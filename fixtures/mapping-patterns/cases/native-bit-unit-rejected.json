@@ -1,0 +1,11 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "native-bit-unit-rejected",
+  "patternId": "MP08",
+  "mode": "gap-probe",
+  "action": "native-bit-rejected",
+  "input": {},
+  "expect": {
+    "schemaRejected": true
+  }
+}

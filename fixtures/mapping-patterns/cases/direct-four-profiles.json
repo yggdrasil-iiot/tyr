@@ -1,0 +1,12 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "direct-four-profiles",
+  "patternId": "MP01",
+  "mode": "current",
+  "action": "direct",
+  "input": {},
+  "expect": {
+    "profiles": 4,
+    "sourceCount": 32
+  }
+}

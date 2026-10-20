@@ -1,0 +1,43 @@
+{
+  "kind": "mapping-set",
+  "schemaVersion": "1.0.0",
+  "id": "map-d",
+  "version": "1.0.0",
+  "equipmentInstanceId": "conveyor-d",
+  "semanticDefinitionRef": {
+    "id": "motor",
+    "version": "1.0.0"
+  },
+  "mappings": [
+    {
+      "mappingId": "speed-d",
+      "sourceRef": {
+        "id": "source-d",
+        "version": "1.0.0"
+      },
+      "targetMemberId": "actual-speed",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "rpm"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "ev-config",
+          "locator": {
+            "kind": "json-pointer",
+            "pointer": "/tags/1"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "array-out-of-range",
+  "patternId": "MP06",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "shape": [
+      3,
+      2
+    ],
+    "index": [
+      3,
+      0
+    ]
+  },
+  "expect": {
+    "error": "index-out-of-range",
+    "publishable": false
+  }
+}

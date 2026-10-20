@@ -1,0 +1,24 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "pressure-difference",
+  "patternId": "MP11",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "inputs": {
+      "upstream": {
+        "value": "150",
+        "unit": "kPa"
+      },
+      "downstream": {
+        "value": "100",
+        "unit": "kPa"
+      }
+    },
+    "op": "subtract"
+  },
+  "expect": {
+    "result": "50",
+    "unit": "kPa"
+  }
+}

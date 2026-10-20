@@ -1,0 +1,354 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "line-a-motor-melsec",
+      "label": "Line A"
+    }
+  ],
+  "connections": [
+    {
+      "id": "logical-melsec",
+      "label": "MELSEC",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "pressure-up",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D1000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-pressure-up",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic dimensionless UInt16 input at D1000; unit 1. Not a physical pressure measurement or a vendor device claim.",
+      "label": "무차원 가상 입력 1",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "pressure-down",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D2000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-pressure-down",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic dimensionless UInt16 input at D2000; unit 1. Not a physical pressure measurement or a vendor device claim.",
+      "label": "무차원 가상 입력 2",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "filter-pressure-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "pressure-difference",
+          "name": "무차원 파생값",
+          "semanticId": "urn:tyr:concept:fixture.dimensionless-derived",
+          "description": "Offline bounded math fixture; not a pressure or vendor engineering rule.",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "role": "measurement",
+          "range": null
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "filter-direct",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "label": "가상 무차원 파생값",
+      "semanticDefinitionRef": {
+        "id": "filter-pressure-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-pressure-up",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-pressure-down",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.11.0",
+      "id": "pressure-direct",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "difference",
+          "op": "sqrt",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "pressure-up",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-pressure-up",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-pressure-down",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        },
+        {
+          "nodeId": "limited",
+          "op": "clamp",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "pressure-down",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-pressure-up",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-pressure-down",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "low": "0",
+          "high": "10"
+        },
+        {
+          "nodeId": "combined",
+          "op": "subtract",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "difference"
+            },
+            "right": {
+              "kind": "node",
+              "nodeId": "limited"
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-pressure-up",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-pressure-down",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.3.0",
+      "id": "pressure-direct-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "filter-direct",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "direct-difference",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "pressure-direct",
+              "version": "1.0.0"
+            },
+            "nodeId": "combined"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "pressure-difference"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-pressure-up",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-pressure-down",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 1000,
+            "maxSkewMs": 100,
+            "uncertainInput": "propagate",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    }
+  ]
+}

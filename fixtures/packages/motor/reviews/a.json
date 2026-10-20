@@ -1,0 +1,26 @@
+{
+  "kind": "review-record",
+  "schemaVersion": "1.0.0",
+  "id": "review-a",
+  "version": "1.0.0",
+  "target": {
+    "kind": "mapping-set",
+    "id": "map-a",
+    "version": "1.0.0",
+    "sha256": "fcebdbdeb97b7601c016956369b17a17bc49d1be26f80e501a48e0d6a21a6f25"
+  },
+  "decision": "reviewed",
+  "by": "fixture-reviewer",
+  "at": "2026-10-17T00:00:00Z",
+  "rationale": "Synthetic review record; not a field approval.",
+  "evidenceRefs": [
+    {
+      "artifactId": "ev-map",
+      "locator": {
+        "kind": "text-line",
+        "line": 2
+      }
+    }
+  ],
+  "deviceVerification": "not-performed"
+}

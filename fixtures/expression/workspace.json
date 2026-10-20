@@ -1,0 +1,2872 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "line-a-motor-ab",
+      "label": "조립 이송 모터 · AB"
+    },
+    {
+      "id": "line-a-motor-ua",
+      "label": "검사 이송 모터 · S7-1500"
+    },
+    {
+      "id": "line-a-motor-db",
+      "label": "포장 이송 모터 · S7-300"
+    },
+    {
+      "id": "line-a-motor-melsec",
+      "label": "배출 이송 모터 · MELSEC"
+    }
+  ],
+  "connections": [
+    {
+      "id": "logical-ab",
+      "label": "가상 AB",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "accessProfileRef": "ab-logix-symbol-v1"
+    },
+    {
+      "id": "logical-ua",
+      "label": "가상 UA",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "logical-db",
+      "label": "가상 DB",
+      "equipmentInstanceId": "line-a-motor-db",
+      "accessProfileRef": "s7-300-db-v1"
+    },
+    {
+      "id": "logical-melsec",
+      "label": "가상 MELSEC",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-ab-actual",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Skid.actual",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Skid.actual"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-ab-actual",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic actual; explicit logical mapping, native struct layout not claimed",
+      "label": "actual · ab",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-ab-target",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Skid.target",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Skid.target"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-ab-target",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic target; explicit logical mapping, native struct layout not claimed",
+      "label": "target · ab",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "arithmetic-ab-gain",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Skid.flags",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Skid.flags"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-arithmetic-ab-gain",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic coefficient word, not live PLC flags",
+      "label": "Synthetic dimensionless gain",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-ua-actual",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:fixture:skid;s=Skid.actual",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:fixture:skid",
+          "identifierType": "string",
+          "identifier": "Skid.actual"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-ua-actual",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic actual; explicit logical mapping, native struct layout not claimed",
+      "label": "actual · ua",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-ua-target",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:fixture:skid;s=Skid.target",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:fixture:skid",
+          "identifierType": "string",
+          "identifier": "Skid.target"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-ua-target",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic target; explicit logical mapping, native struct layout not claimed",
+      "label": "target · ua",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "arithmetic-ua-gain",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:fixture:skid;s=Skid.flags",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:fixture:skid",
+          "identifierType": "string",
+          "identifier": "Skid.flags"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-arithmetic-ua-gain",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic coefficient word, not live PLC flags",
+      "label": "Synthetic dimensionless gain",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-db-actual",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB20.DBW0",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 20,
+          "byteOffset": 0,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-db-actual",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic actual; explicit logical mapping, native struct layout not claimed",
+      "label": "actual · db",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-db-target",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB20.DBW2",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 20,
+          "byteOffset": 2,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-db-target",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic target; explicit logical mapping, native struct layout not claimed",
+      "label": "target · db",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "arithmetic-db-gain",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB20.DBW4",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 20,
+          "byteOffset": 4,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-arithmetic-db-gain",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic coefficient word, not live PLC flags",
+      "label": "Synthetic dimensionless gain",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-melsec-actual",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D1000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-melsec-actual",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic actual; explicit logical mapping, native struct layout not claimed",
+      "label": "actual · melsec",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "structure-melsec-target",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D2000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-structure-melsec-target",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic target; explicit logical mapping, native struct layout not claimed",
+      "label": "target · melsec",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "arithmetic-melsec-gain",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-arithmetic-melsec-gain",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic coefficient word, not live PLC flags",
+      "label": "Synthetic dimensionless gain",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "arithmetic-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "sum",
+          "name": "sum",
+          "semanticId": "urn:tyr:synthetic:sum",
+          "description": "Synthetic arithmetic oracle, not field engineering truth",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "scaled",
+          "name": "scaled",
+          "semanticId": "urn:tyr:synthetic:scaled",
+          "description": "Synthetic arithmetic oracle, not field engineering truth",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "quotient",
+          "name": "quotient",
+          "semanticId": "urn:tyr:synthetic:quotient",
+          "description": "Synthetic arithmetic oracle, not field engineering truth",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "ratio",
+          "name": "ratio",
+          "semanticId": "urn:tyr:synthetic:ratio",
+          "description": "Synthetic arithmetic oracle, not field engineering truth",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "role": "measurement",
+          "range": null
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "arithmetic-object-ab",
+      "version": "1.0.0",
+      "label": "Synthetic arithmetic object ab",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "semanticDefinitionRef": {
+        "id": "arithmetic-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-structure-ab-actual",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-structure-ab-target",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-arithmetic-ab-gain",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "arithmetic-object-ua",
+      "version": "1.0.0",
+      "label": "Synthetic arithmetic object ua",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "semanticDefinitionRef": {
+        "id": "arithmetic-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-structure-ua-actual",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-structure-ua-target",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-arithmetic-ua-gain",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "arithmetic-object-db",
+      "version": "1.0.0",
+      "label": "Synthetic arithmetic object db",
+      "equipmentInstanceId": "line-a-motor-db",
+      "semanticDefinitionRef": {
+        "id": "arithmetic-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-structure-db-actual",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-structure-db-target",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-arithmetic-db-gain",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "arithmetic-object-melsec",
+      "version": "1.0.0",
+      "label": "Synthetic arithmetic object melsec",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "semanticDefinitionRef": {
+        "id": "arithmetic-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-structure-melsec-actual",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-structure-melsec-target",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-arithmetic-melsec-gain",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "arithmetic-ab",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "nodes": [
+        {
+          "nodeId": "sum",
+          "op": "add",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ab-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ab-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "scaled",
+          "op": "multiply",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "sum"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-ab-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "quotient",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "scaled"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-ab-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        },
+        {
+          "nodeId": "ratio",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ab-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ab-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "arithmetic-ua",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "nodes": [
+        {
+          "nodeId": "sum",
+          "op": "add",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ua-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ua-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "scaled",
+          "op": "multiply",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "sum"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-ua-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "quotient",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "scaled"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-ua-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        },
+        {
+          "nodeId": "ratio",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ua-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ua-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "arithmetic-db",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "nodes": [
+        {
+          "nodeId": "sum",
+          "op": "add",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-db-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-db-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "scaled",
+          "op": "multiply",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "sum"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-db-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "quotient",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "scaled"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-db-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        },
+        {
+          "nodeId": "ratio",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-db-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-db-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "arithmetic-melsec",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "sum",
+          "op": "add",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-melsec-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-melsec-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "scaled",
+          "op": "multiply",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "sum"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-melsec-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "quotient",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "scaled"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-melsec-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        },
+        {
+          "nodeId": "ratio",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-melsec-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-melsec-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "formula-ab",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "nodes": [
+        {
+          "nodeId": "expr-001",
+          "op": "subtract",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ab-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ab-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "expr-result",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "expr-001"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-ab-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "formula-ua",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "nodes": [
+        {
+          "nodeId": "expr-001",
+          "op": "subtract",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ua-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-ua-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "expr-result",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "expr-001"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-ua-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "formula-db",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "nodes": [
+        {
+          "nodeId": "expr-001",
+          "op": "subtract",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-db-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-db-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "expr-result",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "expr-001"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-db-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.15.0",
+      "id": "formula-melsec",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "expr-001",
+          "op": "subtract",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-melsec-actual",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "structure-melsec-target",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "expr-result",
+          "op": "divide",
+          "inputs": {
+            "left": {
+              "kind": "node",
+              "nodeId": "expr-001"
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "arithmetic-melsec-gain",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "precision": 34,
+          "rounding": "half-even"
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "arithmetic-mapping-ab",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "targetInstanceRef": {
+        "id": "arithmetic-object-ab",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ab-sum",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "sum"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-ab",
+              "version": "1.0.0"
+            },
+            "nodeId": "sum"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-scaled",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "scaled"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-ab",
+              "version": "1.0.0"
+            },
+            "nodeId": "scaled"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-quotient",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "quotient"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "formula-ab",
+              "version": "1.0.0"
+            },
+            "nodeId": "expr-result"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-ratio",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "ratio"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-ab",
+              "version": "1.0.0"
+            },
+            "nodeId": "ratio"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ab-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ab-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ab-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "arithmetic-mapping-ua",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "targetInstanceRef": {
+        "id": "arithmetic-object-ua",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ua-sum",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "sum"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-ua",
+              "version": "1.0.0"
+            },
+            "nodeId": "sum"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-scaled",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "scaled"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-ua",
+              "version": "1.0.0"
+            },
+            "nodeId": "scaled"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-quotient",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "quotient"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "formula-ua",
+              "version": "1.0.0"
+            },
+            "nodeId": "expr-result"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-ratio",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "ratio"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-ua",
+              "version": "1.0.0"
+            },
+            "nodeId": "ratio"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-ua-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-ua-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-ua-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "arithmetic-mapping-db",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "targetInstanceRef": {
+        "id": "arithmetic-object-db",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "db-sum",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "sum"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-db",
+              "version": "1.0.0"
+            },
+            "nodeId": "sum"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-scaled",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "scaled"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-db",
+              "version": "1.0.0"
+            },
+            "nodeId": "scaled"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-quotient",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "quotient"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "formula-db",
+              "version": "1.0.0"
+            },
+            "nodeId": "expr-result"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-ratio",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "ratio"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-db",
+              "version": "1.0.0"
+            },
+            "nodeId": "ratio"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-db-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-db-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-db-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "arithmetic-mapping-melsec",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "arithmetic-object-melsec",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "melsec-sum",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "sum"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-melsec",
+              "version": "1.0.0"
+            },
+            "nodeId": "sum"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-scaled",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "scaled"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-melsec",
+              "version": "1.0.0"
+            },
+            "nodeId": "scaled"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-quotient",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "quotient"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "formula-melsec",
+              "version": "1.0.0"
+            },
+            "nodeId": "expr-result"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-ratio",
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "ratio"
+            }
+          ],
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "arithmetic-melsec",
+              "version": "1.0.0"
+            },
+            "nodeId": "ratio"
+          },
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "half-even"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-structure-melsec-actual",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-structure-melsec-target",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-arithmetic-melsec-gain",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

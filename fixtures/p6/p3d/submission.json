@@ -1,0 +1,28 @@
+{
+  "kind": "mapping-submission",
+  "schemaVersion": "2.9.0",
+  "id": "p3d",
+  "streamId": "p3d",
+  "version": "1.0.0",
+  "workspaceSha256": "3a31ec10047d929eb75daf3463f0c8df3690300a019d650b5192b6f7599fcc84",
+  "proposalSha256": "926c153f8c6ac9155cf23a672d9834dc0e805087b129c0770a38cdd1bc65e4a0",
+  "baseRelease": null,
+  "proposedBy": "proposer",
+  "execution": "excluded",
+  "context": {
+    "equipment": [
+      {
+        "id": "line-a-motor-melsec",
+        "label": "line-a-motor-melsec"
+      }
+    ],
+    "connections": [
+      {
+        "id": "logical-melsec",
+        "label": "logical-melsec",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "accessProfileRef": "melsec-device-v1"
+      }
+    ]
+  }
+}

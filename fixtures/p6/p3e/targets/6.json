@@ -1,0 +1,21 @@
+{
+  "kind": "target-instance",
+  "schemaVersion": "2.0.0",
+  "id": "array-melsec-first",
+  "version": "1.0.0",
+  "label": "채널 melsec first",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "semanticDefinitionRef": {
+    "id": "array-pressure-channel",
+    "version": "1.0.0"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "manual-array-pressures-melsec",
+      "locator": {
+        "kind": "text-line",
+        "line": 1
+      }
+    }
+  ]
+}

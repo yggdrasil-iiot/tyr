@@ -1,0 +1,17 @@
+{
+  "nominal": {
+    "sum": "200",
+    "scaled": "400",
+    "quotient": "200",
+    "ratio": "3"
+  },
+  "divisionThird": {
+    "graphValue": "0.3333333333333333333333333333333333",
+    "finalValue": "0.333333333333333314829616256247390992939472198486328125",
+    "codes": [
+      "loss.precision"
+    ]
+  },
+  "zeroDenominator": "value.divide-zero",
+  "fieldPoV": "not-performed"
+}

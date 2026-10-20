@@ -1,0 +1,21 @@
+{
+  "kind": "target-instance",
+  "schemaVersion": "2.0.0",
+  "id": "motor-a",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "label": "Motor A",
+  "semanticDefinitionRef": {
+    "id": "motor-counter",
+    "version": "1.0.0"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "ev-motor-a-speed",
+      "locator": {
+        "kind": "text-line",
+        "line": 1
+      }
+    }
+  ]
+}

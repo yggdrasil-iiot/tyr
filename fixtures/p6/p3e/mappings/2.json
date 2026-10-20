@@ -1,0 +1,52 @@
+{
+  "kind": "mapping-set",
+  "schemaVersion": "2.4.0",
+  "id": "array-ua-first-mapping",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-ua",
+  "targetInstanceRef": {
+    "id": "array-ua-first",
+    "version": "1.0.0"
+  },
+  "mappings": [
+    {
+      "mappingId": "ua-first-pressure",
+      "valueRef": {
+        "kind": "graph",
+        "graphRef": {
+          "id": "array-ua-graph",
+          "version": "1.0.0"
+        },
+        "nodeId": "first"
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "actual-pressure"
+        }
+      ],
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ua",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

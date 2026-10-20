@@ -1,0 +1,21 @@
+{
+  "scope": "synthetic-only",
+  "sameUriSameContract": "compatible",
+  "sameUriDifferentRole": "registry-conflict",
+  "sameUriDifferentUnit": "registry-conflict",
+  "sameUriDifferentType": "registry-conflict",
+  "sameNameDifferentUri": "new",
+  "differentNameSameUri": "compatible",
+  "nestedLeafDrift": "registry-conflict",
+  "structureShapeDrift": "registry-conflict",
+  "unconfigured": "registry-unavailable",
+  "canonicalPressureSignature": {
+    "role": "measurement",
+    "valueType": "Double",
+    "unit": {
+      "status": "known",
+      "code": "kPa"
+    }
+  },
+  "fieldPoV": "not-performed"
+}

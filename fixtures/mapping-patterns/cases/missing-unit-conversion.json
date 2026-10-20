@@ -1,0 +1,11 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "missing-unit-conversion",
+  "patternId": "MP10",
+  "mode": "current",
+  "action": "missing-unit",
+  "input": {},
+  "expect": {
+    "rule": "mapping.unit-conversion-required"
+  }
+}

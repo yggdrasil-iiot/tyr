@@ -1,0 +1,27 @@
+{
+  "phase": "P3-F B",
+  "schemaVersion": "2.13.0",
+  "patterns": [
+    "MP13"
+  ],
+  "status": "bounded-subset",
+  "supported": [
+    "same-graph scalar DAG candidates",
+    "mixed direct source/node candidates",
+    "nested lazy selectors",
+    "all-candidate type/unit/evidence",
+    "selected-path time/quality/loss",
+    "definition provenance",
+    "SQLite JSON/CAS",
+    "independent Bifrost approval/file publication"
+  ],
+  "excluded": [
+    "cross-value-graph endpoint",
+    "arbitrary address expression",
+    "automatic failover",
+    "device communication",
+    "external SQL",
+    "write execution"
+  ],
+  "fieldPoV": "not-performed"
+}

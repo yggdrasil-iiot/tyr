@@ -1,0 +1,22 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "separate-low-high",
+  "patternId": "MP07",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "low": {
+      "address": "D1000",
+      "value": 1
+    },
+    "high": {
+      "address": "D2000",
+      "value": 2
+    },
+    "unsignedBits": 32
+  },
+  "expect": {
+    "result": "131073",
+    "inputOrderExplicit": true
+  }
+}

@@ -1,0 +1,492 @@
+{
+  "schemaVersion": "1.0.0",
+  "cases": [
+    {
+      "id": "missing-symbol",
+      "mode": "schema",
+      "schema": "source-definition",
+      "file": "fixtures/invalid/missing-symbol.json",
+      "valid": false
+    },
+    {
+      "id": "unknown-access-kind",
+      "mode": "schema",
+      "schema": "source-definition",
+      "file": "fixtures/invalid/unknown-access-kind.json",
+      "valid": false
+    },
+    {
+      "id": "offset-negative",
+      "mode": "schema",
+      "schema": "source-definition",
+      "file": "fixtures/invalid/offset-negative.json",
+      "valid": false
+    },
+    {
+      "id": "register-bit-16",
+      "mode": "schema",
+      "schema": "source-definition",
+      "file": "fixtures/invalid/register-bit-16.json",
+      "valid": false
+    },
+    {
+      "id": "mixed-access-fields",
+      "mode": "schema",
+      "schema": "source-definition",
+      "file": "fixtures/invalid/mixed-access-fields.json",
+      "valid": false
+    },
+    {
+      "id": "typed-has-byte-order",
+      "mode": "schema",
+      "schema": "source-definition",
+      "file": "fixtures/invalid/typed-has-byte-order.json",
+      "valid": false
+    },
+    {
+      "id": "decimal-exponent",
+      "mode": "schema",
+      "schema": "mapping-set",
+      "file": "fixtures/invalid/decimal-exponent.json",
+      "valid": false
+    },
+    {
+      "id": "arbitrary-script",
+      "mode": "schema",
+      "schema": "mapping-set",
+      "file": "fixtures/invalid/arbitrary-script.json",
+      "valid": false
+    },
+    {
+      "id": "invalid-digest",
+      "mode": "schema",
+      "schema": "evidence-artifact",
+      "file": "fixtures/invalid/invalid-digest.json",
+      "valid": false
+    },
+    {
+      "id": "unsafe-evidence-path",
+      "mode": "schema",
+      "schema": "evidence-artifact",
+      "file": "fixtures/invalid/unsafe-evidence-path.json",
+      "valid": false
+    },
+    {
+      "id": "bad-timestamp",
+      "mode": "schema",
+      "schema": "evidence-artifact",
+      "file": "fixtures/invalid/bad-timestamp.json",
+      "valid": false
+    },
+    {
+      "id": "unrecognized-field",
+      "mode": "schema",
+      "schema": "mapping-set",
+      "file": "fixtures/invalid/unrecognized-field.json",
+      "valid": false
+    },
+    {
+      "id": "unknown-unit",
+      "mode": "schema",
+      "schema": "semantic-definition",
+      "file": "fixtures/invalid/unknown-unit.json",
+      "valid": false
+    },
+    {
+      "id": "ready-unknown-address",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/access/addressIndex",
+          "value": null
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "source.incomplete"
+    },
+    {
+      "id": "ready-unknown-radix",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/addressRadix",
+          "value": null
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "source.incomplete"
+    },
+    {
+      "id": "profile-kind-mismatch",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/accessProfileRef",
+          "value": "ab-logix-symbol-v1"
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "source.profile-mismatch"
+    },
+    {
+      "id": "wrong-byte-width",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "sources/source-b.json",
+          "pointer": "/access/byteLength",
+          "value": 2
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "source.width"
+    },
+    {
+      "id": "missing-source-ref",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "mappings/map-a.json",
+          "pointer": "/mappings/0/sourceRef/id",
+          "value": "not-present"
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "reference.missing"
+    },
+    {
+      "id": "cross-plc-binding",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "mappings/map-b.json",
+          "pointer": "/mappings/0/sourceRef/id",
+          "value": "source-a"
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "mapping.equipment"
+    },
+    {
+      "id": "missing-member",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "mappings/map-a.json",
+          "pointer": "/mappings/0/targetMemberId",
+          "value": "not-present"
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "mapping.member"
+    },
+    {
+      "id": "output-unit-drift",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "mappings/map-a.json",
+          "pointer": "/mappings/0/outputUnit/code",
+          "value": "Cel"
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "mapping.unit"
+    },
+    {
+      "id": "missing-cast",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "mappings/map-a.json",
+          "pointer": "/mappings/0/transform",
+          "value": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            }
+          ]
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "mapping.type"
+    },
+    {
+      "id": "double-scaling",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "mappings/map-c.json",
+          "pointer": "/mappings/0/transform",
+          "value": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ]
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "mapping.double-transform"
+    },
+    {
+      "id": "evidence-not-present",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/evidenceRefs/0/artifactId",
+          "value": "unknown"
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "evidence.missing"
+    },
+    {
+      "id": "stale-review",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "reviews/a.json",
+          "pointer": "/target/sha256",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "review.digest"
+    },
+    {
+      "id": "transport-tamper",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/rawAddressText",
+          "value": "D9999"
+        }
+      ],
+      "reseal": false,
+      "valid": false,
+      "expectedRule": "bundle.digest"
+    },
+    {
+      "id": "null-not-unknown-unit",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/unit",
+          "value": null
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "schema"
+    },
+    {
+      "id": "unknown-target-unit",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/unit",
+          "value": {
+            "status": "unknown"
+          }
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "semantic.unit"
+    },
+    {
+      "id": "duplicate-member-id",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/1",
+          "value": {
+            "memberId": "actual-speed",
+            "name": "actualSpeed",
+            "semanticId": "urn:tyr:concept:motor-actual-speed",
+            "description": "Motor shaft actual rotational speed",
+            "valueType": "Double",
+            "unit": {
+              "status": "known",
+              "code": "rpm"
+            },
+            "role": "measurement",
+            "range": {
+              "low": "0",
+              "high": "3000"
+            }
+          }
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "semantic.duplicate"
+    },
+    {
+      "id": "duplicate-binding",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "mappings/map-a.json",
+          "pointer": "/mappings/1",
+          "value": {
+            "mappingId": "speed-a",
+            "sourceRef": {
+              "id": "source-a",
+              "version": "1.0.0"
+            },
+            "targetMemberId": "actual-speed",
+            "transform": [
+              {
+                "op": "linear",
+                "factor": "0.1",
+                "offset": "0"
+              },
+              {
+                "op": "cast",
+                "to": "Double",
+                "overflow": "error",
+                "rounding": "exact"
+              }
+            ],
+            "outputUnit": {
+              "status": "known",
+              "code": "rpm"
+            },
+            "invalidValuePolicy": "bad-quality",
+            "evidenceRefs": [
+              {
+                "artifactId": "ev-map",
+                "locator": {
+                  "kind": "text-line",
+                  "line": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "mapping.duplicate"
+    },
+    {
+      "id": "numeric-node-string",
+      "mode": "document",
+      "file": "fixtures/invalid/numeric-node-string.json",
+      "valid": false,
+      "expectedRule": "source.node-identifier"
+    },
+    {
+      "id": "bad-node-guid",
+      "mode": "document",
+      "file": "fixtures/invalid/bad-node-guid.json",
+      "valid": false,
+      "expectedRule": "source.node-identifier"
+    },
+    {
+      "id": "report-inconsistent",
+      "mode": "document",
+      "file": "fixtures/invalid/report-inconsistent.json",
+      "valid": false,
+      "expectedRule": "report.consistency"
+    },
+    {
+      "id": "self-approval",
+      "mode": "document",
+      "file": "fixtures/invalid/self-approval.json",
+      "valid": false,
+      "expectedRule": "approval.self"
+    },
+    {
+      "id": "release-wrong-proposal",
+      "mode": "document",
+      "file": "fixtures/invalid/release-wrong-proposal.json",
+      "valid": false,
+      "expectedRule": "release.proposal-digest"
+    },
+    {
+      "id": "observation-count",
+      "mode": "document",
+      "file": "fixtures/invalid/observation-count.json",
+      "valid": false,
+      "expectedRule": "observation.count"
+    },
+    {
+      "id": "semantic-id-conflicting-role",
+      "mode": "package",
+      "base": "fixtures/packages/motor",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/1",
+          "value": {
+            "memberId": "conflicting-setpoint",
+            "name": "actualSpeed",
+            "semanticId": "urn:tyr:concept:motor-actual-speed",
+            "description": "Motor shaft actual rotational speed",
+            "valueType": "Double",
+            "unit": {
+              "status": "known",
+              "code": "rpm"
+            },
+            "role": "setpoint",
+            "range": {
+              "low": "0",
+              "high": "3000"
+            }
+          }
+        }
+      ],
+      "reseal": true,
+      "valid": false,
+      "expectedRule": "semantic.identity-conflict"
+    }
+  ]
+}

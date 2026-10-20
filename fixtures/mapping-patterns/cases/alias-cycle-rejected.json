@@ -1,0 +1,17 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "alias-cycle-rejected",
+  "patternId": "MP12",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "aliases": {
+      "A": "B",
+      "B": "A"
+    }
+  },
+  "expect": {
+    "error": "reference-cycle",
+    "publishable": false
+  }
+}

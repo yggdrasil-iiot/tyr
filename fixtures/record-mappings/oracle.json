@@ -1,0 +1,48 @@
+{
+  "nominalEngineeringValues": {
+    "array": [
+      {
+        "asset": "A-001",
+        "pressure": "100.0",
+        "target": "90.0",
+        "running": false
+      },
+      {
+        "asset": "A-002",
+        "pressure": "123.45",
+        "target": "95.0",
+        "running": true
+      }
+    ],
+    "object": {
+      "asset": "A-002",
+      "pressure": "123.45",
+      "target": "95.0",
+      "running": true
+    },
+    "zeroArray": [],
+    "zeroObject": null
+  },
+  "finalArray": [
+    {
+      "asset": "A-001",
+      "pressure": "100",
+      "target": "90",
+      "running": false
+    },
+    {
+      "asset": "A-002",
+      "pressure": "123.4500000000000028421709430404007434844970703125",
+      "target": "95",
+      "running": true
+    }
+  ],
+  "finalObject": {
+    "asset": "A-002",
+    "pressure": "123.4500000000000028421709430404007434844970703125",
+    "target": "95",
+    "running": true
+  },
+  "expectedQuality": "uncertain",
+  "reason": "Final Double cast reports exact binary64 values and precision loss."
+}

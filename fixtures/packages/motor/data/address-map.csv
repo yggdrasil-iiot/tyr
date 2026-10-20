@@ -1,0 +1,5 @@
+equipment,address,type,scale,unit
+conveyor-a,D1000,INT32,0.1,rpm
+conveyor-b,DB10.DB20,FLOAT32,1,rpm
+conveyor-c,Conveyor.Motor.ActualSpeed,FLOAT32,1,rpm
+conveyor-e,D1000,INT32,0.1,rpm

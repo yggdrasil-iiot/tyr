@@ -1,0 +1,18 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "external-query-preservation",
+  "patternId": "MP14",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "source": {
+      "kind": "solution-query",
+      "text": "SELECT current_job FROM production_context"
+    }
+  },
+  "expect": {
+    "state": "unresolved",
+    "queryExecuted": false,
+    "originalPreserved": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.1.0",
+  "id": "ev-motor-b-low",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "data/motor-b-low.txt",
+    "sha256": "e7f334230cc099e6ce2c9fd5e211d448887cdd0aa4ba4d9905d4fb22995214bb",
+    "mediaType": "text/plain"
+  },
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "product": null,
+  "scope": [
+    "line-a-motor-melsec"
+  ]
+}

@@ -1,0 +1,55 @@
+:root{font-family:Inter,"Segoe UI","Malgun Gothic",sans-serif;color:#23312c;background:#f5f6f2;font-size:14px;--accent:#236c54;--line:#dce3dc}*{box-sizing:border-box}body{margin:0;display:grid;grid-template-columns:235px 1fr;min-height:100vh}aside{background:#142f28;color:#e7eee8;padding:32px 22px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}.brand{color:inherit;text-decoration:none;font-size:32px;letter-spacing:-1px;font-weight:700}.brand span{display:block;font-size:12px;font-weight:400;letter-spacing:2px;margin-top:8px;color:#b7c9bd}.aside-note{line-height:1.8;margin:34px 0;color:#c2d3c7}nav{display:grid;gap:8px}nav button{text-align:left;background:transparent;color:#cddbd1;padding:14px 10px;border:0;border-radius:6px}nav button.active{background:#31574a;color:white}#counts{line-height:2;margin-top:32px;color:#b5cdbf}footer{margin-top:auto;font-size:11px;line-height:1.8;color:#a8c1b3}main{padding:32px 4vw;max-width:1500px;width:100%}header{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:25px;margin-bottom:24px}h1{font-size:26px;letter-spacing:-1px;margin:6px 0}h2{font-size:18px;margin:0 0 14px}.eyebrow{font-size:10px;letter-spacing:2px;color:#60796c}.badge{font-size:11px;background:#e4ede6;padding:8px 10px;border-radius:4px;display:inline-block;margin:5px}.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,1fr);gap:22px}.card{background:white;border:1px solid var(--line);border-radius:9px;padding:24px;min-width:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.full{grid-column:1/-1}label{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:600;min-width:0}input,select,textarea{font:inherit;font-weight:400;border:1px solid #cbd7cc;background:#fcfdfb;border-radius:5px;padding:10px 11px;width:100%;color:#23312c}input:focus,select:focus,textarea:focus{outline:2px solid #83b59d;outline-offset:1px}textarea{min-height:88px;resize:vertical}button{font:inherit;cursor:pointer;border:1px solid transparent;border-radius:5px;background:var(--accent);color:white;padding:10px 15px}button:disabled{opacity:.5;cursor:wait}.secondary{background:white;color:#365a49;border:1px solid #cad9cc}form button[type=submit]{margin-top:20px}.hint,p{color:#6c7d71;line-height:1.7}.hint{font-size:12px}.section-label{font-size:12px;letter-spacing:.5px;margin:22px 0 12px;color:#456454}.record{display:block;width:100%;text-align:left;background:#f5f8f3;color:#244b39;border:1px solid #dce6dc;margin-top:10px;padding:13px}.record small{display:block;color:#738276;font-size:11px;margin-top:6px;overflow-wrap:anywhere}.empty{padding:24px 0;color:#879389}.validation{margin-top:24px;padding:21px 24px;border:1px solid var(--line);background:#eef2ea;border-radius:8px}.validation p{font-size:12px;margin:0}.validation li{font-size:12px;margin:10px 0;overflow-wrap:anywhere}#message:not(:empty){margin:0 0 20px;padding:12px 16px;background:#e0eee3;border-radius:6px;white-space:pre-wrap}#message.error{background:#fbe7e1;color:#9a3628}.check{flex-direction:row;align-items:center}.check input{width:auto}.step{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:6px}.mapping-path{padding:15px;background:#f3f6ee;border-radius:5px;font-size:12px;line-height:1.8;overflow-wrap:anywhere}code{font-size:11px;overflow-wrap:anywhere}@media(max-width:1000px){body{grid-template-columns:195px 1fr}aside{padding:25px 15px}main{padding:25px}.grid{grid-template-columns:1fr}}@media(max-width:680px){body{display:block}aside{position:static;height:auto;padding:18px}nav{grid-template-columns:1fr 1fr}.aside-note,#counts,footer{display:none}.brand span{display:inline;font-size:11px;margin-left:20px}main{padding:18px}header{align-items:flex-start;flex-direction:column}.fields{grid-template-columns:1fr}.full{grid-column:auto}}
+
+.binding-row{display:grid;grid-template-columns:1fr 1.2fr 1.2fr;gap:22px;padding:24px 0;border-bottom:1px solid var(--line)}
+.binding-row h3{margin:0 0 8px;font-size:16px}.binding-row p,.binding-row small{overflow-wrap:anywhere}
+.binding-row label{margin-bottom:12px}.binding-row small{color:#718172;font-size:11px}
+.records-panel{margin-top:22px}.records-panel .record{display:inline-block;width:calc(50% - 12px);margin:6px}
+.table-scroll{overflow:auto;max-width:100%;margin-top:20px}table{border-collapse:collapse;width:100%;font-size:12px;min-width:920px}
+th,td{text-align:left;vertical-align:top;padding:13px;border:1px solid var(--line);line-height:1.7}
+th{background:#edf3ec}td strong,td code,td small,th small{display:block}td code{max-width:240px;overflow-wrap:anywhere;white-space:normal}
+td small,th small{font-weight:400;color:#6a7c6e;font-size:11px;overflow-wrap:anywhere}.collision{background:#fff0da;color:#8c5216}
+.member-summary{border-top:1px solid var(--line);padding:12px 0}.member-summary small{display:block;color:#6a7c6e;overflow-wrap:anywhere}
+@media(max-width:1000px){.binding-row{grid-template-columns:1fr 1fr}.binding-row>div:first-child{grid-column:1/-1}}
+@media(max-width:680px){.binding-row{grid-template-columns:1fr}.records-panel .record{width:100%;margin:6px 0}nav{grid-template-columns:1fr 1fr}}
+
+table.single-equipment{min-width:0;table-layout:fixed}table.single-equipment th:first-child{width:34%}table.single-equipment code{max-width:100%}
+
+.graph-node{border:1px solid var(--line);border-radius:6px;padding:18px;margin:18px 0}.graph-node h3{margin:0 0 14px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
+
+main{min-width:0}
+
+.sample-input{padding:16px;border:1px solid var(--line);border-radius:6px;margin-top:18px}.preview-value{padding:18px;background:#edf3ec;overflow-wrap:anywhere}.preview-value code{font-size:18px}.preview-value small{display:block;margin-top:8px}.preview-error{background:#fbe7e1;color:#9a3628}#preview-result pre{margin:0;max-width:320px;white-space:pre-wrap;overflow-wrap:anywhere}#preview-result details{margin-top:18px}
+
+[hidden]{display:none!important}
+
+.preview-stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:18px 0 26px}.preview-stage{border:1px solid var(--line);border-radius:6px;padding:12px;min-width:0}.preview-stage strong,.preview-stage small,.preview-stage code{display:block;overflow-wrap:anywhere}.preview-stage strong{font-size:11px;margin:7px 0}.preview-stage code{font-size:14px;max-height:9em;overflow:auto}.preview-stage small{font-size:10px;color:#617669}
+
+#review-diff pre,#review-target-hash p,#review-records pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:480px;font-size:11px}#review-diff .table-scroll{max-height:600px;overflow:auto}#review-diff td{vertical-align:top}#review-diff details{margin-top:18px}
+
+#submission-records pre,#submission-records code{white-space:pre-wrap;overflow-wrap:anywhere;max-width:720px;font-size:11px}
+
+/* P7: keep every authoring step reachable in a short desktop viewport. */
+@media(min-width:681px){aside{overflow-y:auto}aside>*{flex-shrink:0}}
+
+/* A07 snapshot metadata must fit narrow authoring panes. */
+#view-parent-summary{overflow-wrap:anywhere}
+
+/* Template operator workbench */
+aside nav{overflow-y:auto;min-height:0} .template-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}.template-slot{padding:16px;border:1px solid var(--line,#d5dce4);border-radius:8px;margin:12px 0}.template-slot small{display:block;margin:6px 0;color:#576574}.template-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.template-diff{max-height:320px;overflow:auto}.template-state{font-weight:600;color:#7b5900}
+
+.record-table{overflow:auto;margin:14px 0}.record-table table{min-width:900px}.record-table input,.record-table select{min-width:100px}.record-table .check input{min-width:0}.record-value{font-size:22px;font-weight:650;color:var(--accent)}.record-quality{display:inline-block;padding:3px 8px;background:#edf1e9;border-radius:4px}.record-warning{color:#805816}.record-property{border-top:1px solid var(--line);padding:10px 0}.record-issues{white-space:pre-wrap;color:#913d24}.record-author section{margin-top:18px}.record-field-small{font-size:11px;color:#6c7d71}
+
+/* Mixed-object preview keeps provenance and exact precision diagnostics readable. */
+.mixed-object-result .template-slot{min-width:0;overflow-wrap:anywhere}.mixed-object-result pre{white-space:pre-wrap;overflow-wrap:anywhere}.mixed-origin{font-size:.9rem;color:var(--muted,#596760)}
+
+#bc-result pre,#bc-plan pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:520px;overflow:auto}#bc-result .template-slot{min-width:0;overflow-wrap:anywhere}
+
+/* Five operator stages; legacy tools remain reachable without hidden navigation. */
+body{grid-template-columns:270px minmax(0,1fr)}aside{padding:24px 16px}.workflow-nav-group{margin:8px 0 16px}.workflow-nav-group>div{padding-left:12px;border-left:2px solid #36564b}.workflow-nav-group .workflow-stage{font-size:15px;font-weight:700;color:#fff;background:transparent}.workflow-stage span{display:inline-grid;place-items:center;border:1px solid #769b8d;border-radius:50%;width:23px;height:23px;margin-right:6px}.workflow-nav-group.current .workflow-stage{color:#a6e8b9}.workflow-nav-group button[data-tab]{padding:8px 10px;font-size:12px}.workflow-toolbar{padding:16px 20px;margin:0 0 24px;background:#edf2e9;border:1px solid var(--line);border-radius:10px}.workflow-stepper{display:flex;gap:7px;flex-wrap:wrap}.workflow-stepper button{background:#fff;color:#344c40;border:1px solid #c5d4c7}.workflow-stepper button.current{background:var(--accent);color:#fff}.workflow-toolbar p{overflow-wrap:anywhere;font-size:12px;color:#52665a}.workflow-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}.workflow-cards .card button{margin:6px 6px 6px 0}.workflow-cards .card h3{margin-top:0}.workflow-cards .card p{line-height:1.8}#rs-plan pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:400px;overflow:auto}@media(max-width:800px){body{display:block}aside{position:static;width:auto;height:auto}aside nav{max-height:240px}.workflow-cards{grid-template-columns:1fr}}
+/* Operator walk-through refinements. Native hidden always wins over card display rules. */
+[hidden] { display: none !important; }
+.ux-input-hint { background: #eef5ef; border-left: 3px solid #2c735d; padding: .7rem; font-size: .9rem; }
+.ux-summary table { width: 100%; }
+.ux-summary th, .ux-summary td { text-align: left; padding: .65rem; border-bottom: 1px solid #d9e4dc; }
+#bc-rows td:first-child button { display: block; margin-top: .4rem; font-size: .8rem; }
+#ux-row-add { margin-left: .5rem; }

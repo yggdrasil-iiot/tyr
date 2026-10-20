@@ -1,0 +1,64 @@
+{
+  "cases": [
+    {
+      "mappingId": "ab-actual-speed-binding",
+      "typedValue": "2400",
+      "expected": "2400.0"
+    },
+    {
+      "mappingId": "ua-actual-speed-binding",
+      "typedValue": "40",
+      "expected": "2400.0"
+    },
+    {
+      "mappingId": "db-actual-speed-binding",
+      "bytesHex": "5dc0",
+      "expected": "2400.0"
+    },
+    {
+      "mappingId": "melsec-actual-speed-binding",
+      "bytesHex": "c05d",
+      "expected": "2400.0"
+    },
+    {
+      "mappingId": "ua-torque-binding",
+      "typedValue": "125000",
+      "expected": "125.0"
+    },
+    {
+      "mappingId": "ua-temperature-binding",
+      "typedValue": "338.15",
+      "expected": "65.0"
+    },
+    {
+      "mappingId": "ab-state-binding",
+      "typedValue": "1",
+      "expected": "running"
+    },
+    {
+      "mappingId": "ua-state-binding",
+      "typedValue": "20",
+      "expected": "running"
+    },
+    {
+      "mappingId": "db-state-binding",
+      "bytesHex": "0004",
+      "expected": "running"
+    },
+    {
+      "mappingId": "melsec-state-binding",
+      "bytesHex": "0100",
+      "expected": "running"
+    },
+    {
+      "mappingId": "ab-alarm-active-binding",
+      "typedValue": true,
+      "expected": true
+    },
+    {
+      "mappingId": "melsec-alarm-active-binding",
+      "bytesHex": "0100",
+      "expected": true
+    }
+  ]
+}

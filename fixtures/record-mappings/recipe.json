@@ -1,0 +1,174 @@
+{
+  "revision": 2,
+  "id": "pressure-records",
+  "version": "1.0.0",
+  "label": "설비별 압력 결과 집합",
+  "equipmentInstanceId": "record-line-a",
+  "resultSchema": {
+    "id": "pressure-result",
+    "version": "1.0.0",
+    "providerRef": "virtual-db",
+    "valueKey": "asset-pressure",
+    "query": {
+      "language": "sql",
+      "text": "SELECT asset, pressure, target, running FROM declared_view"
+    },
+    "fields": [
+      {
+        "fieldId": "asset",
+        "name": "asset",
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "inputStage": "already-engineered",
+        "nullable": false
+      },
+      {
+        "fieldId": "pressure",
+        "name": "pressure",
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "Pa"
+        },
+        "inputStage": "raw",
+        "nullable": true
+      },
+      {
+        "fieldId": "target",
+        "name": "target",
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "inputStage": "raw",
+        "nullable": false
+      },
+      {
+        "fieldId": "running",
+        "name": "running",
+        "valueType": "Boolean",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "inputStage": "already-engineered",
+        "nullable": false
+      }
+    ],
+    "keyFields": [
+      "asset"
+    ],
+    "unknownFields": "preserve"
+  },
+  "output": {
+    "mode": "array",
+    "zeroPolicy": "empty",
+    "manyPolicy": "all",
+    "maxRows": 16,
+    "order": "canonical-key-utf8"
+  },
+  "selection": {
+    "kind": "all",
+    "key": []
+  },
+  "authoredBy": "fixture-author",
+  "reason": "가상 결과 집합 수용 검증",
+  "note": "합성 선언. 실제 DB/schema 정답 아님.",
+  "origin": "synthetic",
+  "templateRef": null,
+  "modelRef": {
+    "id": "record-pressure-model",
+    "version": "1.0.0"
+  },
+  "memberBindings": [
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "asset"
+        }
+      ],
+      "fieldId": "asset",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "pressure"
+        }
+      ],
+      "fieldId": "pressure",
+      "transform": [
+        {
+          "op": "unit-convert",
+          "from": "Pa",
+          "to": "kPa"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "target"
+        }
+      ],
+      "fieldId": "target",
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.1",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "running"
+        }
+      ],
+      "fieldId": "running",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Boolean",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    }
+  ],
+  "slotBindings": [
+    {
+      "fieldId": "pressure",
+      "nullPolicy": "default",
+      "defaultValue": "0"
+    }
+  ],
+  "templateId": "pressure-record-template",
+  "templateVersion": "1.0.0"
+}

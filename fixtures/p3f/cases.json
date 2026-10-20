@@ -1,0 +1,80 @@
+{
+  "cases": [
+    {
+      "id": "first",
+      "index": 0,
+      "previous": 0,
+      "policy": "reject",
+      "default": null,
+      "result": "100",
+      "codes": []
+    },
+    {
+      "id": "last-source-changed",
+      "index": 1,
+      "previous": 0,
+      "policy": "reject",
+      "default": null,
+      "result": "200",
+      "codes": [
+        "selector.source-changed"
+      ]
+    },
+    {
+      "id": "same-source",
+      "index": 1,
+      "previous": 1,
+      "policy": "reject",
+      "default": null,
+      "result": "200",
+      "codes": []
+    },
+    {
+      "id": "out-of-range",
+      "index": 2,
+      "previous": 0,
+      "policy": "reject",
+      "default": null,
+      "result": null,
+      "codes": [
+        "selector.out-of-range",
+        "mapping.input-invalid"
+      ]
+    },
+    {
+      "id": "large-index",
+      "index": 65535,
+      "previous": 0,
+      "policy": "reject",
+      "default": null,
+      "result": null,
+      "codes": [
+        "selector.out-of-range",
+        "mapping.input-invalid"
+      ]
+    },
+    {
+      "id": "default-first",
+      "index": 2,
+      "previous": 0,
+      "policy": "default-candidate",
+      "default": 0,
+      "result": "100",
+      "codes": [
+        "selector.default-used"
+      ]
+    },
+    {
+      "id": "default-last",
+      "index": 9,
+      "previous": 0,
+      "policy": "default-candidate",
+      "default": 1,
+      "result": "200",
+      "codes": [
+        "selector.default-used",
+        "selector.source-changed"
+      ]
+    }
+  ]
+}

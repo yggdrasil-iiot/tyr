@@ -1,0 +1,11 @@
+{
+  "observationId": "row-8",
+  "observationSha256": "3dd2022191a83eb938137b11a1c3572036576d7de46be0499a38490f116d4a17",
+  "previousReviewSha256": null,
+  "decision": "exclude-non-source",
+  "recordKey": null,
+  "source": null,
+  "reviewer": "offline-reviewer",
+  "reason": "Non-signal vendor metadata; preserved original bytes and claims",
+  "reviewedAt": "2026-10-18T00:00:00Z"
+}

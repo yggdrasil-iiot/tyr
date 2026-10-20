@@ -1,0 +1,68 @@
+{
+  "kind": "mapping-set",
+  "schemaVersion": "2.3.0",
+  "id": "pressure-mixed-mapping",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "targetInstanceRef": {
+    "id": "filter-mixed",
+    "version": "1.0.0"
+  },
+  "mappings": [
+    {
+      "mappingId": "mixed-difference",
+      "valueRef": {
+        "kind": "graph",
+        "graphRef": {
+          "id": "pressure-mixed",
+          "version": "1.0.0"
+        },
+        "nodeId": "difference"
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "pressure-difference"
+        }
+      ],
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-pressure-bar",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-pressure-down",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ],
+      "temporalPolicy": {
+        "timestampBasis": "source",
+        "maxAgeMs": 1000,
+        "maxSkewMs": 100,
+        "uncertainInput": "propagate",
+        "missingInput": "reject",
+        "badInput": "propagate",
+        "assembly": "latest"
+      }
+    }
+  ]
+}

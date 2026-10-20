@@ -1,0 +1,52 @@
+{
+  "kind": "mapping-set",
+  "schemaVersion": "2.4.0",
+  "id": "array-melsec-last-mapping",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "targetInstanceRef": {
+    "id": "array-melsec-last",
+    "version": "1.0.0"
+  },
+  "mappings": [
+    {
+      "mappingId": "melsec-last-pressure",
+      "valueRef": {
+        "kind": "graph",
+        "graphRef": {
+          "id": "array-melsec-graph",
+          "version": "1.0.0"
+        },
+        "nodeId": "last"
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "actual-pressure"
+        }
+      ],
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-melsec",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

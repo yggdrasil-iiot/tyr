@@ -1,0 +1,13 @@
+{
+  "kind": "validation-report",
+  "schemaVersion": "1.0.0",
+  "id": "report-motor",
+  "version": "1.0.0",
+  "proposalSha256": "507d00c7016e3f916e0aa2c3e6f8c8e4f93fceb9d9a01604953a9625635b8d9a",
+  "validator": {
+    "name": "fixture-validator",
+    "version": "1.0.0"
+  },
+  "valid": false,
+  "findings": []
+}

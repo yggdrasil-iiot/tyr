@@ -1,0 +1,15 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "bcd16-valid",
+  "patternId": "MP09",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "bytesHex": "1234",
+    "codec": "BCD16",
+    "byteOrder": "big"
+  },
+  "expect": {
+    "result": "1234"
+  }
+}

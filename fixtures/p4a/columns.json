@@ -1,0 +1,10 @@
+{
+  "태그ID": "id",
+  "종류": "kind",
+  "프로파일": "profile",
+  "주소": "address",
+  "타입": "type",
+  "단위": "unit",
+  "바이트순서": "byteOrder",
+  "워드순서": "wordOrder"
+}

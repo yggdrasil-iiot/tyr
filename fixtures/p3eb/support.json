@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2.12.0",
+  "patterns": {
+    "MP02": "bounded-nested-leaf-mapping",
+    "MP05": "inline-structure-and-structure-array",
+    "MP06": "logical-shape-lowerBounds-index"
+  },
+  "scope": {
+    "nativeUDTLayout": "not-verified",
+    "fieldPoV": "not-performed",
+    "deviceCommunication": "excluded",
+    "externalSQL": "excluded",
+    "writeExecution": "excluded"
+  },
+  "limits": {
+    "definitionDepth": 8,
+    "definitionNodes": 256,
+    "expandedLeaves": 256,
+    "rank": 3
+  }
+}

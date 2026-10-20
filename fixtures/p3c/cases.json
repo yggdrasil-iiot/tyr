@@ -1,0 +1,363 @@
+{
+  "scope": "Independent manually specified little-endian UInt16 pressure oracles; no device communication",
+  "cases": [
+    {
+      "id": "direct-pressure-drop",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "9600"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": "50",
+        "quality": "good",
+        "codes": []
+      }
+    },
+    {
+      "id": "scaled-pressure-drop",
+      "variant": "scaled",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "dc05"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": "50",
+        "quality": "good",
+        "codes": []
+      }
+    },
+    {
+      "id": "bar-to-kpa-pressure-drop",
+      "variant": "mixed",
+      "samples": {
+        "pressure-bar": {
+          "bytesHex": "9600"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": "50",
+        "quality": "good",
+        "codes": []
+      }
+    },
+    {
+      "id": "negative-preserved",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "3200"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": "-50",
+        "quality": "good",
+        "codes": []
+      }
+    },
+    {
+      "id": "equal-zero",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "6400"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": "0",
+        "quality": "good",
+        "codes": []
+      }
+    },
+    {
+      "id": "missing-downstream",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "9600"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "sample.missing",
+          "graph.input-invalid"
+        ]
+      }
+    },
+    {
+      "id": "missing-upstream",
+      "variant": "direct",
+      "samples": {
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "sample.missing"
+        ]
+      }
+    },
+    {
+      "id": "bad-downstream-byte",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "9600"
+        },
+        "pressure-down": {
+          "bytesHex": "zz"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "sample.hex"
+        ]
+      }
+    },
+    {
+      "id": "mixed-units-rejected",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "9600"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "graph.input-unit"
+        ]
+      },
+      "change": {
+        "unit": "bar"
+      }
+    },
+    {
+      "id": "unknown-unit-rejected",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "9600"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "graph.input-unit"
+        ]
+      },
+      "change": {
+        "unit": "unknown"
+      }
+    },
+    {
+      "id": "bool-rejected",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "0100"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "graph.input-type"
+        ]
+      },
+      "change": {
+        "bool": true
+      }
+    },
+    {
+      "id": "decimal-binary-loss",
+      "variant": "scaled",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "0100"
+        },
+        "pressure-down": {
+          "bytesHex": "0000"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "loss.precision",
+          "value.inexact"
+        ]
+      }
+    },
+    {
+      "id": "decimal-binary-reviewed",
+      "variant": "scaled",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "0100"
+        },
+        "pressure-down": {
+          "bytesHex": "0000"
+        }
+      },
+      "expect": {
+        "value": "0.1000000000000000055511151231257827021181583404541015625",
+        "quality": "uncertain",
+        "codes": [
+          "loss.precision"
+        ]
+      },
+      "change": {
+        "rounding": "half-even"
+      }
+    },
+    {
+      "id": "int-cast-loss",
+      "variant": "scaled",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "0f00"
+        },
+        "pressure-down": {
+          "bytesHex": "0000"
+        }
+      },
+      "expect": {
+        "value": "2",
+        "quality": "uncertain",
+        "codes": [
+          "loss.rounding"
+        ]
+      },
+      "change": {
+        "cast": "Int32",
+        "rounding": "half-even"
+      }
+    },
+    {
+      "id": "int-exact-rejected",
+      "variant": "scaled",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "0f00"
+        },
+        "pressure-down": {
+          "bytesHex": "0000"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "loss.rounding",
+          "value.inexact"
+        ]
+      },
+      "change": {
+        "cast": "Int32"
+      }
+    },
+    {
+      "id": "cast-overflow",
+      "variant": "scaled",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "ffff"
+        },
+        "pressure-down": {
+          "bytesHex": "0000"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "value.overflow"
+        ]
+      },
+      "change": {
+        "factor": "100000",
+        "cast": "Int32"
+      }
+    },
+    {
+      "id": "output-unit-rejected",
+      "variant": "direct",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "9600"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "graph.output-unit"
+        ]
+      },
+      "change": {
+        "outputUnit": "bar"
+      }
+    },
+    {
+      "id": "double-scaling-rejected",
+      "variant": "scaled",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "dc05"
+        },
+        "pressure-down": {
+          "bytesHex": "6400"
+        }
+      },
+      "expect": {
+        "value": null,
+        "quality": "bad",
+        "codes": [
+          "mapping.double-transform"
+        ]
+      },
+      "change": {
+        "engineered": true
+      }
+    }
+  ]
+}

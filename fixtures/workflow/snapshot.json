@@ -1,0 +1,26 @@
+{
+  "kind": "virtual-result-set",
+  "schemaVersion": "2.20.0",
+  "resultSetRef": {
+    "id": "independent-result",
+    "version": "1.0.0",
+    "sha256": "c520caaf28cb8e2b598119f398795d8648fc30783aa53956d0aca2ac53403b13"
+  },
+  "capturedAt": "2026-10-18T00:00:00Z",
+  "quality": "good",
+  "rows": [
+    {
+      "asset": "A-002",
+      "pressure": "123450",
+      "target": "950",
+      "running": true,
+      "unmapped_note": "원본 보존"
+    },
+    {
+      "asset": "A-001",
+      "pressure": "100000",
+      "target": "900",
+      "running": false
+    }
+  ]
+}

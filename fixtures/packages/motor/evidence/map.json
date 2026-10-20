@@ -1,0 +1,20 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.0.0",
+  "id": "ev-map",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "data/address-map.csv",
+    "sha256": "dc735c8bfb5e10589742186088e3376384815dbe1a3ef0bc2bc919b0b94704d1",
+    "mediaType": "text/csv"
+  },
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "product": null,
+  "scope": [
+    "conveyor-a",
+    "conveyor-b",
+    "conveyor-c",
+    "conveyor-e"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "profiles": {
+    "ab": {
+      "expression": "([structure-ab-actual] - [structure-ab-target]) / [arithmetic-ab-gain]",
+      "graphId": "formula-ab",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "expectedOps": [
+        "subtract",
+        "divide"
+      ],
+      "expectedNominal": "50"
+    },
+    "ua": {
+      "expression": "([structure-ua-actual] - [structure-ua-target]) / [arithmetic-ua-gain]",
+      "graphId": "formula-ua",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "expectedOps": [
+        "subtract",
+        "divide"
+      ],
+      "expectedNominal": "50"
+    },
+    "db": {
+      "expression": "([structure-db-actual] - [structure-db-target]) / [arithmetic-db-gain]",
+      "graphId": "formula-db",
+      "equipmentInstanceId": "line-a-motor-db",
+      "expectedOps": [
+        "subtract",
+        "divide"
+      ],
+      "expectedNominal": "50"
+    },
+    "melsec": {
+      "expression": "([structure-melsec-actual] - [structure-melsec-target]) / [arithmetic-melsec-gain]",
+      "graphId": "formula-melsec",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "expectedOps": [
+        "subtract",
+        "divide"
+      ],
+      "expectedNominal": "50"
+    }
+  },
+  "precedence": "add before divide only with parentheses; multiply/divide bind tighter than add/subtract; operators associate left",
+  "nominal": {
+    "actual": "150",
+    "target": "50",
+    "gain": "2",
+    "result": "50"
+  },
+  "divisionThird": "0.3333333333333333333333333333333333",
+  "fieldPoV": "not-performed"
+}

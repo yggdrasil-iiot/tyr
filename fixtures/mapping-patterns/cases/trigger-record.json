@@ -1,0 +1,21 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "trigger-record",
+  "patternId": "MP16",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "sequence": 42,
+    "trigger": "rising",
+    "fields": {
+      "partId": "A001",
+      "ok": true
+    },
+    "snapshotPolicy": "sequence-latched"
+  },
+  "expect": {
+    "recordKey": "42",
+    "immutableAfterCompletion": true,
+    "deviceHandshakeExecuted": false
+  }
+}

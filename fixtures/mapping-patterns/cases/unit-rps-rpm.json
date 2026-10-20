@@ -1,0 +1,17 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "unit-rps-rpm",
+  "patternId": "MP10",
+  "mode": "current",
+  "action": "evaluate",
+  "input": {
+    "mappingId": "ua-actual-speed-binding",
+    "sample": {
+      "typedValue": "40"
+    }
+  },
+  "expect": {
+    "value": "2400.0",
+    "issues": []
+  }
+}

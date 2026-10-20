@@ -1,0 +1,26 @@
+{
+  "process": {
+    "pressure": {
+      "actual": "150",
+      "target": "180",
+      "deviation": "-30"
+    },
+    "running": false
+  },
+  "modules": [
+    {
+      "pressure": {
+        "actual": "100",
+        "target": "110"
+      },
+      "running": true
+    },
+    {
+      "pressure": {
+        "actual": "220",
+        "target": "210"
+      },
+      "running": true
+    }
+  ]
+}

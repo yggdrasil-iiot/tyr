@@ -1,0 +1,74 @@
+{
+  "profiles": {
+    "ab": {
+      "expected": {
+        "sum": "200",
+        "scaled": "200",
+        "quotient": "50",
+        "ratio": "1"
+      },
+      "chain": [
+        "final-ab",
+        "consumer-ab",
+        "shared-ab"
+      ]
+    },
+    "ua": {
+      "expected": {
+        "sum": "200",
+        "scaled": "200",
+        "quotient": "50",
+        "ratio": "1"
+      },
+      "chain": [
+        "final-ua",
+        "consumer-ua",
+        "shared-ua"
+      ]
+    },
+    "db": {
+      "expected": {
+        "sum": "200",
+        "scaled": "200",
+        "quotient": "50",
+        "ratio": "1"
+      },
+      "chain": [
+        "final-db",
+        "consumer-db",
+        "shared-db"
+      ]
+    },
+    "melsec": {
+      "expected": {
+        "sum": "200",
+        "scaled": "200",
+        "quotient": "50",
+        "ratio": "1"
+      },
+      "chain": [
+        "final-melsec",
+        "consumer-melsec",
+        "shared-melsec"
+      ]
+    }
+  },
+  "fieldPoV": "not-performed",
+  "rejections": [
+    "self-cycle",
+    "two-graph-cycle",
+    "three-graph-cycle",
+    "missing-graph",
+    "missing-version",
+    "missing-node",
+    "cross-equipment",
+    "wrong-type",
+    "wrong-unit",
+    "incomplete-evidence",
+    "whole-array",
+    "legacy-schema",
+    "dependency-depth",
+    "path-depth",
+    "dependency-size"
+  ]
+}

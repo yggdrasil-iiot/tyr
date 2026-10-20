@@ -1,0 +1,19 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "native-structure-select",
+  "patternId": "MP04",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "type": "MotorType",
+    "value": {
+      "speed": "2400",
+      "state": 1
+    },
+    "field": "speed"
+  },
+  "expect": {
+    "result": "2400",
+    "preserveTypeRef": true
+  }
+}

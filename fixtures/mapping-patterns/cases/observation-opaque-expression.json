@@ -1,0 +1,14 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "observation-opaque-expression",
+  "patternId": "MP18",
+  "mode": "current",
+  "action": "observation",
+  "input": {
+    "expression": "TAG(PressureA) - TAG(PressureB)"
+  },
+  "expect": {
+    "status": "unsupported",
+    "adoption": "not-a-source-definition"
+  }
+}

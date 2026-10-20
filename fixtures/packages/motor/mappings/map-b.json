@@ -1,0 +1,43 @@
+{
+  "kind": "mapping-set",
+  "schemaVersion": "1.0.0",
+  "id": "map-b",
+  "version": "1.0.0",
+  "equipmentInstanceId": "conveyor-b",
+  "semanticDefinitionRef": {
+    "id": "motor",
+    "version": "1.0.0"
+  },
+  "mappings": [
+    {
+      "mappingId": "speed-b",
+      "sourceRef": {
+        "id": "source-b",
+        "version": "1.0.0"
+      },
+      "targetMemberId": "actual-speed",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "rpm"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "ev-map",
+          "locator": {
+            "kind": "text-line",
+            "line": 3
+          }
+        }
+      ]
+    }
+  ]
+}

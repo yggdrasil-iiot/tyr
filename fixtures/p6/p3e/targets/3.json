@@ -1,0 +1,21 @@
+{
+  "kind": "target-instance",
+  "schemaVersion": "2.0.0",
+  "id": "array-ua-last",
+  "version": "1.0.0",
+  "label": "채널 ua last",
+  "equipmentInstanceId": "line-a-motor-ua",
+  "semanticDefinitionRef": {
+    "id": "array-pressure-channel",
+    "version": "1.0.0"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "manual-array-pressures-ua",
+      "locator": {
+        "kind": "text-line",
+        "line": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "bounded-selector",
+  "patternId": "MP13",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "selector": 1,
+    "candidates": [
+      {
+        "value": "2400",
+        "id": "A"
+      },
+      {
+        "value": "1800",
+        "id": "B"
+      }
+    ]
+  },
+  "expect": {
+    "result": "1800",
+    "selectedSource": "B"
+  }
+}

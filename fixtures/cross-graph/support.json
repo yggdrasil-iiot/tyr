@@ -1,0 +1,33 @@
+{
+  "contract": "2.17.0",
+  "status": "bounded-current",
+  "profiles": [
+    "ab-logix-symbol",
+    "s7-1500-opc-ua",
+    "s7-300-db",
+    "melsec-register"
+  ],
+  "supported": [
+    "pinned-scalar-result",
+    "same-equipment",
+    "transitive-evidence",
+    "dependency-cycle-gate",
+    "virtual-preview",
+    "cross-graph-selector-candidate"
+  ],
+  "limits": {
+    "graphDependencyDepth": 32,
+    "nodePathDepth": 128,
+    "totalNodesWithExternalRefs": 8192
+  },
+  "fieldPoV": "not-performed",
+  "excluded": [
+    "deviceCommunication",
+    "externalSQL",
+    "writeExecution",
+    "runtimeActivation",
+    "cross-equipment",
+    "whole-array-endpoint",
+    "dynamic-graph-expression"
+  ]
+}

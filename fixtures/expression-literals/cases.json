@@ -1,0 +1,90 @@
+{
+  "profiles": {
+    "ab": {
+      "request": {
+        "revision": 0,
+        "graphId": "literal-ab",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "expression": "([structure-ab-actual] - [structure-ab-target]) * 0.5 + quantity(3, \"kPa\")",
+        "compilerVersion": "1.1.0"
+      },
+      "expectedNominal": "53",
+      "expectedConstants": [
+        {
+          "value": "0.5",
+          "unit": "1"
+        },
+        {
+          "value": "3",
+          "unit": "kPa"
+        }
+      ]
+    },
+    "ua": {
+      "request": {
+        "revision": 0,
+        "graphId": "literal-ua",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "expression": "([structure-ua-actual] - [structure-ua-target]) * 0.5 + quantity(3, \"kPa\")",
+        "compilerVersion": "1.1.0"
+      },
+      "expectedNominal": "53",
+      "expectedConstants": [
+        {
+          "value": "0.5",
+          "unit": "1"
+        },
+        {
+          "value": "3",
+          "unit": "kPa"
+        }
+      ]
+    },
+    "db": {
+      "request": {
+        "revision": 0,
+        "graphId": "literal-db",
+        "equipmentInstanceId": "line-a-motor-db",
+        "expression": "([structure-db-actual] - [structure-db-target]) * 0.5 + quantity(3, \"kPa\")",
+        "compilerVersion": "1.1.0"
+      },
+      "expectedNominal": "53",
+      "expectedConstants": [
+        {
+          "value": "0.5",
+          "unit": "1"
+        },
+        {
+          "value": "3",
+          "unit": "kPa"
+        }
+      ]
+    },
+    "melsec": {
+      "request": {
+        "revision": 0,
+        "graphId": "literal-melsec",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "expression": "([structure-melsec-actual] - [structure-melsec-target]) * 0.5 + quantity(3, \"kPa\")",
+        "compilerVersion": "1.1.0"
+      },
+      "expectedNominal": "53",
+      "expectedConstants": [
+        {
+          "value": "0.5",
+          "unit": "1"
+        },
+        {
+          "value": "3",
+          "unit": "kPa"
+        }
+      ]
+    }
+  },
+  "rejected": [
+    "[structure-ab-actual] + 3",
+    "[structure-ab-actual]+quantity(3,\"bar\")",
+    "quantity(3,\"psi\")"
+  ],
+  "fieldPoV": "not-performed"
+}

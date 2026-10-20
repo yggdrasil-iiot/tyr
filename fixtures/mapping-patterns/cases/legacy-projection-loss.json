@@ -1,0 +1,17 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "legacy-projection-loss",
+  "patternId": "MP18",
+  "mode": "current",
+  "action": "projection",
+  "input": {},
+  "expect": {
+    "requiredLossFields": [
+      "source.access",
+      "mapping.transform",
+      "member.unit",
+      "member.role",
+      "mapping.evidenceRefs"
+    ]
+  }
+}

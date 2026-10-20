@@ -1,0 +1,18 @@
+{
+  "stableSourceId": "imp-review-base-speed-ab",
+  "speedAddress": "Motor.ActualSpeedV2",
+  "speedLabel": "Local speed label",
+  "pressureAddress": "Line.LocalPressure",
+  "retainedDbId": "imp-review-base-pressure-db",
+  "classifications": {
+    "pump-0": "unchanged",
+    "pump-1": "incoming-only",
+    "pressure-mel": "unchanged",
+    "speed-ab": "mergeable",
+    "pressure-ua": "conflict",
+    "unresolved": "incoming-only",
+    "alias": "incoming-only",
+    "new-signal": "new",
+    "pressure-db": "removed"
+  }
+}

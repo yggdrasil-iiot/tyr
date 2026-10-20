@@ -1,0 +1,52 @@
+{
+  "kind": "mapping-set",
+  "schemaVersion": "2.4.0",
+  "id": "array-ab-last-mapping",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-ab",
+  "targetInstanceRef": {
+    "id": "array-ab-last",
+    "version": "1.0.0"
+  },
+  "mappings": [
+    {
+      "mappingId": "ab-last-pressure",
+      "valueRef": {
+        "kind": "graph",
+        "graphRef": {
+          "id": "array-ab-graph",
+          "version": "1.0.0"
+        },
+        "nodeId": "last"
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "actual-pressure"
+        }
+      ],
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ab",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

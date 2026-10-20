@@ -1,0 +1,25 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "template-base-stride",
+  "patternId": "MP03",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "template": {
+      "base": 1000,
+      "stride": 100,
+      "offsets": {
+        "actual": 0,
+        "target": 2
+      }
+    },
+    "instanceIndex": 2
+  },
+  "expect": {
+    "resolved": {
+      "actual": 1200,
+      "target": 1202
+    },
+    "preserveTemplate": true
+  }
+}

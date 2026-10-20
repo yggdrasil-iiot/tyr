@@ -1,0 +1,25 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "graph-cycle",
+  "patternId": "MP11",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "nodes": {
+      "A": {
+        "inputs": [
+          "B"
+        ]
+      },
+      "B": {
+        "inputs": [
+          "A"
+        ]
+      }
+    }
+  },
+  "expect": {
+    "error": "dependency-cycle",
+    "publishable": false
+  }
+}

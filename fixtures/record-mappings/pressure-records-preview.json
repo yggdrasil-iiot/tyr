@@ -1,0 +1,1193 @@
+{
+  "kind": "record-preview",
+  "schemaVersion": "2.20.0",
+  "revision": 4,
+  "mappingRef": {
+    "id": "pressure-records",
+    "version": "1.0.0",
+    "sha256": "2904f0afe7c3bd98f2a5084bc6c26f94de037308d11cc9f4425e3615348b2c3f"
+  },
+  "templateRef": {
+    "id": "pressure-record-template",
+    "version": "1.0.0",
+    "sha256": "34968e1f347fdd707dfad686de2c9b5b63ca9925ca7ab7b088bc8f9353c2313f"
+  },
+  "resultSetRef": {
+    "id": "pressure-result",
+    "version": "1.0.0",
+    "sha256": "4247d3889f86a9444b9f54085822b0ff451c4754404e9c39d917e86df47e5a6d"
+  },
+  "inputSha256": "752d6de2b0d1ee499aa6d205a015d52f2a214a4ddfa6cb5ce766b5401c6212a6",
+  "capturedAt": "2026-10-18T00:00:00Z",
+  "evaluatedAt": "2026-10-18T00:00:01Z",
+  "quality": "uncertain",
+  "valid": true,
+  "empty": false,
+  "result": [
+    {
+      "asset": "A-001",
+      "pressure": "100",
+      "target": "90",
+      "running": false
+    },
+    {
+      "asset": "A-002",
+      "pressure": "123.4500000000000028421709430404007434844970703125",
+      "target": "95",
+      "running": true
+    }
+  ],
+  "partialResults": [
+    {
+      "asset": "A-001",
+      "pressure": "100",
+      "target": "90",
+      "running": false
+    },
+    {
+      "asset": "A-002",
+      "pressure": "123.4500000000000028421709430404007434844970703125",
+      "target": "95",
+      "running": true
+    }
+  ],
+  "records": [
+    {
+      "identity": {
+        "key": [
+          "A-001"
+        ],
+        "sha256": "3538dcd09b9d2e3fcc4553c0ac52b0fd26a2e388634ee4b3219f2a0840666414",
+        "inputRowIndex": 1
+      },
+      "quality": "good",
+      "result": {
+        "asset": "A-001",
+        "pressure": "100",
+        "target": "90",
+        "running": false
+      },
+      "partialResult": {
+        "asset": "A-001",
+        "pressure": "100",
+        "target": "90",
+        "running": false
+      },
+      "fieldBindings": [
+        {
+          "binding": {
+            "slotId": "input-1",
+            "fieldId": "asset",
+            "nullPolicy": "reject",
+            "defaultValue": null
+          },
+          "value": "A-001"
+        },
+        {
+          "binding": {
+            "slotId": "input-2",
+            "fieldId": "pressure",
+            "nullPolicy": "default",
+            "defaultValue": "0"
+          },
+          "value": "100000"
+        },
+        {
+          "binding": {
+            "slotId": "input-3",
+            "fieldId": "running",
+            "nullPolicy": "reject",
+            "defaultValue": null
+          },
+          "value": false
+        },
+        {
+          "binding": {
+            "slotId": "input-4",
+            "fieldId": "target",
+            "nullPolicy": "reject",
+            "defaultValue": null
+          },
+          "value": "900"
+        }
+      ],
+      "members": [
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "asset"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-73466cca6f9a1268c25d5c19-mapping",
+            "mappingId": "reuse-record-73466cca6f9a1268c25d5c19-bc1684f8ac497",
+            "workspaceSha256": "5fee120f8fad1af35287e8a7c55a91267130a2952513f7923103ebdf5fff0857",
+            "sampleSha256": "6ccb96045187cb9c9d8400237decb047f916abaae0a0cd1867fdacd003353da0",
+            "quality": "good",
+            "result": {
+              "value": "A-001",
+              "valueType": "String",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "requiredSources": [
+              "record-73466cca6f9a1268c25d5c19-input-1"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-73466cca6f9a1268c25d5c19-input-1",
+                "status": "ok",
+                "value": "A-001",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "sample": "A-001",
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.asset",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bc1684f8ac497/1",
+                "status": "ok",
+                "value": "A-001",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "String",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:cast",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bc1684f8ac497/1",
+                "status": "ok",
+                "value": "A-001",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "canonical-result",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bc1684f8ac497",
+                "status": "ok",
+                "value": "A-001",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              }
+            ],
+            "issues": [],
+            "losses": [],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        },
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "pressure"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-73466cca6f9a1268c25d5c19-mapping",
+            "mappingId": "reuse-record-73466cca6f9a1268c25d5c19-b9a1b3dfaff4b",
+            "workspaceSha256": "5fee120f8fad1af35287e8a7c55a91267130a2952513f7923103ebdf5fff0857",
+            "sampleSha256": "c0049a9f77f19ee26007904b58aeefd052731709ec6bd4cf09833b2638813bda",
+            "quality": "good",
+            "result": {
+              "value": "100",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "requiredSources": [
+              "record-73466cca6f9a1268c25d5c19-input-2"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-73466cca6f9a1268c25d5c19-input-2",
+                "status": "ok",
+                "value": "100000",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "Pa"
+                },
+                "detail": {
+                  "sample": "100000",
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.pressure",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b9a1b3dfaff4b/1",
+                "status": "ok",
+                "value": "100000",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "Pa"
+                },
+                "detail": {
+                  "op": "unit-convert",
+                  "definition": {
+                    "op": "unit-convert",
+                    "from": "Pa",
+                    "to": "kPa"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:unit-convert",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b9a1b3dfaff4b/1",
+                "status": "ok",
+                "value": "100.000",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "transform-input",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b9a1b3dfaff4b/2",
+                "status": "ok",
+                "value": "100.000",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "Double",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 5,
+                "stage": "transform:cast",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b9a1b3dfaff4b/2",
+                "status": "ok",
+                "value": "100",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 6,
+                "stage": "canonical-result",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b9a1b3dfaff4b",
+                "status": "ok",
+                "value": "100",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              }
+            ],
+            "issues": [],
+            "losses": [],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        },
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "target"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-73466cca6f9a1268c25d5c19-mapping",
+            "mappingId": "reuse-record-73466cca6f9a1268c25d5c19-bac2da24f7c00",
+            "workspaceSha256": "5fee120f8fad1af35287e8a7c55a91267130a2952513f7923103ebdf5fff0857",
+            "sampleSha256": "573722cd98fab94cb9b5a981fec34e28b3074691aaea9e1c9106e580d00bedfa",
+            "quality": "good",
+            "result": {
+              "value": "90",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "requiredSources": [
+              "record-73466cca6f9a1268c25d5c19-input-4"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-73466cca6f9a1268c25d5c19-input-4",
+                "status": "ok",
+                "value": "900",
+                "valueType": "Int32",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "sample": "900",
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.target",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bac2da24f7c00/1",
+                "status": "ok",
+                "value": "900",
+                "valueType": "Int32",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "op": "linear",
+                  "definition": {
+                    "op": "linear",
+                    "factor": "0.1",
+                    "offset": "0"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:linear",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bac2da24f7c00/1",
+                "status": "ok",
+                "value": "90.0",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "transform-input",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bac2da24f7c00/2",
+                "status": "ok",
+                "value": "90.0",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "Double",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 5,
+                "stage": "transform:cast",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bac2da24f7c00/2",
+                "status": "ok",
+                "value": "90",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 6,
+                "stage": "canonical-result",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-bac2da24f7c00",
+                "status": "ok",
+                "value": "90",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              }
+            ],
+            "issues": [],
+            "losses": [],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        },
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-73466cca6f9a1268c25d5c19-mapping",
+            "mappingId": "reuse-record-73466cca6f9a1268c25d5c19-b577541d66ab3",
+            "workspaceSha256": "5fee120f8fad1af35287e8a7c55a91267130a2952513f7923103ebdf5fff0857",
+            "sampleSha256": "4b3077ac8b444599c4291e5c1c12cb0bf6d7c557ac45085a1b290993c9a1e024",
+            "quality": "good",
+            "result": {
+              "value": false,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "requiredSources": [
+              "record-73466cca6f9a1268c25d5c19-input-3"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-73466cca6f9a1268c25d5c19-input-3",
+                "status": "ok",
+                "value": false,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "sample": false,
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.running",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b577541d66ab3/1",
+                "status": "ok",
+                "value": false,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "Boolean",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:cast",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b577541d66ab3/1",
+                "status": "ok",
+                "value": false,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "canonical-result",
+                "identity": "reuse-record-73466cca6f9a1268c25d5c19-b577541d66ab3",
+                "status": "ok",
+                "value": false,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              }
+            ],
+            "issues": [],
+            "losses": [],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "identity": {
+        "key": [
+          "A-002"
+        ],
+        "sha256": "a631f636312c1db3a6c38be84488156a23a94216248280657c2d562504278e5f",
+        "inputRowIndex": 0
+      },
+      "quality": "uncertain",
+      "result": {
+        "asset": "A-002",
+        "pressure": "123.4500000000000028421709430404007434844970703125",
+        "target": "95",
+        "running": true
+      },
+      "partialResult": {
+        "asset": "A-002",
+        "pressure": "123.4500000000000028421709430404007434844970703125",
+        "target": "95",
+        "running": true
+      },
+      "fieldBindings": [
+        {
+          "binding": {
+            "slotId": "input-1",
+            "fieldId": "asset",
+            "nullPolicy": "reject",
+            "defaultValue": null
+          },
+          "value": "A-002"
+        },
+        {
+          "binding": {
+            "slotId": "input-2",
+            "fieldId": "pressure",
+            "nullPolicy": "default",
+            "defaultValue": "0"
+          },
+          "value": "123450"
+        },
+        {
+          "binding": {
+            "slotId": "input-3",
+            "fieldId": "running",
+            "nullPolicy": "reject",
+            "defaultValue": null
+          },
+          "value": true
+        },
+        {
+          "binding": {
+            "slotId": "input-4",
+            "fieldId": "target",
+            "nullPolicy": "reject",
+            "defaultValue": null
+          },
+          "value": "950"
+        }
+      ],
+      "members": [
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "asset"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-03131a7dd0070088a404eb24-mapping",
+            "mappingId": "reuse-record-03131a7dd0070088a404eb24-bc1684f8ac497",
+            "workspaceSha256": "e7416e76951d8740c34333d7ab9a5736489459692dab2dfd9e48a2a5fbdc8f62",
+            "sampleSha256": "cc86e9be7cad4bbe9413fe2395b455cbebd9bd99c24e5765a11918dfaf577373",
+            "quality": "good",
+            "result": {
+              "value": "A-002",
+              "valueType": "String",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "requiredSources": [
+              "record-03131a7dd0070088a404eb24-input-1"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-03131a7dd0070088a404eb24-input-1",
+                "status": "ok",
+                "value": "A-002",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "sample": "A-002",
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.asset",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bc1684f8ac497/1",
+                "status": "ok",
+                "value": "A-002",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "String",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:cast",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bc1684f8ac497/1",
+                "status": "ok",
+                "value": "A-002",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "canonical-result",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bc1684f8ac497",
+                "status": "ok",
+                "value": "A-002",
+                "valueType": "String",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              }
+            ],
+            "issues": [],
+            "losses": [],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        },
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "pressure"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-03131a7dd0070088a404eb24-mapping",
+            "mappingId": "reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b",
+            "workspaceSha256": "e7416e76951d8740c34333d7ab9a5736489459692dab2dfd9e48a2a5fbdc8f62",
+            "sampleSha256": "3f7f69c58ae6a60d4afdf24add9391b94c9a774d3399bee42c881cd0fdf795a2",
+            "quality": "uncertain",
+            "result": {
+              "value": "123.4500000000000028421709430404007434844970703125",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "requiredSources": [
+              "record-03131a7dd0070088a404eb24-input-2"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-03131a7dd0070088a404eb24-input-2",
+                "status": "ok",
+                "value": "123450",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "Pa"
+                },
+                "detail": {
+                  "sample": "123450",
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.pressure",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/1",
+                "status": "ok",
+                "value": "123450",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "Pa"
+                },
+                "detail": {
+                  "op": "unit-convert",
+                  "definition": {
+                    "op": "unit-convert",
+                    "from": "Pa",
+                    "to": "kPa"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:unit-convert",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/1",
+                "status": "ok",
+                "value": "123.450",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "transform-input",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/2",
+                "status": "ok",
+                "value": "123.450",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "Double",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 5,
+                "stage": "transform:cast",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/2",
+                "status": "ok",
+                "value": "123.4500000000000028421709430404007434844970703125",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 6,
+                "stage": "canonical-result",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b",
+                "status": "ok",
+                "value": "123.4500000000000028421709430404007434844970703125",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              }
+            ],
+            "issues": [
+              {
+                "code": "loss.precision",
+                "severity": "loss",
+                "stage": "cast:reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/2",
+                "detail": "before=123.450; exact binary64=123.4500000000000028421709430404007434844970703125"
+              }
+            ],
+            "losses": [
+              {
+                "code": "loss.precision",
+                "severity": "loss",
+                "stage": "cast:reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/2",
+                "detail": "before=123.450; exact binary64=123.4500000000000028421709430404007434844970703125"
+              }
+            ],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        },
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "target"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-03131a7dd0070088a404eb24-mapping",
+            "mappingId": "reuse-record-03131a7dd0070088a404eb24-bac2da24f7c00",
+            "workspaceSha256": "e7416e76951d8740c34333d7ab9a5736489459692dab2dfd9e48a2a5fbdc8f62",
+            "sampleSha256": "85fc02048b78983e8b721a135bba80df6cd85b3c1548bc9bda678d58847d5cf6",
+            "quality": "good",
+            "result": {
+              "value": "95",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "requiredSources": [
+              "record-03131a7dd0070088a404eb24-input-4"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-03131a7dd0070088a404eb24-input-4",
+                "status": "ok",
+                "value": "950",
+                "valueType": "Int32",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "sample": "950",
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.target",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bac2da24f7c00/1",
+                "status": "ok",
+                "value": "950",
+                "valueType": "Int32",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "op": "linear",
+                  "definition": {
+                    "op": "linear",
+                    "factor": "0.1",
+                    "offset": "0"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:linear",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bac2da24f7c00/1",
+                "status": "ok",
+                "value": "95.0",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "transform-input",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bac2da24f7c00/2",
+                "status": "ok",
+                "value": "95.0",
+                "valueType": "Decimal",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "Double",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 5,
+                "stage": "transform:cast",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bac2da24f7c00/2",
+                "status": "ok",
+                "value": "95",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              },
+              {
+                "index": 6,
+                "stage": "canonical-result",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-bac2da24f7c00",
+                "status": "ok",
+                "value": "95",
+                "valueType": "Double",
+                "unit": {
+                  "status": "known",
+                  "code": "kPa"
+                }
+              }
+            ],
+            "issues": [],
+            "losses": [],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        },
+        {
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "preview": {
+            "revision": 4,
+            "mappingSetId": "reuse-record-03131a7dd0070088a404eb24-mapping",
+            "mappingId": "reuse-record-03131a7dd0070088a404eb24-b577541d66ab3",
+            "workspaceSha256": "e7416e76951d8740c34333d7ab9a5736489459692dab2dfd9e48a2a5fbdc8f62",
+            "sampleSha256": "72260e2454de6332ba40e45b42340acac570b030f51069a6fbc77c45a10350c6",
+            "quality": "good",
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "requiredSources": [
+              "record-03131a7dd0070088a404eb24-input-3"
+            ],
+            "selections": [],
+            "trace": [
+              {
+                "index": 1,
+                "stage": "typed-input",
+                "identity": "record-03131a7dd0070088a404eb24-input-3",
+                "status": "ok",
+                "value": true,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "sample": true,
+                  "sourceKind": "external-value",
+                  "accessMode": "read",
+                  "execution": "virtual-input-only",
+                  "access": {
+                    "kind": "external-value",
+                    "providerRef": "virtual-db",
+                    "valueKey": "asset-pressure.running",
+                    "expressionLanguage": "none",
+                    "expression": null
+                  }
+                }
+              },
+              {
+                "index": 2,
+                "stage": "transform-input",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b577541d66ab3/1",
+                "status": "ok",
+                "value": true,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                },
+                "detail": {
+                  "op": "cast",
+                  "definition": {
+                    "op": "cast",
+                    "to": "Boolean",
+                    "overflow": "error",
+                    "rounding": "half-even"
+                  }
+                }
+              },
+              {
+                "index": 3,
+                "stage": "transform:cast",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b577541d66ab3/1",
+                "status": "ok",
+                "value": true,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              },
+              {
+                "index": 4,
+                "stage": "canonical-result",
+                "identity": "reuse-record-03131a7dd0070088a404eb24-b577541d66ab3",
+                "status": "ok",
+                "value": true,
+                "valueType": "Boolean",
+                "unit": {
+                  "status": "not-applicable"
+                }
+              }
+            ],
+            "issues": [],
+            "losses": [],
+            "deviceCommunication": "excluded",
+            "persisted": false
+          }
+        }
+      ],
+      "issues": [
+        {
+          "code": "loss.precision",
+          "severity": "loss",
+          "stage": "cast:reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/2",
+          "detail": "before=123.450; exact binary64=123.4500000000000028421709430404007434844970703125"
+        }
+      ]
+    }
+  ],
+  "trace": [
+    {
+      "stage": "record:validate",
+      "inputRows": 2,
+      "keyFields": [
+        "asset"
+      ],
+      "preservedFields": [
+        {
+          "inputRowIndex": 0,
+          "fields": {
+            "unmapped_note": "원본 보존"
+          }
+        }
+      ]
+    },
+    {
+      "stage": "record:select",
+      "selection": {
+        "kind": "all",
+        "key": []
+      },
+      "selectedRows": 2,
+      "order": "canonical-key-utf8"
+    }
+  ],
+  "issues": [
+    {
+      "code": "loss.precision",
+      "severity": "loss",
+      "stage": "cast:reuse-record-03131a7dd0070088a404eb24-b9a1b3dfaff4b/2",
+      "detail": "before=123.450; exact binary64=123.4500000000000028421709430404007434844970703125",
+      "recordKey": [
+        "A-002"
+      ]
+    }
+  ],
+  "preservedFields": [
+    {
+      "inputRowIndex": 0,
+      "fields": {
+        "unmapped_note": "원본 보존"
+      }
+    }
+  ],
+  "persisted": false,
+  "atomicSnapshot": false,
+  "deviceCommunication": "excluded",
+  "externalSQL": "excluded",
+  "writeExecution": "excluded"
+}

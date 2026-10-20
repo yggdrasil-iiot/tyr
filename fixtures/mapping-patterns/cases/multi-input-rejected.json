@@ -1,0 +1,22 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "multi-input-rejected",
+  "patternId": "MP11",
+  "mode": "gap-probe",
+  "action": "multi-input-rejected",
+  "input": {
+    "inputs": {
+      "high": {
+        "id": "ua-torque",
+        "version": "1.0.0"
+      },
+      "low": {
+        "id": "ab-torque",
+        "version": "1.0.0"
+      }
+    }
+  },
+  "expect": {
+    "schemaRejected": true
+  }
+}

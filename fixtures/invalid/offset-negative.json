@@ -1,0 +1,40 @@
+{
+  "kind": "source-definition",
+  "schemaVersion": "1.0.0",
+  "id": "source-b",
+  "version": "1.0.0",
+  "equipmentInstanceId": "conveyor-b",
+  "connectionProfileRef": "connection-b",
+  "accessProfileRef": "s7-300-db-v1",
+  "status": "ready",
+  "rawAddressText": "DB10.DB20",
+  "addressRadix": 10,
+  "access": {
+    "kind": "db-offset",
+    "dbNumber": 10,
+    "byteOffset": -1,
+    "byteLength": 4,
+    "bitOffset": null
+  },
+  "rawRepresentation": {
+    "mode": "bytes",
+    "valueType": "Float32",
+    "byteOrder": "big",
+    "wordOrder": "high-first"
+  },
+  "inputStage": "already-engineered",
+  "unit": {
+    "status": "known",
+    "code": "rpm"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "ev-map",
+      "locator": {
+        "kind": "text-line",
+        "line": 3
+      }
+    }
+  ],
+  "viewOf": null
+}

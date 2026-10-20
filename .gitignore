@@ -1,0 +1,52 @@
+__pycache__/
+*.pyc
+build/
+
+# Keep written verification records; raw runs and browser captures stay local
+docs/verification/*
+!docs/verification/*.md
+
+# Local authoring databases, sidecars, journals, and backups
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.sqlite.backups/
+*.sqlite3.backups/
+*.db
+*.db-*
+*.db.backups/
+*.submissions/
+
+# Dependencies and generated binaries/logs
+.venv/
+venv/
+node_modules/
+dist/
+target/
+*.class
+*.jar
+*.log
+
+# Credentials, private keys, and machine-local configuration
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+.claude/
+.codex/
+.idea/
+.vscode/
+settings.local.json
+credentials.json
+
+# Editor and operating system files
+*.tmp
+*.swp
+*~
+.DS_Store
+Thumbs.db

@@ -1,0 +1,15 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "date-timezone-missing",
+  "patternId": "MP09",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "localDateTime": "2026-10-17T12:34:56",
+    "timezone": null
+  },
+  "expect": {
+    "state": "unresolved",
+    "publishable": false
+  }
+}

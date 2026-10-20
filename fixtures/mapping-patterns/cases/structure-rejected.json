@@ -1,0 +1,13 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "structure-rejected",
+  "patternId": "MP04",
+  "mode": "gap-probe",
+  "action": "raw-shape-rejected",
+  "input": {
+    "valueType": "Structure"
+  },
+  "expect": {
+    "schemaRejected": true
+  }
+}

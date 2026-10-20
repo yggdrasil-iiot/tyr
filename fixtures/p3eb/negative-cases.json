@@ -1,0 +1,114 @@
+{
+  "cases": [
+    {
+      "id": "index-overflow",
+      "section": "mappings",
+      "index": 0,
+      "path": [
+        "mappings",
+        4,
+        "memberPath",
+        1,
+        "indices"
+      ],
+      "value": [
+        3
+      ],
+      "expectedRule": "structure.index-range"
+    },
+    {
+      "id": "index-underflow",
+      "section": "mappings",
+      "index": 0,
+      "path": [
+        "mappings",
+        4,
+        "memberPath",
+        1,
+        "indices"
+      ],
+      "value": [
+        0
+      ],
+      "expectedRule": "structure.index-range"
+    },
+    {
+      "id": "index-rank",
+      "section": "mappings",
+      "index": 0,
+      "path": [
+        "mappings",
+        4,
+        "memberPath",
+        1,
+        "indices"
+      ],
+      "value": [
+        1,
+        0
+      ],
+      "expectedRule": "structure.array-rank"
+    },
+    {
+      "id": "whole-container",
+      "section": "mappings",
+      "index": 0,
+      "path": [
+        "mappings",
+        0,
+        "memberPath"
+      ],
+      "value": [
+        {
+          "kind": "member",
+          "memberId": "process"
+        }
+      ],
+      "expectedRule": "structure.whole-mapping"
+    },
+    {
+      "id": "missing-leaf",
+      "section": "mappings",
+      "index": 0,
+      "path": [
+        "mappings",
+        0,
+        "memberPath",
+        2,
+        "memberId"
+      ],
+      "value": "absent",
+      "expectedRule": "mapping.member"
+    },
+    {
+      "id": "shape-rank",
+      "section": "semantics",
+      "index": 0,
+      "path": [
+        "members",
+        1,
+        "lowerBounds"
+      ],
+      "value": [
+        1,
+        0
+      ],
+      "expectedRule": "structure.array-rank"
+    },
+    {
+      "id": "shape-overflow",
+      "section": "semantics",
+      "index": 0,
+      "path": [
+        "members",
+        1,
+        "shape"
+      ],
+      "value": [
+        256
+      ],
+      "expectedRule": "structure.size"
+    }
+  ],
+  "scope": "Independent invalid contract mutations; no vendor files"
+}

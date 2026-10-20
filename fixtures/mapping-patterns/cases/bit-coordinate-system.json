@@ -1,0 +1,21 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "bit-coordinate-system",
+  "patternId": "MP08",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "bytesHex": "8001",
+    "byteOrder": "big",
+    "nativeByteBit": {
+      "byteOffset": 0,
+      "bit": 7
+    },
+    "decodedWordBit": 0
+  },
+  "expect": {
+    "nativeByteBit": true,
+    "decodedWordBit": true,
+    "doNotConflateCoordinates": true
+  }
+}

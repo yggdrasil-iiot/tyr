@@ -1,0 +1,65 @@
+{
+  "independentLiteral": "0x8005 = 32768 + 4 + 1; bit0 and bit15 true; bit1 false",
+  "cases": [
+    {
+      "mappingSetId": "a07-ab-mapping",
+      "samples": {
+        "a07-ab-word": {
+          "typedValue": "32773"
+        }
+      },
+      "expected": {
+        "word": "32773",
+        "word-alias": "32773",
+        "running": true,
+        "alarm": true,
+        "alarm-alias": true
+      }
+    },
+    {
+      "mappingSetId": "a07-ua-mapping",
+      "samples": {
+        "a07-ua-word": {
+          "typedValue": "32773"
+        }
+      },
+      "expected": {
+        "word": "32773",
+        "word-alias": "32773",
+        "running": true,
+        "alarm": true,
+        "alarm-alias": true
+      }
+    },
+    {
+      "mappingSetId": "a07-db-mapping",
+      "samples": {
+        "a07-db-word": {
+          "bytesHex": "8005"
+        }
+      },
+      "expected": {
+        "word": "32773",
+        "word-alias": "32773",
+        "running": true,
+        "alarm": true,
+        "alarm-alias": true
+      }
+    },
+    {
+      "mappingSetId": "a07-melsec-mapping",
+      "samples": {
+        "a07-melsec-word": {
+          "bytesHex": "0580"
+        }
+      },
+      "expected": {
+        "word": "32773",
+        "word-alias": "32773",
+        "running": true,
+        "alarm": true,
+        "alarm-alias": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "sqrt-range",
+  "patternId": "MP10",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "raw": "25",
+    "rawLow": "0",
+    "rawHigh": "100",
+    "scaledLow": "0",
+    "scaledHigh": "100",
+    "op": "sqrt-scale"
+  },
+  "expect": {
+    "result": "50"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "splits": {
+    "calibration": 10,
+    "evaluation": 20,
+    "heldout": 10
+  },
+  "evaluationTime": {
+    "manualSeconds": 1000,
+    "toolSeconds": 800,
+    "savingPercent": "20.00"
+  },
+  "heldoutTimeState": "not-measured",
+  "fieldPoV": "not-certified",
+  "evidenceClass": "synthetic-only"
+}

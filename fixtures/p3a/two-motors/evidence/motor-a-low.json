@@ -1,0 +1,17 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.1.0",
+  "id": "ev-motor-a-low",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "data/motor-a-low.txt",
+    "sha256": "5111f93e8e18b2b59820ab7ce9d0da121677c8a5568b81b5fbc53fcfa5ac25b7",
+    "mediaType": "text/plain"
+  },
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "product": null,
+  "scope": [
+    "line-a-motor-melsec"
+  ]
+}

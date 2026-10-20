@@ -1,0 +1,753 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "line-a-motor-melsec",
+      "label": "Line A"
+    }
+  ],
+  "connections": [
+    {
+      "id": "logical-melsec",
+      "label": "MELSEC",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-low",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D1000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-low",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic D1000",
+      "label": "motor-a-low",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-high",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D2000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-high",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic D2000",
+      "label": "motor-a-high",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic D3000",
+      "label": "motor-a-speed",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-b-low",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D1100",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1100,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-b-low",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic D1100",
+      "label": "motor-b-low",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-b-high",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D2100",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2100,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-b-high",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic D2100",
+      "label": "motor-b-high",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-b-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3100",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3100,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-b-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic D3100",
+      "label": "motor-b-speed",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "1.1.0",
+      "id": "motor-counter",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "actual-speed",
+          "name": "actualSpeed",
+          "semanticId": "urn:tyr:concept:motor-actual-speed",
+          "description": "모터 축 실제 회전 속도. 목표값과 구분한다.",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "role": "measurement",
+          "range": {
+            "low": "0",
+            "high": "3000"
+          }
+        },
+        {
+          "memberId": "cycle-count",
+          "name": "cycleCount",
+          "semanticId": "urn:tyr:concept:motor-cycle-count",
+          "description": "완료한 운전 사이클 수. Int32 초과 시 오류.",
+          "valueType": "Int32",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "role": "status",
+          "range": {
+            "low": "0",
+            "high": "2147483647"
+          }
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "motor-a",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "label": "Motor A",
+      "semanticDefinitionRef": {
+        "id": "motor-counter",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-motor-a-speed",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "motor-b",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "label": "Motor B",
+      "semanticDefinitionRef": {
+        "id": "motor-counter",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-motor-b-speed",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.0.0",
+      "id": "motor-a-counter-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "counter",
+          "op": "decode-u32-words",
+          "inputs": {
+            "low": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "motor-a-low",
+                "version": "1.0.0"
+              }
+            },
+            "high": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "motor-a-high",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "UInt32",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-a-low",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-motor-a-high",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "result",
+          "op": "identity",
+          "inputs": {
+            "value": {
+              "kind": "node",
+              "nodeId": "counter"
+            }
+          },
+          "valueType": "UInt32",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-a-low",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-motor-a-high",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.0.0",
+      "id": "motor-b-counter-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "counter",
+          "op": "decode-u32-words",
+          "inputs": {
+            "low": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "motor-b-low",
+                "version": "1.0.0"
+              }
+            },
+            "high": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "motor-b-high",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "UInt32",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-b-low",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-motor-b-high",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "result",
+          "op": "identity",
+          "inputs": {
+            "value": {
+              "kind": "node",
+              "nodeId": "counter"
+            }
+          },
+          "valueType": "UInt32",
+          "unit": {
+            "status": "known",
+            "code": "1"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-b-low",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-motor-b-high",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.0.0",
+      "id": "motor-a-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "motor-a",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "motor-a-speed-binding",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "motor-a-speed",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-speed"
+            }
+          ],
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-a-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "motor-a-counter-binding",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "motor-a-counter-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "result"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "cycle-count"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-a-low",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-motor-a-high",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.0.0",
+      "id": "motor-b-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "motor-b",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "motor-b-speed-binding",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "motor-b-speed",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-speed"
+            }
+          ],
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "0.1",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "rpm"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-b-speed",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "motor-b-counter-binding",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "motor-b-counter-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "result"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "cycle-count"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "1"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-motor-b-low",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-motor-b-high",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

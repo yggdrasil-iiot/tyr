@@ -1,0 +1,18 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "u32-high-first",
+  "patternId": "MP07",
+  "mode": "current",
+  "action": "evaluate",
+  "input": {
+    "mappingId": "melsec-cycle-count-binding",
+    "wordOrder": "high-first",
+    "sample": {
+      "bytesHex": "01000000"
+    }
+  },
+  "expect": {
+    "value": "65536",
+    "issues": []
+  }
+}

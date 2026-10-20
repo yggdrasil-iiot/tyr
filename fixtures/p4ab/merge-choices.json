@@ -1,0 +1,41 @@
+{
+  "pump-0": {
+    "mode": "apply",
+    "fields": {}
+  },
+  "pump-1": {
+    "mode": "apply",
+    "fields": {}
+  },
+  "pressure-mel": {
+    "mode": "apply",
+    "fields": {}
+  },
+  "speed-ab": {
+    "mode": "apply",
+    "fields": {}
+  },
+  "pressure-ua": {
+    "mode": "apply",
+    "fields": {
+      "access": "ours",
+      "rawAddressText": "ours"
+    }
+  },
+  "unresolved": {
+    "mode": "apply",
+    "fields": {}
+  },
+  "alias": {
+    "mode": "apply",
+    "fields": {}
+  },
+  "new-signal": {
+    "mode": "apply",
+    "fields": {}
+  },
+  "pressure-db": {
+    "mode": "retain",
+    "fields": {}
+  }
+}

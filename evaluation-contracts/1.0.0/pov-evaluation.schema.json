@@ -1,0 +1,551 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "pov-evaluation-pack"
+    },
+    "version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "origin": {
+      "enum": [
+        "synthetic",
+        "field-declared"
+      ]
+    },
+    "baselineWorkspaceSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "mappingSetIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reviewerId": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "independenceAttested": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "reviewerId",
+        "independenceAttested"
+      ]
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "caseId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "split": {
+            "enum": [
+              "calibration",
+              "evaluation",
+              "heldout"
+            ]
+          },
+          "identity": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "equipmentInstanceId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "targetInstanceRef": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 512
+                  },
+                  "version": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 512
+                  }
+                },
+                "required": [
+                  "id",
+                  "version"
+                ]
+              },
+              "memberPath": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 24,
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "kind": {
+                          "const": "member"
+                        },
+                        "memberId": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 512
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "memberId"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "kind": {
+                          "const": "index"
+                        },
+                        "indices": {
+                          "type": "array",
+                          "minItems": 1,
+                          "maxItems": 3,
+                          "items": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "indices"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "required": [
+              "equipmentInstanceId",
+              "targetInstanceRef",
+              "memberPath"
+            ]
+          },
+          "expected": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "semanticId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      },
+                      "valueType": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      },
+                      "unit": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "status": {
+                                "const": "known"
+                              },
+                              "code": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 512
+                              }
+                            },
+                            "required": [
+                              "status",
+                              "code"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "status": {
+                                "enum": [
+                                  "unknown",
+                                  "not-applicable"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "status"
+                            ]
+                          }
+                        ]
+                      },
+                      "role": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "required": [
+                      "semanticId",
+                      "valueType",
+                      "unit",
+                      "role"
+                    ]
+                  },
+                  "definitionSha256": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "definitionSha256"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "oracleEvidence": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "samples": {
+            "type": "array",
+            "maxItems": 16,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "sampleId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "samples": {
+                  "type": "object",
+                  "maxProperties": 256
+                },
+                "evaluationContext": {
+                  "type": "object"
+                },
+                "expected": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "result": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "value": {
+                              "type": [
+                                "string",
+                                "boolean",
+                                "null"
+                              ]
+                            },
+                            "valueType": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 512
+                            },
+                            "unit": {
+                              "oneOf": [
+                                {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "status": {
+                                      "const": "known"
+                                    },
+                                    "code": {
+                                      "type": "string",
+                                      "minLength": 1,
+                                      "maxLength": 512
+                                    }
+                                  },
+                                  "required": [
+                                    "status",
+                                    "code"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "status": {
+                                      "enum": [
+                                        "unknown",
+                                        "not-applicable"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status"
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "valueType",
+                            "unit"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "quality": {
+                      "enum": [
+                        "good",
+                        "uncertain",
+                        "bad"
+                      ]
+                    },
+                    "issues": {
+                      "type": "array",
+                      "maxItems": 256,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    },
+                    "losses": {
+                      "type": "array",
+                      "maxItems": 256,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512
+                      }
+                    }
+                  },
+                  "required": [
+                    "result",
+                    "quality",
+                    "issues",
+                    "losses"
+                  ]
+                }
+              },
+              "required": [
+                "sampleId",
+                "samples",
+                "expected"
+              ]
+            }
+          }
+        },
+        "required": [
+          "caseId",
+          "split",
+          "identity",
+          "expected",
+          "oracleEvidence",
+          "samples"
+        ]
+      }
+    },
+    "timePairs": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "taskId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "split": {
+            "enum": [
+              "calibration",
+              "evaluation",
+              "heldout"
+            ]
+          },
+          "order": {
+            "enum": [
+              [
+                "manual",
+                "tool"
+              ],
+              [
+                "tool",
+                "manual"
+              ]
+            ]
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "manual": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "import": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "interpret": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "map": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "inquire": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "correct": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "review": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              }
+            },
+            "required": [
+              "import",
+              "interpret",
+              "map",
+              "inquire",
+              "correct",
+              "review"
+            ]
+          },
+          "tool": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "import": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "interpret": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "map": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "inquire": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "correct": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "review": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              }
+            },
+            "required": [
+              "import",
+              "interpret",
+              "map",
+              "inquire",
+              "correct",
+              "review"
+            ]
+          }
+        },
+        "required": [
+          "participantId",
+          "taskId",
+          "split",
+          "order",
+          "completed",
+          "manual",
+          "tool"
+        ]
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "version",
+    "id",
+    "origin",
+    "baselineWorkspaceSha256",
+    "mappingSetIds",
+    "review",
+    "cases",
+    "timePairs"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tyr offline PoV evaluation preparation pack 1.0.0"
+}

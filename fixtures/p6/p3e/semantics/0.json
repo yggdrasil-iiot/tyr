@@ -1,0 +1,21 @@
+{
+  "kind": "semantic-definition",
+  "schemaVersion": "2.2.0",
+  "id": "array-pressure-channel",
+  "version": "1.0.0",
+  "members": [
+    {
+      "memberId": "actual-pressure",
+      "name": "측정 압력",
+      "semanticId": "urn:tyr:concept:channel.actual-pressure",
+      "description": "지정한 채널 객체의 측정 압력",
+      "valueType": "Double",
+      "unit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "role": "measurement",
+      "range": null
+    }
+  ]
+}
