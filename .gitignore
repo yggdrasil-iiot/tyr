@@ -5,6 +5,29 @@ build/
 # Keep written verification records; raw runs and browser captures stay local
 docs/verification/*
 !docs/verification/*.md
+# Baseline pins that the immutability tests read; tracked so a clean checkout can run them
+!docs/verification/a14-results.json
+!docs/verification/broadcast-baseline-pins.json
+!docs/verification/mapping-templates-baseline-pins.json
+!docs/verification/mixed-objects-baseline-pins.json
+!docs/verification/p3b-validation.json
+!docs/verification/p3c-validation.json
+!docs/verification/p3cb-acceptance.json
+!docs/verification/p3d-validation.json
+!docs/verification/p3e-validation.json
+!docs/verification/p3eb-ui-acceptance.json
+!docs/verification/p3f-validation.json
+!docs/verification/p3fb-full-acceptance.json
+!docs/verification/p4a-validation.json
+!docs/verification/p4ab-full-acceptance.json
+!docs/verification/p4b-validation.json
+!docs/verification/p5-validation.json
+!docs/verification/p6r-validation.json
+!docs/verification/p7eval-validation.json
+!docs/verification/record-mappings-baseline-pins.json
+!docs/verification/semantic-lifecycle-baseline-pins.json
+!docs/verification/workflow-baseline-pins.json
+!docs/verification/p7-baseline-sha256.json
 
 # Local authoring databases, sidecars, journals, and backups
 *.sqlite
