@@ -807,11 +807,13 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 
 [상세 설계·논리 모델·경계·SI01~SI18](docs/P4-F-SOLUTION-INTERPRETATION.md). 아래는 신규 작업이며 기존 P4-A/P4-A B 완료를 실제품 parser 지원으로 확대하지 않는다. 제조사 자료 제공은 선행 조건이 아니다. 허가된 현장 사본·오프라인 시험 자료를 확보하면 제품별 E를 진행한다.
 
+2026-10-20 후속 결정: **vendor 원본은 Mímir만 해석**한다. Mímir가 해석 스냅샷을 파일 계약으로 발행하고 Týr는 그 소비자다. 아래 A의 해석 모델(SourceBundle~UnresolvedItem)은 Mímir wire 계약(A1), 검토·판정·전환 모델은 Týr editor 계약(A2)이다. E의 해석기 구현은 Mímir 작업이며 이 계획에는 Týr 쪽 수신·검증만 남는다. [§3 소유 분리](docs/P4-F-SOLUTION-INTERPRETATION.md)
+
 ### 재사용과 신규 구현
 
 | 재사용할 부분 | 보완·새 구현 | 유지할 경계 |
 |---|---|---|
-| 2.6 원본/hash/locator·2.14 불변 관측/검토·CAS/재가져오기 원칙 | SourceBundle·profile·다중 파일/native 구조·참조·claim·미해석 공통 editor 계약 | 현재 parser/importRef 검증 우회 금지; unknown 필드를 구 schema에 추가하지 않음 |
+| 2.6 원본/hash/locator·2.14 불변 관측/검토·CAS/재가져오기 원칙 | Mímir 해석 스냅샷(SourceBundle·profile·native 구조·참조·claim·미해석) 수신·pin 재검증과 Týr editor 계약 | 현재 parser/importRef 검증 우회 금지; unknown 필드를 구 schema에 추가하지 않음 |
 | source/graph/target/mapping/view/구조/selector·템플릿·가상 preview | endpoint closure·다차원 판정·native→canonical 전환 계획과 근거 | 지원하지 않는 상태·정책을 삭제해 동등 전환으로 표시하지 않음 |
 | P5 영향/검토, 다섯 작업 단계·P7 독립 정답 | 쟁점 작업대·이전 판단 유지/재검토·엑셀 정의서/대조표 | 원문/규칙 해석/사람 선언/가상 확인/실제 운영/승인 분리 |
 | 기존 SQLite workspace2.0·시나리오·제출·CAS | opt-in 별도 sidecar·불변 snapshot/결정·plan/receipt 복구 | 기존 DB DDL/자동 재작성 없음; DB 간 분산 원자성 주장 금지 |
@@ -822,9 +824,10 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 - [x] 설계에서 원본·참조·해석 근거·미해석·전환 판정과 제품 해석기 책임, 합성/실제품 수용 기준을 분리했다. 이 체크는 문서 완료만 의미한다.
 - [x] [정준 의미/값 생성·매핑 계약 경계](docs/CANONICAL-SEMANTICS-AND-GENERATION.md)와 PLC·DB·상수·조건식 혼합 템플릿·MG01~MG08의 명세를 추가했다. 문서 완료이며 조건식/업무 적합성 기능·fixture 실행 완료가 아니다.
 - [ ] SemanticContextContract/GenerationContract의 신규 editor 계약과 기존 semantic/source/graph/mapping/record/template 대응·pin·검증 분리. 업무 문맥·코드 사전·유효성/기간/수량 범주와 입력/생성 정책을 분리하고 기존 schema를 바꾸지 않는다.
-- [ ] SourceBundle/InterpretationProfile/Snapshot/NativeNode/ReferenceEdge/Claim/UnresolvedItem/ReviewDecision/EndpointAssessment/ConversionPlan의 새 editor Schema·version/hash/locator·한도·입출력 계약 구현. 기존 계약은 수정하지 않는다.
+- [ ] A1 (Mímir): SourceBundle/InterpretationProfile/Snapshot/NativeNode/ReferenceEdge/Claim/UnresolvedItem의 해석 스냅샷 wire Schema·version/hash/locator·한도. Mímir가 소유하고 Týr는 사본을 번들한다.
+- [ ] A2 (Týr): ReviewDecision/EndpointAssessment/ConversionPlan의 새 editor Schema와 스냅샷 수신·pin 재검증(재파싱 없음)·evidenceBasis 소유 위반 거부(SI19). 기존 계약은 수정하지 않는다.
 - [ ] native ID/모호한 참조·누락 파일/unknown capture scope·평가 순환/비평가 순환·근거 전이와 endpoint closure 검증.
-- [ ] synthetic-pio-like/synthetic-kepware-like 독립 입력·oracle 작성. **실제 제품 export 형식이 아닌 가상 프로파일**로 표시. SI01~SI12·SI16·SI17의 계약/결정성/차단 부분을 검증.
+- [ ] synthetic-pio-like/synthetic-kepware-like 독립 입력·oracle 작성. 해석기 쪽 SI06·SI07·SI10·SI12 결정성·SI17 공격 파일 부분은 Mímir 시험으로 둔다. **실제 제품 export 형식이 아닌 가상 프로파일**로 표시. SI01~SI12·SI16·SI17의 계약/결정성/차단 부분을 검증.
 
 종료 조건: 설정 단독과 이질 가상 구조의 의존 관계를 설명하고, 같은 정의/다른 의미·누락 참조·변환 손실을 분리한다. 원본/미해석 손실0, 미확정 closure의 최종 전환 성공 판정0. fixture 실행 전 통과 수치를 기록하지 않는다.
 
@@ -863,7 +866,7 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 
 종료 조건: 새 합성 해석 기반 제안을 독립 검증하고 기존 승인 경계를 유지한다. 제품 자료 없이 가능한 A~D 완료와 실제 PIO/Kepware 지원은 분리해 기록한다.
 
-### E 제품별 실제 해석기 (자료 확보 후, A와 병행 조사 가능)
+### E 제품별 실제 해석기 — Mímir 작업 (자료 확보 후, A와 병행 조사 가능)
 
 - [ ] PIO: 제품/driver 버전·허가된 설정/백업·단순/복합 태그·화면 대응·기본값/참조/외부 코드 범위 확보. 정확한 parser/profile·원문 locator·제한을 구현/독립 검증.
 - [ ] BEAN TAG MANAGER: 정확한 제품/버전·PIO와의 연결, 공개 TM Core/TM Connector와의 관계를 실제 자료로 확인. 같은 제품으로 추정해 합치지 않음.
