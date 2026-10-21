@@ -684,7 +684,7 @@ A01~A16의 fixture 실행과 화면·저장 경로를 검증했다. 14개 충족
 
 ## P4-F PIO·Kepware 공통 수용과 제품별 해석기 (설계·미구현)
 
-[상세 모델·계약 경계·fixture 계획](docs/P4-F-SOLUTION-INTERPRETATION.md). SourceBundle → 제품별 Interpreter → InterpretationSnapshot(native 노드·참조·claim·미해석) → endpoint 의존 closure/차원별 판정 → ConversionPlan → 기존 정준 작성본으로 이어진다. 사실 추출과 의미 확인, 계약 표현 가능성과 가상 동등성·Bifrost 승인·운영 일치를 분리한다. 제품 해석기는 제공 bytes와 고정된 로컬 규칙만 읽고 workspace/registry에 쓰지 않는다.
+[상세 모델·계약 경계·fixture 계획](docs/P4-F-SOLUTION-INTERPRETATION.md). Mímir: SourceBundle → 제품별 Interpreter → InterpretationSnapshot(native 노드·참조·claim·미해석)을 파일 계약으로 발행 → Týr: 스냅샷 pin 재검증 → endpoint 의존 closure/차원별 판정 → ConversionPlan → 기존 정준 작성본으로 이어진다. 사실 추출과 의미 확인, 계약 표현 가능성과 가상 동등성·Bifrost 승인·운영 일치를 분리한다. 제품 해석기는 Mímir에 두며(2026-10-20 후속 결정, 원본 형식마다 해석하는 곳은 한 곳) 제공 bytes와 고정된 로컬 규칙만 읽고 workspace/registry에 쓰지 않는다. Týr와 Bifrost는 vendor 원본을 직접 파싱하지 않는다.
 
 기존 P4-A 2.6/P4-A B 2.14는 유지하며 복합 vendor 정의를 scalar source로 위장하지 않는다. 신규 editor 계약/별도 opt-in sidecar SQLite를 계획한다. 기존 workspaceVersion2.0·DDL·API·wire·JAR 변경은 이번에 없다. 새 해석 기반 채택·제출은 신규 근거 closure 수신 계약과 독립 Bifrost 검증이 준비되기 전 차단한다. 합성 SI01~SI18은 작성 예정이며, PIO/Kepware의 제품·버전·driver·원본 형식 지원과 실제 현장 PoV는 별도 미완료다. 장치 통신·외부 SQL·쓰기 실행·vendor 코드 실행·운영 설정 생성/활성화는 제외한다.
 
