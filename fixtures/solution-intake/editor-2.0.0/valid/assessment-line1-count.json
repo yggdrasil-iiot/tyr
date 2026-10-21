@@ -1,0 +1,71 @@
+{
+  "kind": "endpoint-assessment",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/pio-like/assessment-line1-count",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/pio-like/snapshot",
+      "version": "1.0.0",
+      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+    },
+    "endpoint": {
+      "nodeId": "n.line1-count"
+    },
+    "closure": {
+      "nodeIds": [
+        "n.line1-count"
+      ],
+      "edgeIds": [
+        "e.count-source"
+      ],
+      "completeness": "incomplete",
+      "basis": "the source reference is missing (u.count-source)"
+    },
+    "axes": {
+      "capture": {
+        "status": "partial",
+        "basis": "the snapshot's own coverage is partial",
+        "blockers": []
+      },
+      "structure": {
+        "status": "partial",
+        "basis": "the source connection is not in the bundle",
+        "blockers": [
+          "connection plc2 missing"
+        ]
+      },
+      "representation": {
+        "status": "conditional",
+        "basis": "depends on what plc2 turns out to be",
+        "blockers": []
+      },
+      "virtualEquivalence": {
+        "status": "not-tested",
+        "basis": "no input can be fixed without the source",
+        "blockers": []
+      },
+      "meaning": {
+        "status": "unconfirmed",
+        "basis": "decision-2 asks for more evidence",
+        "blockers": []
+      },
+      "approval": {
+        "status": "not-submitted",
+        "basis": "nothing has been sent to Bifrost",
+        "blockers": []
+      }
+    },
+    "decisionRefs": [
+      {
+        "kind": "review-decision",
+        "id": "synthetic/pio-like/decision-2",
+        "version": "1.0.0",
+        "digest": "3fd8138e9ed631fc6cf355cbe64e57a5bdde06eac3b7d97327dba12b70a49475"
+      }
+    ],
+    "assessedAt": "2026-10-22T00:04:00Z"
+  },
+  "digest": "3d38bc7cba36b8452ad78db0e7a6347d1a86396bf1955f3f221ac0bbc311427f"
+}

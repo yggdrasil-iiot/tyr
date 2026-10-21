@@ -1,0 +1,33 @@
+{
+  "kind": "review-decision",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/pio-like/decision-3",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/pio-like/snapshot",
+      "version": "1.0.0",
+      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+    },
+    "target": {
+      "type": "node",
+      "id": "n.line1-temp"
+    },
+    "decision": "confirm",
+    "evidenceBasis": "verified-by-virtual-case",
+    "virtualCase": {
+      "caseId": "synthetic/line1-temp-scale",
+      "harnessVersion": "1.0.0",
+      "inputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "expectedDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+      "observedDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "reviewer": "synthetic reviewer",
+    "reason": "raw 250 gives 25.0 degC in the virtual case, as expected",
+    "decidedAt": "2026-10-22T00:02:00Z",
+    "previousDecisionDigest": "3fd8138e9ed631fc6cf355cbe64e57a5bdde06eac3b7d97327dba12b70a49475",
+    "evidenceRefs": []
+  },
+  "digest": "6afd3a4e166bcf664929c8e728b1663464745b567e9e09ddec0f43532d29074e"
+}

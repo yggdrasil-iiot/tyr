@@ -1,0 +1,52 @@
+{
+  "kind": "conversion-plan",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/pio-like/plan-line1-count",
+  "version": "1.0.0",
+  "body": {
+    "assessmentRef": {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/pio-like/assessment-line1-count",
+      "version": "1.0.0",
+      "digest": "3d38bc7cba36b8452ad78db0e7a6347d1a86396bf1955f3f221ac0bbc311427f"
+    },
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/pio-like/snapshot",
+      "version": "1.0.0",
+      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/pio-like/profile",
+      "version": "1.0.0",
+      "digest": "993f1d2885e83251f70ef3b9fdadb315c151341d62e0203002b585c89699e2d5"
+    },
+    "decisionRefs": [
+      {
+        "kind": "review-decision",
+        "id": "synthetic/pio-like/decision-2",
+        "version": "1.0.0",
+        "digest": "3fd8138e9ed631fc6cf355cbe64e57a5bdde06eac3b7d97327dba12b70a49475"
+      }
+    ],
+    "workspace": {
+      "revision": 7,
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "mappings": [],
+    "losses": [
+      {
+        "nodeId": "n.line1-count",
+        "kind": "missing-input",
+        "description": "connection plc2 is not in the bundle"
+      }
+    ],
+    "validation": {
+      "status": "not-run",
+      "results": []
+    },
+    "status": "blocked"
+  },
+  "digest": "6e2325877276f493d95923e1ac24d7c2c9da0aa897ef374d39e1447d9fa135a9"
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "review-decision",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/pio-like/decision-2",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/pio-like/snapshot",
+      "version": "1.0.0",
+      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+    },
+    "target": {
+      "type": "issue",
+      "id": "u.count-source"
+    },
+    "decision": "needs-evidence",
+    "evidenceBasis": "declared-by-reviewer",
+    "reviewer": "synthetic reviewer",
+    "reason": "connection plc2 has to be found in another export before Line1.Count can be judged",
+    "decidedAt": "2026-10-22T00:01:00Z",
+    "previousDecisionDigest": "9fd1461f6322f893fbac4d8b9874ad49010291a9cd3c543fbdac01a9ed33a28a",
+    "evidenceRefs": []
+  },
+  "digest": "3fd8138e9ed631fc6cf355cbe64e57a5bdde06eac3b7d97327dba12b70a49475"
+}

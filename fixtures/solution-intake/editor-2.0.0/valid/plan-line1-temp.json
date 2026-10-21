@@ -1,0 +1,66 @@
+{
+  "kind": "conversion-plan",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/pio-like/plan-line1-temp",
+  "version": "1.0.0",
+  "body": {
+    "assessmentRef": {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/pio-like/assessment-line1-temp",
+      "version": "1.0.0",
+      "digest": "e7461f889ced26c62b436f41c04418ac7db9ccf1d53a50df0c8b4e6bf0db2909"
+    },
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/pio-like/snapshot",
+      "version": "1.0.0",
+      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/pio-like/profile",
+      "version": "1.0.0",
+      "digest": "993f1d2885e83251f70ef3b9fdadb315c151341d62e0203002b585c89699e2d5"
+    },
+    "decisionRefs": [
+      {
+        "kind": "review-decision",
+        "id": "synthetic/pio-like/decision-1",
+        "version": "1.0.0",
+        "digest": "9fd1461f6322f893fbac4d8b9874ad49010291a9cd3c543fbdac01a9ed33a28a"
+      },
+      {
+        "kind": "review-decision",
+        "id": "synthetic/pio-like/decision-3",
+        "version": "1.0.0",
+        "digest": "6afd3a4e166bcf664929c8e728b1663464745b567e9e09ddec0f43532d29074e"
+      }
+    ],
+    "workspace": {
+      "revision": 7,
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "mappings": [
+      {
+        "nativeNodeId": "n.line1-temp",
+        "target": {
+          "kind": "source-definition",
+          "id": "line1-temp"
+        },
+        "basis": "address D100 on plc1 with scale 0.1",
+        "assumptions": [
+          "plc1 is the device named in the workspace"
+        ]
+      }
+    ],
+    "losses": [],
+    "validation": {
+      "status": "passed",
+      "results": [
+        "synthetic/line1-temp-scale"
+      ]
+    },
+    "status": "candidate"
+  },
+  "digest": "b7f68400e406cf12ba44f5e8c0b57fe9fbf600ef67d0e5d908e0e928cc30bcc6"
+}
