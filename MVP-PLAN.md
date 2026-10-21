@@ -4,7 +4,7 @@
 작성일: 2026년 10월 17일
 기준 설계: [DESIGN.md](DESIGN.md)
 
-2026-10-20 다음 우선순위: [P4-F PIO·Kepware 공통 수용 모델과 제품별 해석기](docs/P4-F-SOLUTION-INTERPRETATION.md). **설계 반영 완료·구현 미착수**이며, 기존 P0~P7 구현/합성 수용 실적과 별도다. 매핑 표현력 확대보다 설정 단독 수용 → 최종 태그 생성 과정 설명 → 쟁점 검토 → 익숙한 산출물 반환을 우선한다. 구체 제품/버전/driver/실제 원본 형식과 현장 PoV는 미확정이다.
+2026-10-20 다음 우선순위: [P4-F PIO·Kepware 공통 수용 모델과 제품별 해석기](docs/P4-F-SOLUTION-INTERPRETATION.md). **설계 반영 완료, A1(Mímir 계약)은 2026-10-22 완료, Týr 쪽 구현(A2 이후)은 미착수**이며, 기존 P0~P7 구현/합성 수용 실적과 별도다. 매핑 표현력 확대보다 설정 단독 수용 → 최종 태그 생성 과정 설명 → 쟁점 검토 → 익숙한 산출물 반환을 우선한다. 구체 제품/버전/driver/실제 원본 형식과 현장 PoV는 미확정이다.
 
 이 계획의 구현 대상은 문서·설정·수동 입력에서 PLC 접근 정의를 만들고, 공통 의미에 매핑하며, 근거·변경을 검토한 뒤 Bifrost에 제출하는 오프라인 도구다. P0·P1의 계약·fixture·게이트는 구현했으며, P2~P5의 제한된 오프라인 작성·미리보기·가져오기·변경 검토를 구현했으며, P6 오프라인 승인/파일 발행 연계는 구현했고 P7 fixture 수용 결과는 별도 기록했으며 실제 자료 PoV와 운영 활성화는 후속이다.
 
@@ -824,7 +824,7 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 - [x] 설계에서 원본·참조·해석 근거·미해석·전환 판정과 제품 해석기 책임, 합성/실제품 수용 기준을 분리했다. 이 체크는 문서 완료만 의미한다.
 - [x] [정준 의미/값 생성·매핑 계약 경계](docs/CANONICAL-SEMANTICS-AND-GENERATION.md)와 PLC·DB·상수·조건식 혼합 템플릿·MG01~MG08의 명세를 추가했다. 문서 완료이며 조건식/업무 적합성 기능·fixture 실행 완료가 아니다.
 - [ ] SemanticContextContract/GenerationContract의 신규 editor 계약과 기존 semantic/source/graph/mapping/record/template 대응·pin·검증 분리. 업무 문맥·코드 사전·유효성/기간/수량 범주와 입력/생성 정책을 분리하고 기존 schema를 바꾸지 않는다.
-- [ ] A1 (Mímir): SourceBundle/InterpretationProfile/Snapshot/NativeNode/ReferenceEdge/Claim/UnresolvedItem의 해석 스냅샷 wire Schema·version/hash/locator·한도. Mímir가 소유하고 Týr는 사본을 번들한다.
+- [x] A1 (Mímir): SourceBundle/InterpretationProfile/Snapshot/NativeNode/ReferenceEdge/Claim/UnresolvedItem의 해석 스냅샷 wire Schema·version/hash/locator·한도. Mímir가 소유하고 Týr는 사본을 번들한다. 2026-10-22에 yggdrasil-iiot/mimir PR #3(머지 커밋 `f8691d0`) 머지로 완료됐으며, 스키마 6개(`contracts/interpretation/1.0.0/`), Java 검사기, 표준 라이브러리만 쓰는 독립 Python digest 스크립트, 합성 fixture 두 세트와 거부 사례 목록(`fixtures/interpretation/1.0.0/invalid/cases.json`)이 들어갔다. 해석기(파서)와 실제 제품 자료는 아직 없으며, Týr 사본 번들은 A2에서 한다.
 - [ ] A2 (Týr): ReviewDecision/EndpointAssessment/ConversionPlan의 새 editor Schema와 스냅샷 수신·pin 재검증(재파싱 없음)·evidenceBasis 소유 위반 거부(SI19). 기존 계약은 수정하지 않는다.
 - [ ] native ID/모호한 참조·누락 파일/unknown capture scope·평가 순환/비평가 순환·근거 전이와 endpoint closure 검증.
 - [ ] synthetic-pio-like/synthetic-kepware-like 독립 입력·oracle 작성. 해석기 쪽 SI06·SI07·SI10·SI12 결정성·SI17 공격 파일 부분은 Mímir 시험으로 둔다. **실제 제품 export 형식이 아닌 가상 프로파일**로 표시. SI01~SI12·SI16·SI17의 계약/결정성/차단 부분을 검증.
