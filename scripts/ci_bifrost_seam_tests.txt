@@ -1,0 +1,23 @@
+# Tests that need a sibling Bifrost checkout with the mapping gate (../bifrost):
+# its bundled mapping-contracts copies, or gates/target/bifrost-gates.jar and a registry.
+# That gate is not on Bifrost's main branch yet, so CI cannot run these.
+# ci_run.py excludes exactly these IDs and fails if any of them no longer exists.
+# When Bifrost's mapping gate is on main, check Bifrost out as a sibling in CI and empty this list.
+test_a07.Contract.test_new_schema_bytes_in_receiver
+test_cross_graph.Contracts.test_schema_ids_and_independent_copies
+test_mapping_templates.Templates.test_standalone_cli_and_independent_schemas
+test_mixed_objects.MixedObjects.test_standalone_cli_and_mirrors
+test_p6.Receiver.test_cli_validation_readonly
+test_p6.Receiver.test_compat_ab
+test_p6.Receiver.test_compat_db
+test_p6.Receiver.test_compat_p3d
+test_p6.Receiver.test_compat_p3e
+test_p6.Receiver.test_compat_p3f
+test_p6.Receiver.test_compat_ua
+test_p6.Receiver.test_current_registry_status_no_activation
+test_p6.Receiver.test_java_manifest_matches_python
+test_p6.Receiver.test_real_adapter_refresh
+test_p6.Receiver.test_shared_schema_copies
+test_p7_evaluation.Evaluator.test_old_contract_fixture_and_java_schema_preserved
+test_record_mappings.Records.test_standalone_contract_cli_and_schema_mirrors
+test_semantic_lifecycle.Lifecycle.test_old_contract_fixture_hashes_and_mirror

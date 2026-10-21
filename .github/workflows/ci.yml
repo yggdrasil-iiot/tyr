@@ -1,0 +1,38 @@
+# Týr alone, from a clean checkout. The Bifrost seam tests (scripts/ci_bifrost_seam_tests.txt) are
+# excluded by ID until Bifrost's mapping gate is on its main branch; then check Bifrost out as a
+# sibling here, the way mimir's CI does, and empty that list.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: contracts + tests (no Bifrost seam)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-contracts.txt
+
+      - name: Install pinned contract dependencies
+        run: python -m pip install -r requirements-contracts.txt
+
+      - name: P1 contract and governance gate (network denied)
+        run: python -B scripts/validate_contracts.py --deny-network --report "$RUNNER_TEMP/p1-validation.json"
+
+      - name: P3-A CLI acceptance
+        run: python -B scripts/test_p3a.py --report "$RUNNER_TEMP/p3a.json"
+
+      - name: Unit and acceptance tests
+        run: python -B scripts/ci_run.py
