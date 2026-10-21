@@ -23,7 +23,7 @@ def wire_mutation(folder,case):
 class Contract(unittest.TestCase):
     def test_fixture(self):server.check_state(load());self.assertEqual(server.findings_for(load()),[])
     def test_old_60_schemas(self):
-        baseline=server.contracts.load(R/"docs/verification/p7-validation.json")["sha256"];n=0
+        baseline=server.contracts.load(R/"docs/verification/p7-baseline-sha256.json")["sha256"];n=0
         for p,h in baseline.items():
             if p.startswith("contracts/"):self.assertEqual(server.contracts.hashed(R/p),h);n+=1
         self.assertEqual(n,60)
