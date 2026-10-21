@@ -1,0 +1,93 @@
+{
+  "about": "Byte-identical copies of Mímir's interpretation snapshot contract 1.0.0 and its fixtures. Mímir owns them; Týr bundles them and does not edit them. A test checks every file against this list.",
+  "source": {
+    "repository": "yggdrasil-iiot/mimir",
+    "commit": "f8691d0",
+    "contracts": "contracts/interpretation/1.0.0",
+    "fixtures": "fixtures/interpretation/1.0.0"
+  },
+  "contracts": [
+    {
+      "path": "common.schema.json",
+      "sha256": "f2e5eea4d8575db3a0e045a9bcff78fb60d41de3da1f4519b80d90af4a366237"
+    },
+    {
+      "path": "interpret-request.schema.json",
+      "sha256": "76f5442a76ba3410908d6043dda5e25bfba040b35297508ee73284aa75270969"
+    },
+    {
+      "path": "interpret-result.schema.json",
+      "sha256": "c9d780d28868b5a3dc64d55dfa402af7b9fe67d77e6766649fc04ffd0e3a7748"
+    },
+    {
+      "path": "interpretation-profile.schema.json",
+      "sha256": "51f3d5b43f99ca7cf4ed259f530c09111857c68c4a2415d5d72c81921c6bbd52"
+    },
+    {
+      "path": "interpretation-snapshot.schema.json",
+      "sha256": "452d444805956650122282337086115ed9c1f4bf9fcd6f31e521310862f9ea6b"
+    },
+    {
+      "path": "source-bundle.schema.json",
+      "sha256": "d7c4dcecd583a6434e0f3eb2f5061d29cf3cf091eddf6f4e70eda7e4ee9a75f1"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "invalid/cases.json",
+      "sha256": "a185d4acf3e3f59d35fc96806da15e5c22527f06a49f7d1399333435cc05050d"
+    },
+    {
+      "path": "jcs-vectors.json",
+      "sha256": "9b100571012a9d19265878df679c763106f2a3ed6f5568fa2a2b010cc7f80ce7"
+    },
+    {
+      "path": "valid/kepware-like/artifacts/project.json",
+      "sha256": "30875cea43c793ec9d43194c7d9c32c72413531f55d13c122eba8f9084a6ca18"
+    },
+    {
+      "path": "valid/kepware-like/interpretation-profile.json",
+      "sha256": "cb5adeb324057a95e4a44445bdaad37940f55a7e4d3e7e07892a240a3e362a0b"
+    },
+    {
+      "path": "valid/kepware-like/interpretation-snapshot.json",
+      "sha256": "7669dec58464feacfe45ca0d59b64702a5aa2804d94d8945f859d999ccdef9f8"
+    },
+    {
+      "path": "valid/kepware-like/source-bundle.json",
+      "sha256": "8fa2821dbb0df4e537f0fdd2e6789e363444fe8b31a4d026789de5a6bae8a17f"
+    },
+    {
+      "path": "valid/pio-like/artifacts/config.txt",
+      "sha256": "9c479cc2b40db96edc8fcd2b9392aae9096f78fa37ae3a191f63c933ccf58ca3"
+    },
+    {
+      "path": "valid/pio-like/artifacts/connection-redacted.txt",
+      "sha256": "6558282ee56eef33eca8c9dbba787f4d608fe11f8183ec13a2d8b8193c3c27ec"
+    },
+    {
+      "path": "valid/pio-like/artifacts/connection.txt",
+      "sha256": "f211ed3f545d0faf7f63a20e74d36629767fd657b8e5fc96d492d74dd72ac044"
+    },
+    {
+      "path": "valid/pio-like/interpret-request.json",
+      "sha256": "86eccf8d17b3d077266aa2a65d3bf888aed7b1cfe58c9967973c02ad9b6523cf"
+    },
+    {
+      "path": "valid/pio-like/interpret-result.json",
+      "sha256": "ab9455dd44d045d44f118f81c1a72f736f4836340910b4864811206a8f95355a"
+    },
+    {
+      "path": "valid/pio-like/interpretation-profile.json",
+      "sha256": "fd6d52f2acf1683a92e02bd6b57102f80098a2eb1a4ce8c2f161c7852f520c61"
+    },
+    {
+      "path": "valid/pio-like/interpretation-snapshot.json",
+      "sha256": "1faa3fa839bd92aafa4634d892f4536343e9b2fb3279ea9b2479cc8cb398ca6e"
+    },
+    {
+      "path": "valid/pio-like/source-bundle.json",
+      "sha256": "7f15d6dedcdedb9fa0f582abc05975d0149cb0d61931448c696b3f7f2758448a"
+    }
+  ]
+}
