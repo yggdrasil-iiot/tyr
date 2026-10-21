@@ -1,0 +1,278 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "record-line-a",
+      "label": "합성 설비 A"
+    },
+    {
+      "id": "record-line-b",
+      "label": "합성 설비 B"
+    }
+  ],
+  "connections": [
+    {
+      "id": "mixed-melsec",
+      "label": "MELSEC metadata only",
+      "equipmentInstanceId": "record-line-b",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "mixed-plc-pressure",
+        "version": "1.0.0",
+        "equipmentInstanceId": "record-line-b",
+        "connectionProfileRef": "mixed-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D1000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-plc-pressure",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic pressure definition; engineering scale declared in graph",
+      "label": "PLC actual pressure",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-baseline",
+        "version": "1.0.0",
+        "sourceKind": "constant",
+        "accessMode": "read",
+        "equipmentInstanceId": "record-line-b",
+        "connectionProfileRef": null,
+        "accessProfileRef": "constant-v1",
+        "status": "ready",
+        "rawAddressText": "constant:mixed-baseline",
+        "addressRadix": null,
+        "access": {
+          "kind": "constant",
+          "value": "100"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Double"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-baseline",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-baseline",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-external-reference",
+        "version": "1.0.0",
+        "sourceKind": "external-value",
+        "accessMode": "read",
+        "equipmentInstanceId": "record-line-b",
+        "connectionProfileRef": null,
+        "accessProfileRef": "external-value-v1",
+        "status": "ready",
+        "rawAddressText": "external-value:mixed-external-reference",
+        "addressRadix": null,
+        "access": {
+          "kind": "external-value",
+          "providerRef": "reference-provider",
+          "valueKey": "reference.pressure",
+          "expressionLanguage": "sql",
+          "expression": "SELECT reference_pressure FROM process_reference WHERE equipment_id = :equipment_id;\n-- Preserve exactly; do not execute"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Double"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-external-reference",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-external-reference",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-line-code",
+        "version": "1.0.0",
+        "sourceKind": "constant",
+        "accessMode": "read",
+        "equipmentInstanceId": "record-line-b",
+        "connectionProfileRef": null,
+        "accessProfileRef": "constant-v1",
+        "status": "ready",
+        "rawAddressText": "constant:mixed-line-code",
+        "addressRadix": null,
+        "access": {
+          "kind": "constant",
+          "value": "LINE-A"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "String"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-line-code",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-line-code",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "combined-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "actual",
+          "name": "actual",
+          "semanticId": "urn:tyr:concept:combined.actual",
+          "description": "Synthetic combined object actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "target",
+          "name": "target",
+          "semanticId": "urn:tyr:concept:combined.target",
+          "description": "Synthetic combined object target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint",
+          "range": null
+        },
+        {
+          "memberId": "baseline",
+          "name": "baseline",
+          "semanticId": "urn:tyr:concept:combined.baseline",
+          "description": "Synthetic combined object baseline",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint",
+          "range": null
+        },
+        {
+          "memberId": "external",
+          "name": "external",
+          "semanticId": "urn:tyr:concept:combined.external",
+          "description": "Synthetic combined object external",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "line_code",
+          "name": "line_code",
+          "semanticId": "urn:tyr:concept:combined.line_code",
+          "description": "Synthetic combined object line_code",
+          "valueType": "String",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        }
+      ]
+    }
+  ],
+  "targets": [],
+  "graphs": [],
+  "mappings": []
+}

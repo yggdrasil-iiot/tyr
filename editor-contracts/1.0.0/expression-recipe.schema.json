@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "graphId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+    },
+    "compilation": {
+      "type": "object",
+      "properties": {
+        "compilerVersion": {
+          "const": "1.0.0"
+        },
+        "expression": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "graph": {
+          "type": "object"
+        },
+        "graphSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceContextSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+          }
+        },
+        "origins": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "properties": {
+              "nodeId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+              },
+              "op": {
+                "enum": [
+                  "identity",
+                  "add",
+                  "subtract",
+                  "multiply",
+                  "divide",
+                  "sqrt",
+                  "clamp",
+                  "linear"
+                ]
+              },
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "nodeId",
+              "op",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "output": {
+          "type": "object",
+          "properties": {
+            "nodeId": {
+              "const": "expr-result"
+            },
+            "valueType": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "nodeId",
+            "valueType",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "compilerVersion",
+        "expression",
+        "graph",
+        "graphSha256",
+        "sourceContextSha256",
+        "sourceIds",
+        "origins",
+        "output"
+      ],
+      "additionalProperties": false
+    },
+    "savedRevision": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "graphId",
+    "compilation",
+    "savedRevision"
+  ],
+  "additionalProperties": false
+}

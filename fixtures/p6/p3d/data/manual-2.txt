@@ -1,0 +1,2 @@
+Field label: 상류 bar × 0.01
+Synthetic pressure definition; engineering scale declared in graph

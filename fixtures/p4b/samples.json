@@ -1,0 +1,14 @@
+{
+  "mixed-plc-pressure": {
+    "bytesHex": "9600"
+  },
+  "mixed-tag-pressure": {
+    "typedValue": "80"
+  },
+  "mixed-external-reference": {
+    "typedValue": "70"
+  },
+  "mixed-tag-setpoint": {
+    "typedValue": "25"
+  }
+}

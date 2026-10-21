@@ -1,0 +1,17 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "unit-kelvin",
+  "patternId": "MP10",
+  "mode": "current",
+  "action": "evaluate",
+  "input": {
+    "mappingId": "ua-temperature-binding",
+    "sample": {
+      "typedValue": "338.15"
+    }
+  },
+  "expect": {
+    "value": "65.0",
+    "issues": []
+  }
+}

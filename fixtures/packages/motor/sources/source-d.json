@@ -1,0 +1,37 @@
+{
+  "kind": "source-definition",
+  "schemaVersion": "1.0.0",
+  "id": "source-d",
+  "version": "1.0.0",
+  "equipmentInstanceId": "conveyor-d",
+  "connectionProfileRef": "connection-d",
+  "accessProfileRef": "s7-1500-opcua-v1",
+  "status": "ready",
+  "rawAddressText": "nsu=urn:tyr:fixture:s7-1500;s=Motor.ActualSpeed",
+  "addressRadix": null,
+  "access": {
+    "kind": "opcua-node",
+    "namespaceUri": "urn:tyr:fixture:s7-1500",
+    "identifierType": "string",
+    "identifier": "Motor.ActualSpeed"
+  },
+  "rawRepresentation": {
+    "mode": "typed",
+    "valueType": "Float64"
+  },
+  "inputStage": "already-engineered",
+  "unit": {
+    "status": "known",
+    "code": "rpm"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "ev-config",
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/tags/1"
+      }
+    }
+  ],
+  "viewOf": null
+}

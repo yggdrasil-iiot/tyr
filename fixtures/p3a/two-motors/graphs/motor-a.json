@@ -1,0 +1,81 @@
+{
+  "kind": "value-graph",
+  "schemaVersion": "2.0.0",
+  "id": "motor-a-counter-graph",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "nodes": [
+    {
+      "nodeId": "counter",
+      "op": "decode-u32-words",
+      "inputs": {
+        "low": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "motor-a-low",
+            "version": "1.0.0"
+          }
+        },
+        "high": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "motor-a-high",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "valueType": "UInt32",
+      "unit": {
+        "status": "known",
+        "code": "1"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "ev-motor-a-low",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "ev-motor-a-high",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "nodeId": "result",
+      "op": "identity",
+      "inputs": {
+        "value": {
+          "kind": "node",
+          "nodeId": "counter"
+        }
+      },
+      "valueType": "UInt32",
+      "unit": {
+        "status": "known",
+        "code": "1"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "ev-motor-a-low",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "ev-motor-a-high",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

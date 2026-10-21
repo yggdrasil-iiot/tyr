@@ -1,0 +1,14 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "partial-object",
+  "patternId": "MP02",
+  "mode": "current",
+  "action": "partial-object",
+  "input": {
+    "keepMembers": 3
+  },
+  "expect": {
+    "rule": "mapping.incomplete-object",
+    "count": 5
+  }
+}

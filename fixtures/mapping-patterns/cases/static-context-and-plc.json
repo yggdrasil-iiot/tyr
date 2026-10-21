@@ -1,0 +1,26 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "static-context-and-plc",
+  "patternId": "MP14",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "sources": {
+      "plant": {
+        "kind": "constant",
+        "value": "PlantA"
+      },
+      "speed": {
+        "kind": "plc",
+        "value": "2400"
+      }
+    }
+  },
+  "expect": {
+    "object": {
+      "plant": "PlantA",
+      "speed": "2400"
+    },
+    "queryExecution": false
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "cases": [
+    {
+      "id": "cycle",
+      "mutation": "cycle",
+      "rules": [
+        "graph.cycle"
+      ]
+    },
+    {
+      "id": "missing-node",
+      "mutation": "missing-node",
+      "rules": [
+        "graph.node-missing"
+      ]
+    },
+    {
+      "id": "missing-source",
+      "mutation": "missing-source",
+      "rules": [
+        "reference.missing"
+      ]
+    },
+    {
+      "id": "source-version",
+      "mutation": "source-version",
+      "rules": [
+        "reference.missing"
+      ]
+    },
+    {
+      "id": "missing-target",
+      "mutation": "missing-target",
+      "rules": [
+        "reference.missing"
+      ]
+    },
+    {
+      "id": "target-version",
+      "mutation": "target-version",
+      "rules": [
+        "reference.missing"
+      ]
+    },
+    {
+      "id": "missing-semantic",
+      "mutation": "missing-semantic",
+      "rules": [
+        "reference.missing"
+      ]
+    },
+    {
+      "id": "duplicate-target-member",
+      "mutation": "duplicate-target",
+      "rules": [
+        "mapping.duplicate-target"
+      ]
+    },
+    {
+      "id": "duplicate-node",
+      "mutation": "duplicate-node",
+      "rules": [
+        "graph.duplicate-node"
+      ]
+    },
+    {
+      "id": "duplicate-mapping-id",
+      "mutation": "duplicate-mapping",
+      "rules": [
+        "mapping.duplicate-id"
+      ]
+    },
+    {
+      "id": "graph-cross-equipment",
+      "mutation": "graph-equipment",
+      "rules": [
+        "value.equipment"
+      ]
+    },
+    {
+      "id": "source-cross-equipment",
+      "mutation": "source-equipment",
+      "rules": [
+        "value.equipment"
+      ]
+    },
+    {
+      "id": "mapping-cross-equipment",
+      "mutation": "mapping-equipment",
+      "rules": [
+        "mapping.equipment"
+      ]
+    },
+    {
+      "id": "wrong-word-type",
+      "mutation": "input-type",
+      "rules": [
+        "graph.input-type"
+      ]
+    },
+    {
+      "id": "wrong-word-unit",
+      "mutation": "input-unit",
+      "rules": [
+        "graph.input-unit"
+      ]
+    },
+    {
+      "id": "engineered-word",
+      "mutation": "input-stage",
+      "rules": [
+        "graph.input-type"
+      ]
+    },
+    {
+      "id": "identity-type",
+      "mutation": "identity-type",
+      "rules": [
+        "graph.output-type"
+      ]
+    },
+    {
+      "id": "identity-unit",
+      "mutation": "identity-unit",
+      "rules": [
+        "graph.output-unit"
+      ]
+    },
+    {
+      "id": "unknown-op",
+      "mutation": "unknown-op",
+      "rules": [
+        "schema"
+      ]
+    },
+    {
+      "id": "missing-high",
+      "mutation": "missing-high",
+      "rules": [
+        "schema"
+      ]
+    },
+    {
+      "id": "unexpected-input",
+      "mutation": "extra-input",
+      "rules": [
+        "schema"
+      ]
+    },
+    {
+      "id": "both-direct-and-graph",
+      "mutation": "ambiguous-value",
+      "rules": [
+        "schema"
+      ]
+    },
+    {
+      "id": "unknown-member",
+      "mutation": "member",
+      "rules": [
+        "mapping.member"
+      ]
+    },
+    {
+      "id": "nested-path-not-yet",
+      "mutation": "nested-path",
+      "rules": [
+        "schema"
+      ]
+    },
+    {
+      "id": "incomplete-object",
+      "mutation": "incomplete",
+      "rules": [
+        "mapping.incomplete-object"
+      ]
+    },
+    {
+      "id": "target-type-mismatch",
+      "mutation": "target-type",
+      "rules": [
+        "mapping.type"
+      ]
+    },
+    {
+      "id": "missing-input-evidence",
+      "mutation": "evidence",
+      "rules": [
+        "evidence.missing"
+      ]
+    },
+    {
+      "id": "tampered-proposal-digest",
+      "mutation": "digest",
+      "rules": [
+        "bundle.digest"
+      ]
+    },
+    {
+      "id": "path-traversal",
+      "mutation": "path",
+      "rules": [
+        "schema"
+      ]
+    },
+    {
+      "id": "target-multiple-versions",
+      "mutation": "target-multiple-versions",
+      "rules": [
+        "target.multiple-versions"
+      ]
+    },
+    {
+      "id": "graph-input-evidence-omitted",
+      "mutation": "graph-evidence",
+      "rules": [
+        "graph.evidence-incomplete"
+      ]
+    },
+    {
+      "id": "binding-input-evidence-omitted",
+      "mutation": "mapping-evidence",
+      "rules": [
+        "mapping.evidence-incomplete"
+      ]
+    }
+  ]
+}

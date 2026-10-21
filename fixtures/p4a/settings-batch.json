@@ -1,0 +1,846 @@
+{
+  "id": "settings",
+  "filename": "settings.json",
+  "format": "tyr-config-json-v1",
+  "bytesBase64": "ew0KICAiZm9ybWF0IjogInR5ci1jb25maWctdjEiLA0KICAicmVjb3JkcyI6IFsNCiAgICB7DQogICAgICAiaWQiOiAic3BlZWQtYWIiLA0KICAgICAgInByb2ZpbGUiOiAiYWItbG9naXgtc3ltYm9sLXYxIiwNCiAgICAgICJhZGRyZXNzIjogIk1vdG9yLkFjdHVhbFNwZWVkIiwNCiAgICAgICJ0eXBlIjogIkZsb2F0MzIiLA0KICAgICAgInVuaXQiOiAicnBtIiwNCiAgICAgICJzdGFnZSI6ICJhbHJlYWR5LWVuZ2luZWVyZWQiDQogICAgfSwNCiAgICB7DQogICAgICAiaWQiOiAicHJlc3N1cmUtdWEiLA0KICAgICAgInByb2ZpbGUiOiAiczctMTUwMC1vcGN1YS12MSIsDQogICAgICAiYWRkcmVzcyI6ICJMaW5lLlByZXNzdXJlIiwNCiAgICAgICJuYW1lc3BhY2VVcmkiOiAidXJuOnR5cjpzeW50aGV0aWM6bGluZSIsDQogICAgICAiaWRlbnRpZmllclR5cGUiOiAic3RyaW5nIiwNCiAgICAgICJ0eXBlIjogIkZsb2F0MzIiLA0KICAgICAgInVuaXQiOiAia1BhIiwNCiAgICAgICJzdGFnZSI6ICJhbHJlYWR5LWVuZ2luZWVyZWQiDQogICAgfSwNCiAgICB7DQogICAgICAiaWQiOiAicHJlc3N1cmUtZGIiLA0KICAgICAgInByb2ZpbGUiOiAiczctMzAwLWRiLXYxIiwNCiAgICAgICJhZGRyZXNzIjogIkRCMTAuREJCNjQiLA0KICAgICAgInR5cGUiOiAiVUludDE2IiwNCiAgICAgICJ3aWR0aCI6IDIsDQogICAgICAidW5pdCI6ICJrUGEiLA0KICAgICAgImJ5dGVPcmRlciI6ICJiaWciLA0KICAgICAgIndvcmRPcmRlciI6ICJoaWdoLWZpcnN0IiwNCiAgICAgICJzdGFnZSI6ICJyYXciDQogICAgfSwNCiAgICB7DQogICAgICAiaWQiOiAicHJlc3N1cmUtbWVsIiwNCiAgICAgICJwcm9maWxlIjogIm1lbHNlYy1kZXZpY2UtdjEiLA0KICAgICAgImFkZHJlc3MiOiAiRDEwMDAiLA0KICAgICAgInR5cGUiOiAiVUludDE2IiwNCiAgICAgICJ3aWR0aCI6IDEsDQogICAgICAidW5pdCI6ICJrUGEiLA0KICAgICAgImJ5dGVPcmRlciI6ICJsaXR0bGUiLA0KICAgICAgIndvcmRPcmRlciI6ICJsb3ctZmlyc3QiLA0KICAgICAgInN0YWdlIjogInJhdyINCiAgICB9LA0KICAgIHsNCiAgICAgICJpZCI6ICJwdW1wIiwNCiAgICAgICJraW5kIjogInRlbXBsYXRlIiwNCiAgICAgICJwcm9maWxlIjogIm1lbHNlYy1kZXZpY2UtdjEiLA0KICAgICAgImFkZHJlc3MiOiAiRHtvZmZzZXR9IiwNCiAgICAgICJiYXNlIjogMjAwMCwNCiAgICAgICJzdHJpZGUiOiAxMCwNCiAgICAgICJjb3VudCI6IDMsDQogICAgICAidHlwZSI6ICJVSW50MTYiLA0KICAgICAgInVuaXQiOiAia1BhIiwNCiAgICAgICJieXRlT3JkZXIiOiAibGl0dGxlIiwNCiAgICAgICJ3b3JkT3JkZXIiOiAibG93LWZpcnN0IiwNCiAgICAgICJvdmVycmlkZXMiOiB7DQogICAgICAgICIxIjogew0KICAgICAgICAgICJhZGRyZXNzIjogIkQyMDUwIiwNCiAgICAgICAgICAibGFiZWwiOiAi7Y6M7ZSEIDIg7JiI7Jm4Ig0KICAgICAgICB9DQogICAgICB9LA0KICAgICAgInN0YWdlIjogInJhdyINCiAgICB9LA0KICAgIHsNCiAgICAgICJpZCI6ICJwdW1wLWFsaWFzIiwNCiAgICAgICJraW5kIjogImFsaWFzIiwNCiAgICAgICJ0YXJnZXQiOiAicHVtcC0xIg0KICAgIH0sDQogICAgew0KICAgICAgImlkIjogInB1bXAtYWxpYXMtY2hhaW4iLA0KICAgICAgImtpbmQiOiAiYWxpYXMiLA0KICAgICAgInRhcmdldCI6ICJwdW1wLWFsaWFzIg0KICAgIH0sDQogICAgew0KICAgICAgImlkIjogImN5Y2xlLWEiLA0KICAgICAgImtpbmQiOiAiYWxpYXMiLA0KICAgICAgInRhcmdldCI6ICJjeWNsZS1iIg0KICAgIH0sDQogICAgew0KICAgICAgImlkIjogImN5Y2xlLWIiLA0KICAgICAgImtpbmQiOiAiYWxpYXMiLA0KICAgICAgInRhcmdldCI6ICJjeWNsZS1hIg0KICAgIH0sDQogICAgew0KICAgICAgImlkIjogIm1pc3NpbmctYWxpYXMiLA0KICAgICAgImtpbmQiOiAiYWxpYXMiLA0KICAgICAgInRhcmdldCI6ICJhYnNlbnQiDQogICAgfSwNCiAgICB7DQogICAgICAiaWQiOiAib3BhcXVlIiwNCiAgICAgICJwcm9maWxlIjogIm1lbHNlYy1kZXZpY2UtdjEiLA0KICAgICAgImFkZHJlc3MiOiAiRFtpbmRleCAqIDJdIiwNCiAgICAgICJ0eXBlIjogIlVJbnQxNiIsDQogICAgICAidmVuZG9yRXhwcmVzc2lvbiI6ICJQTENfUE9JTlRFUigpIiwNCiAgICAgICJzdGFnZSI6ICJyYXciDQogICAgfQ0KICBdLA0KICAidmVuZG9yRXh0ZW5zaW9uIjogew0KICAgICJjdXN0b20iOiAibXVzdCBwcmVzZXJ2ZSBleGFjdGx5Ig0KICB9DQp9DQo=",
+  "equipmentInstanceId": "import-line",
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "origin": "synthetic",
+  "columnMap": {},
+  "contextConnections": [
+    {
+      "id": "import-0",
+      "label": "ab-logix-symbol-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "ab-logix-symbol-v1"
+    },
+    {
+      "id": "import-1",
+      "label": "s7-1500-opcua-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "import-2",
+      "label": "s7-300-db-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "s7-300-db-v1"
+    },
+    {
+      "id": "import-3",
+      "label": "melsec-device-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "kind": "import-batch",
+  "schemaVersion": "2.6.0",
+  "version": "1.0.0",
+  "parser": {
+    "name": "tyr-bounded-files",
+    "version": "1.0.0"
+  },
+  "sha256": "8cbd19fa57e73679f33134ce3a50fd22d3a16ba2d5d42428cf08e4cc53a04397",
+  "observations": [
+    {
+      "id": "row-0",
+      "raw": {
+        "id": "speed-ab",
+        "profile": "ab-logix-symbol-v1",
+        "address": "Motor.ActualSpeed",
+        "type": "Float32",
+        "unit": "rpm",
+        "stage": "already-engineered"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/0"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/0"
+        }
+      ],
+      "issues": [],
+      "assumptions": [],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-speed-ab",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-0",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "draft",
+        "rawAddressText": "Motor.ActualSpeed",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Motor.ActualSpeed"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/0"
+            }
+          }
+        ],
+        "viewOf": null
+      }
+    },
+    {
+      "id": "row-1",
+      "raw": {
+        "id": "pressure-ua",
+        "profile": "s7-1500-opcua-v1",
+        "address": "Line.Pressure",
+        "namespaceUri": "urn:tyr:synthetic:line",
+        "identifierType": "string",
+        "type": "Float32",
+        "unit": "kPa",
+        "stage": "already-engineered"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/1"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/1"
+        }
+      ],
+      "issues": [],
+      "assumptions": [],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pressure-ua",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-1",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "draft",
+        "rawAddressText": "Line.Pressure",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:synthetic:line",
+          "identifierType": "string",
+          "identifier": "Line.Pressure"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/1"
+            }
+          }
+        ],
+        "viewOf": null
+      }
+    },
+    {
+      "id": "row-2",
+      "raw": {
+        "id": "pressure-db",
+        "profile": "s7-300-db-v1",
+        "address": "DB10.DBB64",
+        "type": "UInt16",
+        "width": 2,
+        "unit": "kPa",
+        "byteOrder": "big",
+        "wordOrder": "high-first",
+        "stage": "raw"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/2"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/2"
+        }
+      ],
+      "issues": [],
+      "assumptions": [],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pressure-db",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-2",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "draft",
+        "rawAddressText": "DB10.DBB64",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 64,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/2"
+            }
+          }
+        ],
+        "viewOf": null
+      }
+    },
+    {
+      "id": "row-3",
+      "raw": {
+        "id": "pressure-mel",
+        "profile": "melsec-device-v1",
+        "address": "D1000",
+        "type": "UInt16",
+        "width": 1,
+        "unit": "kPa",
+        "byteOrder": "little",
+        "wordOrder": "low-first",
+        "stage": "raw"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/3"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/3"
+        }
+      ],
+      "issues": [],
+      "assumptions": [],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pressure-mel",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D1000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/3"
+            }
+          }
+        ],
+        "viewOf": null
+      }
+    },
+    {
+      "id": "row-4",
+      "raw": {
+        "id": "pump-0",
+        "kind": "source",
+        "profile": "melsec-device-v1",
+        "address": "D2000",
+        "type": "UInt16",
+        "unit": "kPa",
+        "byteOrder": "little",
+        "wordOrder": "low-first",
+        "stage": "raw"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/4"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/4"
+        }
+      ],
+      "issues": [],
+      "assumptions": [
+        "storage width derived from declared type"
+      ],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pump-0",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D2000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/4"
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "template": {
+        "id": "pump",
+        "kind": "template",
+        "profile": "melsec-device-v1",
+        "address": "D{offset}",
+        "base": 2000,
+        "stride": 10,
+        "count": 3,
+        "type": "UInt16",
+        "unit": "kPa",
+        "byteOrder": "little",
+        "wordOrder": "low-first",
+        "overrides": {
+          "1": {
+            "address": "D2050",
+            "label": "펌프 2 예외"
+          }
+        },
+        "stage": "raw"
+      }
+    },
+    {
+      "id": "row-5",
+      "raw": {
+        "id": "pump-1",
+        "kind": "source",
+        "profile": "melsec-device-v1",
+        "address": "D2050",
+        "type": "UInt16",
+        "unit": "kPa",
+        "byteOrder": "little",
+        "wordOrder": "low-first",
+        "stage": "raw",
+        "label": "펌프 2 예외"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/4"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/4"
+        }
+      ],
+      "issues": [],
+      "assumptions": [
+        "storage width derived from declared type"
+      ],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pump-1",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D2050",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2050,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/4"
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "template": {
+        "id": "pump",
+        "kind": "template",
+        "profile": "melsec-device-v1",
+        "address": "D{offset}",
+        "base": 2000,
+        "stride": 10,
+        "count": 3,
+        "type": "UInt16",
+        "unit": "kPa",
+        "byteOrder": "little",
+        "wordOrder": "low-first",
+        "overrides": {
+          "1": {
+            "address": "D2050",
+            "label": "펌프 2 예외"
+          }
+        },
+        "stage": "raw"
+      }
+    },
+    {
+      "id": "row-6",
+      "raw": {
+        "id": "pump-2",
+        "kind": "source",
+        "profile": "melsec-device-v1",
+        "address": "D2020",
+        "type": "UInt16",
+        "unit": "kPa",
+        "byteOrder": "little",
+        "wordOrder": "low-first",
+        "stage": "raw"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/4"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/4"
+        }
+      ],
+      "issues": [],
+      "assumptions": [
+        "storage width derived from declared type"
+      ],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pump-2",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D2020",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2020,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/4"
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "template": {
+        "id": "pump",
+        "kind": "template",
+        "profile": "melsec-device-v1",
+        "address": "D{offset}",
+        "base": 2000,
+        "stride": 10,
+        "count": 3,
+        "type": "UInt16",
+        "unit": "kPa",
+        "byteOrder": "little",
+        "wordOrder": "low-first",
+        "overrides": {
+          "1": {
+            "address": "D2050",
+            "label": "펌프 2 예외"
+          }
+        },
+        "stage": "raw"
+      }
+    },
+    {
+      "id": "row-7",
+      "raw": {
+        "id": "pump-alias",
+        "kind": "alias",
+        "target": "pump-1"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/5"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/5"
+        },
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/4"
+        }
+      ],
+      "issues": [],
+      "assumptions": [
+        "storage width derived from declared type"
+      ],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pump-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D2050",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2050,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/5"
+            }
+          },
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/4"
+            }
+          }
+        ],
+        "viewOf": null
+      }
+    },
+    {
+      "id": "row-8",
+      "raw": {
+        "id": "pump-alias-chain",
+        "kind": "alias",
+        "target": "pump-alias"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/6"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/6"
+        },
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/5"
+        },
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/4"
+        }
+      ],
+      "issues": [],
+      "assumptions": [
+        "storage width derived from declared type"
+      ],
+      "draft": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-settings-pump-alias-chain",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D2050",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 2050,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/6"
+            }
+          },
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/5"
+            }
+          },
+          {
+            "artifactId": "import-settings",
+            "locator": {
+              "kind": "json-pointer",
+              "pointer": "/records/4"
+            }
+          }
+        ],
+        "viewOf": null
+      }
+    },
+    {
+      "id": "row-9",
+      "raw": {
+        "id": "cycle-a",
+        "kind": "alias",
+        "target": "cycle-b"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/7"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/7"
+        }
+      ],
+      "issues": [
+        "alias.cycle"
+      ],
+      "assumptions": [],
+      "draft": null
+    },
+    {
+      "id": "row-10",
+      "raw": {
+        "id": "cycle-b",
+        "kind": "alias",
+        "target": "cycle-a"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/8"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/8"
+        }
+      ],
+      "issues": [
+        "alias.cycle"
+      ],
+      "assumptions": [],
+      "draft": null
+    },
+    {
+      "id": "row-11",
+      "raw": {
+        "id": "missing-alias",
+        "kind": "alias",
+        "target": "absent"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/9"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/9"
+        }
+      ],
+      "issues": [
+        "alias.missing-target"
+      ],
+      "assumptions": [],
+      "draft": null
+    },
+    {
+      "id": "row-12",
+      "raw": {
+        "id": "opaque",
+        "profile": "melsec-device-v1",
+        "address": "D[index * 2]",
+        "type": "UInt16",
+        "vendorExpression": "PLC_POINTER()",
+        "stage": "raw"
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/records/10"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/records/10"
+        }
+      ],
+      "issues": [
+        "record.unknown-fields"
+      ],
+      "assumptions": [],
+      "draft": null
+    },
+    {
+      "id": "row-13",
+      "raw": {
+        "kind": "opaque",
+        "field": "vendorExtension",
+        "value": {
+          "custom": "must preserve exactly"
+        }
+      },
+      "locator": {
+        "kind": "json-pointer",
+        "pointer": "/vendorExtension"
+      },
+      "derivation": [
+        {
+          "kind": "json-pointer",
+          "pointer": "/vendorExtension"
+        }
+      ],
+      "issues": [
+        "record.id"
+      ],
+      "assumptions": [],
+      "draft": null
+    }
+  ]
+}

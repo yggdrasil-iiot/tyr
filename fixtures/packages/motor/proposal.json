@@ -1,0 +1,107 @@
+{
+  "kind": "mapping-proposal",
+  "schemaVersion": "1.0.0",
+  "id": "proposal-motor",
+  "version": "1.0.0",
+  "baseRelease": null,
+  "files": [
+    {
+      "path": "evidence/map.json",
+      "kind": "evidence-artifact",
+      "id": "ev-map",
+      "version": "1.0.0",
+      "sha256": "3c35b65291c0e4602f3c46a1a33d9ce7f0b077787456402e94debf7b557c1235"
+    },
+    {
+      "path": "evidence/config.json",
+      "kind": "evidence-artifact",
+      "id": "ev-config",
+      "version": "1.0.0",
+      "sha256": "5f6196d7d438b7589d0c3bf23db8534a06654b2819010b416684178e5965529e"
+    },
+    {
+      "path": "observations/a.json",
+      "kind": "source-observation",
+      "id": "obs-a",
+      "version": "1.0.0",
+      "sha256": "44037737a472468985117fe479d8d9add274573b83020121580fdf9981cb6d2b"
+    },
+    {
+      "path": "semantics/motor.json",
+      "kind": "semantic-definition",
+      "id": "motor",
+      "version": "1.0.0",
+      "sha256": "29b6834eb4f3faa6e54c7239a608697af1afb79168e88bd0b5d21c457f926354"
+    },
+    {
+      "path": "sources/source-a.json",
+      "kind": "source-definition",
+      "id": "source-a",
+      "version": "1.0.0",
+      "sha256": "3359132b92b915a48721479cf10fb7616249c80a7596c9fc7831599911edcb94"
+    },
+    {
+      "path": "sources/source-b.json",
+      "kind": "source-definition",
+      "id": "source-b",
+      "version": "1.0.0",
+      "sha256": "b6fd637fe5a939d2f023f556c2b8e34b8810bff882bc23d6e0c164640d984fd4"
+    },
+    {
+      "path": "sources/source-c.json",
+      "kind": "source-definition",
+      "id": "source-c",
+      "version": "1.0.0",
+      "sha256": "192d8486d6e939e645ab7071af0e858119bfd10e517ee18f5ba2178bc286e2f7"
+    },
+    {
+      "path": "mappings/map-a.json",
+      "kind": "mapping-set",
+      "id": "map-a",
+      "version": "1.0.0",
+      "sha256": "fcebdbdeb97b7601c016956369b17a17bc49d1be26f80e501a48e0d6a21a6f25"
+    },
+    {
+      "path": "mappings/map-b.json",
+      "kind": "mapping-set",
+      "id": "map-b",
+      "version": "1.0.0",
+      "sha256": "f089378a644f045f5989bc06631e753ffa5d0f08f6cc46a39c4d95c341cb9cc2"
+    },
+    {
+      "path": "mappings/map-c.json",
+      "kind": "mapping-set",
+      "id": "map-c",
+      "version": "1.0.0",
+      "sha256": "8c17d7140609674b7e006f2bab6b63592a0973b42a3e14ab55f90bac04beeed8"
+    },
+    {
+      "path": "reviews/a.json",
+      "kind": "review-record",
+      "id": "review-a",
+      "version": "1.0.0",
+      "sha256": "80b2e91a97a91c9d637236f99b40049a6b6e742b2a3c24784a69164f219c3257"
+    },
+    {
+      "path": "sources/source-d.json",
+      "kind": "source-definition",
+      "id": "source-d",
+      "version": "1.0.0",
+      "sha256": "5677fc5f010e23c20d9068002c6a5472f1fd837106b9c875105706a4fbed3a6f"
+    },
+    {
+      "path": "mappings/map-d.json",
+      "kind": "mapping-set",
+      "id": "map-d",
+      "version": "1.0.0",
+      "sha256": "993146b12566feba07bed6db4029da910536a56d838dc85ec675ddae5ee8cae5"
+    },
+    {
+      "path": "sources/source-other-plc.json",
+      "kind": "source-definition",
+      "id": "source-other-plc",
+      "version": "1.0.0",
+      "sha256": "bb059c37e0a65909184fde2c8d5380299b4d0f9fb524f14fb5f02844b2fcfd97"
+    }
+  ]
+}

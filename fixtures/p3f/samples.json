@@ -1,0 +1,14 @@
+{
+  "selector-index": {
+    "bytesHex": "0000"
+  },
+  "selector-previous": {
+    "bytesHex": "0000"
+  },
+  "pressure-up": {
+    "bytesHex": "6400"
+  },
+  "pressure-down": {
+    "bytesHex": "c800"
+  }
+}

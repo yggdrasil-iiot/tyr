@@ -1,0 +1,814 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "reviewedAt": "2026-10-17",
+  "deviceCommunication": "excluded",
+  "axes": [
+    "representation",
+    "evidencePreservation",
+    "staticValidation",
+    "sampleEvaluation",
+    "ui"
+  ],
+  "sources": {
+    "ignition-udt": {
+      "title": "Ignition 8.1 UDT Parameters",
+      "url": "https://www.docs.inductiveautomation.com/docs/8.1/platform/tags/user-defined-types-udts/udt-parameters"
+    },
+    "ignition-nesting": {
+      "title": "Ignition 8.1 UDT Nesting",
+      "url": "https://www.docs.inductiveautomation.com/docs/8.1/platform/tags/user-defined-types-udts/udt-nesting"
+    },
+    "ignition-inheritance": {
+      "title": "Ignition 8.1 UDT Inheritance",
+      "url": "https://www.docs.inductiveautomation.com/docs/8.1/platform/tags/user-defined-types-udts/udt-inheritance"
+    },
+    "kepware-complex": {
+      "title": "Kepware Complex Tags",
+      "url": "https://support.ptc.com/help/kepware/kepwareplus/en/kepwareplus/advanced-tags/complex-tags.html"
+    },
+    "kepware-derived": {
+      "title": "Kepware Derived Tags",
+      "url": "https://support.ptc.com/help/kepware/kepwareplus/en/kepwareplus/advanced-tags/derived-tags.html"
+    },
+    "kepware-scaling": {
+      "title": "Kepware Scaling",
+      "url": "https://www.ptc.com/help/kepware/kepware_server/en/kepware/server/scaling.html"
+    },
+    "beckhoff-structure": {
+      "title": "Beckhoff OPC UA StructuredTypes",
+      "url": "https://infosys.beckhoff.com/content/1033/ts6100_tc2_opcua_server/15563544971.html"
+    },
+    "mitsubishi": {
+      "title": "Ignition 8.1 Mitsubishi TCP Driver",
+      "url": "https://www.docs.inductiveautomation.com/docs/8.1/ignition-modules/opc-ua/opc-ua-drivers/mitsubishi-tcp-driver"
+    },
+    "siemens": {
+      "title": "Ignition 8.1 Siemens Driver / Addressing",
+      "url": "https://www.docs.inductiveautomation.com/docs/8.1/ignition-modules/opc-ua/opc-ua-drivers/siemens"
+    },
+    "modbus": {
+      "title": "Ignition 8.1 Modbus Address Mapping",
+      "url": "https://www.docs.inductiveautomation.com/docs/8.1/ignition-modules/opc-ua/opc-ua-drivers/modbus/modbus-address-mapping"
+    },
+    "ignition-types": {
+      "title": "Ignition 8.1 Types of Tags",
+      "url": "https://www.docs.inductiveautomation.com/docs/8.1/platform/tags/types-of-tags"
+    },
+    "siemens-multiplex": {
+      "title": "Siemens WinCC Unified Multiplexing, 04/2026",
+      "url": "https://docs.tia.siemens.cloud/r/en-us/v1.0/wincc-unified/modernization-how-tos/hmi-tags/multiplexing?contentId=ecAyM8kjDjJuOKgIayMX_g"
+    },
+    "opc-datavalue": {
+      "title": "OPC UA Part 4 DataValue",
+      "url": "https://reference.opcfoundation.org/specs/OPC-10000-4/7.11"
+    },
+    "aveva-io": {
+      "title": "AVEVA System Platform Object I/O Access official training",
+      "url": "https://community.aveva.com/heroes-hq/m/aveva-system-platform---beg---2017-training/21859"
+    },
+    "spin-case": {
+      "title": "Tatsoft / SPIN Automation case study (utilities)",
+      "url": "https://tatsoft.com/wp-content/uploads/2020/09/CaseStudy_Spin.pdf"
+    }
+  },
+  "patterns": [
+    {
+      "id": "MP01",
+      "name": "단일 소스 → 스칼라",
+      "kind": "mapping",
+      "support": {
+        "representation": "yes",
+        "evidencePreservation": "partial",
+        "staticValidation": "yes",
+        "sampleEvaluation": "partial",
+        "ui": "yes"
+      },
+      "priority": "A",
+      "phase": "P3-B",
+      "limitations": "숫자/Boolean·제한 codec의 단계별 read-only preview 지원. 네 접근의 가상 입력만 검증하며 실장치 통신은 제외.",
+      "evidenceRefs": [
+        "ignition-types"
+      ],
+      "codeRefs": [
+        "backend/server.py",
+        "scripts/governance_checks.py",
+        "backend/preview.py",
+        "scripts/source_codecs.py",
+        "frontend/preview.js",
+        "scripts/test_p3b.py"
+      ],
+      "versionSupport": {
+        "P3-B-preview": {
+          "representation": "yes",
+          "evidencePreservation": "partial",
+          "staticValidation": "yes",
+          "sampleEvaluation": "partial",
+          "ui": "yes"
+        }
+      }
+    },
+    {
+      "id": "MP02",
+      "name": "분산 주소 → 객체 프로퍼티",
+      "kind": "mapping",
+      "support": {
+        "representation": "yes",
+        "evidencePreservation": "partial",
+        "staticValidation": "yes",
+        "sampleEvaluation": "partial",
+        "ui": "yes"
+      },
+      "priority": "A",
+      "phase": "P3-A",
+      "limitations": "평면 scalar 멤버. 완전성 검사는 작성 서버. 원자적 시점 보장 없음.",
+      "evidenceRefs": [
+        "ignition-udt",
+        "kepware-complex",
+        "aveva-io",
+        "spin-case"
+      ],
+      "codeRefs": [
+        "backend/server.py",
+        "frontend/app.js"
+      ]
+    },
+    {
+      "id": "MP03",
+      "name": "파라미터·기준 주소·인스턴스 예외",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P4-A",
+      "limitations": "P4-A: template base/stride/count, {offset}/{index}, instance override 유한 전개. vendor UDT 상속/임의 식은 미지원.",
+      "evidenceRefs": [
+        "ignition-udt",
+        "ignition-inheritance"
+      ],
+      "codeRefs": [
+        "scripts/import_files.py",
+        "scripts/test_p4a.py",
+        "contracts/2.6.0/import-batch.schema.json"
+      ]
+    },
+    {
+      "id": "MP04",
+      "name": "네이티브 구조체 → 객체",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "contract-only",
+        "staticValidation": "partial",
+        "sampleEvaluation": "no",
+        "ui": "partial"
+      },
+      "priority": "B",
+      "phase": "P3-E",
+      "limitations": "구조체 멤버를 scalar 심볼로 쓰는 것만 가능. 전체 타입/필드 selector 미지원.",
+      "evidenceRefs": [
+        "beckhoff-structure"
+      ],
+      "codeRefs": [
+        "contracts/1.1.0/common.schema.json"
+      ]
+    },
+    {
+      "id": "MP05",
+      "name": "중첩 객체·반복 객체 인스턴스",
+      "kind": "mapping",
+      "support": {
+        "representation": "no",
+        "evidencePreservation": "contract-only",
+        "staticValidation": "no",
+        "sampleEvaluation": "no",
+        "ui": "no"
+      },
+      "priority": "B",
+      "phase": "P3-E",
+      "limitations": "members[]는 scalar 타입뿐이며 재귀 객체 참조가 없음.",
+      "evidenceRefs": [
+        "ignition-nesting"
+      ],
+      "codeRefs": [
+        "contracts/1.1.0/semantic-definition.schema.json"
+      ]
+    },
+    {
+      "id": "MP06",
+      "name": "배열·stride·요소 선택",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P3-E",
+      "limitations": "2.4 고정 scalar 배열 rank1~3/256요소/4096 buffer. shape/lowerBounds/stride/range와 array-element indices 작성·저장·preview 및 범위 초과 차단. native 구조/배열 결과 타입/동적 selector/장치 수집은 후속.",
+      "evidenceRefs": [
+        "mitsubishi",
+        "modbus"
+      ],
+      "codeRefs": [
+        "contracts/1.1.0/common.schema.json",
+        "contracts/2.4.0/source-definition.schema.json",
+        "contracts/2.4.0/value-graph.schema.json",
+        "scripts/fixed_arrays.py",
+        "frontend/arrays.js",
+        "scripts/test_p3e.py"
+      ],
+      "versionSupport": {
+        "2.4.0-fixed-scalar-array": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        }
+      }
+    },
+    {
+      "id": "MP07",
+      "name": "여러 워드 → 단일 저장값",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P3-B",
+      "limitations": "분산 UInt16 low/high→UInt32와 최종 cast/overflow를 바이트부터 preview. UInt64·분산 signed 재해석은 후속.",
+      "evidenceRefs": [
+        "modbus",
+        "mitsubishi"
+      ],
+      "codeRefs": [
+        "scripts/validate_contracts.py",
+        "scripts/governance_checks.py",
+        "scripts/p3a_contracts.py",
+        "scripts/test_p3a.py",
+        "backend/workspace_v2.py",
+        "frontend/v2.js",
+        "scripts/test_p3a_workspace.py",
+        "backend/preview.py",
+        "scripts/source_codecs.py",
+        "frontend/preview.js",
+        "scripts/test_p3b.py"
+      ],
+      "versionSupport": {
+        "1.x": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        },
+        "2.0.0-file-contract": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "no"
+        },
+        "2.0.0-workspace": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        },
+        "P3-B-preview": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        }
+      }
+    },
+    {
+      "id": "MP08",
+      "name": "워드 fan-out·비트·상태 코드",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P3-B",
+      "limitations": "word bit/명시 native-byte 좌표·MELSEC native bit subset을 2.1로 작성하고 preview. 실제 frame·CPU 범위는 미검증.",
+      "evidenceRefs": [
+        "mitsubishi",
+        "siemens"
+      ],
+      "codeRefs": [
+        "scripts/validate_contracts.py",
+        "frontend/app.js",
+        "backend/preview.py",
+        "scripts/source_codecs.py",
+        "frontend/preview.js",
+        "scripts/test_p3b.py"
+      ],
+      "versionSupport": {
+        "P3-B-preview": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        }
+      }
+    },
+    {
+      "id": "MP09",
+      "name": "문자열·BCD·날짜 codec",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P3-B",
+      "limitations": "2.1 고정 ASCII/NUL·BCD16·DB의 S7 DATE_AND_TIME subset 작성/preview. DateTime 결과 타입·일반 인코딩/날짜 형식은 미지원.",
+      "evidenceRefs": [
+        "siemens",
+        "mitsubishi"
+      ],
+      "codeRefs": [
+        "contracts/1.1.0/common.schema.json",
+        "backend/preview.py",
+        "scripts/source_codecs.py",
+        "frontend/preview.js",
+        "scripts/test_p3b.py"
+      ],
+      "versionSupport": {
+        "P3-B-preview": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        }
+      }
+    },
+    {
+      "id": "MP10",
+      "name": "스케일·단위·비선형 변환",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P3-C",
+      "limitations": "입력별 linear/unit-convert와 압력 Pa/kPa/bar 변환·최종 cast 손실 preview 구현. sqrt/clamp/일반 차원 분석은 B 후속.",
+      "evidenceRefs": [
+        "kepware-scaling",
+        "ignition-types"
+      ],
+      "codeRefs": [
+        "scripts/validate_contracts.py",
+        "frontend/app.js",
+        "backend/preview.py",
+        "scripts/source_codecs.py",
+        "frontend/preview.js",
+        "scripts/test_p3b.py",
+        "contracts/2.2.0/value-graph.schema.json",
+        "frontend/v2.js",
+        "scripts/test_p3c.py"
+      ],
+      "versionSupport": {
+        "P3-B-preview": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        },
+        "2.2.0-derived": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        }
+      }
+    },
+    {
+      "id": "MP11",
+      "name": "여러 입력 → 계산·조립 스칼라",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P3-C",
+      "limitations": "2.2 이름 있는 left/right subtract와 입력별 변환을 작성·저장·preview. 압력/무차원 같은 known 단위만 허용. 결측은 bad/null. 일반 식·시간/품질 조립은 후속.",
+      "evidenceRefs": [
+        "kepware-derived",
+        "siemens"
+      ],
+      "codeRefs": [
+        "contracts/1.1.0/mapping-set.schema.json",
+        "scripts/p3a_contracts.py",
+        "scripts/test_p3a.py",
+        "backend/workspace_v2.py",
+        "frontend/v2.js",
+        "scripts/test_p3a_workspace.py",
+        "backend/preview.py",
+        "scripts/source_codecs.py",
+        "frontend/preview.js",
+        "scripts/test_p3b.py",
+        "contracts/2.2.0/value-graph.schema.json",
+        "frontend/v2.js",
+        "scripts/test_p3c.py"
+      ],
+      "versionSupport": {
+        "1.x": {
+          "representation": "no",
+          "evidencePreservation": "contract-only",
+          "staticValidation": "no",
+          "sampleEvaluation": "no",
+          "ui": "no"
+        },
+        "2.0.0-file-contract": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "no"
+        },
+        "2.0.0-workspace": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        },
+        "P3-B-preview": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        },
+        "2.2.0-derived": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        }
+      }
+    },
+    {
+      "id": "MP12",
+      "name": "별칭·참조 체인·view",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P4-A",
+      "limitations": "P4-A: 파일 안의 source/template instance alias chain, missing/cycle/duplicate/depth 검사와 근거 경로. vendor alias 문법 자동 인식은 미지원. A07 2.10.0: 명시적 PLC 정수 word alias/bit view와 최대 16단계 체인 작성·SQLite·preview·Bifrost 승인/발행 지원. 임의 vendor alias/view 자동 importer는 후속.",
+      "evidenceRefs": [
+        "ignition-types"
+      ],
+      "codeRefs": [
+        "scripts/import_files.py",
+        "scripts/test_p4a.py",
+        "contracts/2.6.0/import-batch.schema.json",
+        "scripts/source_views.py",
+        "scripts/test_a07.py",
+        "contracts/2.10.0/source-definition.schema.json",
+        "frontend/views.js"
+      ]
+    },
+    {
+      "id": "MP13",
+      "name": "동적 주소·소스 선택",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "B",
+      "phase": "P3-F",
+      "limitations": "P3-F: 1~32개 사전 정의 scalar 소스, 0-based 정수 index, reject/default-candidate, 실제 sourceRef 변경 비교. 후보 그래프·주소식·런타임 browse/read·자동 failover는 미지원. 독립 fixtures/p3f와 test_p3f.py에서 검증하며 기존 planned 목록은 역사적 기준선이다.",
+      "evidenceRefs": [
+        "siemens-multiplex"
+      ],
+      "codeRefs": [
+        "contracts/2.5.0/value-graph.schema.json",
+        "backend/preview.py",
+        "scripts/test_p3f.py"
+      ]
+    },
+    {
+      "id": "MP14",
+      "name": "상수·솔루션 태그·외부 값 혼합",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "B",
+      "phase": "P4-B",
+      "limitations": "P4-B: constant/solution-tag/external Typed scalar + PLC 혼합 읽기·가상 값. SQL 원문 보존이며 실행/실제 provider 연동 제외.",
+      "evidenceRefs": [
+        "ignition-types"
+      ],
+      "codeRefs": [
+        "contracts/2.7.0/source-definition.schema.json",
+        "contracts/2.7.0/write-definition.schema.json",
+        "scripts/mixed_sources.py",
+        "scripts/test_p4b.py"
+      ]
+    },
+    {
+      "id": "MP15",
+      "name": "읽기·쓰기별 정의·변환",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "C",
+      "phase": "P4-B",
+      "limitations": "P4-B: 명시적 source accessMode와 별도 semantic→destination write-definition, 변환 방향·타입·단위·근거·중복 검사. 인가/실제 쓰기/자동 역변환 제외.",
+      "evidenceRefs": [
+        "ignition-types"
+      ],
+      "codeRefs": [
+        "contracts/2.7.0/source-definition.schema.json",
+        "contracts/2.7.0/write-definition.schema.json",
+        "scripts/mixed_sources.py",
+        "scripts/test_p4b.py"
+      ]
+    },
+    {
+      "id": "MP16",
+      "name": "트리거 레코드·시간·품질 결합",
+      "kind": "mapping",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P3-D",
+      "limitations": "2.3 단일 바인딩의 가상 입력 age/skew·결측·bad/uncertain·trigger sequence 일치 검증 및 SQLite 시나리오 재현. 실제 시각/OPC 품질·target 전체 원자 조립·연속 latch/handshake 미지원.",
+      "evidenceRefs": [
+        "kepware-complex",
+        "opc-datavalue"
+      ],
+      "codeRefs": [
+        "contracts/1.1.0/mapping-set.schema.json",
+        "contracts/2.3.0/mapping-set.schema.json",
+        "contracts/2.3.0/preview-scenario.schema.json",
+        "backend/sample_quality.py",
+        "frontend/quality.js",
+        "scripts/test_p3d.py"
+      ],
+      "versionSupport": {
+        "2.3.0-virtual-time-quality": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        }
+      }
+    },
+    {
+      "id": "MP17",
+      "name": "객체 인스턴스 식별",
+      "kind": "crosscut",
+      "support": {
+        "representation": "yes",
+        "evidencePreservation": "partial",
+        "staticValidation": "yes",
+        "sampleEvaluation": "partial",
+        "ui": "yes"
+      },
+      "priority": "A",
+      "phase": "P3-A",
+      "limitations": "2.0 객체 ID와 같은 설비의 복수 객체 작성·조회·중복/완전성 검사 지원. 기존 1.x는 명시적 이전 필요.",
+      "evidenceRefs": [
+        "ignition-nesting",
+        "ignition-udt"
+      ],
+      "codeRefs": [
+        "scripts/validate_contracts.py",
+        "scripts/p3a_contracts.py",
+        "scripts/test_p3a.py",
+        "backend/workspace_v2.py",
+        "frontend/v2.js",
+        "scripts/test_p3a_workspace.py"
+      ],
+      "versionSupport": {
+        "1.x": {
+          "representation": "partial",
+          "evidencePreservation": "partial",
+          "staticValidation": "partial",
+          "sampleEvaluation": "partial",
+          "ui": "partial"
+        },
+        "2.0.0-file-contract": {
+          "representation": "yes",
+          "evidencePreservation": "partial",
+          "staticValidation": "yes",
+          "sampleEvaluation": "partial",
+          "ui": "no"
+        },
+        "2.0.0-workspace": {
+          "representation": "yes",
+          "evidencePreservation": "partial",
+          "staticValidation": "yes",
+          "sampleEvaluation": "partial",
+          "ui": "yes"
+        }
+      }
+    },
+    {
+      "id": "MP18",
+      "name": "미지원 원문·손실·미해결 보존",
+      "kind": "crosscut",
+      "support": {
+        "representation": "partial",
+        "evidencePreservation": "partial",
+        "staticValidation": "partial",
+        "sampleEvaluation": "partial",
+        "ui": "partial"
+      },
+      "priority": "A",
+      "phase": "P4-A",
+      "limitations": "P4-A: XLSX/tyr-config-v1 원본 bytes/hash, cell/JSON pointer, 미해석/unknown-field/formula 보존 및 내보내기. PDF/xls/vendor parser 미지원.",
+      "evidenceRefs": [
+        "ignition-types",
+        "aveva-io"
+      ],
+      "codeRefs": [
+        "scripts/import_files.py",
+        "scripts/test_p4a.py",
+        "contracts/2.6.0/import-batch.schema.json"
+      ]
+    }
+  ],
+  "cases": [
+    "cases/direct-four-profiles.json",
+    "cases/dispersed-motor.json",
+    "cases/aliases-and-collisions.json",
+    "cases/partial-object.json",
+    "cases/u32-low-first.json",
+    "cases/u32-high-first.json",
+    "cases/word-fanout.json",
+    "cases/enum-unknown.json",
+    "cases/unit-rps-rpm.json",
+    "cases/unit-millitorque.json",
+    "cases/unit-kelvin.json",
+    "cases/missing-unit-conversion.json",
+    "cases/observation-opaque-expression.json",
+    "cases/legacy-projection-loss.json",
+    "cases/multi-input-rejected.json",
+    "cases/structure-rejected.json",
+    "cases/array-rejected.json",
+    "cases/raw-string-rejected.json",
+    "cases/native-bit-unit-rejected.json",
+    "cases/native-area-unchecked.json",
+    "cases/alias-cycle-unchecked.json",
+    "cases/two-objects-one-equipment.json",
+    "cases/template-base-stride.json",
+    "cases/template-instance-override.json",
+    "cases/template-missing-parameter.json",
+    "cases/native-structure-select.json",
+    "cases/nested-object-tree.json",
+    "cases/array-shape-stride.json",
+    "cases/array-out-of-range.json",
+    "cases/array-of-struct-to-objects.json",
+    "cases/separate-low-high.json",
+    "cases/bit-coordinate-system.json",
+    "cases/melsec-native-relay.json",
+    "cases/ascii-fixed-string.json",
+    "cases/bcd16-valid.json",
+    "cases/bcd16-invalid.json",
+    "cases/s7-date-time.json",
+    "cases/date-timezone-missing.json",
+    "cases/sqrt-domain.json",
+    "cases/sqrt-range.json",
+    "cases/pressure-difference.json",
+    "cases/multi-input-missing.json",
+    "cases/graph-cycle.json",
+    "cases/alias-chain.json",
+    "cases/alias-cycle-rejected.json",
+    "cases/bounded-selector.json",
+    "cases/selector-out-of-range.json",
+    "cases/static-context-and-plc.json",
+    "cases/external-query-preservation.json",
+    "cases/read-write-definitions.json",
+    "cases/freshness-good.json",
+    "cases/freshness-stale.json",
+    "cases/bad-input-quality.json",
+    "cases/trigger-record.json",
+    "cases/two-instances-same-equipment.json",
+    "cases/unsupported-roundtrip.json"
+  ],
+  "supportScope": "P3-A objects, P3-B bounded codecs, P3-C derived values, P3-D virtual time/quality, P3-E bounded fixed scalar arrays; original 1.x baseline retained. No native structures/dynamic selection/device communication.",
+  "partialVerification": {
+    "cases": [
+      "separate-low-high",
+      "two-instances-same-equipment",
+      "graph-cycle"
+    ],
+    "gate": "scripts/test_p3a.py",
+    "scope": "2.0 file + UI/SQLite authoring complete for flat objects and low/high/identity; generic bytes decoder and value preview remain planned."
+  },
+  "previewVerification": {
+    "gate": "scripts/test_p3b.py",
+    "fixture": "fixtures/p3b/cases.json",
+    "scope": "P3-B bounded decode/codec/graph/transform/cast preview; no communication; original 56-case baseline retained separately"
+  },
+  "derivedVerification": {
+    "gate": "scripts/test_p3c.py",
+    "fixture": "fixtures/p3c/cases.json",
+    "cases": [
+      "pressure-difference",
+      "multi-input-missing",
+      "graph-cycle"
+    ],
+    "scope": "2.2 pressure/dimensionless subtraction with input normalization, type/unit/missing and loss gates; original 56-case baseline retained"
+  },
+  "temporalVerification": {
+    "gate": "scripts/test_p3d.py",
+    "fixture": "fixtures/p3d/cases.json",
+    "cases": [
+      "freshness-good",
+      "freshness-stale",
+      "bad-input-quality",
+      "trigger-record"
+    ],
+    "scope": "Single-binding virtual time/quality and per-request sequence; original planned baseline retained separately"
+  },
+  "arrayVerification": {
+    "gate": "scripts/test_p3e.py",
+    "fixture": "fixtures/p3e/cases.json",
+    "cases": [
+      "array-shape-stride",
+      "array-out-of-range"
+    ],
+    "scope": "Fixed scalar array element selection only; native structures and arrays-of-struct remain planned"
+  },
+  "sourceViewsVerification": {
+    "schemaVersion": "2.10.0",
+    "scope": "A07 bounded read-only PLC integer-word alias/bit views; no vendor alias importer or runtime activation",
+    "profiles": [
+      "ab-logix-symbol-v1",
+      "s7-1500-opcua-v1",
+      "s7-300-db-v1",
+      "melsec-device-v1"
+    ],
+    "fixture": "fixtures/a07/workspace.json",
+    "wireFixture": "fixtures/a07/wire",
+    "validator": "scripts/test_a07.py",
+    "receiver": "Bifrost MappingPublicationTest",
+    "result": "docs/verification/A07-RESULTS.md"
+  }
+}

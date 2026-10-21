@@ -1,0 +1,20 @@
+{
+  "mixed-plc-pressure": {
+    "value": {
+      "bytesHex": "b004"
+    },
+    "sourceTimestamp": "2026-10-18T00:00:00Z",
+    "serverTimestamp": "2026-10-18T00:00:00Z",
+    "quality": "good",
+    "sequence": null
+  },
+  "mixed-external-reference": {
+    "value": {
+      "typedValue": "101"
+    },
+    "sourceTimestamp": "2026-10-18T00:00:00Z",
+    "serverTimestamp": "2026-10-18T00:00:00Z",
+    "quality": "good",
+    "sequence": null
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "kind": "mapping-submission",
+  "schemaVersion": "2.9.0",
+  "id": "mixed-db",
+  "streamId": "mixed-db",
+  "version": "1.0.0",
+  "workspaceSha256": "970df9d9121b1e932ec9a97e0e3bb5895020c87c7c11ccf3e30c597441a7f3bf",
+  "proposalSha256": "8985ce51f82a6f77f62b89f31ae17039b59851f3fd41e20e3c3babd3796a816f",
+  "baseRelease": null,
+  "proposedBy": "proposer",
+  "execution": "excluded",
+  "context": {
+    "equipment": [
+      {
+        "id": "mixed-line",
+        "label": "mixed-line"
+      }
+    ],
+    "connections": [
+      {
+        "id": "mixed-db",
+        "label": "mixed-db",
+        "equipmentInstanceId": "mixed-line",
+        "accessProfileRef": "s7-300-db-v1"
+      },
+      {
+        "id": "mixed-melsec",
+        "label": "mixed-melsec",
+        "equipmentInstanceId": "mixed-line",
+        "accessProfileRef": "melsec-device-v1"
+      }
+    ]
+  }
+}

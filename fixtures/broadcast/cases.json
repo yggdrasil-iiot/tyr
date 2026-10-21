@@ -1,0 +1,325 @@
+[
+  {
+    "id": "row-reject",
+    "rowErrorPolicy": "reject-all",
+    "snapshot": {
+      "kind": "virtual-result-set",
+      "schemaVersion": "2.20.0",
+      "resultSetRef": {
+        "id": "pressure-result",
+        "version": "1.0.0",
+        "sha256": "4247d3889f86a9444b9f54085822b0ff451c4754404e9c39d917e86df47e5a6d"
+      },
+      "capturedAt": "2026-10-18T00:00:00Z",
+      "quality": "good",
+      "rows": [
+        {
+          "asset": "A-002",
+          "pressure": "123450",
+          "target": "oops",
+          "running": true,
+          "unmapped_note": "원본 보존"
+        },
+        {
+          "asset": "A-001",
+          "pressure": "100000",
+          "target": "900",
+          "running": false
+        }
+      ]
+    },
+    "commonSamples": {
+      "mixed-plc-pressure": {
+        "value": {
+          "bytesHex": "b004"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      },
+      "mixed-external-reference": {
+        "value": {
+          "typedValue": "101"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      }
+    },
+    "expected": {
+      "valid": false,
+      "outputRows": 0,
+      "quality": "bad"
+    }
+  },
+  {
+    "id": "row-omit",
+    "rowErrorPolicy": "omit-invalid",
+    "snapshot": {
+      "kind": "virtual-result-set",
+      "schemaVersion": "2.20.0",
+      "resultSetRef": {
+        "id": "pressure-result",
+        "version": "1.0.0",
+        "sha256": "4247d3889f86a9444b9f54085822b0ff451c4754404e9c39d917e86df47e5a6d"
+      },
+      "capturedAt": "2026-10-18T00:00:00Z",
+      "quality": "good",
+      "rows": [
+        {
+          "asset": "A-002",
+          "pressure": "123450",
+          "target": "oops",
+          "running": true,
+          "unmapped_note": "원본 보존"
+        },
+        {
+          "asset": "A-001",
+          "pressure": "100000",
+          "target": "900",
+          "running": false
+        }
+      ]
+    },
+    "commonSamples": {
+      "mixed-plc-pressure": {
+        "value": {
+          "bytesHex": "b004"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      },
+      "mixed-external-reference": {
+        "value": {
+          "typedValue": "101"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      }
+    },
+    "expected": {
+      "valid": true,
+      "outputRows": 1,
+      "quality": "uncertain"
+    }
+  },
+  {
+    "id": "duplicate-global",
+    "rowErrorPolicy": "omit-invalid",
+    "snapshot": {
+      "kind": "virtual-result-set",
+      "schemaVersion": "2.20.0",
+      "resultSetRef": {
+        "id": "pressure-result",
+        "version": "1.0.0",
+        "sha256": "4247d3889f86a9444b9f54085822b0ff451c4754404e9c39d917e86df47e5a6d"
+      },
+      "capturedAt": "2026-10-18T00:00:00Z",
+      "quality": "good",
+      "rows": [
+        {
+          "asset": "A-002",
+          "pressure": "123450",
+          "target": "950",
+          "running": true,
+          "unmapped_note": "원본 보존"
+        },
+        {
+          "asset": "A-001",
+          "pressure": "100000",
+          "target": "900",
+          "running": false
+        },
+        {
+          "asset": "A-002",
+          "pressure": "123450",
+          "target": "950",
+          "running": true,
+          "unmapped_note": "원본 보존"
+        }
+      ]
+    },
+    "commonSamples": {
+      "mixed-plc-pressure": {
+        "value": {
+          "bytesHex": "b004"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      },
+      "mixed-external-reference": {
+        "value": {
+          "typedValue": "101"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      }
+    },
+    "expected": {
+      "valid": false,
+      "outputRows": 0,
+      "quality": "bad"
+    }
+  },
+  {
+    "id": "bad-common-global",
+    "rowErrorPolicy": "omit-invalid",
+    "snapshot": {
+      "kind": "virtual-result-set",
+      "schemaVersion": "2.20.0",
+      "resultSetRef": {
+        "id": "pressure-result",
+        "version": "1.0.0",
+        "sha256": "4247d3889f86a9444b9f54085822b0ff451c4754404e9c39d917e86df47e5a6d"
+      },
+      "capturedAt": "2026-10-18T00:00:00Z",
+      "quality": "good",
+      "rows": [
+        {
+          "asset": "A-002",
+          "pressure": "123450",
+          "target": "950",
+          "running": true,
+          "unmapped_note": "원본 보존"
+        },
+        {
+          "asset": "A-001",
+          "pressure": "100000",
+          "target": "900",
+          "running": false
+        }
+      ]
+    },
+    "commonSamples": {
+      "mixed-plc-pressure": {
+        "value": {
+          "bytesHex": "b004"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "bad",
+        "sequence": null
+      },
+      "mixed-external-reference": {
+        "value": {
+          "typedValue": "101"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      }
+    },
+    "expected": {
+      "valid": false,
+      "outputRows": 0,
+      "quality": "bad"
+    }
+  },
+  {
+    "id": "zero-empty",
+    "rowErrorPolicy": "reject-all",
+    "snapshot": {
+      "kind": "virtual-result-set",
+      "schemaVersion": "2.20.0",
+      "resultSetRef": {
+        "id": "pressure-result",
+        "version": "1.0.0",
+        "sha256": "4247d3889f86a9444b9f54085822b0ff451c4754404e9c39d917e86df47e5a6d"
+      },
+      "capturedAt": "2026-10-18T00:00:00Z",
+      "quality": "good",
+      "rows": []
+    },
+    "commonSamples": {
+      "mixed-plc-pressure": {
+        "value": {
+          "bytesHex": "b004"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      },
+      "mixed-external-reference": {
+        "value": {
+          "typedValue": "101"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      }
+    },
+    "expected": {
+      "valid": true,
+      "outputRows": 0,
+      "quality": "good"
+    }
+  },
+  {
+    "id": "row-cast-loss",
+    "rowErrorPolicy": "reject-all",
+    "snapshot": {
+      "kind": "virtual-result-set",
+      "schemaVersion": "2.20.0",
+      "resultSetRef": {
+        "id": "pressure-result",
+        "version": "1.0.0",
+        "sha256": "4247d3889f86a9444b9f54085822b0ff451c4754404e9c39d917e86df47e5a6d"
+      },
+      "capturedAt": "2026-10-18T00:00:00Z",
+      "quality": "good",
+      "rows": [
+        {
+          "asset": "A-002",
+          "pressure": "123450",
+          "target": "951",
+          "running": true,
+          "unmapped_note": "원본 보존"
+        },
+        {
+          "asset": "A-001",
+          "pressure": "100000",
+          "target": "900",
+          "running": false
+        }
+      ]
+    },
+    "commonSamples": {
+      "mixed-plc-pressure": {
+        "value": {
+          "bytesHex": "b004"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      },
+      "mixed-external-reference": {
+        "value": {
+          "typedValue": "101"
+        },
+        "sourceTimestamp": "2026-10-18T00:00:00Z",
+        "serverTimestamp": "2026-10-18T00:00:00Z",
+        "quality": "good",
+        "sequence": null
+      }
+    },
+    "expected": {
+      "valid": true,
+      "outputRows": 2,
+      "quality": "uncertain"
+    }
+  }
+]

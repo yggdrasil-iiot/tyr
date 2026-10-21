@@ -1,0 +1,147 @@
+{
+  "revision": 2,
+  "modelRef": {
+    "id": "combined-model",
+    "version": "1.0.0"
+  },
+  "equipmentInstanceId": "record-line-b",
+  "applicationId": "combined-pump",
+  "label": "PLC·레코드·상수·외부 값 통합 객체",
+  "templateId": "combined-pump-kit",
+  "templateVersion": "1.0.0",
+  "authoredBy": "fixture-author",
+  "reason": "Synthetic mixed object acceptance",
+  "note": "Offline declarations and virtual samples only",
+  "memberBindings": [
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "actual"
+        }
+      ],
+      "input": {
+        "kind": "source",
+        "sourceRef": {
+          "id": "mixed-plc-pressure",
+          "version": "1.0.0"
+        }
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.1",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "target"
+        }
+      ],
+      "input": {
+        "kind": "record-field",
+        "recordMappingRef": {
+          "id": "pressure-object",
+          "version": "1.0.0",
+          "sha256": "6dad6129f700162ac46851558642ba43f78bed217a79822dbce9046a72203acc"
+        },
+        "fieldId": "target",
+        "nullPolicy": "reject",
+        "defaultValue": null
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.1",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "baseline"
+        }
+      ],
+      "input": {
+        "kind": "source",
+        "sourceRef": {
+          "id": "mixed-baseline",
+          "version": "1.0.0"
+        }
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "external"
+        }
+      ],
+      "input": {
+        "kind": "source",
+        "sourceRef": {
+          "id": "mixed-external-reference",
+          "version": "1.0.0"
+        }
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    },
+    {
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "line_code"
+        }
+      ],
+      "input": {
+        "kind": "source",
+        "sourceRef": {
+          "id": "mixed-line-code",
+          "version": "1.0.0"
+        }
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ]
+    }
+  ],
+  "temporalPolicy": null
+}

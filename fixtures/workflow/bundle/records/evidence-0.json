@@ -1,0 +1,17 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.0.0",
+  "id": "record-broadcast-pumps-1-0-0",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "record-evidence/broadcast-pumps-1.0.0.txt",
+    "sha256": "4b863274e5a0ba2c70bfe74b90ae1c9709fbf63ae4832a5ad8c511069bf81711",
+    "mediaType": "text/plain"
+  },
+  "capturedAt": "2026-10-18T00:00:00Z",
+  "product": null,
+  "scope": [
+    "record-line-b"
+  ]
+}

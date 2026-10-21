@@ -1,0 +1,3 @@
+# Cross-graph scalar reuse 2.17
+
+Synthetic AB/OPC-UA/S7 DB/MELSEC only. actual=150 kPa, target=50 kPa, gain=2: shared delta=100; consumer sum=200, scaled=200, quotient=50, ratio=1; final wrapper quotient=50. Graph list deliberately puts consumers before producers. Existing 2.15 producers and 2.17 consumers coexist. Exact graph ID/version/node pins, same equipment, scalar outputs. No flattening; dependency/evidence closure is published. Real vendor/native data, physical semantic equivalence and field PoV are unverified. No device communication, external SQL, write execution or runtime activation.

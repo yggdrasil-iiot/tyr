@@ -1,0 +1,25 @@
+{
+  "format": "tyr-synthetic-config/1",
+  "product": {
+    "name": "fixture-only",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "MTR_SPD_PV",
+      "path": "Conveyor.Motor.ActualSpeed",
+      "type": "FLOAT32",
+      "unit": "rpm",
+      "alreadyScaled": true
+    },
+    {
+      "name": "UaSpeed",
+      "namespaceUri": "urn:tyr:fixture:s7-1500",
+      "identifierType": "string",
+      "identifier": "Motor.ActualSpeed",
+      "type": "FLOAT64",
+      "unit": "rpm",
+      "alreadyScaled": true
+    }
+  ]
+}

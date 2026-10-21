@@ -1,0 +1,41 @@
+{
+  "kind": "source-definition",
+  "schemaVersion": "1.1.0",
+  "id": "motor-b-speed",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "connectionProfileRef": "logical-melsec",
+  "accessProfileRef": "melsec-device-v1",
+  "status": "ready",
+  "rawAddressText": "D3100",
+  "addressRadix": 10,
+  "access": {
+    "kind": "device-register",
+    "deviceArea": "D",
+    "addressIndex": 3100,
+    "addressUnit": "word16",
+    "wordCount": 1,
+    "bitOffset": null
+  },
+  "rawRepresentation": {
+    "mode": "bytes",
+    "valueType": "UInt16",
+    "byteOrder": "little",
+    "wordOrder": "low-first"
+  },
+  "inputStage": "raw",
+  "unit": {
+    "status": "known",
+    "code": "rpm"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "ev-motor-b-speed",
+      "locator": {
+        "kind": "text-line",
+        "line": 1
+      }
+    }
+  ],
+  "viewOf": null
+}

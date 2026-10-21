@@ -1,0 +1,116 @@
+{
+  "kind": "value-graph",
+  "schemaVersion": "2.2.0",
+  "id": "pressure-mixed",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "nodes": [
+    {
+      "nodeId": "normalize",
+      "op": "linear",
+      "inputs": {
+        "value": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "pressure-bar",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "valueType": "Decimal",
+      "unit": {
+        "status": "known",
+        "code": "bar"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-pressure-bar",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-pressure-down",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ],
+      "factor": "0.01",
+      "offset": "0"
+    },
+    {
+      "nodeId": "convert",
+      "op": "unit-convert",
+      "inputs": {
+        "value": {
+          "kind": "node",
+          "nodeId": "normalize"
+        }
+      },
+      "valueType": "Decimal",
+      "unit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-pressure-bar",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-pressure-down",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ],
+      "from": "bar",
+      "to": "kPa"
+    },
+    {
+      "nodeId": "difference",
+      "op": "subtract",
+      "inputs": {
+        "left": {
+          "kind": "node",
+          "nodeId": "convert"
+        },
+        "right": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "pressure-down",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "valueType": "Decimal",
+      "unit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-pressure-bar",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-pressure-down",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

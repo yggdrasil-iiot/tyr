@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "index": 0,
+      "value": "100",
+      "selectedSourceIds": [
+        "pressure-up"
+      ],
+      "sourceChanged": false
+    },
+    {
+      "index": 1,
+      "value": "100",
+      "selectedSourceIds": [
+        "pressure-down"
+      ],
+      "sourceChanged": true
+    },
+    {
+      "index": 2,
+      "value": "0",
+      "selectedSourceIds": [
+        "pressure-down",
+        "pressure-up"
+      ],
+      "sourceChanged": true
+    }
+  ]
+}

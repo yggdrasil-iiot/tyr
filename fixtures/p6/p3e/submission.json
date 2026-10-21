@@ -1,0 +1,58 @@
+{
+  "kind": "mapping-submission",
+  "schemaVersion": "2.9.0",
+  "id": "p3e",
+  "streamId": "p3e",
+  "version": "1.0.0",
+  "workspaceSha256": "ceebc3bc51d632cd9a20cbfe6e7d49919723cfb7a37c5eb4af2845260ef28668",
+  "proposalSha256": "083dfc7a5ddc3064c2d60f969632ccfcc2cc3a2e8c9f5bc1335170fe8af4d919",
+  "baseRelease": null,
+  "proposedBy": "proposer",
+  "execution": "excluded",
+  "context": {
+    "equipment": [
+      {
+        "id": "line-a-motor-ab",
+        "label": "line-a-motor-ab"
+      },
+      {
+        "id": "line-a-motor-db",
+        "label": "line-a-motor-db"
+      },
+      {
+        "id": "line-a-motor-melsec",
+        "label": "line-a-motor-melsec"
+      },
+      {
+        "id": "line-a-motor-ua",
+        "label": "line-a-motor-ua"
+      }
+    ],
+    "connections": [
+      {
+        "id": "logical-ab",
+        "label": "logical-ab",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "accessProfileRef": "ab-logix-symbol-v1"
+      },
+      {
+        "id": "logical-db",
+        "label": "logical-db",
+        "equipmentInstanceId": "line-a-motor-db",
+        "accessProfileRef": "s7-300-db-v1"
+      },
+      {
+        "id": "logical-melsec",
+        "label": "logical-melsec",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "accessProfileRef": "melsec-device-v1"
+      },
+      {
+        "id": "logical-ua",
+        "label": "logical-ua",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "accessProfileRef": "s7-1500-opcua-v1"
+      }
+    ]
+  }
+}

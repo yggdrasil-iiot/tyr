@@ -1,0 +1,74 @@
+{
+  "kind": "result-schema-definition",
+  "schemaVersion": "1.0.0",
+  "id": "independent-result",
+  "version": "1.0.0",
+  "label": "Independent result",
+  "resultSchema": {
+    "id": "independent-result",
+    "version": "1.0.0",
+    "providerRef": "virtual-db",
+    "valueKey": "asset-pressure",
+    "query": {
+      "language": "sql",
+      "text": "SELECT asset, pressure, target, running FROM declared_view"
+    },
+    "fields": [
+      {
+        "fieldId": "asset",
+        "name": "asset",
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "inputStage": "already-engineered",
+        "nullable": false
+      },
+      {
+        "fieldId": "pressure",
+        "name": "pressure",
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "Pa"
+        },
+        "inputStage": "raw",
+        "nullable": true
+      },
+      {
+        "fieldId": "target",
+        "name": "target",
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "inputStage": "raw",
+        "nullable": false
+      },
+      {
+        "fieldId": "running",
+        "name": "running",
+        "valueType": "Boolean",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "inputStage": "already-engineered",
+        "nullable": false
+      }
+    ],
+    "keyFields": [
+      "asset"
+    ],
+    "unknownFields": "preserve"
+  },
+  "previousSchemaRef": null,
+  "authoredBy": "operator",
+  "authoredAt": "2026-10-18T00:00:00Z",
+  "reason": "Independent schema acceptance",
+  "provenance": {
+    "origin": "synthetic",
+    "capturedAt": "2026-10-18T00:00:00Z",
+    "note": "No DB access"
+  }
+}

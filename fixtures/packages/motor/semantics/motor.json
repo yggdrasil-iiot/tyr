@@ -1,0 +1,24 @@
+{
+  "kind": "semantic-definition",
+  "schemaVersion": "1.0.0",
+  "id": "motor",
+  "version": "1.0.0",
+  "members": [
+    {
+      "memberId": "actual-speed",
+      "name": "actualSpeed",
+      "semanticId": "urn:tyr:concept:motor-actual-speed",
+      "description": "Motor shaft actual rotational speed",
+      "valueType": "Double",
+      "unit": {
+        "status": "known",
+        "code": "rpm"
+      },
+      "role": "measurement",
+      "range": {
+        "low": "0",
+        "high": "3000"
+      }
+    }
+  ]
+}

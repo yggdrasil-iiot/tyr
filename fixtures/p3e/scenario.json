@@ -1,0 +1,36 @@
+{
+  "kind": "preview-scenario",
+  "schemaVersion": "2.4.0",
+  "id": "array-typed-time-good",
+  "version": "1.0.0",
+  "label": "가상 Typed 배열 요소 · 시간 정책",
+  "mappingSetRef": {
+    "id": "array-ab-first-mapping",
+    "version": "1.0.0"
+  },
+  "mappingId": "ab-first-pressure",
+  "workspaceSha256": "1b6c08e525a27ebbb57b3b8a9501eba224ac7ec4a438c14375af2e06e34857a0",
+  "evaluationContext": {
+    "at": "2026-10-17T10:00:00Z",
+    "triggerSequence": null
+  },
+  "samples": {
+    "array-pressures-ab": {
+      "value": {
+        "typedValues": [
+          "100",
+          "110",
+          "120",
+          null,
+          "200",
+          "210",
+          "220"
+        ]
+      },
+      "quality": "good",
+      "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+      "serverTimestamp": "2026-10-17T10:00:00Z",
+      "sequence": null
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "selector-index": {
+    "value": {
+      "bytesHex": "0000"
+    },
+    "quality": "good",
+    "sourceTimestamp": "2026-10-17T10:00:00Z",
+    "serverTimestamp": "2026-10-17T10:00:00Z",
+    "sequence": null
+  },
+  "selector-previous": {
+    "value": {
+      "bytesHex": "0000"
+    },
+    "quality": "good",
+    "sourceTimestamp": "2026-10-17T10:00:00Z",
+    "serverTimestamp": "2026-10-17T10:00:00Z",
+    "sequence": null
+  },
+  "pressure-up": {
+    "value": {
+      "bytesHex": "e803"
+    },
+    "quality": "good",
+    "sourceTimestamp": "2026-10-17T10:00:00Z",
+    "serverTimestamp": "2026-10-17T10:00:00Z",
+    "sequence": null
+  },
+  "pressure-down": {
+    "value": {
+      "bytesHex": "0100"
+    },
+    "quality": "good",
+    "sourceTimestamp": "2026-10-17T10:00:00Z",
+    "serverTimestamp": "2026-10-17T10:00:00Z",
+    "sequence": null
+  }
+}

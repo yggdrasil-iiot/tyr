@@ -1,0 +1,59 @@
+{
+  "scope": "P3-A contract and typed-word oracle only",
+  "samples": [
+    {
+      "id": "motor-a-separated",
+      "graphId": "motor-a-counter-graph",
+      "samples": {
+        "motor-a-low": 1,
+        "motor-a-high": 2
+      },
+      "expected": {
+        "counter": 131073,
+        "result": 131073
+      }
+    },
+    {
+      "id": "motor-b-separated",
+      "graphId": "motor-b-counter-graph",
+      "samples": {
+        "motor-b-low": 3,
+        "motor-b-high": 4
+      },
+      "expected": {
+        "counter": 262147,
+        "result": 262147
+      }
+    },
+    {
+      "id": "word-order-visible",
+      "graphId": "motor-a-counter-graph",
+      "samples": {
+        "motor-a-low": 2,
+        "motor-a-high": 1
+      },
+      "expected": {
+        "counter": 65538,
+        "result": 65538
+      }
+    },
+    {
+      "id": "u32-boundary",
+      "graphId": "motor-a-counter-graph",
+      "samples": {
+        "motor-a-low": 65535,
+        "motor-a-high": 65535
+      },
+      "expected": {
+        "counter": 4294967295,
+        "result": 4294967295
+      }
+    }
+  ],
+  "targetInstances": [
+    "motor-a",
+    "motor-b"
+  ],
+  "bindingCount": 4,
+  "sameEquipment": "line-a-motor-melsec"
+}

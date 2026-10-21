@@ -1,0 +1,22 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "alias-chain",
+  "patternId": "MP12",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "aliases": {
+      "PublicSpeed": "SolutionSpeed",
+      "SolutionSpeed": "PlcSpeed"
+    },
+    "base": "PlcSpeed"
+  },
+  "expect": {
+    "resolved": "PlcSpeed",
+    "preservedChain": [
+      "PublicSpeed",
+      "SolutionSpeed",
+      "PlcSpeed"
+    ]
+  }
+}

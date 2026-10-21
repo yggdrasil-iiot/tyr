@@ -1,0 +1,21 @@
+{
+  "kind": "target-instance",
+  "schemaVersion": "2.0.0",
+  "id": "array-ab-last",
+  "version": "1.0.0",
+  "label": "채널 ab last",
+  "equipmentInstanceId": "line-a-motor-ab",
+  "semanticDefinitionRef": {
+    "id": "array-pressure-channel",
+    "version": "1.0.0"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "manual-array-pressures-ab",
+      "locator": {
+        "kind": "text-line",
+        "line": 1
+      }
+    }
+  ]
+}

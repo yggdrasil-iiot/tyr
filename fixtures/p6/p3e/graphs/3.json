@@ -1,0 +1,71 @@
+{
+  "kind": "value-graph",
+  "schemaVersion": "2.4.0",
+  "id": "array-melsec-graph",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "nodes": [
+    {
+      "nodeId": "first",
+      "op": "array-element",
+      "inputs": {
+        "value": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "array-pressures-melsec",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "indices": [
+        1,
+        10
+      ],
+      "valueType": "Float32",
+      "unit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-melsec",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "nodeId": "last",
+      "op": "array-element",
+      "inputs": {
+        "value": {
+          "kind": "source",
+          "sourceRef": {
+            "id": "array-pressures-melsec",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "indices": [
+        2,
+        12
+      ],
+      "valueType": "Float32",
+      "unit": {
+        "status": "known",
+        "code": "kPa"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-melsec",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

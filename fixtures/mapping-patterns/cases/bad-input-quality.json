@@ -1,0 +1,24 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "bad-input-quality",
+  "patternId": "MP16",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "inputs": [
+      {
+        "value": "150",
+        "quality": "good"
+      },
+      {
+        "value": "100",
+        "quality": "bad"
+      }
+    ],
+    "policy": "propagate-worst"
+  },
+  "expect": {
+    "quality": "bad",
+    "result": null
+  }
+}

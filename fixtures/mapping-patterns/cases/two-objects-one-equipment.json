@@ -1,0 +1,12 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "two-objects-one-equipment",
+  "patternId": "MP17",
+  "mode": "gap-probe",
+  "action": "duplicate-object",
+  "input": {},
+  "expect": {
+    "rule": "mapping.duplicate",
+    "knownGap": "no-independent-object-instance-key"
+  }
+}

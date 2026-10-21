@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "execution": "excluded",
+  "cases": [
+    {
+      "point": "bundle-built",
+      "expected": "no SQLite row; orphan retained"
+    },
+    {
+      "point": "row-inserted",
+      "expected": "transaction rollback on process death"
+    },
+    {
+      "point": "row-committed",
+      "expected": "immutable row survives restart"
+    },
+    {
+      "point": "intent-written",
+      "expected": "verified staging promoted on explicit recovery"
+    },
+    {
+      "point": "release-moved",
+      "expected": "verified release becomes head through base CAS"
+    },
+    {
+      "point": "head-moved",
+      "expected": "journal cleanup is idempotent"
+    },
+    {
+      "point": "journal-truncated",
+      "expected": "fail closed; preserve files"
+    },
+    {
+      "point": "payload-tampered",
+      "expected": "fail closed; preserve files"
+    },
+    {
+      "point": "head-conflict",
+      "expected": "no head overwrite"
+    },
+    {
+      "point": "gc-plan-stale",
+      "expected": "quarantine refused"
+    },
+    {
+      "point": "gc-old-orphan",
+      "expected": "reversible quarantine"
+    },
+    {
+      "point": "gc-referenced-history",
+      "expected": "retain all immutable facts"
+    }
+  ]
+}

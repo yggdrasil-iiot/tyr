@@ -1,0 +1,16 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "s7-date-time",
+  "patternId": "MP09",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "bytesHex": "2610171234567897",
+    "codec": "S7_DATE_AND_TIME",
+    "timezone": "Asia/Seoul"
+  },
+  "expect": {
+    "localDateTime": "2026-10-17T12:34:56.789",
+    "utc": "2026-10-17T03:34:56.789Z"
+  }
+}

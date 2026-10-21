@@ -1,0 +1,2687 @@
+{
+  "kind": "pov-evaluation-pack",
+  "version": "1.0.0",
+  "id": "synthetic-four-profile-oracle",
+  "origin": "synthetic",
+  "baselineWorkspaceSha256": "0e2f0ffad153b990cb8bac200f6c848265ddb25649fe4f621695f6ab9c7bde5e",
+  "mappingSetIds": [
+    "structure-ab-mapping",
+    "structure-ua-mapping",
+    "structure-db-mapping",
+    "structure-melsec-mapping"
+  ],
+  "review": {
+    "reviewerId": "fixture-oracle",
+    "independenceAttested": true
+  },
+  "cases": [
+    {
+      "caseId": "case-001",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "7e64a74aa3bd76a2d68ffb38d474f177cbafdb8cfb959e23569dba694032c2e0"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ab-actual": {
+              "typedValue": "150"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "150",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-002",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "e1c323bd021c4ab873622c98685c7e09ae8221fc4a7cbd9f798609991caf6fb2"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ab-target": {
+              "typedValue": "180"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "180",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-003",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "deviation"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.deviation",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "39abab8174be19ca257fe8fee2d7c15e2c2f678df5fc84d2c6fcf690984875ca"
+      },
+      "oracleEvidence": "synthetic-oracle.md#deviation",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ab-actual": {
+              "typedValue": "150"
+            },
+            "structure-ab-target": {
+              "typedValue": "180"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "-30",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-004",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "704cd6c0ca5dbdda3151d10be3961b94a1344ec8cf1f7a9647f76f46525f5f05"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ab-flags": {
+              "typedValue": "3"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": false,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-005",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "60f33e9218f23b048c6ad31bf888f4e192598da75344326344e7842da47d1183"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ab": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "100",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-006",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "a7d41120c929f5f19b6000ea964e5cf0b837343dd86a664fbbc9804041decd3d"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ab": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "110",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-007",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "b4755759693bb6bd88918df3f282615ff76e71cf873d0d3a6a97a9585e613877"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ab-flags": {
+              "typedValue": "3"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-008",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "c9a7054447962f9253db378f13aa6e115ba29917eb2e53da78975576654442a1"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ab": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "220",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-009",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "93fcef62807bd3af17d6d1c69c0e015f17d2dc4f0b4bbd2480338361a2e6244a"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ab": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "210",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-010",
+      "split": "calibration",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "0e5b2a9e4d7493c6d05728c1884144b88f865a450c3a39ebdb92c7faf785361f"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ab-flags": {
+              "typedValue": "3"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-011",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "4a7c20a00c0d628fd399a9ad1e1044c2227f2918d6ff69325f46aa8e95026faa"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ua-actual": {
+              "typedValue": "150"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "150",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-012",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "7268a47c40ca09c40d81a1cbc1e564abeda0feb80ef6989cc48396d977226b50"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ua-target": {
+              "typedValue": "180"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "180",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-013",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "deviation"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.deviation",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "daabe1d97b37f80e752433770b58e3cfe1e4c58d23643dda0a207ca6665afa5a"
+      },
+      "oracleEvidence": "synthetic-oracle.md#deviation",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ua-actual": {
+              "typedValue": "150"
+            },
+            "structure-ua-target": {
+              "typedValue": "180"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "-30",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-014",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "8550f4a22a384a08571b0bfe4fb748b5caf8bbf16db0f893aff563643d905506"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ua-flags": {
+              "typedValue": "3"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": false,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-015",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "d0ef232114eacc62c67025988006a168b715d4509fa2854d1704e51b6940ce28"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ua": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "100",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-016",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "fb6f78402bad26853241edf46300b7dec76701426bc5f977c38d06f2f950a6ba"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ua": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "110",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-017",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "60f2bf02839e680903436cd469642168783796be91347014e9bf8736d9737c1c"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ua-flags": {
+              "typedValue": "3"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-018",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "0177c70410a6f7593ef24ad0dd6242e553c9c22de6df19bf0a258a4dea38bcf3"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ua": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "220",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-019",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "dac1cc81f111f826ea191cfaef27a274e8d5d821a6b3ba28c76f9ec039cbd73c"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-ua": {
+              "typedValues": [
+                "100",
+                "110",
+                "120",
+                null,
+                "200",
+                "210",
+                "220"
+              ]
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "210",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-020",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ua",
+        "targetInstanceRef": {
+          "id": "structure-skid-ua",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "9d93996d085c7b17d5062df4730564f78b3b2e390e622ec0144d3e17e385bf8a"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ua-flags": {
+              "typedValue": "3"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-021",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "41feeed5a696c81bd2d88d174b6c5a39aaa692e54f2a4ac8b744dacaba048960"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-db-actual": {
+              "bytesHex": "9600"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "150",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-022",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "a437908bd479b873c8f3d9084059bc8ecff63d6942ef6a221d829712840b3815"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-db-target": {
+              "bytesHex": "b400"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "180",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-023",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "deviation"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.deviation",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "1cbd15924d56f3e95e8546827695746a18c0b1761f02e367f9563bc6279e17ea"
+      },
+      "oracleEvidence": "synthetic-oracle.md#deviation",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-db-actual": {
+              "bytesHex": "9600"
+            },
+            "structure-db-target": {
+              "bytesHex": "b400"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "-30",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-024",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "7ac813b1a399384f39192bbd87ba1279fc44e1d79b5e3fffcbd509f8bf7af25a"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-db-flags": {
+              "bytesHex": "0300"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": false,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-025",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "82acc9f9b771b877456b9d1a0faac2b81cc96a60cbc02cb6864ca8fea3cd212c"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-db": {
+              "bytesHex": "42c80000 42dc0000 42f00000 00000000 43480000 43520000 435c0000"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "100",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-026",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "b6bfe4efdcd83335396a5badf52643f56e22f138133d9e86c0bbecbe75e10e7d"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-db": {
+              "bytesHex": "42c80000 42dc0000 42f00000 00000000 43480000 43520000 435c0000"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "110",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-027",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "6cf318c3b1e31e5af47e3c171924d60e9c6dc11f3baa40c08eba90c7c2b997be"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-db-flags": {
+              "bytesHex": "0300"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-028",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "63ea77d43030855cdd8f5ff056e27e326316e05d11c2cf6eabd69a5fc893a4c6"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-db": {
+              "bytesHex": "42c80000 42dc0000 42f00000 00000000 43480000 43520000 435c0000"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "220",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-029",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "0e2dbed83f64b66e1b7daccc0d734fd3979c4d834d65c79f40ef8063e865e1a5"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-db": {
+              "bytesHex": "42c80000 42dc0000 42f00000 00000000 43480000 43520000 435c0000"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "210",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-030",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-db",
+        "targetInstanceRef": {
+          "id": "structure-skid-db",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "bc151b85a7bf1a1532a12158819f72f323da4f4c32eb8646582635fc5e3a5923"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-db-flags": {
+              "bytesHex": "0300"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-031",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "794363890788e23a9bc7022c1a9aa6648d05287580ca6a74274a135885b5fa3c"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-melsec-actual": {
+              "bytesHex": "9600"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "150",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-032",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "aa6737a9a79b2819f81082cd3898ba31d990fc9e36bab026ed52fccbaff5d3e4"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-melsec-target": {
+              "bytesHex": "b400"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "180",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-033",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "deviation"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.deviation",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "06aaf937ea0881a6ac49f9f6d7811c3284ffcc1e42ca4c9c063b39de888f632b"
+      },
+      "oracleEvidence": "synthetic-oracle.md#deviation",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-melsec-actual": {
+              "bytesHex": "9600"
+            },
+            "structure-melsec-target": {
+              "bytesHex": "b400"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "-30",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-034",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "5e0bb0f1b2d7c17452ec3f3d4cec196dea824c810386256051730d4f9ba3d47d"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-melsec-flags": {
+              "bytesHex": "0300"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": false,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-035",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "c18936ed2040b2f3754a6f5ca6f35fb7ea7ee0e516f1fb53f41dc191d4387ffe"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-melsec": {
+              "bytesHex": "0000c842 0000dc42 0000f042 00000000 00004843 00005243 00005c43"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "100",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-036",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "a5164ef16cdd56bab7d41be41fc3c4b7a50c0623a208b701051c7970e5f208cc"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-melsec": {
+              "bytesHex": "0000c842 0000dc42 0000f042 00000000 00004843 00005243 00005c43"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "110",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-037",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              1
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "b2db43eadcd45dcb42b71789bcc99d64aae45a93f3d5b37c1427e5b2b11ecf27"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-melsec-flags": {
+              "bytesHex": "0300"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-038",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "1fa286fa8af642b4c0018840a322fd17440f2a207fa50d29b3cc80d60124c0c0"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-melsec": {
+              "bytesHex": "0000c842 0000dc42 0000f042 00000000 00004843 00005243 00005c43"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "220",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-039",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "target"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.target",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint"
+        },
+        "definitionSha256": "c908eefa7a5f0f3081fd0b7efcca8d8f81c324601fc6a575c993cf4c3bbdddf8"
+      },
+      "oracleEvidence": "synthetic-oracle.md#target",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "array-pressures-melsec": {
+              "bytesHex": "0000c842 0000dc42 0000f042 00000000 00004843 00005243 00005c43"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "210",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "case-040",
+      "split": "heldout",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "targetInstanceRef": {
+          "id": "structure-skid-melsec",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "modules"
+          },
+          {
+            "kind": "index",
+            "indices": [
+              2
+            ]
+          },
+          {
+            "kind": "member",
+            "memberId": "running"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:equipment.running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status"
+        },
+        "definitionSha256": "516f497545522bd20007aba4b5b13b92120eabc9d87ea7c9f3e063fb22919ea8"
+      },
+      "oracleEvidence": "synthetic-oracle.md#running",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-melsec-flags": {
+              "bytesHex": "0300"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": true,
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              }
+            },
+            "quality": "good",
+            "issues": [],
+            "losses": []
+          }
+        }
+      ]
+    }
+  ],
+  "timePairs": [
+    {
+      "participantId": "synthetic-reviewer",
+      "taskId": "task-1",
+      "split": "evaluation",
+      "order": [
+        "manual",
+        "tool"
+      ],
+      "completed": true,
+      "manual": {
+        "import": 100,
+        "interpret": 100,
+        "map": 100,
+        "inquire": 100,
+        "correct": 100,
+        "review": 100
+      },
+      "tool": {
+        "import": 70,
+        "interpret": 70,
+        "map": 70,
+        "inquire": 70,
+        "correct": 70,
+        "review": 70
+      }
+    },
+    {
+      "participantId": "synthetic-reviewer",
+      "taskId": "task-2",
+      "split": "evaluation",
+      "order": [
+        "tool",
+        "manual"
+      ],
+      "completed": true,
+      "manual": {
+        "import": 100,
+        "interpret": 100,
+        "map": 50,
+        "inquire": 50,
+        "correct": 50,
+        "review": 50
+      },
+      "tool": {
+        "import": 80,
+        "interpret": 80,
+        "map": 60,
+        "inquire": 60,
+        "correct": 50,
+        "review": 50
+      }
+    },
+    {
+      "participantId": "synthetic-reviewer",
+      "taskId": "tuning",
+      "split": "calibration",
+      "order": [
+        "manual",
+        "tool"
+      ],
+      "completed": true,
+      "manual": {
+        "import": 100,
+        "interpret": 100,
+        "map": 100,
+        "inquire": 100,
+        "correct": 100,
+        "review": 100
+      },
+      "tool": {
+        "import": 1,
+        "interpret": 1,
+        "map": 1,
+        "inquire": 1,
+        "correct": 1,
+        "review": 1
+      }
+    }
+  ]
+}

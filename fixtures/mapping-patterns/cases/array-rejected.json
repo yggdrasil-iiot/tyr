@@ -1,0 +1,16 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "array-rejected",
+  "patternId": "MP06",
+  "mode": "gap-probe",
+  "action": "raw-shape-rejected",
+  "input": {
+    "shape": [
+      3,
+      2
+    ]
+  },
+  "expect": {
+    "schemaRejected": true
+  }
+}

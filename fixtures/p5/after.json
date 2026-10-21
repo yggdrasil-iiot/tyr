@@ -1,0 +1,1616 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "mixed-line",
+      "label": "Mixed synthetic line"
+    }
+  ],
+  "connections": [
+    {
+      "id": "mixed-melsec",
+      "label": "MELSEC metadata only",
+      "equipmentInstanceId": "mixed-line",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "mixed-plc-pressure",
+        "version": "1.0.0",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": "mixed-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D1001",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 1001,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-plc-pressure",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "note": "Synthetic pressure definition; engineering scale declared in graph",
+      "label": "PLC actual pressure",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-baseline",
+        "version": "1.0.0",
+        "sourceKind": "constant",
+        "accessMode": "read",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": null,
+        "accessProfileRef": "constant-v1",
+        "status": "ready",
+        "rawAddressText": "constant:mixed-baseline",
+        "addressRadix": null,
+        "access": {
+          "kind": "constant",
+          "value": "100"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Double"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-baseline",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-baseline",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-tag-pressure",
+        "version": "1.0.0",
+        "sourceKind": "solution-tag",
+        "accessMode": "read",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": null,
+        "accessProfileRef": "solution-tag-v1",
+        "status": "ready",
+        "rawAddressText": "solution-tag:mixed-tag-pressure",
+        "addressRadix": null,
+        "access": {
+          "kind": "solution-tag",
+          "solutionInstanceRef": "hmi-a",
+          "solutionName": "Synthetic HMI",
+          "solutionVersion": "1.0",
+          "tagPath": "Tank.PV"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Double"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-tag-pressure",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-tag-pressure",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-external-reference",
+        "version": "1.0.0",
+        "sourceKind": "external-value",
+        "accessMode": "read",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": null,
+        "accessProfileRef": "external-value-v1",
+        "status": "ready",
+        "rawAddressText": "external-value:mixed-external-reference",
+        "addressRadix": null,
+        "access": {
+          "kind": "external-value",
+          "providerRef": "reference-provider",
+          "valueKey": "reference.pressure",
+          "expressionLanguage": "sql",
+          "expression": "SELECT reference_pressure FROM process_reference WHERE equipment_id = :equipment_id;\n-- Preserve exactly; do not execute"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Double"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-external-reference",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-external-reference",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-line-code",
+        "version": "1.0.0",
+        "sourceKind": "constant",
+        "accessMode": "read",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": null,
+        "accessProfileRef": "constant-v1",
+        "status": "ready",
+        "rawAddressText": "constant:mixed-line-code",
+        "addressRadix": null,
+        "access": {
+          "kind": "constant",
+          "value": "LINE-A"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "String"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-line-code",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-line-code",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-enabled",
+        "version": "1.0.0",
+        "sourceKind": "constant",
+        "accessMode": "read",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": null,
+        "accessProfileRef": "constant-v1",
+        "status": "ready",
+        "rawAddressText": "constant:mixed-enabled",
+        "addressRadix": null,
+        "access": {
+          "kind": "constant",
+          "value": true
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-enabled",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-enabled",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-tag-setpoint",
+        "version": "1.0.0",
+        "sourceKind": "solution-tag",
+        "accessMode": "read-write",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": null,
+        "accessProfileRef": "solution-tag-v1",
+        "status": "ready",
+        "rawAddressText": "solution-tag:mixed-tag-setpoint",
+        "addressRadix": null,
+        "access": {
+          "kind": "solution-tag",
+          "solutionInstanceRef": "hmi-a",
+          "solutionName": "Synthetic HMI",
+          "solutionVersion": "1.0",
+          "tagPath": "Tank.Setpoint"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Double"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-tag-setpoint",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "mixed-tag-setpoint",
+      "note": "Synthetic mixed source definition; no live provider or write execution",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixed-plc-write",
+        "version": "1.0.0",
+        "equipmentInstanceId": "mixed-line",
+        "connectionProfileRef": "mixed-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D4000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 4000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixed-plc-write",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "write"
+      },
+      "note": "Synthetic pressure definition; engineering scale declared in graph",
+      "label": "PLC setpoint destination · definition only",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "mixed-tank-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "plc-pressure",
+          "name": "plc-pressure",
+          "semanticId": "urn:tyr:concept:mixed.plc-pressure",
+          "description": "Synthetic plc-pressure",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "solution-pressure",
+          "name": "solution-pressure",
+          "semanticId": "urn:tyr:concept:mixed.solution-pressure",
+          "description": "Synthetic solution-pressure",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "external-reference",
+          "name": "external-reference",
+          "semanticId": "urn:tyr:concept:mixed.external-reference",
+          "description": "Synthetic external-reference",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "baseline",
+          "name": "baseline",
+          "semanticId": "urn:tyr:concept:mixed.baseline",
+          "description": "Synthetic baseline",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "difference",
+          "name": "difference",
+          "semanticId": "urn:tyr:concept:mixed.difference",
+          "description": "Synthetic difference",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        },
+        {
+          "memberId": "line-code",
+          "name": "line-code",
+          "semanticId": "urn:tyr:concept:mixed.line-code",
+          "description": "Synthetic line-code",
+          "valueType": "String",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "enabled",
+          "name": "enabled",
+          "semanticId": "urn:tyr:concept:mixed.enabled",
+          "description": "Synthetic enabled",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "setpoint",
+          "name": "setpoint",
+          "semanticId": "urn:tyr:concept:mixed.setpoint",
+          "description": "Synthetic setpoint",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint",
+          "range": null
+        },
+        {
+          "memberId": "hmi-setpoint",
+          "name": "hmi-setpoint",
+          "semanticId": "urn:tyr:concept:mixed.hmi-setpoint",
+          "description": "Synthetic hmi-setpoint",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "setpoint",
+          "range": null
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "mixed-tank",
+      "version": "1.0.0",
+      "label": "혼합 소스 탱크",
+      "equipmentInstanceId": "mixed-line",
+      "semanticDefinitionRef": {
+        "id": "mixed-tank-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-mixed-plc-pressure",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-baseline",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-tag-pressure",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-external-reference",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-line-code",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-enabled",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-tag-setpoint",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-plc-write",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.5.0",
+      "id": "mixed-pressure-difference",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixed-line",
+      "nodes": [
+        {
+          "nodeId": "difference",
+          "op": "subtract",
+          "inputs": {
+            "left": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "mixed-plc-pressure",
+                "version": "1.0.0"
+              }
+            },
+            "right": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "mixed-baseline",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Decimal",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "mixed-tank-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixed-line",
+      "targetInstanceRef": {
+        "id": "mixed-tank",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "p4b-plc-pressure",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-plc-pressure",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "plc-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "linear",
+              "factor": "2",
+              "offset": "0"
+            },
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-solution-pressure",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-tag-pressure",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "solution-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-external-reference",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-external-reference",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "external-reference"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-baseline",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-baseline",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "baseline"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-difference",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "mixed-pressure-difference",
+              "version": "1.0.0"
+            },
+            "nodeId": "difference"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "difference"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-line-code",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-line-code",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "line-code"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "String",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-enabled",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-enabled",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "enabled"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-setpoint",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-tag-pressure",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "setpoint"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "p4b-hmi-setpoint",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixed-tag-setpoint",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "hmi-setpoint"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixed-plc-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-baseline",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-pressure",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-external-reference",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-line-code",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-enabled",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-tag-setpoint",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-mixed-plc-write",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "writes": [
+    {
+      "kind": "write-definition",
+      "schemaVersion": "2.7.0",
+      "id": "mixed-write-plc",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixed-line",
+      "targetInstanceRef": {
+        "id": "mixed-tank",
+        "version": "1.0.0"
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "setpoint"
+        }
+      ],
+      "destinationRef": {
+        "id": "mixed-plc-write",
+        "version": "1.0.0"
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "10",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "UInt16",
+          "rounding": "exact",
+          "overflow": "error"
+        }
+      ],
+      "execution": "excluded",
+      "invalidValuePolicy": "reject",
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-mixed-plc-pressure",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-baseline",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-tag-pressure",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-external-reference",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-line-code",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-enabled",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-tag-setpoint",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-plc-write",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "write-definition",
+      "schemaVersion": "2.7.0",
+      "id": "mixed-write-hmi",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixed-line",
+      "targetInstanceRef": {
+        "id": "mixed-tank",
+        "version": "1.0.0"
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "hmi-setpoint"
+        }
+      ],
+      "destinationRef": {
+        "id": "mixed-tag-setpoint",
+        "version": "1.0.0"
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "rounding": "exact",
+          "overflow": "error"
+        }
+      ],
+      "execution": "excluded",
+      "invalidValuePolicy": "reject",
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-mixed-plc-pressure",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-baseline",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-tag-pressure",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-external-reference",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-line-code",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-enabled",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-tag-setpoint",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-mixed-plc-write",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

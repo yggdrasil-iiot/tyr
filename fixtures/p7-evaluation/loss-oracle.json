@@ -1,0 +1,82 @@
+{
+  "kind": "pov-evaluation-pack",
+  "version": "1.0.0",
+  "id": "synthetic-loss-oracle",
+  "origin": "synthetic",
+  "baselineWorkspaceSha256": "0ffd31e84e083de3141473962c96f9fba117ad6231d7085d35811f07fbbd65f1",
+  "mappingSetIds": [
+    "structure-ab-mapping"
+  ],
+  "review": {
+    "reviewerId": "fixture-oracle",
+    "independenceAttested": true
+  },
+  "cases": [
+    {
+      "caseId": "case-001",
+      "split": "evaluation",
+      "identity": {
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "structure-skid-ab",
+          "version": "1.0.0"
+        },
+        "memberPath": [
+          {
+            "kind": "member",
+            "memberId": "process"
+          },
+          {
+            "kind": "member",
+            "memberId": "pressure"
+          },
+          {
+            "kind": "member",
+            "memberId": "actual"
+          }
+        ]
+      },
+      "expected": {
+        "meaning": {
+          "semanticId": "urn:tyr:concept:pressure.actual",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement"
+        },
+        "definitionSha256": "a07d4c9f587484489d1fbba3558ed7aa450c5795633d226f9e6f1d08f812ad8c"
+      },
+      "oracleEvidence": "synthetic-oracle.md#actual",
+      "samples": [
+        {
+          "sampleId": "nominal",
+          "samples": {
+            "structure-ab-actual": {
+              "typedValue": "150"
+            }
+          },
+          "expected": {
+            "result": {
+              "value": "0.1499999999999999944488848768742172978818416595458984375",
+              "valueType": "Double",
+              "unit": {
+                "status": "known",
+                "code": "kPa"
+              }
+            },
+            "quality": "uncertain",
+            "issues": [
+              "loss.precision"
+            ],
+            "losses": [
+              "loss.precision"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "timePairs": []
+}

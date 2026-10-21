@@ -1,0 +1,1199 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "line-a-motor-ab",
+      "label": "조립 이송 모터 · AB"
+    },
+    {
+      "id": "line-a-motor-ua",
+      "label": "검사 이송 모터 · S7-1500"
+    },
+    {
+      "id": "line-a-motor-db",
+      "label": "포장 이송 모터 · S7-300"
+    },
+    {
+      "id": "line-a-motor-melsec",
+      "label": "배출 이송 모터 · MELSEC"
+    }
+  ],
+  "connections": [
+    {
+      "id": "logical-ab",
+      "label": "가상 AB",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "accessProfileRef": "ab-logix-symbol-v1"
+    },
+    {
+      "id": "logical-ua",
+      "label": "가상 UA",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "logical-db",
+      "label": "가상 DB",
+      "equipmentInstanceId": "line-a-motor-db",
+      "accessProfileRef": "s7-300-db-v1"
+    },
+    {
+      "id": "logical-melsec",
+      "label": "가상 MELSEC",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.4.0",
+        "id": "array-pressures-ab",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Filter.Pressures",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Filter.Pressures"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-array-pressures-ab",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "fixedArray": {
+          "shape": [
+            2,
+            3
+          ],
+          "lowerBounds": [
+            0,
+            0
+          ],
+          "strides": [
+            4,
+            1
+          ],
+          "strideUnit": "element",
+          "range": {
+            "start": 0,
+            "endExclusive": 7
+          }
+        }
+      },
+      "label": "압력 채널 배열 · ab",
+      "note": "Synthetic fixed scalar array with explicit gaps; no device connection",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.4.0",
+        "id": "array-pressures-ua",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:fixture;Filter.Pressures",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Filter.Pressures"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-array-pressures-ua",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "fixedArray": {
+          "shape": [
+            2,
+            3
+          ],
+          "lowerBounds": [
+            0,
+            0
+          ],
+          "strides": [
+            4,
+            1
+          ],
+          "strideUnit": "element",
+          "range": {
+            "start": 0,
+            "endExclusive": 7
+          }
+        }
+      },
+      "label": "압력 채널 배열 · ua",
+      "note": "Synthetic fixed scalar array with explicit gaps; no device connection",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.4.0",
+        "id": "array-pressures-db",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10 @ byte64",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 64,
+          "byteLength": 4,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Float32",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-array-pressures-db",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "fixedArray": {
+          "shape": [
+            2,
+            3
+          ],
+          "lowerBounds": [
+            1,
+            10
+          ],
+          "strides": [
+            16,
+            4
+          ],
+          "strideUnit": "byte",
+          "range": {
+            "start": 64,
+            "endExclusive": 92
+          }
+        }
+      },
+      "label": "압력 채널 배열 · db",
+      "note": "Synthetic fixed scalar array with explicit gaps; no device connection",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.4.0",
+        "id": "array-pressures-melsec",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D7000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 7000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Float32",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-array-pressures-melsec",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "fixedArray": {
+          "shape": [
+            2,
+            3
+          ],
+          "lowerBounds": [
+            1,
+            10
+          ],
+          "strides": [
+            8,
+            2
+          ],
+          "strideUnit": "word16",
+          "range": {
+            "start": 7000,
+            "endExclusive": 7014
+          }
+        }
+      },
+      "label": "압력 채널 배열 · melsec",
+      "note": "Synthetic fixed scalar array with explicit gaps; no device connection",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "array-pressure-channel",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "actual-pressure",
+          "name": "측정 압력",
+          "semanticId": "urn:tyr:concept:channel.actual-pressure",
+          "description": "지정한 채널 객체의 측정 압력",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "role": "measurement",
+          "range": null
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-ab-first",
+      "version": "1.0.0",
+      "label": "채널 ab first",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ab",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-ab-last",
+      "version": "1.0.0",
+      "label": "채널 ab last",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ab",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-ua-first",
+      "version": "1.0.0",
+      "label": "채널 ua first",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ua",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-ua-last",
+      "version": "1.0.0",
+      "label": "채널 ua last",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-ua",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-db-first",
+      "version": "1.0.0",
+      "label": "채널 db first",
+      "equipmentInstanceId": "line-a-motor-db",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-db",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-db-last",
+      "version": "1.0.0",
+      "label": "채널 db last",
+      "equipmentInstanceId": "line-a-motor-db",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-db",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-melsec-first",
+      "version": "1.0.0",
+      "label": "채널 melsec first",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-melsec",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "array-melsec-last",
+      "version": "1.0.0",
+      "label": "채널 melsec last",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "semanticDefinitionRef": {
+        "id": "array-pressure-channel",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-array-pressures-melsec",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.4.0",
+      "id": "array-ab-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "nodes": [
+        {
+          "nodeId": "first",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-ab",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            0,
+            0
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ab",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "last",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-ab",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            1,
+            2
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ab",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.4.0",
+      "id": "array-ua-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "nodes": [
+        {
+          "nodeId": "first",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-ua",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            0,
+            0
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ua",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "last",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-ua",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            1,
+            2
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ua",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.4.0",
+      "id": "array-db-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "nodes": [
+        {
+          "nodeId": "first",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-db",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            1,
+            10
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-db",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "last",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-db",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            2,
+            12
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-db",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.4.0",
+      "id": "array-melsec-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "first",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-melsec",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            1,
+            10
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-melsec",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "nodeId": "last",
+          "op": "array-element",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "array-pressures-melsec",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "indices": [
+            2,
+            12
+          ],
+          "valueType": "Float32",
+          "unit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-melsec",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-ab-first-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "targetInstanceRef": {
+        "id": "array-ab-first",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ab-first-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-ab-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "first"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ab",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-ab-last-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "targetInstanceRef": {
+        "id": "array-ab-last",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ab-last-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-ab-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "last"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ab",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-ua-first-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "targetInstanceRef": {
+        "id": "array-ua-first",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ua-first-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-ua-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "first"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ua",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-ua-last-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "targetInstanceRef": {
+        "id": "array-ua-last",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ua-last-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-ua-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "last"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-ua",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-db-first-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "targetInstanceRef": {
+        "id": "array-db-first",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "db-first-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-db-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "first"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-db",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-db-last-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "targetInstanceRef": {
+        "id": "array-db-last",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "db-last-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-db-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "last"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-db",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-melsec-first-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "array-melsec-first",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "melsec-first-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-melsec-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "first"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-melsec",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.4.0",
+      "id": "array-melsec-last-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "array-melsec-last",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "melsec-last-pressure",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "array-melsec-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "last"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "actual-pressure"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "overflow": "error",
+              "rounding": "exact"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "kPa"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-array-pressures-melsec",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "observationId": "row-4",
+  "observationSha256": "bba7738b80e7fb82c8fd08b1c87a74cf054171665e9bdf44a056831f48486388",
+  "previousReviewSha256": null,
+  "decision": "resolve-source",
+  "recordKey": "unresolved",
+  "source": {
+    "kind": "source-definition",
+    "schemaVersion": "2.2.0",
+    "id": "imp-review-base-unresolved",
+    "version": "1.0.0",
+    "equipmentInstanceId": "import-line",
+    "connectionProfileRef": "import-3",
+    "accessProfileRef": "melsec-device-v1",
+    "status": "draft",
+    "rawAddressText": "D4000",
+    "addressRadix": 10,
+    "access": {
+      "kind": "device-register",
+      "deviceArea": "D",
+      "addressIndex": 4000,
+      "addressUnit": "word16",
+      "wordCount": 1,
+      "bitOffset": null
+    },
+    "rawRepresentation": {
+      "mode": "bytes",
+      "valueType": "UInt16",
+      "byteOrder": "little",
+      "wordOrder": "low-first"
+    },
+    "inputStage": "raw",
+    "unit": {
+      "status": "known",
+      "code": "kPa"
+    },
+    "evidenceRefs": [
+      {
+        "artifactId": "import-review-base",
+        "locator": {
+          "kind": "json-pointer",
+          "pointer": "/records/4"
+        }
+      }
+    ],
+    "viewOf": null
+  },
+  "reviewer": "offline-reviewer",
+  "reason": "Synthetic engineering correction; explicit D4000 from independent fixture oracle",
+  "reviewedAt": "2026-10-18T00:00:00Z"
+}

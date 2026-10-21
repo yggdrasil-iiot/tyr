@@ -1,0 +1,17 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.1.0",
+  "id": "ev-motor-b-speed",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "data/motor-b-speed.txt",
+    "sha256": "28993d8a88e618ec273e82485ff12873ec8bd436d539145e732af267bf4db8cf",
+    "mediaType": "text/plain"
+  },
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "product": null,
+  "scope": [
+    "line-a-motor-melsec"
+  ]
+}

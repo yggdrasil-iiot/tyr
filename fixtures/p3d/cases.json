@@ -1,0 +1,1094 @@
+{
+  "scope": "Independent virtual timestamps, quality and sequence oracles; no wall clock/device communication",
+  "cases": [
+    {
+      "id": "freshness-good",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "good",
+        "result": "50",
+        "codes": []
+      }
+    },
+    {
+      "id": "age-inclusive",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "good",
+        "result": "50",
+        "codes": []
+      }
+    },
+    {
+      "id": "skew-inclusive",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.600Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "good",
+        "result": "50",
+        "codes": []
+      }
+    },
+    {
+      "id": "stale-one-microsecond",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:58.999999Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:58.999999Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.stale-input"
+        ]
+      }
+    },
+    {
+      "id": "skew-one-microsecond",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.600001Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.skew-exceeded"
+        ]
+      }
+    },
+    {
+      "id": "future-one-microsecond",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T10:00:00.000001Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.future-input"
+        ]
+      }
+    },
+    {
+      "id": "missing-source-no-server-fallback",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": null,
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.timestamp-missing"
+        ]
+      }
+    },
+    {
+      "id": "server-basis-explicit",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-01T00:00:00Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {
+        "timestampBasis": "server"
+      },
+      "expect": {
+        "quality": "good",
+        "result": "50",
+        "codes": []
+      }
+    },
+    {
+      "id": "server-missing-no-source-fallback",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": null,
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {
+        "timestampBasis": "server"
+      },
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.timestamp-missing"
+        ]
+      }
+    },
+    {
+      "id": "equivalent-offsets",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T18:59:59.500+09:00",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "good",
+        "result": "50",
+        "codes": []
+      }
+    },
+    {
+      "id": "unknown-offset-rejected",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500-00:00",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.timestamp-invalid"
+        ]
+      }
+    },
+    {
+      "id": "no-offset-rejected",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.timestamp-invalid"
+        ]
+      }
+    },
+    {
+      "id": "invalid-calendar-rejected",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-02-30T09:59:59Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.timestamp-invalid"
+        ]
+      }
+    },
+    {
+      "id": "uncertain-propagated",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "uncertain",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "uncertain",
+        "result": "50",
+        "codes": [
+          "quality.uncertain-input"
+        ]
+      }
+    },
+    {
+      "id": "uncertain-rejected",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "uncertain",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {
+        "uncertainInput": "reject"
+      },
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "quality.uncertain-input"
+        ]
+      }
+    },
+    {
+      "id": "bad-input-propagated",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "bad",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "quality.bad-input"
+        ]
+      }
+    },
+    {
+      "id": "bad-with-no-value",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": null,
+          "quality": "bad",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "quality.bad-input",
+          "sample.missing-value"
+        ]
+      }
+    },
+    {
+      "id": "missing-downstream",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "sample.missing"
+        ]
+      }
+    },
+    {
+      "id": "missing-both",
+      "samples": {},
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "sample.missing"
+        ]
+      }
+    },
+    {
+      "id": "trigger-record",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": "42"
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": "42"
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": "42"
+      },
+      "policyChange": {
+        "assembly": "trigger-sequence"
+      },
+      "expect": {
+        "quality": "good",
+        "result": "50",
+        "codes": []
+      }
+    },
+    {
+      "id": "sequence-mismatch",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": "42"
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": "41"
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": "42"
+      },
+      "policyChange": {
+        "assembly": "trigger-sequence"
+      },
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "assembly.sequence-mismatch"
+        ]
+      }
+    },
+    {
+      "id": "sequence-missing",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": "42"
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": "42"
+      },
+      "policyChange": {
+        "assembly": "trigger-sequence"
+      },
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "assembly.sequence-mismatch"
+        ]
+      }
+    },
+    {
+      "id": "trigger-not-declared",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {
+        "assembly": "trigger-sequence"
+      },
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.evaluation-invalid"
+        ]
+      }
+    },
+    {
+      "id": "latest-does-not-claim-sequence",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": "42"
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": "41"
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "good",
+        "result": "50",
+        "codes": []
+      }
+    },
+    {
+      "id": "unused-bad-does-not-poison",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-bar": {
+          "value": {
+            "bytesHex": "0000"
+          },
+          "quality": "bad",
+          "sourceTimestamp": "2020-01-01T00:00:00Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "uncertain",
+        "result": "50",
+        "codes": [
+          "sample.unused"
+        ]
+      }
+    },
+    {
+      "id": "unknown-quality-rejected",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "unknown",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "quality.invalid"
+        ]
+      }
+    },
+    {
+      "id": "nonfinite-with-good-metadata",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "zz"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "sample.hex"
+        ]
+      }
+    },
+    {
+      "id": "invalid-evaluation-clock",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.evaluation-invalid"
+        ]
+      }
+    },
+    {
+      "id": "missing-value-with-good-quality",
+      "samples": {
+        "pressure-up": {
+          "value": null,
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "sample.missing-value"
+        ]
+      }
+    },
+    {
+      "id": "unused-clock-malformed",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "not-a-date",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.timestamp-invalid"
+        ]
+      }
+    },
+    {
+      "id": "legacy-payload-not-implicitly-good",
+      "samples": {
+        "pressure-up": {
+          "bytesHex": "9600"
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": {
+        "at": "2026-10-17T10:00:00Z",
+        "triggerSequence": null
+      },
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "sample.metadata-required"
+        ]
+      }
+    },
+    {
+      "id": "evaluation-not-supplied",
+      "samples": {
+        "pressure-up": {
+          "value": {
+            "bytesHex": "9600"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        },
+        "pressure-down": {
+          "value": {
+            "bytesHex": "6400"
+          },
+          "quality": "good",
+          "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+          "serverTimestamp": "2026-10-17T10:00:00Z",
+          "sequence": null
+        }
+      },
+      "evaluationContext": null,
+      "policyChange": {},
+      "expect": {
+        "quality": "bad",
+        "result": null,
+        "codes": [
+          "time.evaluation-invalid"
+        ]
+      }
+    }
+  ]
+}

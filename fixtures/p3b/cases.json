@@ -1,0 +1,3085 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "deviceCommunication": "excluded",
+  "cases": [
+    {
+      "id": "speed-scale",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "c05d"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "2400",
+          "valueType": "Double"
+        },
+        "stages": [
+          "raw-bytes",
+          "byte-layout",
+          "decode",
+          "transform:linear",
+          "transform:cast",
+          "canonical-result"
+        ]
+      }
+    },
+    {
+      "id": "separated-low-high",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-counter-binding",
+      "samples": {
+        "motor-a-low": {
+          "bytesHex": "0100"
+        },
+        "motor-a-high": {
+          "bytesHex": "0200"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "131073",
+          "valueType": "Int32"
+        },
+        "stages": [
+          "graph:decode-u32-words",
+          "graph:identity",
+          "canonical-result"
+        ]
+      }
+    },
+    {
+      "id": "missing-high",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-counter-binding",
+      "samples": {
+        "motor-a-low": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "sample.missing",
+          "graph.input-invalid"
+        ],
+        "result": null
+      }
+    },
+    {
+      "id": "graph-int32-overflow",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-counter-binding",
+      "samples": {
+        "motor-a-low": {
+          "bytesHex": "ffff"
+        },
+        "motor-a-high": {
+          "bytesHex": "ffff"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.overflow"
+        ],
+        "result": null
+      }
+    },
+    {
+      "id": "width",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "01"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "sample.width"
+        ],
+        "result": null
+      }
+    },
+    {
+      "id": "invalid-hex",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0Z"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "sample.hex"
+        ],
+        "result": null
+      }
+    },
+    {
+      "id": "odd-hex",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "123"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "sample.hex"
+        ],
+        "result": null
+      }
+    },
+    {
+      "id": "u32-low-first",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "01000000"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "1",
+          "valueType": "Int32"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt32",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "u32-high-first",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "01000000"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "65536",
+          "valueType": "Int32"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt32",
+          "byteOrder": "little",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "u32-big-layout",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "00010002"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "65538",
+          "valueType": "Int32"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt32",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "signed-negative",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "f6ff"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "-1",
+          "valueType": "Double"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.1",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "float32-exact-bits",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "3dcccccd"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "0.100000001490116119384765625",
+          "valueType": "Double"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Float32",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "nan",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "7fc00000"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.nonfinite"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Float32",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "infinity",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "7f800000"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.nonfinite"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Float32",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "int64-double-exact",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100000000002000"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "loss.precision",
+          "value.inexact"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 4,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int64",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "int64-double-half-even",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100000000002000"
+        }
+      },
+      "expect": {
+        "quality": "uncertain",
+        "codes": [
+          "loss.precision"
+        ],
+        "result": {
+          "value": "9007199254740992",
+          "valueType": "Double"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 4,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Int64",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "fraction-exact",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "loss.rounding",
+          "value.inexact"
+        ],
+        "result": null
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "2.5",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "half-even-down",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "uncertain",
+        "codes": [
+          "loss.rounding"
+        ],
+        "result": {
+          "value": "2",
+          "valueType": "Int32"
+        }
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "2.5",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "half-even-up",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "uncertain",
+        "codes": [
+          "loss.rounding"
+        ],
+        "result": {
+          "value": "4",
+          "valueType": "Int32"
+        }
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "3.5",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "half-even-negative",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "uncertain",
+        "codes": [
+          "loss.rounding"
+        ],
+        "result": {
+          "value": "-2",
+          "valueType": "Int32"
+        }
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "-2.5",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "int32-overflow",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.overflow"
+        ],
+        "result": null
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "2147483648",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "double-overflow",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.overflow"
+        ],
+        "result": null
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "offset": "0"
+        },
+        {
+          "op": "linear",
+          "factor": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "rps-rpm",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "2800"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "2400",
+          "valueType": "Double"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1/s"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "unit-convert",
+          "from": "1/s",
+          "to": "rpm"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "millitorque",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "48e80100"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "125",
+          "valueType": "Double"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt32",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "mN.m"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "unit-convert",
+          "from": "mN.m",
+          "to": "N.m"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "N.m"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "scale-then-kelvin",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "b36a"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "0",
+          "valueType": "Double"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "K"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.01",
+          "offset": "0"
+        },
+        {
+          "op": "unit-convert",
+          "from": "K",
+          "to": "Cel"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "Cel"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "missing-unit-conversion",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "2800"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "mapping.unit-conversion-required"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1/s"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "double-transform",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "mapping.double-transform"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.1",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "range-violation",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "409c"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.range"
+        ],
+        "result": null
+      }
+    },
+    {
+      "id": "enum-known",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "running",
+          "valueType": "String"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "enum-map",
+          "entries": [
+            {
+              "raw": "0",
+              "value": "stopped"
+            },
+            {
+              "raw": "1",
+              "value": "running"
+            }
+          ],
+          "onUnknown": "bad-quality"
+        },
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "enum-unknown",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0700"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.enum-unknown"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "enum-map",
+          "entries": [
+            {
+              "raw": "0",
+              "value": "stopped"
+            },
+            {
+              "raw": "1",
+              "value": "running"
+            }
+          ],
+          "onUnknown": "bad-quality"
+        },
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "bit-select",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": true,
+          "valueType": "Boolean"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "bit-select",
+          "index": 0
+        },
+        {
+          "op": "cast",
+          "to": "Boolean",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Boolean",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "coordinate-native-byte",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "8001"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": true,
+          "valueType": "Boolean"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 2,
+          "bitOffset": 7
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "bitCoordinate": {
+            "kind": "native-byte",
+            "byteIndex": 0
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Boolean",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Boolean",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "coordinate-decoded-value",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "8001"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": false,
+          "valueType": "Boolean"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 2,
+          "bitOffset": 7
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "bitCoordinate": {
+            "kind": "decoded-value"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Boolean",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Boolean",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "native-relay",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "01"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": true,
+          "valueType": "Boolean"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "M100",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "M",
+          "addressIndex": 100,
+          "addressUnit": "bit",
+          "bitCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Boolean",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Boolean",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Boolean",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "native-relay-invalid-carrier",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "02"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "sample.boolean-carrier"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "M100",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "M",
+          "addressIndex": 100,
+          "addressUnit": "bit",
+          "bitCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "Boolean",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Boolean",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Boolean",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "ascii-nul",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "414243000000"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "ABC",
+          "valueType": "String"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 6,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "ascii-fixed",
+            "length": 6,
+            "termination": "nul"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "ascii-truncation",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "414243005859"
+        }
+      },
+      "expect": {
+        "quality": "uncertain",
+        "codes": [
+          "loss.truncation"
+        ],
+        "result": {
+          "value": "ABC",
+          "valueType": "String"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 6,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "ascii-fixed",
+            "length": 6,
+            "termination": "nul"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "ascii-invalid",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "ff4243000000"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.ascii"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 6,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "ascii-fixed",
+            "length": 6,
+            "termination": "nul"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "bcd-valid",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "3412"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "1234",
+          "valueType": "Int32"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first",
+          "codec": {
+            "kind": "bcd16"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "bcd-invalid",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "341a"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.bcd-digit"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first",
+          "codec": {
+            "kind": "bcd16"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Int32",
+        "unit": {
+          "status": "known",
+          "code": "1"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "s7-date",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "2610171234567897"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "2026-10-17T03:34:56.789Z",
+          "valueType": "String"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 8,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "s7-date-time",
+            "timezone": "Asia/Seoul"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "s7-date-no-zone",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "2610171234567897"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "source.timezone-required"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 8,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "s7-date-time",
+            "timezone": null
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "s7-date-invalid",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "2632171234567897"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.date-fields"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 8,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "s7-date-time",
+            "timezone": "UTC"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "s7-date-weekday",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "2610171234567893"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "value.weekday"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 8,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "s7-date-time",
+            "timezone": "UTC"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "s7-date-1990",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "9001010000000002"
+        }
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "1990-01-01T00:00:00.000Z",
+          "valueType": "String"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "2.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB1",
+        "addressRadix": 10,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 1,
+          "byteOffset": 0,
+          "byteLength": 8,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "String",
+          "byteOrder": "big",
+          "wordOrder": "high-first",
+          "codec": {
+            "kind": "s7-date-time",
+            "timezone": "UTC"
+          }
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "String",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "String",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "typed-float32-loss",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "typedValue": "0.1"
+        }
+      },
+      "expect": {
+        "quality": "uncertain",
+        "codes": [
+          "loss.input-precision"
+        ],
+        "result": {
+          "value": "0.100000001490116119384765625",
+          "valueType": "Double"
+        }
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.Value"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float32"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "typed-int32-overflow",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "typedValue": "2147483648"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "sample.type-range"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.Value"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Int32"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "typed-mode-wrong",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "bad",
+        "codes": [
+          "sample.mode"
+        ],
+        "result": null
+      },
+      "source": {
+        "kind": "source-definition",
+        "schemaVersion": "1.1.0",
+        "id": "motor-a-speed",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "fixture-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.Value"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Int32"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-motor-a-speed",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      }
+    },
+    {
+      "id": "unused-sample",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-speed-binding",
+      "samples": {
+        "motor-a-speed": {
+          "bytesHex": "c05d"
+        },
+        "unused": {
+          "bytesHex": "0100"
+        }
+      },
+      "expect": {
+        "quality": "uncertain",
+        "codes": [
+          "sample.unused"
+        ],
+        "result": {
+          "value": "2400",
+          "valueType": "Double"
+        }
+      }
+    },
+    {
+      "id": "graph-scale-unit-cast",
+      "mappingSetId": "motor-a-mapping",
+      "mappingId": "motor-a-counter-binding",
+      "graphUnit": {
+        "status": "known",
+        "code": "1/s"
+      },
+      "samples": {
+        "motor-a-low": {
+          "bytesHex": "9001"
+        },
+        "motor-a-high": {
+          "bytesHex": "0000"
+        }
+      },
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.1",
+          "offset": "0"
+        },
+        {
+          "op": "unit-convert",
+          "from": "1/s",
+          "to": "rpm"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "member": {
+        "valueType": "Double",
+        "unit": {
+          "status": "known",
+          "code": "rpm"
+        },
+        "range": null
+      },
+      "expect": {
+        "quality": "good",
+        "codes": [],
+        "result": {
+          "value": "2400",
+          "valueType": "Double"
+        },
+        "stages": [
+          "raw-bytes",
+          "decode",
+          "graph:decode-u32-words",
+          "transform:linear",
+          "transform:unit-convert",
+          "transform:cast",
+          "canonical-result"
+        ]
+      }
+    }
+  ]
+}

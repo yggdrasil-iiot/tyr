@@ -1,0 +1,121 @@
+{
+  "kind": "mapping-proposal",
+  "schemaVersion": "2.0.0",
+  "id": "local-workspace",
+  "version": "2.0.0",
+  "baseRelease": null,
+  "files": [
+    {
+      "path": "evidence/2.json",
+      "kind": "evidence-artifact",
+      "id": "manual-pressure-bar",
+      "version": "1.0.0",
+      "sha256": "250173042aa5f488b7978e0f8763ace587524d12b07c3201757b32f2bebf7e0e"
+    },
+    {
+      "path": "evidence/1.json",
+      "kind": "evidence-artifact",
+      "id": "manual-pressure-down",
+      "version": "1.0.0",
+      "sha256": "272f0c7769d0264006dd913d0364fe4c332f12ddf19b7eedbdad705f7c5ebe46"
+    },
+    {
+      "path": "evidence/0.json",
+      "kind": "evidence-artifact",
+      "id": "manual-pressure-up",
+      "version": "1.0.0",
+      "sha256": "79853cba7daf5c6a121e4c9d8b2dcc341f705476df4436e92c406ca71ec47784"
+    },
+    {
+      "path": "mappings/0.json",
+      "kind": "mapping-set",
+      "id": "pressure-direct-mapping",
+      "version": "1.0.0",
+      "sha256": "4493c4ac66e111d1a4d790f1080f3417eceecbe5af1d6952123020d9a4441ef5"
+    },
+    {
+      "path": "mappings/2.json",
+      "kind": "mapping-set",
+      "id": "pressure-mixed-mapping",
+      "version": "1.0.0",
+      "sha256": "e95f29bdb562c7d6f098e74dd61f74a0450ad368cff3be02145d2564ed89f844"
+    },
+    {
+      "path": "mappings/1.json",
+      "kind": "mapping-set",
+      "id": "pressure-scaled-mapping",
+      "version": "1.0.0",
+      "sha256": "0048138e2713d05b44bcef35aef056f0cefd156333b075e4b7c075763ae8f7fa"
+    },
+    {
+      "path": "semantics/0.json",
+      "kind": "semantic-definition",
+      "id": "filter-pressure-model",
+      "version": "1.0.0",
+      "sha256": "019f82af6b2b66dc18cbdc786a04ad5639198e5f0b17bcb3401cc51f708fe294"
+    },
+    {
+      "path": "sources/2.json",
+      "kind": "source-definition",
+      "id": "pressure-bar",
+      "version": "1.0.0",
+      "sha256": "dcfe28ebdee0d6073526b8c9d53ff8ef3061908123ce8ece7e85c9254704b801"
+    },
+    {
+      "path": "sources/1.json",
+      "kind": "source-definition",
+      "id": "pressure-down",
+      "version": "1.0.0",
+      "sha256": "066fa6fb04e5e01a07081da7eeb319bb20bd2709556700fa50a19c0a567ebd08"
+    },
+    {
+      "path": "sources/0.json",
+      "kind": "source-definition",
+      "id": "pressure-up",
+      "version": "1.0.0",
+      "sha256": "f182ee8bc5316210bf935655d4a68145c1a1a0d317537d5d1ffc855bd915cb60"
+    },
+    {
+      "path": "targets/0.json",
+      "kind": "target-instance",
+      "id": "filter-direct",
+      "version": "1.0.0",
+      "sha256": "22ec4aa5334046b86cbc0c710c9228e78d6817252316b4089c7fff7987f41a75"
+    },
+    {
+      "path": "targets/2.json",
+      "kind": "target-instance",
+      "id": "filter-mixed",
+      "version": "1.0.0",
+      "sha256": "cd22f2a34a1004913e4d48beb229cba720d019fc395abfc0ff8f2e52e10f30a7"
+    },
+    {
+      "path": "targets/1.json",
+      "kind": "target-instance",
+      "id": "filter-scaled",
+      "version": "1.0.0",
+      "sha256": "3662a071d1dbe388ec5415f6c39ce7176881fd356fba6ef0521bd466697acedb"
+    },
+    {
+      "path": "graphs/0.json",
+      "kind": "value-graph",
+      "id": "pressure-direct",
+      "version": "1.0.0",
+      "sha256": "0c1a74b3721fa6f7b06ff32b873d5b0df0d7f9cc21474d3392e6a92d49bfecf6"
+    },
+    {
+      "path": "graphs/2.json",
+      "kind": "value-graph",
+      "id": "pressure-mixed",
+      "version": "1.0.0",
+      "sha256": "93e078d4f68a794f7142207a1dc2e973adae09aae524ea259af92e5929eaca27"
+    },
+    {
+      "path": "graphs/1.json",
+      "kind": "value-graph",
+      "id": "pressure-scaled",
+      "version": "1.0.0",
+      "sha256": "7399e640cf5ee17933f68b415064ed330cf7b77f81692344e4cfaf8618577e34"
+    }
+  ]
+}

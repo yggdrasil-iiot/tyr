@@ -1,0 +1,13 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "raw-string-rejected",
+  "patternId": "MP09",
+  "mode": "gap-probe",
+  "action": "raw-shape-rejected",
+  "input": {
+    "valueType": "String"
+  },
+  "expect": {
+    "schemaRejected": true
+  }
+}

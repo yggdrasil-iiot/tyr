@@ -1,0 +1,35 @@
+{
+  "semanticId": "urn:tyr:concept:mixed.plc-pressure",
+  "signature": {
+    "role": "measurement",
+    "valueType": "Double",
+    "unit": {
+      "status": "known",
+      "code": "kPa"
+    }
+  },
+  "retire": {
+    "kind": "semantic-lifecycle",
+    "schemaVersion": "2.18.0",
+    "id": "lifecycle-fixture-3",
+    "version": "1.0.0",
+    "semanticId": "urn:tyr:concept:mixed.plc-pressure",
+    "revision": 3,
+    "previousEvent": {
+      "id": "lifecycle-fixture-2",
+      "version": "1.0.0",
+      "sha256": "56384ea9fb2b5930205394c2b7f9fcdfdc481de6413223531078ef240600d39d"
+    },
+    "signatureSha256": "a6ff2c076fb79ffe2889426337e563ccb2d3abc5f6196c45a81037da874d9b63",
+    "action": "retire",
+    "replacementSemanticId": null,
+    "label": "Pressure canonical label 3",
+    "description": "Synthetic governance revision",
+    "reason": "Synthetic policy review; not field evidence",
+    "authoredBy": "fixture-author",
+    "authoredAt": "2026-10-18T00:00:03Z"
+  },
+  "expectedState": "deprecated",
+  "expectedRevision": 2,
+  "expectedImpacts": 1
+}

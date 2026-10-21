@@ -1,0 +1,77 @@
+{
+  "origin": "hand-specified-synthetic",
+  "cases": [
+    {
+      "id": "register-speed",
+      "sourceId": "source-a",
+      "bytesHex": "39300000",
+      "expectedDecoded": "12345",
+      "factor": "0.1",
+      "offset": "0",
+      "expectedResult": "1234.5",
+      "unit": "rpm"
+    },
+    {
+      "id": "db-speed",
+      "sourceId": "source-b",
+      "bytesHex": "449a5000",
+      "expectedDecoded": "1234.5",
+      "factor": "1",
+      "offset": "0",
+      "expectedResult": "1234.5",
+      "unit": "rpm"
+    },
+    {
+      "id": "symbol-speed",
+      "sourceId": "source-c",
+      "typedValue": "1234.5",
+      "expectedDecoded": "1234.5",
+      "factor": "1",
+      "offset": "0",
+      "expectedResult": "1234.5",
+      "unit": "rpm"
+    },
+    {
+      "id": "negative-int",
+      "bytesHex": "ffffffff",
+      "format": "<i",
+      "expectedDecoded": "-1"
+    },
+    {
+      "id": "high-word-first",
+      "bytesHex": "01000000",
+      "format": ">I",
+      "expectedDecoded": "16777216"
+    },
+    {
+      "id": "enum-unknown",
+      "rawCode": "7",
+      "entries": {
+        "0": "stopped",
+        "1": "running"
+      },
+      "expectedQuality": "bad"
+    },
+    {
+      "id": "bit-15",
+      "integer": "32768",
+      "bit": 15,
+      "expected": true
+    },
+    {
+      "id": "int32-overflow",
+      "integer": "2147483648",
+      "expectedError": "overflow"
+    },
+    {
+      "id": "opcua-speed",
+      "sourceId": "source-d",
+      "typedValue": "1234.5",
+      "expectedDecoded": "1234.5",
+      "factor": "1",
+      "offset": "0",
+      "expectedResult": "1234.5",
+      "unit": "rpm"
+    }
+  ]
+}

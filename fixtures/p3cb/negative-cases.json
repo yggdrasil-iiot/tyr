@@ -1,0 +1,50 @@
+{
+  "scope": "Mutation descriptors used for bounded offline acceptance; not vendor measurements",
+  "cases": [
+    {
+      "id": "sqrt-negative",
+      "change": {
+        "node": "difference",
+        "precedingLinearFactor": "-1"
+      },
+      "expectedCodes": [
+        "value.sqrt-domain"
+      ],
+      "expectedValue": null
+    },
+    {
+      "id": "clamp-reversed-bounds",
+      "change": {
+        "node": "limited",
+        "low": "11",
+        "high": "10"
+      },
+      "expectedCodes": [
+        "graph.clamp-range"
+      ],
+      "expectedValue": null
+    },
+    {
+      "id": "sqrt-dimensioned-input",
+      "change": {
+        "source": "pressure-up",
+        "unit": "kPa"
+      },
+      "expectedCodes": [
+        "graph.input-unit"
+      ],
+      "expectedValue": null
+    },
+    {
+      "id": "sqrt-static-fixed-precision",
+      "change": {
+        "node": "difference",
+        "precision": 35
+      },
+      "expectedCodes": [
+        "schema"
+      ],
+      "expectedValue": null
+    }
+  ]
+}

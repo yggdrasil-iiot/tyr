@@ -1,0 +1,25 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "dispersed-motor",
+  "patternId": "MP02",
+  "mode": "current",
+  "action": "dispersed",
+  "input": {},
+  "expect": {
+    "addresses": [
+      1000,
+      2000,
+      3000
+    ],
+    "wordCounts": [
+      1,
+      1,
+      1
+    ],
+    "members": [
+      "actual-speed",
+      "target-speed",
+      "state"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "alias-cycle-unchecked",
+  "patternId": "MP12",
+  "mode": "gap-probe",
+  "action": "alias-cycle",
+  "input": {},
+  "expect": {
+    "packageRules": [],
+    "editorRejected": true,
+    "knownGap": "no-p1-cycle-detection"
+  }
+}

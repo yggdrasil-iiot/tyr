@@ -1,0 +1,358 @@
+{
+  "expectedMeaning": {
+    "semanticId": "urn:tyr:concept:motor-actual-speed",
+    "role": "measurement",
+    "valueType": "Double",
+    "unit": {
+      "status": "known",
+      "code": "rpm"
+    }
+  },
+  "samples": [
+    {
+      "mappingId": "speed-a",
+      "bytesHex": "39300000",
+      "expected": "1234.5",
+      "issues": []
+    },
+    {
+      "mappingId": "speed-b",
+      "bytesHex": "449a5000",
+      "expected": "1234.5",
+      "issues": []
+    },
+    {
+      "mappingId": "speed-c",
+      "typedValue": "1234.5",
+      "expected": "1234.5",
+      "issues": []
+    },
+    {
+      "mappingId": "speed-d",
+      "typedValue": "1234.5",
+      "expected": "1234.5",
+      "issues": []
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "rename-preserves-meaning",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/name",
+          "value": "PV"
+        }
+      ],
+      "categories": [
+        "presentation"
+      ],
+      "distinct": false,
+      "conflicts": [],
+      "reviewRequired": false
+    },
+    {
+      "id": "same-name-different-concept",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/semanticId",
+          "value": "urn:tyr:concept:motor-target-speed"
+        },
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/role",
+          "value": "setpoint"
+        }
+      ],
+      "categories": [
+        "meaning"
+      ],
+      "distinct": true,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "same-id-role-collision",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/role",
+          "value": "setpoint"
+        }
+      ],
+      "categories": [
+        "meaning"
+      ],
+      "distinct": true,
+      "conflicts": [
+        "semantic.identity-conflict"
+      ],
+      "reviewRequired": true
+    },
+    {
+      "id": "same-id-unit-collision",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/unit/code",
+          "value": "Cel"
+        }
+      ],
+      "categories": [
+        "meaning"
+      ],
+      "distinct": true,
+      "conflicts": [
+        "semantic.identity-conflict"
+      ],
+      "reviewRequired": true
+    },
+    {
+      "id": "different-quantity-same-label",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/semanticId",
+          "value": "urn:tyr:concept:motor-temperature"
+        },
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/unit/code",
+          "value": "Cel"
+        }
+      ],
+      "categories": [
+        "meaning"
+      ],
+      "distinct": true,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "scale-change",
+      "mutations": [
+        {
+          "path": "mappings/map-a.json",
+          "pointer": "/mappings/0/transform/0/factor",
+          "value": "0.01"
+        }
+      ],
+      "categories": [
+        "transform"
+      ],
+      "distinct": false,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "decode-change",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/rawRepresentation/wordOrder",
+          "value": "high-first"
+        }
+      ],
+      "categories": [
+        "decode"
+      ],
+      "distinct": false,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "address-change",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/access/addressIndex",
+          "value": 1002
+        }
+      ],
+      "categories": [
+        "access"
+      ],
+      "distinct": false,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "range-change",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/range/high",
+          "value": "4000"
+        }
+      ],
+      "categories": [
+        "constraint"
+      ],
+      "distinct": false,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "context-change",
+      "mutations": [
+        {
+          "path": "sources/source-a.json",
+          "pointer": "/connectionProfileRef",
+          "value": "other-controller"
+        }
+      ],
+      "categories": [
+        "context"
+      ],
+      "distinct": false,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "evidence-change",
+      "mutations": [
+        {
+          "path": "mappings/map-a.json",
+          "pointer": "/mappings/0/evidenceRefs/0/locator/line",
+          "value": 3
+        }
+      ],
+      "categories": [
+        "evidence"
+      ],
+      "distinct": false,
+      "conflicts": [],
+      "reviewRequired": true
+    },
+    {
+      "id": "result-type-change",
+      "mutations": [
+        {
+          "path": "semantics/motor.json",
+          "pointer": "/members/0/valueType",
+          "value": "Int32"
+        }
+      ],
+      "categories": [
+        "meaning"
+      ],
+      "distinct": true,
+      "conflicts": [
+        "semantic.identity-conflict"
+      ],
+      "reviewRequired": true
+    }
+  ],
+  "projectionLossFields": [
+    "source.access",
+    "source.rawRepresentation",
+    "source.equipmentInstanceId",
+    "mapping.transform",
+    "mapping.evidenceRefs",
+    "member.unit",
+    "member.role",
+    "source.inputStage",
+    "source.unit",
+    "source.connectionProfileRef",
+    "source.accessProfileRef",
+    "source.evidenceRefs",
+    "source.id",
+    "source.version",
+    "member.memberId",
+    "member.description",
+    "mapping.sourceRef",
+    "mapping.targetMemberId",
+    "mapping.outputUnit",
+    "mapping.invalidValuePolicy"
+  ],
+  "valueCases": [
+    {
+      "id": "int64-double-precision",
+      "typedValue": "9007199254740993",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "expected": null,
+      "issues": [
+        "loss.precision",
+        "value.inexact"
+      ]
+    },
+    {
+      "id": "exact-fraction-rejected",
+      "typedValue": "1.5",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "expected": null,
+      "issues": [
+        "loss.rounding",
+        "value.inexact"
+      ]
+    },
+    {
+      "id": "half-even-loss-visible",
+      "typedValue": "2.5",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "half-even"
+        }
+      ],
+      "expected": "2",
+      "issues": [
+        "loss.rounding"
+      ]
+    },
+    {
+      "id": "overflow-rejected",
+      "typedValue": "2147483648",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "expected": null,
+      "issues": [
+        "value.overflow"
+      ]
+    },
+    {
+      "id": "identity-exact",
+      "typedValue": "42",
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "expected": "42.0",
+      "issues": []
+    }
+  ],
+  "distinctBinding": {
+    "mappingId": "target-speed",
+    "semanticId": "urn:tyr:concept:motor-target-speed",
+    "role": "setpoint",
+    "expectedConceptCount": 2,
+    "expectedNameCount": 1
+  }
+}

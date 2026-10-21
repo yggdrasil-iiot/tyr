@@ -1,0 +1,857 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "import-line",
+      "label": "가상 통합 설비"
+    }
+  ],
+  "connections": [
+    {
+      "id": "import-0",
+      "label": "ab-logix-symbol-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "ab-logix-symbol-v1"
+    },
+    {
+      "id": "import-1",
+      "label": "s7-1500-opcua-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "import-2",
+      "label": "s7-300-db-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "s7-300-db-v1"
+    },
+    {
+      "id": "import-3",
+      "label": "melsec-device-v1",
+      "equipmentInstanceId": "import-line",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-excel-tank-pv",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-imp-excel-tank-pv",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          },
+          {
+            "artifactId": "import-excel",
+            "locator": {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A2"
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "imp-excel-tank-pv",
+      "note": "Imported draft. Review decoding assumptions. SHA256 8d9aced02c1ce39f9549c9548a45f7d08056c1c0bfb7fc527de65e92bd34782b",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z",
+      "importRef": {
+        "batchId": "excel",
+        "observationId": "row-0"
+      }
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-excel-tank-0",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D3100",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3100,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-imp-excel-tank-0",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          },
+          {
+            "artifactId": "import-excel",
+            "locator": {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A3"
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "imp-excel-tank-0",
+      "note": "Imported draft. Review decoding assumptions. SHA256 8d9aced02c1ce39f9549c9548a45f7d08056c1c0bfb7fc527de65e92bd34782b",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z",
+      "importRef": {
+        "batchId": "excel",
+        "observationId": "row-1"
+      }
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-excel-tank-1",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D3190",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3190,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-imp-excel-tank-1",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          },
+          {
+            "artifactId": "import-excel",
+            "locator": {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A3"
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "imp-excel-tank-1",
+      "note": "Imported draft. Review decoding assumptions. SHA256 8d9aced02c1ce39f9549c9548a45f7d08056c1c0bfb7fc527de65e92bd34782b",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z",
+      "importRef": {
+        "batchId": "excel",
+        "observationId": "row-2"
+      }
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.2.0",
+        "id": "imp-excel-tank-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "import-line",
+        "connectionProfileRef": "import-3",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "draft",
+        "rawAddressText": "D3190",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3190,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "raw",
+        "unit": {
+          "status": "known",
+          "code": "kPa"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-imp-excel-tank-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          },
+          {
+            "artifactId": "import-excel",
+            "locator": {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A4"
+            }
+          },
+          {
+            "artifactId": "import-excel",
+            "locator": {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A3"
+            }
+          }
+        ],
+        "viewOf": null
+      },
+      "label": "imp-excel-tank-alias",
+      "note": "Imported draft. Review decoding assumptions. SHA256 8d9aced02c1ce39f9549c9548a45f7d08056c1c0bfb7fc527de65e92bd34782b",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z",
+      "importRef": {
+        "batchId": "excel",
+        "observationId": "row-3"
+      }
+    }
+  ],
+  "semantics": [],
+  "targets": [],
+  "graphs": [],
+  "mappings": [],
+  "imports": [
+    {
+      "id": "excel",
+      "filename": "memory-map.xlsx",
+      "format": "xlsx",
+      "bytesBase64": "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",
+      "equipmentInstanceId": "import-line",
+      "capturedAt": "2026-10-17T00:00:00Z",
+      "origin": "synthetic",
+      "columnMap": {
+        "태그ID": "id",
+        "종류": "kind",
+        "프로파일": "profile",
+        "주소": "address",
+        "타입": "type",
+        "단위": "unit",
+        "바이트순서": "byteOrder",
+        "워드순서": "wordOrder"
+      },
+      "contextConnections": [
+        {
+          "id": "import-0",
+          "label": "ab-logix-symbol-v1",
+          "equipmentInstanceId": "import-line",
+          "accessProfileRef": "ab-logix-symbol-v1"
+        },
+        {
+          "id": "import-1",
+          "label": "s7-1500-opcua-v1",
+          "equipmentInstanceId": "import-line",
+          "accessProfileRef": "s7-1500-opcua-v1"
+        },
+        {
+          "id": "import-2",
+          "label": "s7-300-db-v1",
+          "equipmentInstanceId": "import-line",
+          "accessProfileRef": "s7-300-db-v1"
+        },
+        {
+          "id": "import-3",
+          "label": "melsec-device-v1",
+          "equipmentInstanceId": "import-line",
+          "accessProfileRef": "melsec-device-v1"
+        }
+      ],
+      "kind": "import-batch",
+      "schemaVersion": "2.6.0",
+      "version": "1.0.0",
+      "parser": {
+        "name": "tyr-bounded-files",
+        "version": "1.0.0"
+      },
+      "sha256": "8d9aced02c1ce39f9549c9548a45f7d08056c1c0bfb7fc527de65e92bd34782b",
+      "observations": [
+        {
+          "id": "row-0",
+          "raw": {
+            "id": "tank-pv",
+            "kind": "source",
+            "profile": "melsec-device-v1",
+            "address": "D3000",
+            "type": "UInt16",
+            "unit": "kPa",
+            "byteOrder": "little",
+            "wordOrder": "low-first",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "",
+            "stage": "raw"
+          },
+          "locator": {
+            "kind": "xlsx-cell",
+            "sheet": "메모리맵",
+            "cell": "A2"
+          },
+          "derivation": [
+            {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A2"
+            }
+          ],
+          "issues": [],
+          "assumptions": [
+            "storage width derived from declared type"
+          ],
+          "draft": {
+            "kind": "source-definition",
+            "schemaVersion": "2.2.0",
+            "id": "imp-excel-tank-pv",
+            "version": "1.0.0",
+            "equipmentInstanceId": "import-line",
+            "connectionProfileRef": "import-3",
+            "accessProfileRef": "melsec-device-v1",
+            "status": "draft",
+            "rawAddressText": "D3000",
+            "addressRadix": 10,
+            "access": {
+              "kind": "device-register",
+              "deviceArea": "D",
+              "addressIndex": 3000,
+              "addressUnit": "word16",
+              "wordCount": 1,
+              "bitOffset": null
+            },
+            "rawRepresentation": {
+              "mode": "bytes",
+              "valueType": "UInt16",
+              "byteOrder": "little",
+              "wordOrder": "low-first"
+            },
+            "inputStage": "raw",
+            "unit": {
+              "status": "known",
+              "code": "kPa"
+            },
+            "evidenceRefs": [
+              {
+                "artifactId": "import-excel",
+                "locator": {
+                  "kind": "xlsx-cell",
+                  "sheet": "메모리맵",
+                  "cell": "A2"
+                }
+              }
+            ],
+            "viewOf": null
+          },
+          "originalColumns": {
+            "태그ID": "tank-pv",
+            "종류": "source",
+            "프로파일": "melsec-device-v1",
+            "주소": "D3000",
+            "타입": "UInt16",
+            "단위": "kPa",
+            "바이트순서": "little",
+            "워드순서": "low-first",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "",
+            "stage": "raw"
+          }
+        },
+        {
+          "id": "row-1",
+          "raw": {
+            "id": "tank-0",
+            "kind": "source",
+            "profile": "melsec-device-v1",
+            "address": "D3100",
+            "type": "UInt16",
+            "unit": "kPa",
+            "byteOrder": "little",
+            "wordOrder": "low-first",
+            "target": "",
+            "stage": "raw"
+          },
+          "locator": {
+            "kind": "xlsx-cell",
+            "sheet": "메모리맵",
+            "cell": "A3"
+          },
+          "derivation": [
+            {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A3"
+            }
+          ],
+          "issues": [],
+          "assumptions": [
+            "storage width derived from declared type"
+          ],
+          "draft": {
+            "kind": "source-definition",
+            "schemaVersion": "2.2.0",
+            "id": "imp-excel-tank-0",
+            "version": "1.0.0",
+            "equipmentInstanceId": "import-line",
+            "connectionProfileRef": "import-3",
+            "accessProfileRef": "melsec-device-v1",
+            "status": "draft",
+            "rawAddressText": "D3100",
+            "addressRadix": 10,
+            "access": {
+              "kind": "device-register",
+              "deviceArea": "D",
+              "addressIndex": 3100,
+              "addressUnit": "word16",
+              "wordCount": 1,
+              "bitOffset": null
+            },
+            "rawRepresentation": {
+              "mode": "bytes",
+              "valueType": "UInt16",
+              "byteOrder": "little",
+              "wordOrder": "low-first"
+            },
+            "inputStage": "raw",
+            "unit": {
+              "status": "known",
+              "code": "kPa"
+            },
+            "evidenceRefs": [
+              {
+                "artifactId": "import-excel",
+                "locator": {
+                  "kind": "xlsx-cell",
+                  "sheet": "메모리맵",
+                  "cell": "A3"
+                }
+              }
+            ],
+            "viewOf": null
+          },
+          "originalColumns": {
+            "태그ID": "tank",
+            "종류": "template",
+            "프로파일": "melsec-device-v1",
+            "주소": "D{offset}",
+            "타입": "UInt16",
+            "단위": "kPa",
+            "바이트순서": "little",
+            "워드순서": "low-first",
+            "base": "3100",
+            "stride": "10",
+            "count": "2",
+            "overrides": "{\"1\":{\"address\":\"D3190\"}}",
+            "target": "",
+            "stage": "raw"
+          },
+          "template": {
+            "id": "tank",
+            "kind": "template",
+            "profile": "melsec-device-v1",
+            "address": "D{offset}",
+            "type": "UInt16",
+            "unit": "kPa",
+            "byteOrder": "little",
+            "wordOrder": "low-first",
+            "base": "3100",
+            "stride": "10",
+            "count": "2",
+            "overrides": "{\"1\":{\"address\":\"D3190\"}}",
+            "target": "",
+            "stage": "raw"
+          }
+        },
+        {
+          "id": "row-2",
+          "raw": {
+            "id": "tank-1",
+            "kind": "source",
+            "profile": "melsec-device-v1",
+            "address": "D3190",
+            "type": "UInt16",
+            "unit": "kPa",
+            "byteOrder": "little",
+            "wordOrder": "low-first",
+            "target": "",
+            "stage": "raw"
+          },
+          "locator": {
+            "kind": "xlsx-cell",
+            "sheet": "메모리맵",
+            "cell": "A3"
+          },
+          "derivation": [
+            {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A3"
+            }
+          ],
+          "issues": [],
+          "assumptions": [
+            "storage width derived from declared type"
+          ],
+          "draft": {
+            "kind": "source-definition",
+            "schemaVersion": "2.2.0",
+            "id": "imp-excel-tank-1",
+            "version": "1.0.0",
+            "equipmentInstanceId": "import-line",
+            "connectionProfileRef": "import-3",
+            "accessProfileRef": "melsec-device-v1",
+            "status": "draft",
+            "rawAddressText": "D3190",
+            "addressRadix": 10,
+            "access": {
+              "kind": "device-register",
+              "deviceArea": "D",
+              "addressIndex": 3190,
+              "addressUnit": "word16",
+              "wordCount": 1,
+              "bitOffset": null
+            },
+            "rawRepresentation": {
+              "mode": "bytes",
+              "valueType": "UInt16",
+              "byteOrder": "little",
+              "wordOrder": "low-first"
+            },
+            "inputStage": "raw",
+            "unit": {
+              "status": "known",
+              "code": "kPa"
+            },
+            "evidenceRefs": [
+              {
+                "artifactId": "import-excel",
+                "locator": {
+                  "kind": "xlsx-cell",
+                  "sheet": "메모리맵",
+                  "cell": "A3"
+                }
+              }
+            ],
+            "viewOf": null
+          },
+          "originalColumns": {
+            "태그ID": "tank",
+            "종류": "template",
+            "프로파일": "melsec-device-v1",
+            "주소": "D{offset}",
+            "타입": "UInt16",
+            "단위": "kPa",
+            "바이트순서": "little",
+            "워드순서": "low-first",
+            "base": "3100",
+            "stride": "10",
+            "count": "2",
+            "overrides": "{\"1\":{\"address\":\"D3190\"}}",
+            "target": "",
+            "stage": "raw"
+          },
+          "template": {
+            "id": "tank",
+            "kind": "template",
+            "profile": "melsec-device-v1",
+            "address": "D{offset}",
+            "type": "UInt16",
+            "unit": "kPa",
+            "byteOrder": "little",
+            "wordOrder": "low-first",
+            "base": "3100",
+            "stride": "10",
+            "count": "2",
+            "overrides": "{\"1\":{\"address\":\"D3190\"}}",
+            "target": "",
+            "stage": "raw"
+          }
+        },
+        {
+          "id": "row-3",
+          "raw": {
+            "id": "tank-alias",
+            "kind": "alias",
+            "profile": "",
+            "address": "",
+            "type": "",
+            "unit": "",
+            "byteOrder": "",
+            "wordOrder": "",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "tank-1",
+            "stage": ""
+          },
+          "locator": {
+            "kind": "xlsx-cell",
+            "sheet": "메모리맵",
+            "cell": "A4"
+          },
+          "derivation": [
+            {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A4"
+            },
+            {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A3"
+            }
+          ],
+          "issues": [],
+          "assumptions": [
+            "storage width derived from declared type"
+          ],
+          "draft": {
+            "kind": "source-definition",
+            "schemaVersion": "2.2.0",
+            "id": "imp-excel-tank-alias",
+            "version": "1.0.0",
+            "equipmentInstanceId": "import-line",
+            "connectionProfileRef": "import-3",
+            "accessProfileRef": "melsec-device-v1",
+            "status": "draft",
+            "rawAddressText": "D3190",
+            "addressRadix": 10,
+            "access": {
+              "kind": "device-register",
+              "deviceArea": "D",
+              "addressIndex": 3190,
+              "addressUnit": "word16",
+              "wordCount": 1,
+              "bitOffset": null
+            },
+            "rawRepresentation": {
+              "mode": "bytes",
+              "valueType": "UInt16",
+              "byteOrder": "little",
+              "wordOrder": "low-first"
+            },
+            "inputStage": "raw",
+            "unit": {
+              "status": "known",
+              "code": "kPa"
+            },
+            "evidenceRefs": [
+              {
+                "artifactId": "import-excel",
+                "locator": {
+                  "kind": "xlsx-cell",
+                  "sheet": "메모리맵",
+                  "cell": "A4"
+                }
+              },
+              {
+                "artifactId": "import-excel",
+                "locator": {
+                  "kind": "xlsx-cell",
+                  "sheet": "메모리맵",
+                  "cell": "A3"
+                }
+              }
+            ],
+            "viewOf": null
+          },
+          "originalColumns": {
+            "태그ID": "tank-alias",
+            "종류": "alias",
+            "프로파일": "",
+            "주소": "",
+            "타입": "",
+            "단위": "",
+            "바이트순서": "",
+            "워드순서": "",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "tank-1",
+            "stage": ""
+          }
+        },
+        {
+          "id": "row-4",
+          "raw": {
+            "id": "unknown-expression",
+            "kind": "source",
+            "profile": "melsec-device-v1",
+            "address": "D[Idx]",
+            "type": "UInt16",
+            "unit": "kPa",
+            "byteOrder": "little",
+            "wordOrder": "low-first",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "",
+            "stage": "raw"
+          },
+          "locator": {
+            "kind": "xlsx-cell",
+            "sheet": "메모리맵",
+            "cell": "A5"
+          },
+          "derivation": [
+            {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A5"
+            }
+          ],
+          "issues": [
+            "address.register"
+          ],
+          "assumptions": [],
+          "draft": null,
+          "originalColumns": {
+            "태그ID": "unknown-expression",
+            "종류": "source",
+            "프로파일": "melsec-device-v1",
+            "주소": "D[Idx]",
+            "타입": "UInt16",
+            "단위": "kPa",
+            "바이트순서": "little",
+            "워드순서": "low-first",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "",
+            "stage": "raw"
+          }
+        },
+        {
+          "id": "row-5",
+          "raw": {
+            "id": "formula",
+            "kind": "source",
+            "profile": "melsec-device-v1",
+            "address": "3",
+            "type": "UInt16",
+            "unit": "kPa",
+            "byteOrder": "little",
+            "wordOrder": "low-first",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "",
+            "stage": "raw",
+            "_formula": true
+          },
+          "locator": {
+            "kind": "xlsx-cell",
+            "sheet": "메모리맵",
+            "cell": "A6"
+          },
+          "derivation": [
+            {
+              "kind": "xlsx-cell",
+              "sheet": "메모리맵",
+              "cell": "A6"
+            }
+          ],
+          "issues": [
+            "xlsx.formula"
+          ],
+          "assumptions": [],
+          "draft": null,
+          "originalColumns": {
+            "태그ID": "formula",
+            "종류": "source",
+            "프로파일": "melsec-device-v1",
+            "주소": "3",
+            "타입": "UInt16",
+            "단위": "kPa",
+            "바이트순서": "little",
+            "워드순서": "low-first",
+            "base": "",
+            "stride": "",
+            "count": "",
+            "overrides": "",
+            "target": "",
+            "stage": "raw",
+            "_formula": true
+          }
+        }
+      ]
+    }
+  ]
+}

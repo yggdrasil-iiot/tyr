@@ -1,0 +1,81 @@
+{
+  "kind": "observation-bundle",
+  "schemaVersion": "1.0.0",
+  "id": "bundle-motor",
+  "version": "1.0.0",
+  "artifacts": [
+    {
+      "kind": "evidence-artifact",
+      "schemaVersion": "1.0.0",
+      "id": "ev-map",
+      "version": "1.0.0",
+      "origin": "synthetic",
+      "file": {
+        "path": "data/address-map.csv",
+        "sha256": "dc735c8bfb5e10589742186088e3376384815dbe1a3ef0bc2bc919b0b94704d1",
+        "mediaType": "text/csv"
+      },
+      "capturedAt": "2026-10-17T00:00:00Z",
+      "product": null,
+      "scope": [
+        "conveyor-a",
+        "conveyor-b",
+        "conveyor-c",
+        "conveyor-e"
+      ]
+    },
+    {
+      "kind": "evidence-artifact",
+      "schemaVersion": "1.0.0",
+      "id": "ev-config",
+      "version": "1.0.0",
+      "origin": "synthetic",
+      "file": {
+        "path": "data/solution-export.json",
+        "sha256": "5c7bfcc1bad71e57a94fc083c94f53de47b2581e7d92482fecc55ac870baf11d",
+        "mediaType": "application/json"
+      },
+      "capturedAt": "2026-10-17T00:00:00Z",
+      "product": {
+        "name": "fixture-only",
+        "version": "1.0.0"
+      },
+      "scope": [
+        "conveyor-c",
+        "conveyor-d"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "kind": "source-observation",
+      "schemaVersion": "1.0.0",
+      "id": "obs-a",
+      "version": "1.0.0",
+      "evidenceRefs": [
+        {
+          "artifactId": "ev-map",
+          "locator": {
+            "kind": "text-line",
+            "line": 2
+          }
+        }
+      ],
+      "extractor": {
+        "name": "manual-fixture",
+        "version": "1.0.0"
+      },
+      "claims": [
+        {
+          "field": "rawAddressText",
+          "value": "D1000",
+          "certainty": "explicit"
+        }
+      ],
+      "status": "extracted"
+    }
+  ],
+  "inputCount": 10,
+  "processedCount": 1,
+  "unsupportedCount": 0
+}

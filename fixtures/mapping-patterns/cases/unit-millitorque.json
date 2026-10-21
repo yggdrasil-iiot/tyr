@@ -1,0 +1,17 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "unit-millitorque",
+  "patternId": "MP10",
+  "mode": "current",
+  "action": "evaluate",
+  "input": {
+    "mappingId": "ua-torque-binding",
+    "sample": {
+      "typedValue": "125000"
+    }
+  },
+  "expect": {
+    "value": "125.0",
+    "issues": []
+  }
+}

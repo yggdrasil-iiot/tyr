@@ -1,0 +1,42 @@
+{
+  "kind": "source-definition",
+  "schemaVersion": "2.7.0",
+  "id": "mixed-plc-pressure",
+  "version": "1.0.0",
+  "equipmentInstanceId": "mixed-line",
+  "connectionProfileRef": "mixed-db",
+  "accessProfileRef": "s7-300-db-v1",
+  "status": "ready",
+  "rawAddressText": "D1000",
+  "addressRadix": null,
+  "access": {
+    "kind": "db-offset",
+    "dbNumber": 1,
+    "byteOffset": 0,
+    "byteLength": 2,
+    "bitOffset": null
+  },
+  "rawRepresentation": {
+    "mode": "bytes",
+    "valueType": "UInt16",
+    "byteOrder": "big",
+    "wordOrder": "high-first"
+  },
+  "inputStage": "raw",
+  "unit": {
+    "status": "known",
+    "code": "kPa"
+  },
+  "evidenceRefs": [
+    {
+      "artifactId": "manual-mixed-plc-pressure",
+      "locator": {
+        "kind": "text-line",
+        "line": 1
+      }
+    }
+  ],
+  "viewOf": null,
+  "sourceKind": "plc",
+  "accessMode": "read"
+}

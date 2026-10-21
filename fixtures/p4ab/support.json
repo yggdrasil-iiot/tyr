@@ -1,0 +1,29 @@
+{
+  "phase": "P4-A B",
+  "schemaVersion": "2.14.0",
+  "patterns": [
+    "MP03",
+    "MP12",
+    "MP18"
+  ],
+  "status": "bounded-subset",
+  "supported": [
+    "explicit observation resolution/non-source classification",
+    "append-only review chain",
+    "stable record-key three-way comparison",
+    "atomic conflict choices/whole-source retain",
+    "removed/reappearing source identity",
+    "SQLite JSON/CAS history guards",
+    "XLSX/tyr-config-v1",
+    "independent Bifrost workflow verification/publication"
+  ],
+  "fieldPoV": "not-performed",
+  "excluded": [
+    "device communication",
+    "external SQL",
+    "write execution",
+    "vendor-specific native parser certification",
+    "PDF/.xls",
+    "cross-file alias/UDT inheritance"
+  ]
+}

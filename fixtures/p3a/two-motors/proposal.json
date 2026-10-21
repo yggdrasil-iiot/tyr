@@ -1,0 +1,142 @@
+{
+  "kind": "mapping-proposal",
+  "schemaVersion": "2.0.0",
+  "id": "two-motors",
+  "version": "1.0.0",
+  "baseRelease": null,
+  "files": [
+    {
+      "path": "semantics/motor-counter.json",
+      "kind": "semantic-definition",
+      "id": "motor-counter",
+      "version": "1.0.0",
+      "sha256": "ed52e6ba229d1c127c86f99d7570e8dcb609a8e3e047e47bd7711ddf5947d49d"
+    },
+    {
+      "path": "evidence/motor-a-low.json",
+      "kind": "evidence-artifact",
+      "id": "ev-motor-a-low",
+      "version": "1.0.0",
+      "sha256": "0446abae3084b811cb7a8713543b78264269ff5b8d9d8a5b8f6aa4e7c63f9858"
+    },
+    {
+      "path": "sources/motor-a-low.json",
+      "kind": "source-definition",
+      "id": "motor-a-low",
+      "version": "1.0.0",
+      "sha256": "cc5e8a016ca7570d1263afdf69923abb0420c63751bf03f521baed1c37af1a7c"
+    },
+    {
+      "path": "evidence/motor-a-high.json",
+      "kind": "evidence-artifact",
+      "id": "ev-motor-a-high",
+      "version": "1.0.0",
+      "sha256": "acf32b426bb4de0ff1dc4462559216432a8b92ff3446226cbe0d09a10ddd14cc"
+    },
+    {
+      "path": "sources/motor-a-high.json",
+      "kind": "source-definition",
+      "id": "motor-a-high",
+      "version": "1.0.0",
+      "sha256": "1e87d5298ffc503b4952c7474d6bc15dcbf9e3acbb4397f9b03b6f95327833ac"
+    },
+    {
+      "path": "evidence/motor-a-speed.json",
+      "kind": "evidence-artifact",
+      "id": "ev-motor-a-speed",
+      "version": "1.0.0",
+      "sha256": "1bce310604d4f3859d6f3d8a612c0b907be64c18ec7f0c3b63aae7bc930e95cc"
+    },
+    {
+      "path": "sources/motor-a-speed.json",
+      "kind": "source-definition",
+      "id": "motor-a-speed",
+      "version": "1.0.0",
+      "sha256": "e66625d03665ef25e98b244a4b3f55305fcb2522cfada0ba94279dd46b8665dd"
+    },
+    {
+      "path": "targets/motor-a.json",
+      "kind": "target-instance",
+      "id": "motor-a",
+      "version": "1.0.0",
+      "sha256": "41fad68b74edcfe3108fac903bf76b91ae98ebaf3e1bacfbdedd5ace17319fdf"
+    },
+    {
+      "path": "graphs/motor-a.json",
+      "kind": "value-graph",
+      "id": "motor-a-counter-graph",
+      "version": "1.0.0",
+      "sha256": "dde4f4fe2eef8d198f5e1d03c757565fd5d859aaccfb73b78e22945d73a6ae9d"
+    },
+    {
+      "path": "mappings/motor-a.json",
+      "kind": "mapping-set",
+      "id": "motor-a-mapping",
+      "version": "1.0.0",
+      "sha256": "67d31ae6e6e76ad621ae22426e11f19a01a3927ed9af687711f15fddc289e083"
+    },
+    {
+      "path": "evidence/motor-b-low.json",
+      "kind": "evidence-artifact",
+      "id": "ev-motor-b-low",
+      "version": "1.0.0",
+      "sha256": "a9c81c7f5398a7ebf5be12da40ad933f56757580e37c092c1232711c5e0b4e0d"
+    },
+    {
+      "path": "sources/motor-b-low.json",
+      "kind": "source-definition",
+      "id": "motor-b-low",
+      "version": "1.0.0",
+      "sha256": "30c474c6dc5a25d5be61c780a8543df3a65301db39a41366d778f6e9498cefce"
+    },
+    {
+      "path": "evidence/motor-b-high.json",
+      "kind": "evidence-artifact",
+      "id": "ev-motor-b-high",
+      "version": "1.0.0",
+      "sha256": "8b3d85cafdf4d25ef7a5ab575514efffd543e16f6068e0e27597c4168147a8a0"
+    },
+    {
+      "path": "sources/motor-b-high.json",
+      "kind": "source-definition",
+      "id": "motor-b-high",
+      "version": "1.0.0",
+      "sha256": "4e7aaf261af0a006ea1f6e8acc69aaa9aace8539e34635b44bc5768a753e369d"
+    },
+    {
+      "path": "evidence/motor-b-speed.json",
+      "kind": "evidence-artifact",
+      "id": "ev-motor-b-speed",
+      "version": "1.0.0",
+      "sha256": "6b5db42874dd73663bda3323b475ec8beabf0c4a62dce002375eb31dfc526520"
+    },
+    {
+      "path": "sources/motor-b-speed.json",
+      "kind": "source-definition",
+      "id": "motor-b-speed",
+      "version": "1.0.0",
+      "sha256": "6fa3cc8ad9fe85f4b6a45fc84ad0c16b90307e8f3f054af2bb7c7b28ebd53750"
+    },
+    {
+      "path": "targets/motor-b.json",
+      "kind": "target-instance",
+      "id": "motor-b",
+      "version": "1.0.0",
+      "sha256": "959d33981d39037e9ca59ac406c7bf6e8eb098b681c7364c61e5a940433eda2f"
+    },
+    {
+      "path": "graphs/motor-b.json",
+      "kind": "value-graph",
+      "id": "motor-b-counter-graph",
+      "version": "1.0.0",
+      "sha256": "df2e78d78f24e6fc40ce18b73577d389bd2604080207a31df72cbe25a9649663"
+    },
+    {
+      "path": "mappings/motor-b.json",
+      "kind": "mapping-set",
+      "id": "motor-b-mapping",
+      "version": "1.0.0",
+      "sha256": "c5ae2e57e7bb81f5235eb8fbf05b3cd96bfc078a62e4eabafeb614181dec2c25"
+    }
+  ]
+}

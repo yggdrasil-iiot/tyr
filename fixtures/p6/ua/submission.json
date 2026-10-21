@@ -1,0 +1,34 @@
+{
+  "kind": "mapping-submission",
+  "schemaVersion": "2.9.0",
+  "id": "mixed-ua",
+  "streamId": "mixed-ua",
+  "version": "1.0.0",
+  "workspaceSha256": "c7e82cb38e9bb167c0d155871a95fe24466db2c8174bff3faf2ad0ef86ff8e81",
+  "proposalSha256": "d9a47b8ec2ee793d2d1f3cd86979b0f63c320014f7f6a0e72bd2402b0a6b4c90",
+  "baseRelease": null,
+  "proposedBy": "proposer",
+  "execution": "excluded",
+  "context": {
+    "equipment": [
+      {
+        "id": "mixed-line",
+        "label": "mixed-line"
+      }
+    ],
+    "connections": [
+      {
+        "id": "mixed-melsec",
+        "label": "mixed-melsec",
+        "equipmentInstanceId": "mixed-line",
+        "accessProfileRef": "melsec-device-v1"
+      },
+      {
+        "id": "mixed-ua",
+        "label": "mixed-ua",
+        "equipmentInstanceId": "mixed-line",
+        "accessProfileRef": "s7-1500-opcua-v1"
+      }
+    ]
+  }
+}

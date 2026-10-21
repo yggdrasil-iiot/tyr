@@ -1,0 +1,26 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "nested-object-tree",
+  "patternId": "MP05",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "equipment": "machine-a",
+    "objects": {
+      "Motor1": {
+        "type": "Motor",
+        "speed": "2400"
+      },
+      "Motor2": {
+        "type": "Motor",
+        "speed": "1800"
+      }
+    }
+  },
+  "expect": {
+    "distinctInstancePaths": [
+      "Motor1.speed",
+      "Motor2.speed"
+    ]
+  }
+}

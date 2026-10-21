@@ -1,0 +1,16 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "word-fanout",
+  "patternId": "MP08",
+  "mode": "current",
+  "action": "word-fanout",
+  "input": {
+    "sample": {
+      "bytesHex": "0100"
+    }
+  },
+  "expect": {
+    "state": "running",
+    "alarm": true
+  }
+}

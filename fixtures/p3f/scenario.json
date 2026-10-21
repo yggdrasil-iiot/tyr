@@ -1,0 +1,55 @@
+{
+  "kind": "preview-scenario",
+  "schemaVersion": "2.3.0",
+  "id": "selector-source-changed",
+  "version": "1.0.0",
+  "label": "0 → 1 · D1000 → D2000 · 200 kPa",
+  "mappingSetRef": {
+    "id": "bounded-pressure-mapping",
+    "version": "1.0.0"
+  },
+  "mappingId": "selected-pressure",
+  "workspaceSha256": "e009aa9e6c6873efc575242421800ce429a98e57dd37f935cb2e899f1ea58a5c",
+  "evaluationContext": {
+    "at": "2026-10-17T10:00:00Z",
+    "triggerSequence": null
+  },
+  "samples": {
+    "selector-index": {
+      "value": {
+        "bytesHex": "0100"
+      },
+      "quality": "good",
+      "sourceTimestamp": "2026-10-17T10:00:00Z",
+      "serverTimestamp": "2026-10-17T10:00:00Z",
+      "sequence": null
+    },
+    "selector-previous": {
+      "value": {
+        "bytesHex": "0000"
+      },
+      "quality": "good",
+      "sourceTimestamp": "2026-10-17T10:00:00Z",
+      "serverTimestamp": "2026-10-17T10:00:00Z",
+      "sequence": null
+    },
+    "pressure-up": {
+      "value": {
+        "bytesHex": "6400"
+      },
+      "quality": "good",
+      "sourceTimestamp": "2026-10-17T10:00:00Z",
+      "serverTimestamp": "2026-10-17T10:00:00Z",
+      "sequence": null
+    },
+    "pressure-down": {
+      "value": {
+        "bytesHex": "c800"
+      },
+      "quality": "good",
+      "sourceTimestamp": "2026-10-17T10:00:00Z",
+      "serverTimestamp": "2026-10-17T10:00:00Z",
+      "sequence": null
+    }
+  }
+}

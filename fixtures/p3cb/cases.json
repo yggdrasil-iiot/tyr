@@ -1,0 +1,72 @@
+{
+  "scope": "Manually specified decimal oracles. Virtual inputs only; no execution or device access.",
+  "cases": [
+    {
+      "id": "sqrt-zero",
+      "op": "sqrt",
+      "sample": {
+        "bytesHex": "0000"
+      },
+      "expectedGraphValue": "0",
+      "codes": []
+    },
+    {
+      "id": "sqrt-perfect",
+      "op": "sqrt",
+      "sample": {
+        "bytesHex": "0900"
+      },
+      "expectedGraphValue": "3",
+      "codes": []
+    },
+    {
+      "id": "sqrt-irrational",
+      "op": "sqrt",
+      "sample": {
+        "bytesHex": "0200"
+      },
+      "expectedGraphValue": "1.414213562373095048801688724209698",
+      "codes": [
+        "loss.precision"
+      ]
+    },
+    {
+      "id": "clamp-pass",
+      "op": "clamp",
+      "sample": {
+        "bytesHex": "0500"
+      },
+      "expectedGraphValue": "5",
+      "codes": []
+    },
+    {
+      "id": "clamp-low-edge",
+      "op": "clamp",
+      "sample": {
+        "bytesHex": "0000"
+      },
+      "expectedGraphValue": "0",
+      "codes": []
+    },
+    {
+      "id": "clamp-high-edge",
+      "op": "clamp",
+      "sample": {
+        "bytesHex": "0a00"
+      },
+      "expectedGraphValue": "10",
+      "codes": []
+    },
+    {
+      "id": "clamp-high-loss",
+      "op": "clamp",
+      "sample": {
+        "bytesHex": "0b00"
+      },
+      "expectedGraphValue": "10",
+      "codes": [
+        "loss.clamp"
+      ]
+    }
+  ]
+}

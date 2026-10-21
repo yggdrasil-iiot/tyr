@@ -1,0 +1,38 @@
+{
+  "structure-ab-actual": {
+    "typedValue": "150"
+  },
+  "structure-ab-target": {
+    "typedValue": "50"
+  },
+  "arithmetic-ab-gain": {
+    "typedValue": "2"
+  },
+  "structure-ua-actual": {
+    "typedValue": "150"
+  },
+  "structure-ua-target": {
+    "typedValue": "50"
+  },
+  "arithmetic-ua-gain": {
+    "typedValue": "2"
+  },
+  "structure-db-actual": {
+    "bytesHex": "9600"
+  },
+  "structure-db-target": {
+    "bytesHex": "3200"
+  },
+  "arithmetic-db-gain": {
+    "bytesHex": "0200"
+  },
+  "structure-melsec-actual": {
+    "bytesHex": "9600"
+  },
+  "structure-melsec-target": {
+    "bytesHex": "3200"
+  },
+  "arithmetic-melsec-gain": {
+    "bytesHex": "0200"
+  }
+}

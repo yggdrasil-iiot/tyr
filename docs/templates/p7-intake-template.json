@@ -1,0 +1,26 @@
+{
+  "kind": "pov-intake-checklist",
+  "version": "1.0.0",
+  "status": "not-provided",
+  "datasetPseudonym": null,
+  "permissionConfirmed": false,
+  "productAndVersion": null,
+  "documentsAndSettingsSameRevisionConfirmed": false,
+  "artifacts": [],
+  "artifactEntryInstructions": {
+    "pseudonymFilename": "source-01.xlsx",
+    "sha256": "compute from the delivered bytes",
+    "split": "calibration/evaluation/heldout",
+    "revision": "declare source revision and time"
+  },
+  "independentReviewerPseudonym": null,
+  "independenceAttested": false,
+  "anonymization": {
+    "correspondenceTableStoredSeparately": false,
+    "namesAddressesCredentialsReviewed": false,
+    "mappingRelationsPreserved": false,
+    "unverifiableRedactions": []
+  },
+  "acceptanceTargetsAgreed": false,
+  "fieldPoV": "not-performed"
+}

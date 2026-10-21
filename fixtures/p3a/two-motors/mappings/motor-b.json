@@ -1,0 +1,102 @@
+{
+  "kind": "mapping-set",
+  "schemaVersion": "2.0.0",
+  "id": "motor-b-mapping",
+  "version": "1.0.0",
+  "equipmentInstanceId": "line-a-motor-melsec",
+  "targetInstanceRef": {
+    "id": "motor-b",
+    "version": "1.0.0"
+  },
+  "mappings": [
+    {
+      "mappingId": "motor-b-speed-binding",
+      "valueRef": {
+        "kind": "source",
+        "sourceRef": {
+          "id": "motor-b-speed",
+          "version": "1.0.0"
+        }
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "actual-speed"
+        }
+      ],
+      "transform": [
+        {
+          "op": "linear",
+          "factor": "0.1",
+          "offset": "0"
+        },
+        {
+          "op": "cast",
+          "to": "Double",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "rpm"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "ev-motor-b-speed",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "mappingId": "motor-b-counter-binding",
+      "valueRef": {
+        "kind": "graph",
+        "graphRef": {
+          "id": "motor-b-counter-graph",
+          "version": "1.0.0"
+        },
+        "nodeId": "result"
+      },
+      "memberPath": [
+        {
+          "kind": "member",
+          "memberId": "cycle-count"
+        }
+      ],
+      "transform": [
+        {
+          "op": "cast",
+          "to": "Int32",
+          "overflow": "error",
+          "rounding": "exact"
+        }
+      ],
+      "outputUnit": {
+        "status": "known",
+        "code": "1"
+      },
+      "invalidValuePolicy": "bad-quality",
+      "evidenceRefs": [
+        {
+          "artifactId": "ev-motor-b-low",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "ev-motor-b-high",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}

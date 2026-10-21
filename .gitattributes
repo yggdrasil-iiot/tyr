@@ -1,0 +1,6 @@
+# Preserve existing bytes: fixture references and evidence use SHA-256.
+# Normalize line endings only as a separate, explicitly resealed change.
+* -text
+*.png binary
+*.jpg binary
+*.xlsx binary

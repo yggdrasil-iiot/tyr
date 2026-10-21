@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "mappingId": "p4b-plc-pressure",
+      "result": "150",
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-solution-pressure",
+      "result": "80",
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-external-reference",
+      "result": "70",
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-baseline",
+      "result": "100",
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-difference",
+      "result": "50",
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-line-code",
+      "result": "LINE-A",
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-enabled",
+      "result": true,
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-setpoint",
+      "result": "80",
+      "quality": "good"
+    },
+    {
+      "mappingId": "p4b-hmi-setpoint",
+      "result": "25",
+      "quality": "good"
+    }
+  ]
+}

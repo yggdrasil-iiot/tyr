@@ -1,0 +1,40 @@
+{
+  "kind": "semantic-definition",
+  "schemaVersion": "1.1.0",
+  "id": "motor-counter",
+  "version": "1.0.0",
+  "members": [
+    {
+      "memberId": "actual-speed",
+      "name": "actualSpeed",
+      "semanticId": "urn:tyr:concept:motor-actual-speed",
+      "description": "모터 축 실제 회전 속도. 목표값과 구분한다.",
+      "valueType": "Double",
+      "unit": {
+        "status": "known",
+        "code": "rpm"
+      },
+      "role": "measurement",
+      "range": {
+        "low": "0",
+        "high": "3000"
+      }
+    },
+    {
+      "memberId": "cycle-count",
+      "name": "cycleCount",
+      "semanticId": "urn:tyr:concept:motor-cycle-count",
+      "description": "완료한 운전 사이클 수. Int32 초과 시 오류.",
+      "valueType": "Int32",
+      "unit": {
+        "status": "known",
+        "code": "1"
+      },
+      "role": "status",
+      "range": {
+        "low": "0",
+        "high": "2147483647"
+      }
+    }
+  ]
+}

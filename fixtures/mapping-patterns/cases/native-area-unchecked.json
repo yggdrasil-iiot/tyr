@@ -1,0 +1,14 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "native-area-unchecked",
+  "patternId": "MP08",
+  "mode": "gap-probe",
+  "action": "native-area-unchecked",
+  "input": {
+    "deviceArea": "M"
+  },
+  "expect": {
+    "sourceRules": [],
+    "knownGap": "native-area-unit-not-checked"
+  }
+}

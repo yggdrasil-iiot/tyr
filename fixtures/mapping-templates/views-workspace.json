@@ -1,0 +1,3595 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "line-a-motor-ab",
+      "label": "조립 이송 모터 · AB"
+    },
+    {
+      "id": "line-a-motor-ua",
+      "label": "검사 이송 모터 · S7-1500"
+    },
+    {
+      "id": "line-a-motor-db",
+      "label": "포장 이송 모터 · S7-300"
+    },
+    {
+      "id": "line-a-motor-melsec",
+      "label": "배출 이송 모터 · MELSEC"
+    }
+  ],
+  "connections": [
+    {
+      "id": "logical-ab",
+      "label": "가상 AB",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "accessProfileRef": "ab-logix-symbol-v1"
+    },
+    {
+      "id": "logical-ua",
+      "label": "가상 UA",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "logical-db",
+      "label": "가상 DB",
+      "equipmentInstanceId": "line-a-motor-db",
+      "accessProfileRef": "s7-300-db-v1"
+    },
+    {
+      "id": "logical-melsec",
+      "label": "가상 MELSEC",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "accessProfileRef": "melsec-device-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "a07-ab-word",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.StatusWord",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.StatusWord"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ab-word",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "a07-ab-word",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ab-word-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.StatusWord",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.StatusWord"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ab-word-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ab-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-ab-word-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ab-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.StatusWord",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.StatusWord"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ab-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ab-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 0
+        }
+      },
+      "label": "a07-ab-running",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ab-alarm",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.StatusWord",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.StatusWord"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ab-alarm",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ab-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 15
+        }
+      },
+      "label": "a07-ab-alarm",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ab-alarm-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "connectionProfileRef": "logical-ab",
+        "accessProfileRef": "ab-logix-symbol-v1",
+        "status": "ready",
+        "rawAddressText": "Drive.StatusWord",
+        "addressRadix": null,
+        "access": {
+          "kind": "symbol",
+          "symbolPath": "Drive.StatusWord"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ab-alarm-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ab-alarm",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-ab-alarm-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "a07-ua-word",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Mode",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Mode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ua-word",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "a07-ua-word",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ua-word-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Mode",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Mode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ua-word-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ua-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-ua-word-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ua-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Mode",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Mode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ua-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ua-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 0
+        }
+      },
+      "label": "a07-ua-running",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ua-alarm",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Mode",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Mode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ua-alarm",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ua-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 15
+        }
+      },
+      "label": "a07-ua-alarm",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-ua-alarm-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ua",
+        "connectionProfileRef": "logical-ua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:tyr:sample:s7-1500;s=Motor.Mode",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:tyr:sample:s7-1500",
+          "identifierType": "string",
+          "identifier": "Motor.Mode"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "UInt16"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-ua-alarm-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-ua-alarm",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-ua-alarm-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "a07-db-word",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW40",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 40,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-db-word",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "a07-db-word",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-db-word-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW40",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 40,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-db-word-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-db-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-db-word-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-db-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW40",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 40,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-db-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-db-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 0
+        }
+      },
+      "label": "a07-db-running",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-db-alarm",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW40",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 40,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-db-alarm",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-db-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 15
+        }
+      },
+      "label": "a07-db-alarm",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-db-alarm-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-db",
+        "connectionProfileRef": "logical-db",
+        "accessProfileRef": "s7-300-db-v1",
+        "status": "ready",
+        "rawAddressText": "DB10.DBW40",
+        "addressRadix": null,
+        "access": {
+          "kind": "db-offset",
+          "dbNumber": 10,
+          "byteOffset": 40,
+          "byteLength": 2,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "big",
+          "wordOrder": "high-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-db-alarm-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-db-alarm",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-db-alarm-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "a07-melsec-word",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-melsec-word",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "a07-melsec-word",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-melsec-word-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-melsec-word-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-melsec-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-melsec-word-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-melsec-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-melsec-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-melsec-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 0
+        }
+      },
+      "label": "a07-melsec-running",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-melsec-alarm",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-melsec-alarm",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-melsec-word",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "bit",
+          "bitIndex": 15
+        }
+      },
+      "label": "a07-melsec-alarm",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.10.0",
+        "id": "a07-melsec-alarm-alias",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-melsec",
+        "connectionProfileRef": "logical-melsec",
+        "accessProfileRef": "melsec-device-v1",
+        "status": "ready",
+        "rawAddressText": "D3000",
+        "addressRadix": 10,
+        "access": {
+          "kind": "device-register",
+          "deviceArea": "D",
+          "addressIndex": 3000,
+          "addressUnit": "word16",
+          "wordCount": 1,
+          "bitOffset": null
+        },
+        "rawRepresentation": {
+          "mode": "bytes",
+          "valueType": "UInt16",
+          "byteOrder": "little",
+          "wordOrder": "low-first"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-a07-melsec-alarm-alias",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": {
+          "id": "a07-melsec-alarm",
+          "version": "1.0.0"
+        },
+        "sourceKind": "plc",
+        "accessMode": "read",
+        "view": {
+          "kind": "alias"
+        }
+      },
+      "label": "a07-melsec-alarm-alias",
+      "note": "Synthetic A07 explicit read view; LSB=0; root sample only.",
+      "origin": "synthetic",
+      "capturedAt": "2026-10-17T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "a07-status-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "word",
+          "name": "word",
+          "semanticId": "urn:tyr:concept:a07.word",
+          "description": "Synthetic status word",
+          "valueType": "Int32",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "word-alias",
+          "name": "word-alias",
+          "semanticId": "urn:tyr:concept:a07.word-alias",
+          "description": "Synthetic status word-alias",
+          "valueType": "Int32",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "running",
+          "name": "running",
+          "semanticId": "urn:tyr:concept:a07.running",
+          "description": "Synthetic status running",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "alarm",
+          "name": "alarm",
+          "semanticId": "urn:tyr:concept:a07.alarm",
+          "description": "Synthetic status alarm",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        },
+        {
+          "memberId": "alarm-alias",
+          "name": "alarm-alias",
+          "semanticId": "urn:tyr:concept:a07.alarm-alias",
+          "description": "Synthetic status alarm-alias",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        }
+      ]
+    },
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "template-state-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "alarm-alias",
+          "name": "alarm-alias",
+          "semanticId": "urn:tyr:concept:a07.alarm-alias",
+          "description": "Synthetic status alarm-alias",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        }
+      ]
+    },
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.2.0",
+      "id": "reuse-view-melsec-r1-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "alarm-alias",
+          "name": "alarm-alias",
+          "semanticId": "urn:tyr:concept:a07.alarm-alias",
+          "description": "Synthetic status alarm-alias",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "a07-ab-status",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "label": "ab status",
+      "semanticDefinitionRef": {
+        "id": "a07-status-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-a07-ab-word",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "a07-ua-status",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "label": "ua status",
+      "semanticDefinitionRef": {
+        "id": "a07-status-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-a07-ua-word",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "a07-db-status",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "label": "db status",
+      "semanticDefinitionRef": {
+        "id": "a07-status-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-a07-db-word",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "a07-melsec-status",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "label": "melsec status",
+      "semanticDefinitionRef": {
+        "id": "a07-status-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-a07-melsec-word",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "template-state-target",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "label": "ab status",
+      "semanticDefinitionRef": {
+        "id": "template-state-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-a07-ab-word",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "reuse-view-melsec-target",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "label": "재사용 워드·비트",
+      "semanticDefinitionRef": {
+        "id": "reuse-view-melsec-r1-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-a07-melsec-alarm-alias",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-a07-melsec-word",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        },
+        {
+          "artifactId": "manual-a07-melsec-alarm",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.2.0",
+      "id": "a07-ab-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "nodes": [
+        {
+          "nodeId": "alarm",
+          "op": "identity",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "a07-ab-alarm-alias",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ab-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.2.0",
+      "id": "a07-ua-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "nodes": [
+        {
+          "nodeId": "alarm",
+          "op": "identity",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "a07-ua-alarm-alias",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ua-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.2.0",
+      "id": "a07-db-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "nodes": [
+        {
+          "nodeId": "alarm",
+          "op": "identity",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "a07-db-alarm-alias",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-db-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.2.0",
+      "id": "a07-melsec-graph",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "alarm",
+          "op": "identity",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "a07-melsec-alarm-alias",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "value-graph",
+      "schemaVersion": "2.2.0",
+      "id": "reuse-view-melsec-r1-g0",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "nodes": [
+        {
+          "nodeId": "alarm",
+          "op": "identity",
+          "inputs": {
+            "value": {
+              "kind": "source",
+              "sourceRef": {
+                "id": "a07-melsec-alarm-alias",
+                "version": "1.0.0"
+              }
+            }
+          },
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "a07-ab-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "targetInstanceRef": {
+        "id": "a07-ab-status",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ab-word",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ab-word",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ab-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-word-alias",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ab-word-alias",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ab-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ab-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ab-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-alarm",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ab-alarm",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ab-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ab-alarm-alias",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "a07-ab-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "alarm"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ab-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "a07-ua-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ua",
+      "targetInstanceRef": {
+        "id": "a07-ua-status",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "ua-word",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ua-word",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ua-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-word-alias",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ua-word-alias",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ua-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ua-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ua-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-alarm",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-ua-alarm",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ua-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "ua-alarm-alias",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "a07-ua-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "alarm"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ua-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ua-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "a07-db-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-db",
+      "targetInstanceRef": {
+        "id": "a07-db-status",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "db-word",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-db-word",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-db-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-word-alias",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-db-word-alias",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-db-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-db-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-db-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-alarm",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-db-alarm",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-db-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "db-alarm-alias",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "a07-db-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "alarm"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-db-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-db-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "a07-melsec-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "a07-melsec-status",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "melsec-word",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-melsec-word",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-word-alias",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-melsec-word-alias",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "word-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Int32",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-melsec-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-alarm",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "a07-melsec-alarm",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "mappingId": "melsec-alarm-alias",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "a07-melsec-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "alarm"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "template-state-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-ab",
+      "targetInstanceRef": {
+        "id": "template-state-target",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "template-alarm-alias",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "a07-ab-graph",
+              "version": "1.0.0"
+            },
+            "nodeId": "alarm"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-ab-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-word-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-ab-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.2.0",
+      "id": "reuse-view-melsec-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetInstanceRef": {
+        "id": "reuse-view-melsec-target",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "reuse-view-melsec-b319fe81e0faa",
+          "valueRef": {
+            "kind": "graph",
+            "graphRef": {
+              "id": "reuse-view-melsec-r1-g0",
+              "version": "1.0.0"
+            },
+            "nodeId": "alarm"
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "alarm-alias"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Boolean",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mappingTemplates": [
+    {
+      "kind": "mapping-template",
+      "schemaVersion": "2.19.0",
+      "id": "word-and-bit",
+      "version": "1.0.0",
+      "label": "워드·비트 공통 템플릿",
+      "description": "합성 alias/view 재사용",
+      "reason": "부모 근거 고정 검증",
+      "authoredBy": "fixture-author",
+      "authoredAt": "2026-10-18T04:00:00Z",
+      "previousTemplateRef": null,
+      "slots": [
+        {
+          "slotId": "input-1",
+          "label": "a07-ab-alarm-alias",
+          "sourceRef": {
+            "id": "a07-ab-alarm-alias",
+            "version": "1.0.0"
+          },
+          "signature": {
+            "rawRepresentation": {
+              "valueType": "Boolean"
+            },
+            "unit": {
+              "status": "not-applicable"
+            },
+            "inputStage": "already-engineered",
+            "fixedArray": null
+          }
+        }
+      ],
+      "model": {
+        "kind": "semantic-definition",
+        "schemaVersion": "2.2.0",
+        "id": "template-state-model",
+        "version": "1.0.0",
+        "members": [
+          {
+            "memberId": "alarm-alias",
+            "name": "alarm-alias",
+            "semanticId": "urn:tyr:concept:a07.alarm-alias",
+            "description": "Synthetic status alarm-alias",
+            "valueType": "Boolean",
+            "unit": {
+              "status": "not-applicable"
+            },
+            "role": "status",
+            "range": null
+          }
+        ]
+      },
+      "target": {
+        "kind": "target-instance",
+        "schemaVersion": "2.0.0",
+        "id": "template-state-target",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "label": "ab status",
+        "semanticDefinitionRef": {
+          "id": "template-state-model",
+          "version": "1.0.0"
+        },
+        "evidenceRefs": []
+      },
+      "graphs": [
+        {
+          "kind": "value-graph",
+          "schemaVersion": "2.2.0",
+          "id": "a07-ab-graph",
+          "version": "1.0.0",
+          "equipmentInstanceId": "line-a-motor-ab",
+          "nodes": [
+            {
+              "nodeId": "alarm",
+              "op": "identity",
+              "inputs": {
+                "value": {
+                  "kind": "source",
+                  "sourceRef": {
+                    "id": "a07-ab-alarm-alias",
+                    "version": "1.0.0"
+                  }
+                }
+              },
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              },
+              "evidenceRefs": []
+            }
+          ]
+        }
+      ],
+      "mapping": {
+        "kind": "mapping-set",
+        "schemaVersion": "2.2.0",
+        "id": "template-state-mapping",
+        "version": "1.0.0",
+        "equipmentInstanceId": "line-a-motor-ab",
+        "targetInstanceRef": {
+          "id": "template-state-target",
+          "version": "1.0.0"
+        },
+        "mappings": [
+          {
+            "mappingId": "template-alarm-alias",
+            "valueRef": {
+              "kind": "graph",
+              "graphRef": {
+                "id": "a07-ab-graph",
+                "version": "1.0.0"
+              },
+              "nodeId": "alarm"
+            },
+            "memberPath": [
+              {
+                "kind": "member",
+                "memberId": "alarm-alias"
+              }
+            ],
+            "transform": [
+              {
+                "op": "cast",
+                "to": "Boolean",
+                "rounding": "exact",
+                "overflow": "error"
+              }
+            ],
+            "outputUnit": {
+              "status": "not-applicable"
+            },
+            "invalidValuePolicy": "bad-quality",
+            "evidenceRefs": []
+          }
+        ]
+      }
+    }
+  ],
+  "templateApplications": [
+    {
+      "kind": "template-application",
+      "schemaVersion": "2.19.0",
+      "id": "application-view-melsec-r1",
+      "version": "1.0.0",
+      "applicationId": "view-melsec",
+      "revision": 1,
+      "previousApplicationRef": null,
+      "templateRef": {
+        "id": "word-and-bit",
+        "version": "1.0.0",
+        "sha256": "8d48bf178fe56321d51647293ec9ffdf814e743f01b56861c19d376d77699dfe"
+      },
+      "equipmentInstanceId": "line-a-motor-melsec",
+      "targetLabel": "재사용 워드·비트",
+      "bindings": [
+        {
+          "slotId": "input-1",
+          "sourceRef": {
+            "id": "a07-melsec-alarm-alias",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "sourceSnapshots": [
+        {
+          "kind": "source-definition",
+          "schemaVersion": "2.10.0",
+          "id": "a07-melsec-alarm",
+          "version": "1.0.0",
+          "equipmentInstanceId": "line-a-motor-melsec",
+          "connectionProfileRef": "logical-melsec",
+          "accessProfileRef": "melsec-device-v1",
+          "status": "ready",
+          "rawAddressText": "D3000",
+          "addressRadix": 10,
+          "access": {
+            "kind": "device-register",
+            "deviceArea": "D",
+            "addressIndex": 3000,
+            "addressUnit": "word16",
+            "wordCount": 1,
+            "bitOffset": null
+          },
+          "rawRepresentation": {
+            "mode": "bytes",
+            "valueType": "UInt16",
+            "byteOrder": "little",
+            "wordOrder": "low-first"
+          },
+          "inputStage": "already-engineered",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "viewOf": {
+            "id": "a07-melsec-word",
+            "version": "1.0.0"
+          },
+          "sourceKind": "plc",
+          "accessMode": "read",
+          "view": {
+            "kind": "bit",
+            "bitIndex": 15
+          }
+        },
+        {
+          "kind": "source-definition",
+          "schemaVersion": "2.10.0",
+          "id": "a07-melsec-alarm-alias",
+          "version": "1.0.0",
+          "equipmentInstanceId": "line-a-motor-melsec",
+          "connectionProfileRef": "logical-melsec",
+          "accessProfileRef": "melsec-device-v1",
+          "status": "ready",
+          "rawAddressText": "D3000",
+          "addressRadix": 10,
+          "access": {
+            "kind": "device-register",
+            "deviceArea": "D",
+            "addressIndex": 3000,
+            "addressUnit": "word16",
+            "wordCount": 1,
+            "bitOffset": null
+          },
+          "rawRepresentation": {
+            "mode": "bytes",
+            "valueType": "UInt16",
+            "byteOrder": "little",
+            "wordOrder": "low-first"
+          },
+          "inputStage": "already-engineered",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "viewOf": {
+            "id": "a07-melsec-alarm",
+            "version": "1.0.0"
+          },
+          "sourceKind": "plc",
+          "accessMode": "read",
+          "view": {
+            "kind": "alias"
+          }
+        },
+        {
+          "kind": "source-definition",
+          "schemaVersion": "2.7.0",
+          "id": "a07-melsec-word",
+          "version": "1.0.0",
+          "equipmentInstanceId": "line-a-motor-melsec",
+          "connectionProfileRef": "logical-melsec",
+          "accessProfileRef": "melsec-device-v1",
+          "status": "ready",
+          "rawAddressText": "D3000",
+          "addressRadix": 10,
+          "access": {
+            "kind": "device-register",
+            "deviceArea": "D",
+            "addressIndex": 3000,
+            "addressUnit": "word16",
+            "wordCount": 1,
+            "bitOffset": null
+          },
+          "rawRepresentation": {
+            "mode": "bytes",
+            "valueType": "UInt16",
+            "byteOrder": "little",
+            "wordOrder": "low-first"
+          },
+          "inputStage": "already-engineered",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "viewOf": null,
+          "sourceKind": "plc",
+          "accessMode": "read"
+        }
+      ],
+      "generated": [
+        {
+          "kind": "semantic-definition",
+          "schemaVersion": "2.2.0",
+          "id": "reuse-view-melsec-r1-model",
+          "version": "1.0.0",
+          "members": [
+            {
+              "memberId": "alarm-alias",
+              "name": "alarm-alias",
+              "semanticId": "urn:tyr:concept:a07.alarm-alias",
+              "description": "Synthetic status alarm-alias",
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              },
+              "role": "status",
+              "range": null
+            }
+          ]
+        },
+        {
+          "kind": "target-instance",
+          "schemaVersion": "2.0.0",
+          "id": "reuse-view-melsec-target",
+          "version": "1.0.0",
+          "equipmentInstanceId": "line-a-motor-melsec",
+          "label": "재사용 워드·비트",
+          "semanticDefinitionRef": {
+            "id": "reuse-view-melsec-r1-model",
+            "version": "1.0.0"
+          },
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-a07-melsec-alarm-alias",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-word",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            },
+            {
+              "artifactId": "manual-a07-melsec-alarm",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ]
+        },
+        {
+          "kind": "value-graph",
+          "schemaVersion": "2.2.0",
+          "id": "reuse-view-melsec-r1-g0",
+          "version": "1.0.0",
+          "equipmentInstanceId": "line-a-motor-melsec",
+          "nodes": [
+            {
+              "nodeId": "alarm",
+              "op": "identity",
+              "inputs": {
+                "value": {
+                  "kind": "source",
+                  "sourceRef": {
+                    "id": "a07-melsec-alarm-alias",
+                    "version": "1.0.0"
+                  }
+                }
+              },
+              "valueType": "Boolean",
+              "unit": {
+                "status": "not-applicable"
+              },
+              "evidenceRefs": [
+                {
+                  "artifactId": "manual-a07-melsec-alarm-alias",
+                  "locator": {
+                    "kind": "text-line",
+                    "line": 1
+                  }
+                },
+                {
+                  "artifactId": "manual-a07-melsec-word",
+                  "locator": {
+                    "kind": "text-line",
+                    "line": 1
+                  }
+                },
+                {
+                  "artifactId": "manual-a07-melsec-alarm",
+                  "locator": {
+                    "kind": "text-line",
+                    "line": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "mapping-set",
+          "schemaVersion": "2.2.0",
+          "id": "reuse-view-melsec-mapping",
+          "version": "1.0.0",
+          "equipmentInstanceId": "line-a-motor-melsec",
+          "targetInstanceRef": {
+            "id": "reuse-view-melsec-target",
+            "version": "1.0.0"
+          },
+          "mappings": [
+            {
+              "mappingId": "reuse-view-melsec-b319fe81e0faa",
+              "valueRef": {
+                "kind": "graph",
+                "graphRef": {
+                  "id": "reuse-view-melsec-r1-g0",
+                  "version": "1.0.0"
+                },
+                "nodeId": "alarm"
+              },
+              "memberPath": [
+                {
+                  "kind": "member",
+                  "memberId": "alarm-alias"
+                }
+              ],
+              "transform": [
+                {
+                  "op": "cast",
+                  "to": "Boolean",
+                  "rounding": "exact",
+                  "overflow": "error"
+                }
+              ],
+              "outputUnit": {
+                "status": "not-applicable"
+              },
+              "invalidValuePolicy": "bad-quality",
+              "evidenceRefs": [
+                {
+                  "artifactId": "manual-a07-melsec-alarm-alias",
+                  "locator": {
+                    "kind": "text-line",
+                    "line": 1
+                  }
+                },
+                {
+                  "artifactId": "manual-a07-melsec-word",
+                  "locator": {
+                    "kind": "text-line",
+                    "line": 1
+                  }
+                },
+                {
+                  "artifactId": "manual-a07-melsec-alarm",
+                  "locator": {
+                    "kind": "text-line",
+                    "line": 1
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "authoredBy": "fixture-author",
+      "authoredAt": "2026-10-18T04:00:00Z"
+    }
+  ]
+}

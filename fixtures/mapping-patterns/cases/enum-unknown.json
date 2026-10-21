@@ -1,0 +1,19 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "enum-unknown",
+  "patternId": "MP08",
+  "mode": "current",
+  "action": "evaluate",
+  "input": {
+    "mappingId": "melsec-state-binding",
+    "sample": {
+      "bytesHex": "0700"
+    }
+  },
+  "expect": {
+    "value": null,
+    "issues": [
+      "value.enum-unknown"
+    ]
+  }
+}

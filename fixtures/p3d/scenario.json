@@ -1,0 +1,37 @@
+{
+  "kind": "preview-scenario",
+  "schemaVersion": "2.3.0",
+  "id": "filter-freshness-good",
+  "version": "1.0.0",
+  "label": "가상 차압 freshness/skew 정상",
+  "mappingSetRef": {
+    "id": "pressure-direct-mapping",
+    "version": "1.0.0"
+  },
+  "mappingId": "direct-difference",
+  "workspaceSha256": "3a31ec10047d929eb75daf3463f0c8df3690300a019d650b5192b6f7599fcc84",
+  "evaluationContext": {
+    "at": "2026-10-17T10:00:00Z",
+    "triggerSequence": null
+  },
+  "samples": {
+    "pressure-up": {
+      "value": {
+        "bytesHex": "9600"
+      },
+      "quality": "good",
+      "sourceTimestamp": "2026-10-17T09:59:59.500Z",
+      "serverTimestamp": "2026-10-17T10:00:00Z",
+      "sequence": null
+    },
+    "pressure-down": {
+      "value": {
+        "bytesHex": "6400"
+      },
+      "quality": "good",
+      "sourceTimestamp": "2026-10-17T09:59:59.550Z",
+      "serverTimestamp": "2026-10-17T10:00:00Z",
+      "sequence": null
+    }
+  }
+}

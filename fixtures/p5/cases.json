@@ -1,0 +1,162 @@
+{
+  "cases": [
+    {
+      "id": "address-A04",
+      "pointer": "/sources/0/definition/access/addressIndex",
+      "value": 1001,
+      "category": "access",
+      "affected": [
+        "source-definition:mixed-plc-pressure",
+        "value-graph:mixed-pressure-difference",
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "endian",
+      "pointer": "/sources/0/definition/rawRepresentation/byteOrder",
+      "value": "big",
+      "category": "decode",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "source-label-only",
+      "pointer": "/sources/0/label",
+      "value": "Pressure measured",
+      "category": "presentation",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "raw-address-evidence-only",
+      "pointer": "/sources/0/definition/rawAddressText",
+      "value": "D001000",
+      "category": "evidence",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "same-name-different-meaning",
+      "pointer": "/semantics/0/members/0/semanticId",
+      "value": "urn:tyr:semantic:pressure:setpoint",
+      "category": "meaning",
+      "affected": [
+        "mapping-set:mixed-tank-mapping",
+        "target-instance:mixed-tank"
+      ]
+    },
+    {
+      "id": "same-type-different-role",
+      "pointer": "/semantics/0/members/0/role",
+      "value": "setpoint",
+      "category": "meaning",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "semantic-display-name",
+      "pointer": "/semantics/0/members/0/name",
+      "value": "Pressure alias",
+      "category": "presentation",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "semantic-unit",
+      "pointer": "/semantics/0/members/0/unit/code",
+      "value": "bar",
+      "category": "meaning",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "source-unit",
+      "pointer": "/sources/0/definition/unit/code",
+      "value": "bar",
+      "category": "meaning",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "source-evidence-note",
+      "pointer": "/sources/0/note",
+      "value": "Rechecked from document page 2",
+      "category": "evidence",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "constant-definition",
+      "pointer": "/sources/1/definition/access/value",
+      "value": "110",
+      "category": "access",
+      "affected": [
+        "value-graph:mixed-pressure-difference",
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "SQL-raw-only",
+      "pointer": "/sources/3/definition/access/expression",
+      "value": "  SELECT reference_pressure FROM source;\\n ",
+      "category": "access",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "write-scale-A05",
+      "pointer": "/writes/0/transform/0/factor",
+      "value": "20",
+      "category": "transform",
+      "affected": [
+        "write-definition:mixed-write-plc"
+      ]
+    },
+    {
+      "id": "connection-profile",
+      "pointer": "/connections/0/accessProfileRef",
+      "value": "s7-300-db-v1",
+      "category": "access",
+      "affected": [
+        "source-definition:mixed-plc-pressure",
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "object-display-name",
+      "pointer": "/targets/0/label",
+      "value": "Tank A label",
+      "category": "presentation",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "object-stable-id",
+      "pointer": "/targets/0/id",
+      "value": "mixed-tank-renamed",
+      "category": "identity",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    },
+    {
+      "id": "read-scale-A05",
+      "pointer": "/mappings/0/mappings/0/transform/0/factor",
+      "value": "2",
+      "category": "transform",
+      "affected": [
+        "mapping-set:mixed-tank-mapping"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "array-pressures-ab": {
+    "typedValues": [
+      "100",
+      "110",
+      "120",
+      null,
+      "200",
+      "210",
+      "220"
+    ]
+  },
+  "array-pressures-ua": {
+    "typedValues": [
+      "100",
+      "110",
+      "120",
+      null,
+      "200",
+      "210",
+      "220"
+    ]
+  },
+  "array-pressures-db": {
+    "bytesHex": "42c80000 42dc0000 42f00000 00000000 43480000 43520000 435c0000"
+  },
+  "array-pressures-melsec": {
+    "bytesHex": "0000c842 0000dc42 0000f042 00000000 00004843 00005243 00005c43"
+  }
+}

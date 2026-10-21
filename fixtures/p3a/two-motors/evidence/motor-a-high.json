@@ -1,0 +1,17 @@
+{
+  "kind": "evidence-artifact",
+  "schemaVersion": "1.1.0",
+  "id": "ev-motor-a-high",
+  "version": "1.0.0",
+  "origin": "synthetic",
+  "file": {
+    "path": "data/motor-a-high.txt",
+    "sha256": "a21a8e892e50468814f356db2bdac67fac536b8cba118969fbc1dcd2cd0897b9",
+    "mediaType": "text/plain"
+  },
+  "capturedAt": "2026-10-17T00:00:00Z",
+  "product": null,
+  "scope": [
+    "line-a-motor-melsec"
+  ]
+}

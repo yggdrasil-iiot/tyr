@@ -1,0 +1,19 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "selector-out-of-range",
+  "patternId": "MP13",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "selector": 2,
+    "candidates": [
+      "A",
+      "B"
+    ],
+    "defaultPolicy": "bad-quality"
+  },
+  "expect": {
+    "error": "selector-out-of-range",
+    "quality": "bad"
+  }
+}

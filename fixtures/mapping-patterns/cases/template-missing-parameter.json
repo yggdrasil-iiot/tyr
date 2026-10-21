@@ -1,0 +1,20 @@
+{
+  "fixtureSpecVersion": "1.0.0",
+  "id": "template-missing-parameter",
+  "patternId": "MP03",
+  "mode": "planned",
+  "action": "not-implemented",
+  "input": {
+    "template": "D{Base+Offset}",
+    "parameters": {
+      "Base": 1000
+    }
+  },
+  "expect": {
+    "state": "unresolved",
+    "missing": [
+      "Offset"
+    ],
+    "publishable": false
+  }
+}
