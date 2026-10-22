@@ -1,0 +1,76 @@
+{
+  "kind": "endpoint-assessment",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/pio-like/assessment-line1-temp",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/pio-like/snapshot",
+      "version": "1.0.0",
+      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+    },
+    "endpoint": {
+      "nodeId": "n.line1-temp"
+    },
+    "closure": {
+      "nodeIds": [
+        "n.line1-temp",
+        "n.plc1"
+      ],
+      "edgeIds": [
+        "e.temp-source"
+      ],
+      "completeness": "complete",
+      "basis": "the only reference is resolved and no unresolved item touches these nodes"
+    },
+    "axes": {
+      "capture": {
+        "status": "partial",
+        "basis": "the snapshot's own coverage is partial",
+        "blockers": []
+      },
+      "structure": {
+        "status": "complete",
+        "basis": "address, scale and unit are all read; the reference is resolved",
+        "blockers": []
+      },
+      "representation": {
+        "status": "representable",
+        "basis": "a source definition with a linear scale expresses it",
+        "blockers": []
+      },
+      "virtualEquivalence": {
+        "status": "passed-within-scope",
+        "basis": "synthetic/line1-temp-scale, one input",
+        "blockers": []
+      },
+      "meaning": {
+        "status": "reviewer-confirmed",
+        "basis": "decision-1 and decision-3",
+        "blockers": []
+      },
+      "approval": {
+        "status": "not-submitted",
+        "basis": "nothing has been sent to Bifrost",
+        "blockers": []
+      }
+    },
+    "decisionRefs": [
+      {
+        "kind": "review-decision",
+        "id": "synthetic/pio-like/decision-1",
+        "version": "1.0.0",
+        "digest": "9fd1461f6322f893fbac4d8b9874ad49010291a9cd3c543fbdac01a9ed33a28a"
+      },
+      {
+        "kind": "review-decision",
+        "id": "synthetic/pio-like/decision-3",
+        "version": "1.0.0",
+        "digest": "6afd3a4e166bcf664929c8e728b1663464745b567e9e09ddec0f43532d29074e"
+      }
+    ],
+    "assessedAt": "2026-10-22T00:03:00Z"
+  },
+  "digest": "e7461f889ced26c62b436f41c04418ac7db9ccf1d53a50df0c8b4e6bf0db2909"
+}

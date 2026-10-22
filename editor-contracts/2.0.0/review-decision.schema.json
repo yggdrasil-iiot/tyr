@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tyr:editor:2.0.0:review-decision.schema.json",
+  "title": "ReviewDecision — a reviewer's local judgement about one item of a pinned snapshot; never an approval",
+  "type": "object",
+  "properties": {
+    "kind": { "const": "review-decision" },
+    "contractVersion": { "const": "2.0.0" },
+    "id": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/id" },
+    "version": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/version" },
+    "body": {
+      "type": "object",
+      "properties": {
+        "snapshotRef": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/snapshotRef" },
+        "target": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["node", "edge", "claim", "issue"] },
+            "id": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/id" }
+          },
+          "required": ["type", "id"],
+          "additionalProperties": false
+        },
+        "decision": { "enum": ["confirm", "hold", "intended-exception", "needs-correction", "refers-elsewhere", "needs-evidence"] },
+        "proposedCorrection": {
+          "type": "object",
+          "properties": {
+            "field": { "type": "string", "minLength": 1, "maxLength": 200 },
+            "value": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/scalar" }
+          },
+          "required": ["field", "value"],
+          "additionalProperties": false
+        },
+        "evidenceBasis": {
+          "description": "Týr records only what a person declared or a virtual case verified. What the interpreter saw or derived belongs to the snapshot.",
+          "enum": ["declared-by-reviewer", "verified-by-virtual-case"]
+        },
+        "virtualCase": {
+          "type": "object",
+          "properties": {
+            "caseId": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/id" },
+            "harnessVersion": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/version" },
+            "inputDigest": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/sha256" },
+            "expectedDigest": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/sha256" },
+            "observedDigest": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/sha256" }
+          },
+          "required": ["caseId", "harnessVersion", "inputDigest", "expectedDigest", "observedDigest"],
+          "additionalProperties": false
+        },
+        "reviewer": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/text" },
+        "reason": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/text" },
+        "decidedAt": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/timestamp" },
+        "previousDecisionDigest": {
+          "description": "Digest of the decision this one follows; null for the first. Decisions are appended, never edited.",
+          "oneOf": [ { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/sha256" }, { "type": "null" } ]
+        },
+        "evidenceRefs": { "type": "array", "items": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/text" } }
+      },
+      "required": ["snapshotRef", "target", "decision", "evidenceBasis", "reviewer", "reason", "decidedAt", "previousDecisionDigest", "evidenceRefs"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "decision": { "const": "needs-correction" } } },
+          "then": { "required": ["proposedCorrection"] },
+          "else": { "not": { "required": ["proposedCorrection"] } }
+        },
+        {
+          "if": { "properties": { "evidenceBasis": { "const": "verified-by-virtual-case" } } },
+          "then": { "required": ["virtualCase"] },
+          "else": { "not": { "required": ["virtualCase"] } }
+        }
+      ]
+    },
+    "digest": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/sha256" },
+    "envelope": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/envelope" }
+  },
+  "required": ["kind", "contractVersion", "id", "version", "body", "digest"],
+  "additionalProperties": false
+}

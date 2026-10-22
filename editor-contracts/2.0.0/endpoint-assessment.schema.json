@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tyr:editor:2.0.0:endpoint-assessment.schema.json",
+  "title": "EndpointAssessment — one endpoint judged on separate axes; there is no single success flag",
+  "type": "object",
+  "properties": {
+    "kind": { "const": "endpoint-assessment" },
+    "contractVersion": { "const": "2.0.0" },
+    "id": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/id" },
+    "version": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/version" },
+    "body": {
+      "type": "object",
+      "properties": {
+        "snapshotRef": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/snapshotRef" },
+        "endpoint": {
+          "type": "object",
+          "properties": {
+            "nodeId": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/id" },
+            "field": { "type": "string", "minLength": 1, "maxLength": 200 }
+          },
+          "required": ["nodeId"],
+          "additionalProperties": false
+        },
+        "closure": {
+          "type": "object",
+          "properties": {
+            "nodeIds": { "type": "array", "minItems": 1, "items": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/id" } },
+            "edgeIds": { "type": "array", "items": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/id" } },
+            "completeness": { "enum": ["complete", "incomplete"] },
+            "basis": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/text" }
+          },
+          "required": ["nodeIds", "edgeIds", "completeness", "basis"],
+          "additionalProperties": false
+        },
+        "axes": {
+          "type": "object",
+          "properties": {
+            "capture": { "allOf": [ { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/axis" }, { "properties": { "status": { "enum": ["unknown", "partial", "declared-complete"] } } } ], "unevaluatedProperties": false },
+            "structure": { "allOf": [ { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/axis" }, { "properties": { "status": { "enum": ["complete", "partial", "unsupported"] } } } ], "unevaluatedProperties": false },
+            "representation": { "allOf": [ { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/axis" }, { "properties": { "status": { "enum": ["representable", "conditional", "lossy", "unsupported"] } } } ], "unevaluatedProperties": false },
+            "virtualEquivalence": { "allOf": [ { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/axis" }, { "properties": { "status": { "enum": ["not-tested", "passed-within-scope", "failed"] } } } ], "unevaluatedProperties": false },
+            "meaning": { "allOf": [ { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/axis" }, { "properties": { "status": { "enum": ["unconfirmed", "reviewer-confirmed", "disputed"] } } } ], "unevaluatedProperties": false },
+            "approval": {
+              "description": "A reference to Bifrost's own state, recorded as seen; Týr does not decide it.",
+              "allOf": [ { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/axis" }, { "properties": { "status": { "enum": ["not-submitted", "submitted", "approved", "published", "rejected"] } } } ],
+              "unevaluatedProperties": false
+            }
+          },
+          "required": ["capture", "structure", "representation", "virtualEquivalence", "meaning", "approval"],
+          "additionalProperties": false
+        },
+        "decisionRefs": { "type": "array", "items": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/decisionRef" } },
+        "assessedAt": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/timestamp" }
+      },
+      "required": ["snapshotRef", "endpoint", "closure", "axes", "decisionRefs", "assessedAt"],
+      "additionalProperties": false
+    },
+    "digest": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/sha256" },
+    "envelope": { "$ref": "urn:tyr:editor:2.0.0:common.schema.json#/$defs/envelope" }
+  },
+  "required": ["kind", "contractVersion", "id", "version", "body", "digest"],
+  "additionalProperties": false
+}
