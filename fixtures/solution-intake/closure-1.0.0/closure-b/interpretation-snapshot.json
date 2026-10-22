@@ -1,0 +1,264 @@
+{
+  "kind": "interpretation-snapshot",
+  "contractVersion": "1.0.0",
+  "id": "synthetic/closure-b/snapshot",
+  "version": "1.0.0",
+  "body": {
+    "bundleRef": {
+      "kind": "source-bundle",
+      "id": "synthetic/closure-b/bundle",
+      "version": "1.0.0",
+      "digest": "01a05e5a0aaabc1a37a32aea61fd83eb1ee9504eaac12876ac706962e2221d86"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/closure-b/profile",
+      "version": "1.0.0",
+      "digest": "b428a4fdad01a2939fc80e401e00cdbc0b6f462426b69b76823984a259d6972c"
+    },
+    "inputManifest": [
+      {
+        "artifactId": "cfg",
+        "sha256": "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc1"
+      }
+    ],
+    "context": [],
+    "nativeNodes": [
+      {
+        "nodeId": "n.b-tag",
+        "namespace": "synthetic-closure",
+        "nativeId": "B.Tag",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      },
+      {
+        "nodeId": "n.b-ext",
+        "namespace": "synthetic-closure",
+        "nativeId": "B.Ext",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 2
+          }
+        }
+      },
+      {
+        "nodeId": "n.b-uns",
+        "namespace": "synthetic-closure",
+        "nativeId": "B.Uns",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 3
+          }
+        }
+      },
+      {
+        "nodeId": "n.b-cnt",
+        "namespace": "synthetic-closure",
+        "nativeId": "B.Count",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 4
+          }
+        }
+      },
+      {
+        "nodeId": "n.b-cnt.script",
+        "namespace": "synthetic-closure",
+        "nativeId": "B.Count#script",
+        "kind": "opaque",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 5
+          }
+        },
+        "payload": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 5
+          }
+        }
+      },
+      {
+        "nodeId": "n.b-src",
+        "namespace": "synthetic-closure",
+        "nativeId": "B.Src",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 6
+          }
+        }
+      },
+      {
+        "nodeId": "n.b-ok",
+        "namespace": "synthetic-closure",
+        "nativeId": "B.Ok",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 7
+          }
+        }
+      }
+    ],
+    "referenceEdges": [
+      {
+        "edgeId": "e.b-tag-src",
+        "owner": {
+          "nodeId": "n.b-tag",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc9:D1",
+        "resolution": "missing",
+        "basis": "synthetic"
+      },
+      {
+        "edgeId": "e.b-ext",
+        "owner": {
+          "nodeId": "n.b-ext",
+          "field": "function"
+        },
+        "relation": "external",
+        "targetText": "ext:Calc.dll",
+        "resolution": "external-required",
+        "basis": "synthetic"
+      },
+      {
+        "edgeId": "e.b-uns",
+        "owner": {
+          "nodeId": "n.b-uns",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "{weird}",
+        "resolution": "unsupported",
+        "basis": "synthetic"
+      },
+      {
+        "edgeId": "e.b-cnt-script",
+        "owner": {
+          "nodeId": "n.b-cnt",
+          "field": "script"
+        },
+        "relation": "reference",
+        "targetText": "B.Count#script",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.b-cnt.script"
+      },
+      {
+        "edgeId": "e.b-script-src",
+        "owner": {
+          "nodeId": "n.b-cnt.script",
+          "field": "arg"
+        },
+        "relation": "input",
+        "targetText": "B.Src",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.b-src"
+      },
+      {
+        "edgeId": "e.b-ok-src",
+        "owner": {
+          "nodeId": "n.b-ok",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "B.Src",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.b-src"
+      }
+    ],
+    "claims": [
+      {
+        "claimId": "c.b-src-address",
+        "subject": {
+          "nodeId": "n.b-src",
+          "field": "address"
+        },
+        "value": "D7",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 6
+            }
+          }
+        ]
+      }
+    ],
+    "unresolved": [
+      {
+        "issueId": "u.b-missing",
+        "code": "missing",
+        "edgeId": "e.b-tag-src",
+        "reason": "plc9 is not in the bundle",
+        "affectedNodeIds": [
+          "n.b-tag"
+        ]
+      },
+      {
+        "issueId": "u.b-ext",
+        "code": "external-required",
+        "edgeId": "e.b-ext",
+        "reason": "external library",
+        "affectedNodeIds": [
+          "n.b-ext"
+        ]
+      },
+      {
+        "issueId": "u.b-uns",
+        "code": "unsupported",
+        "edgeId": "e.b-uns",
+        "reason": "unsupported syntax",
+        "affectedNodeIds": [
+          "n.b-uns"
+        ]
+      },
+      {
+        "issueId": "u.b-cnt-script",
+        "code": "behavior-unknown",
+        "nodeId": "n.b-cnt.script",
+        "reason": "keeps the previous value; stateful",
+        "affectedNodeIds": [
+          "n.b-cnt"
+        ]
+      }
+    ],
+    "coverage": {
+      "capture": "partial",
+      "artifactsRead": 1,
+      "artifactsSkipped": 0
+    },
+    "diagnostics": []
+  },
+  "digest": "30230a7221e0b302657da9b00660ca1dfd9764e4c1bb1fa5543e95e5361408af"
+}
