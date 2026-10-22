@@ -1,6 +1,6 @@
-# Týr alone, from a clean checkout. The Bifrost seam tests (scripts/ci_bifrost_seam_tests.txt) are
-# excluded by ID until Bifrost's mapping gate is on its main branch; then check Bifrost out as a
-# sibling here, the way mimir's CI does, and empty that list.
+# Týr with a sibling Bifrost checkout. Bifrost's mapping gate is on its main branch
+# (yggdrasil-iiot/bifrost#21), so the seam tests that read ../bifrost — its bundled
+# mapping-contracts copies, gates/target/bifrost-gates.jar and its mapping sources — run here.
 name: CI
 
 on:
@@ -14,25 +14,47 @@ permissions:
 
 jobs:
   test:
-    name: contracts + tests (no Bifrost seam)
+    name: contracts + tests (with Bifrost)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: tyr
+
+      - name: Check out Bifrost as a sibling
+        uses: actions/checkout@v4
+        with:
+          repository: yggdrasil-iiot/bifrost
+          path: bifrost
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
           cache: pip
-          cache-dependency-path: requirements-contracts.txt
+          cache-dependency-path: tyr/requirements-contracts.txt
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: temurin
+          cache: maven
+
+      - name: Build Bifrost's gates CLI
+        working-directory: bifrost
+        run: mvn -B -ntp -pl gates -am package -DskipTests
 
       - name: Install pinned contract dependencies
+        working-directory: tyr
         run: python -m pip install -r requirements-contracts.txt
 
       - name: P1 contract and governance gate (network denied)
+        working-directory: tyr
         run: python -B scripts/validate_contracts.py --deny-network --report "$RUNNER_TEMP/p1-validation.json"
 
       - name: P3-A CLI acceptance
+        working-directory: tyr
         run: python -B scripts/test_p3a.py --report "$RUNNER_TEMP/p3a.json"
 
       - name: Unit and acceptance tests
+        working-directory: tyr
         run: python -B scripts/ci_run.py
