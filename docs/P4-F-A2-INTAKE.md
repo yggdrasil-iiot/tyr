@@ -72,7 +72,7 @@
 
 - editor 2.0.0 fixture(`fixtures/solution-intake/editor-2.0.0/`):
   - `valid/`: 판단 3개, assessment 2개(`Line1.Temp`는 완결 및 `candidate` 계획, `Line1.Count`는 누락 참조로 `incomplete` 및 `blocked` 계획), 계획 2개.
-  - `invalid/cases.json`: 28건(거부 27건, 통과 1건).
+  - `invalid/cases.json`: 30건(거부 29건, 통과 1건). 2건은 closure 일치 검사용이며 [P4-F closure](P4-F-CLOSURE.md) 에서 추가했다.
 - Mímir 거부 사례 37건도 Týr 검사기에서 그대로 실행하여 동일한 위반 코드를 확인한다.
 - 모든 fixture는 합성 자료이며 실제 제품 형식이 아니다.
 - **2026-10-22 로컬 검증**: `python -B scripts/test_p4f_a2.py` 11개 시험을 통과했다.

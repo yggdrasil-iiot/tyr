@@ -13,6 +13,7 @@ from functools import lru_cache
 from pathlib import Path
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
+import interpretation_closure
 
 R = Path(__file__).resolve().parents[1]
 MIMIR = R/"vendor-contracts"/"mimir"/"interpretation"
@@ -255,17 +256,11 @@ def check_decisions(decisions, snapshot):
         previous = d["digest"]; seen.add(d["digest"])
 
 
-def _closure_incomplete(assessment, snapshot):
-    """Reasons the snapshot gives for calling this closure incomplete; an empty list does not by itself make it complete."""
-    b = snapshot["body"]; c = assessment["body"]["closure"]; nodes = set(c["nodeIds"]); edges = set(c["edgeIds"])
-    reasons = [e["edgeId"] for e in b["referenceEdges"] if e["edgeId"] in edges and e["resolution"] != "resolved"]
-    reasons += [u["issueId"] for u in b["unresolved"] if nodes & set(u["affectedNodeIds"]) or u.get("nodeId") in nodes or u.get("edgeId") in edges]
-    return reasons
-
-
-def check_assessment(assessment, snapshot, decisions=()):
-    check(assessment); check(snapshot); b = assessment["body"]
+def check_assessment(assessment, snapshot, profile, decisions=()):
+    """The declared closure must be the computed one (§5); a complete claim over an incomplete closure is an over-claim."""
+    check(assessment); check(snapshot); check(profile); b = assessment["body"]
     _ref(b["snapshotRef"], snapshot, "pin.snapshot-mismatch")
+    _ref(snapshot["body"]["profileRef"], profile, "pin.profile-mismatch")
     t = _targets(snapshot)
     if b["endpoint"]["nodeId"] not in t["node"]: raise Violation("editor.target-missing", b["endpoint"]["nodeId"])
     for n in b["closure"]["nodeIds"]:
@@ -273,8 +268,12 @@ def check_assessment(assessment, snapshot, decisions=()):
     for e in b["closure"]["edgeIds"]:
         if e not in t["edge"]: raise Violation("editor.target-missing", e)
     if b["endpoint"]["nodeId"] not in b["closure"]["nodeIds"]: raise Violation("editor.closure-without-endpoint", b["endpoint"]["nodeId"])
-    if b["closure"]["completeness"] == "complete" and _closure_incomplete(assessment, snapshot):
-        raise Violation("editor.closure-overclaimed", ",".join(_closure_incomplete(assessment, snapshot)))
+    computed = interpretation_closure.closure(snapshot, b["endpoint"]["nodeId"], profile["body"]["limits"]["maxReferenceDepth"])
+    if b["closure"]["completeness"] == "complete" and computed["completeness"] != "complete":
+        raise Violation("editor.closure-overclaimed", ",".join(r["ref"] for r in computed["reasons"]))
+    if (sorted(b["closure"]["nodeIds"]), sorted(b["closure"]["edgeIds"]), b["closure"]["completeness"]) != \
+            (computed["nodeIds"], computed["edgeIds"], computed["completeness"]):
+        raise Violation("editor.closure-mismatch", b["endpoint"]["nodeId"])
     axes = b["axes"]
     if axes["structure"]["status"] == "complete" and b["closure"]["completeness"] != "complete":
         raise Violation("editor.axis-inconsistent", "structure complete over an incomplete closure")
@@ -286,8 +285,8 @@ def check_assessment(assessment, snapshot, decisions=()):
         _ref(ref, known[ref["digest"]], "pin.decision-mismatch")
 
 
-def check_plan(plan, assessment, snapshot, decisions=()):
-    check(plan); check_assessment(assessment, snapshot, decisions); b = plan["body"]
+def check_plan(plan, assessment, snapshot, profile, decisions=()):
+    check(plan); check_assessment(assessment, snapshot, profile, decisions); b = plan["body"]
     _ref(b["assessmentRef"], assessment, "pin.assessment-mismatch")
     _ref(b["snapshotRef"], snapshot, "pin.snapshot-mismatch")
     if b["profileRef"] != snapshot["body"]["profileRef"]: raise Violation("pin.profile-mismatch", b["profileRef"]["id"])
