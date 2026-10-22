@@ -123,13 +123,14 @@ class SI19(unittest.TestCase):
 
 class EditorDocuments(unittest.TestCase):
     def snapshot(self): return mimir("pio-like", "interpretation-snapshot.json")
+    def profile(self): return mimir("pio-like", "interpretation-profile.json")
     def decisions(self): return [editor(f"decision-{i}.json") for i in (1, 2, 3)]
 
     def test_valid_set(self):
         s, ds = self.snapshot(), self.decisions(); ii.check_decisions(ds, s)
         for n in ("temp", "count"):
             with self.subTest(n):
-                a = editor(f"assessment-line1-{n}.json"); ii.check_assessment(a, s, ds); ii.check_plan(editor(f"plan-line1-{n}.json"), a, s, ds)
+                a = editor(f"assessment-line1-{n}.json"); ii.check_assessment(a, s, self.profile(), ds); ii.check_plan(editor(f"plan-line1-{n}.json"), a, s, self.profile(), ds)
 
     def test_rejection_cases(self):
         cases = json.loads((EDITOR/"invalid/cases.json").read_text(encoding="utf-8"))["cases"]; ran = 0
@@ -140,8 +141,8 @@ class EditorDocuments(unittest.TestCase):
                     i = int(c["file"][9]) - 1; ds = ds[:i] + [doc]
                 run = {"single": lambda: ii.check(doc),
                        "decisions": lambda: ii.check_decisions(ds, s),
-                       "assessment": lambda: ii.check_assessment(doc, s, ds),
-                       "plan": lambda: ii.check_plan(doc, editor(c["assessment"]), s, ds)}[c["mode"]]
+                       "assessment": lambda: ii.check_assessment(doc, s, self.profile(), ds),
+                       "plan": lambda: ii.check_plan(doc, editor(c["assessment"]), s, self.profile(), ds)}[c["mode"]]
                 if c["expect"] is None: run()
                 else:
                     with self.assertRaises(ii.Violation) as e: run()
