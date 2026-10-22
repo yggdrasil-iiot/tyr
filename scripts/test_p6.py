@@ -7,6 +7,18 @@ from urllib.error import HTTPError
 R=Path(__file__).resolve().parents[1];sys.path[:0]=[str(R/"backend"),str(R/"scripts")]
 import server,publication as pub,p3a_contracts as p3,sample_quality as sq
 JAR=R.parent/"bifrost/gates/target/bifrost-gates.jar"
+def java_code(text):
+    """Java source with comments removed and string/char literals kept, so a comment saying "no python" is not a call."""
+    out,i,n=[],0,len(text)
+    while i<n:
+        if text.startswith("//",i):i=text.find("\n",i);i=n if i<0 else i;continue
+        if text.startswith("/*",i):j=text.find("*/",i+2);i=n if j<0 else j+2;out.append(" ");continue
+        if text[i] in "\"'":
+            q,j=text[i],i+1
+            while j<n and text[j]!=q:j+=2 if text[j]=="\\" else 1
+            out.append(text[i:j+1]);i=j+1;continue
+        out.append(text[i]);i+=1
+    return "".join(out)
 def load():return server.contracts.load(R/"fixtures/p4b/workspace.json")
 def request_export(id="first",stream="mixed-line",revision=2):return {"revision":revision,"id":id,"streamId":stream,"proposedBy":"proposer","mappingSetIds":["mixed-tank-mapping"],"includeWrites":True}
 class Adapter(unittest.TestCase):
@@ -94,8 +106,11 @@ class Receiver(unittest.TestCase):
         other=R.parent/"bifrost/core/src/main/resources/mapping-contracts"
         for p in (R/"contracts").rglob("*.schema.json"):self.assertEqual(p.read_bytes(),(other/p.relative_to(R/"contracts")).read_bytes())
     def test_no_shared_source(self):
-        for p in (R.parent/"bifrost/core/src/main/java/dev/krillin/bifrost/core/mapping").glob("*.java"):
-            text=p.read_text();self.assertNotIn("ProcessBuilder",text);self.assertNotIn("python",text.lower())
+        files=sorted((R.parent/"bifrost/core/src/main/java/dev/krillin/bifrost/core/mapping").glob("*.java"))
+        self.assertTrue(files,"no Bifrost mapping sources: this check needs a sibling Bifrost checkout")
+        for p in files:
+            code=java_code(p.read_text(encoding="utf-8")).lower()
+            for banned in ("processbuilder","runtime.getruntime","python"):self.assertNotIn(banned,code,p.name)
     def test_java_manifest_matches_python(self):
         folder=R/"fixtures/p6/valid";r=self.adapter.call("validate",folder);pub.schema("mapping-validation",r)
         self.assertTrue(r["accepted"],r["findings"]);self.assertEqual(r["bundleSha256"],pub.manifest_digest(pub.file_pins(folder)))
