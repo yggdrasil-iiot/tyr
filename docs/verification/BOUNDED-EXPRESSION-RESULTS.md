@@ -17,7 +17,7 @@
 
 17 화면 작성/compile/read-only·stale revision 409·graph/recipe 원자 저장·reload 원문·수동 graph 변경 stale·명시적 재컴파일/이력 보존을 확인했다. 새 lazy 테이블을 포함한 rollback, source/connection 변경 감지·무관한 source 변경 제외·graph 제거 후 이력 보존·과대 history fault 거부를 검증했다. 기존 05/06/09/13/16 경로와 옛 DB 재개방 행 보존도 통과했다.
 
-Bifrost **코드·schema·JAR는 변경하지 않았다**. 이전 카탈로그 단계의 매핑 관련 Java JUnit 138개는 이번 새 실행 수에 더하지 않는다. 동일 JAR SHA를 재확인하고 새 컴파일된 2.15 DAG를 실제 Java CLI로 수신 검증·두 등록 키 승인·파일 발행했다. output unit을 변조하고 manifest SHA까지 다시 만든 음성 package도 receiver가 graph.output-unit으로 거부했다. Java가 Týr 코드를 참조하거나 수식 원문을 실행하지 않는다.
+Bifrost **코드·schema·JAR는 변경하지 않았다**. 이전 카탈로그 단계의 매핑 관련 Java JUnit 138개는 이번 새 실행 수에 더하지 않는다. 동일 JAR SHA를 재확인하고 새 컴파일된 2.15 DAG를 실제 Java CLI로 수신 검증·두 등록 키 승인·파일 발행했다. output unit을 변조하고 manifest SHA까지 다시 만든 음성 package도 receiver가 graph.output-unit으로 거부했다. Java가 Tyr (Týr) 코드를 참조하거나 수식 원문을 실행하지 않는다.
 
 기존 canonical 계약 파일 75개(스키마 74개 포함)·fixture 513개·평가 계약 1개 SHA가 유지됐고 schema 74개 Java 사본은 동일하다. 새 local editor recipe 계약만 별도 추가했다. 기존 SQLite workspace/기존 테이블·행·CAS·버전은 유지한다. 최초 명시적 수식 apply에서만 별도 recipe 테이블을 추가하며 조회/compile/옛 DB 재개방은 테이블이나 행을 만들지 않는다.
 

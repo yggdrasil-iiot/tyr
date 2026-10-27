@@ -1,4 +1,4 @@
-"""P4-F §5: the closure of one endpoint in a Mímir interpretation snapshot (contract 1.0.0).
+"""P4-F §5: the closure of one endpoint in a Mimir interpretation snapshot (contract 1.0.0).
 
 Breadth-first over evaluation edges to the profile's maxReferenceDepth; contains edges are structural and
 never followed for evaluation. A closure is complete only when no reason says otherwise, and a leaf counts

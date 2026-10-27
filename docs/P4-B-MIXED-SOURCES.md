@@ -11,7 +11,7 @@ source-definition 2.7은 sourceKind와 accessMode를 명시한다. 기존 PLC 1.
 sourceKind: plc / constant / solution-tag / external-value.
 accessMode: read / write / read-write. constant/external-value는 read만 허용한다. 쓰기 전용 소스는 읽기 바인딩과 그래프 입력으로 사용할 수 없다.
 
-Týr는 정의·매핑·검증 근거를 작성한다. Mímir 관측, Bifrost 승인/인가, Muninn 실행 계약을 확대하지 않는다. source의 read-write 표시는 실행 권한이 아니며 write-definition 저장으로 명령을 발행하지 않는다. 제안 2.7을 기존 downstream이 지원한다고 가정하지 않는다.
+Tyr (Týr)는 정의·매핑·검증 근거를 작성한다. Mimir (Mímir) 관측, Bifrost 승인/인가, Muninn 실행 계약을 확대하지 않는다. source의 read-write 표시는 실행 권한이 아니며 write-definition 저장으로 명령을 발행하지 않는다. 제안 2.7을 기존 downstream이 지원한다고 가정하지 않는다.
 
 ## 비 PLC 소스
 

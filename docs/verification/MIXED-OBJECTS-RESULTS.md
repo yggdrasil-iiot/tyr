@@ -11,7 +11,7 @@
 
 ## 보존과 바이너리
 
-`mixed-objects-baseline-pins.json`의 기존819파일 SHA를 유지했다(contracts88=87schema+README, fixtures728, evaluation1, editor2).2.21 source/proposal/common 및 object/scalar preview-scenario5개를 추가하여 현재92schema가 있다. 기존 schema를 수정하지 않았다. Týr↔Bifrost resource↔최종 JAR의92schema bytes 및 Java mapping compiled class bytes가 일치한다.
+`mixed-objects-baseline-pins.json`의 기존819파일 SHA를 유지했다(contracts88=87schema+README, fixtures728, evaluation1, editor2).2.21 source/proposal/common 및 object/scalar preview-scenario5개를 추가하여 현재92schema가 있다. 기존 schema를 수정하지 않았다. Tyr (Týr)↔Bifrost resource↔최종 JAR의92schema bytes 및 Java mapping compiled class bytes가 일치한다.
 
 최종 bifrost-gates.jar SHA256: `7f16fbf29f9ab8db0e2e56d95e900932097af48507dcad41ef037150bcef43d6`.
 

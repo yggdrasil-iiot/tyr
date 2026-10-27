@@ -1,12 +1,12 @@
-"""P4-F A2: receive Mímir interpretation snapshots (contract 1.0.0) and check Týr's editor documents (2.0.0).
+"""P4-F A2: receive Mimir interpretation snapshots (contract 1.0.0) and check Tyr's editor documents (2.0.0).
 
-Týr never parses a vendor file. It checks what Mímir published — schema, digest, internal references and pins
+Tyr never parses a vendor file. It checks what Mimir published — schema, digest, internal references and pins
 against the bundle/profile/request it names — and its own review, assessment and plan documents against that
 snapshot. Nothing here writes: storage (sidecar) is P4-F B.
 
 Digest (both contracts): SHA-256 over the UTF-8 bytes of the RFC 8785 (JCS) form of the document without its
 top-level "digest" and "envelope". Numbers are integers within +/-(2**53-1); a decimal travels as a string.
-This is Týr's own implementation of that rule; it shares no code with Mímir's.
+This is Tyr's own implementation of that rule; it shares no code with Mimir's.
 """
 import hashlib, json
 from functools import lru_cache
@@ -234,7 +234,7 @@ def _snapshot(b):
         if "locator" in d: loc(d["locator"])
 
 
-# ---- Týr editor documents (2.0.0) -------------------------------------------------------------------------
+# ---- Tyr editor documents (2.0.0) -------------------------------------------------------------------------
 
 def _pin(doc): return {k: doc[k] for k in ("kind", "id", "version", "digest")}
 

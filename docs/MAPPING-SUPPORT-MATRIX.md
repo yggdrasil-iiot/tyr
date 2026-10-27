@@ -1,4 +1,4 @@
-# Týr 매핑 패턴 지원 매트릭스
+# Tyr 매핑 패턴 지원 매트릭스
 
 기준일: 2026-10-17. 16개 매핑 패턴 + 객체 식별/미해석 보존 2개 공통 요구. 실제 장치 통신은 제외한다. 아래 표는 현재 소스·계약·검증기의 범위이며 제품 전체 호환성 인증이 아니다.
 
@@ -52,7 +52,7 @@ Ignition UDT의 멤버별 경로·매개변수·override와 Kepware Complex Tags
 - [AVEVA System Platform Object I/O Access official training](https://community.aveva.com/heroes-hq/m/aveva-system-platform---beg---2017-training/21859): MP02, MP18
 - [Tatsoft / SPIN Automation case study (utilities)](https://tatsoft.com/wp-content/uploads/2020/09/CaseStudy_Spin.pdf): MP02
 
-각 패턴의 evidenceRefs와 codeRefs는 [matrix.json](../fixtures/mapping-patterns/matrix.json)에 있다. 문헌의 제품 지원과 Týr의 현재 지원을 혼동하지 않는다. Modbus 주소 매핑은 배열/stride 패턴의 참고이며 이번 네 접근 프로파일에 Modbus를 추가했다는 뜻이 아니다.
+각 패턴의 evidenceRefs와 codeRefs는 [matrix.json](../fixtures/mapping-patterns/matrix.json)에 있다. 문헌의 제품 지원과 Tyr (Týr)의 현재 지원을 혼동하지 않는다. Modbus 주소 매핑은 배열/stride 패턴의 참고이며 이번 네 접근 프로파일에 Modbus를 추가했다는 뜻이 아니다.
 
 ## 검증과 승격
 

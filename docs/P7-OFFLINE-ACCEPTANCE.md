@@ -4,7 +4,7 @@
 
 ## 재현
 
-Týr 루트에서 Python으로 scripts/test_p7.py를 실행한다. 기본 결과는 docs/verification/p7-validation.json이며 개별 시험 ID·실패·입력 SHA-256·Python 버전을 기록한다. 기존 P1 gate·P3-A 별도 CLI와 P2~P6 unittest를 그대로 실행하며 제품 코드나 fixture를 수정하지 않는다. 실패를 격리 재검증할 때 --resume에 최초 JSON 경로를 전달한다. 제품/fixture/계약의 hash가 달라지면 resume를 거부한다. 최초 실패와 유지한 성공·재실행 ID를 기록하고 P1/P3-A는 다시 검사한다. 보고서 집계는 scripts/report_p7.py로 실행한다. Windows에서 임시 파일 권한이 필요한 경우 작업 디렉터리 및 OS 임시 디렉터리 접근을 허용한다.
+Tyr (Týr) 루트에서 Python으로 scripts/test_p7.py를 실행한다. 기본 결과는 docs/verification/p7-validation.json이며 개별 시험 ID·실패·입력 SHA-256·Python 버전을 기록한다. 기존 P1 gate·P3-A 별도 CLI와 P2~P6 unittest를 그대로 실행하며 제품 코드나 fixture를 수정하지 않는다. 실패를 격리 재검증할 때 --resume에 최초 JSON 경로를 전달한다. 제품/fixture/계약의 hash가 달라지면 resume를 거부한다. 최초 실패와 유지한 성공·재실행 ID를 기록하고 P1/P3-A는 다시 검사한다. 보고서 집계는 scripts/report_p7.py로 실행한다. Windows에서 임시 파일 권한이 필요한 경우 작업 디렉터리 및 OS 임시 디렉터리 접근을 허용한다.
 
 이 runner는 Python의 connect/connect_ex/DNS를 차단하고 숫자 loopback만 허용한다. 192.0.2.1:102 접속 거부를 negative control로 먼저 확인한다. HTTP API 시험은 loopback에서 수행한다. Java와 브라우저를 포함한 OS 전체 네트워크 차단을 입증하는 검증은 별도다. JVM은 로컬 jar/classpath로, Maven은 -o로 실행한다. 이를 PC 전체의 방화벽 시험 통과로 해석하지 않는다.
 
@@ -14,7 +14,7 @@ Bifrost 루트에서 다음 시험을 실행한다. PowerShell에서는 -D 인�
 mvn -o -pl gates -am test '-Dtest=MappingPublicationTest,MappingGateTest' '-Dsurefire.failIfNoSpecifiedTests=false'
 ~~~
 
-A11은 검사·승인 뒤 파일 변경, A12는 릴리스 파일/manifest 변조와 staging 실패, A16은 SQLite revision 및 릴리스 base 충돌을 각각 별개 시험으로 평가한다. Týr와 Bifrost는 JSON·파일·CLI로만 연결한다.
+A11은 검사·승인 뒤 파일 변경, A12는 릴리스 파일/manifest 변조와 staging 실패, A16은 SQLite revision 및 릴리스 base 충돌을 각각 별개 시험으로 평가한다. Tyr와 Bifrost는 JSON·파일·CLI로만 연결한다.
 
 ## 화면 수용 순서
 

@@ -1,11 +1,11 @@
 # P6 구현 및 검증 결과
 
-2026-10-17. Bifrost 독립 수신 검증·등록 키 서명 승인·불변 파일 릴리스와 Týr 파일/CLI/SQLite/화면 연계를 구현했다. 실제 장치/솔루션 접속·외부 SQL·쓰기 실행·운영 활성화는 제외했다.
+2026-10-17. Bifrost 독립 수신 검증·등록 키 서명 승인·불변 파일 릴리스와 Tyr (Týr) 파일/CLI/SQLite/화면 연계를 구현했다. 실제 장치/솔루션 접속·외부 SQL·쓰기 실행·운영 활성화는 제외했다.
 
 ## 결과
 
 - 기존 계약 56개를 변경하지 않고 2.9 submission/validation/approval/release 4종을 추가했다.
-- Bifrost는 별도 Java 구현과 자체 bundled schema로 네 접근 프로파일·설비/연결·참조·hash·근거·타입/단위·의미·그래프/배열/selector·쓰기 정의를 검사한다. Týr 코드를 import/실행하지 않는다.
+- Bifrost는 별도 Java 구현과 자체 bundled schema로 네 접근 프로파일·설비/연결·참조·hash·근거·타입/단위·의미·그래프/배열/selector·쓰기 정의를 검사한다. Tyr 코드를 import/실행하지 않는다.
 - 승인에 proposal/전체 bundle/기준 릴리스/수신 변경 보고서 hash를 묶고 등록된 두 Ed25519 키와 PUBLISH/APPROVE 권한을 확인한다.
 - 수정·변조·stale base/approval·unknown-op·미확인·같은 의미 ID의 role/type/unit 변경을 거부한다. source-only 묶음을 매핑 릴리스로 발행하지 못한다.
 - staging 재검증, atomic 디렉터리 이동·HEAD 교체를 구현했다. 실패 주입 시험에서 이전 HEAD를 유지했다.
@@ -13,7 +13,7 @@
 
 ## 직접 실행한 검증
 
-Týr **701/701**: 신규 **37**, P1~P5 회귀 **664**. [신규 보고서](p6-validation.json)와 각 *-p6-regression.json/.log를 참조한다.
+Tyr **701/701**: 신규 **37**, P1~P5 회귀 **664**. [신규 보고서](p6-validation.json)와 각 *-p6-regression.json/.log를 참조한다.
 
 Bifrost **661/661**의 중복 제외 검증 범위: 기존 **614**, 신규 core **45**, CLI **2**.
 전체 reactor 실행에서 655개(기존 614 + 당시 신규 41)가 통과했다. 이후 변경 보고서 바인딩·의미 변경·source-only 거부·UTF-8 출력 보완을 포함한 최종 45+2개를 다시 실행했다. 최종 jar package도 성공했다.
@@ -33,8 +33,8 @@ Maven은 offline 모드로 실행했다. CycloneDX SBOM goal은 online 모드 �
 
 1. 13에서 mixed-tank-mapping과 해당 객체의 쓰기 정의 2개를 p6-mixed-first 제출본으로 저장했다. streamId=mixed-line. 작성 revision은 39 유지.
 2. Bifrost CLI가 다시 검사해 승인 대기 상태를 표시했다.
-3. 별도 시험 registry에서 임시 proposer/approver 등록 키로 p6-approval-first 서명 승인을 생성했다. Týr에서 서명 승인됨을 조회했다.
-4. Bifrost CLI가 mixed-release@1.0.0을 파일 발행했다. Týr에서 릴리스 발행됨과 ID/버전을 확인했다.
+3. 별도 시험 registry에서 임시 proposer/approver 등록 키로 p6-approval-first 서명 승인을 생성했다. Tyr에서 서명 승인됨을 조회했다.
+4. Bifrost CLI가 mixed-release@1.0.0을 파일 발행했다. Tyr에서 릴리스 발행됨과 ID/버전을 확인했다.
 5. 최종 jar로 status/전체 payload를 재검증했다. 32개 파일 byte SHA가 제출본과 같았다. SQL 원문의 앞 공백 2개·뒤 개행/공백도 그대로였다.
 6. 기존 가상 preview 150−110=40 kPa가 유지됐다. 브라우저 console error는 없었다.
 

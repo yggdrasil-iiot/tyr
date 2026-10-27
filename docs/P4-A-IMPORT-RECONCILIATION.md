@@ -56,7 +56,7 @@ definition의 schemaVersion/access/rawRepresentation/inputStage/unit 등과 labe
 
 제안 envelope는 기존 2.6/2.7을 유지하고 새 import-batch 2.14를 함께 싣는다. 재가져오기 감사 기록과 previousBatchRef, 원본 artifact/관측을 제출 closure에 포함한다. active source를 유지한 경우에도 관련 reconciliation 기록을 포함해 미해석이나 조작된 계획이 숨겨지지 않게 한다.
 
-Java는 JSON/schema 데이터만 받아 검토 hash chain·source 형태/연결/근거·완전성, 이전 batch hash, 3방향 action/field 계산·choices·results·adoptions를 독립 검사한다. Týr 코드를 import/호출하지 않는다. 기존 batch의 원문 parser replay는 Týr가 수행하며, Java가 vendor parser 해석 정확성을 인증한다고 주장하지 않는다. schema의 교차 버전 참조는 번들 내부 version/file만 허용하며 원격 조회하지 않는다. 최종 승인은 기존 별도 Ed25519 주체의 Bifrost 승인/파일 발행이고 운영 활성화는 하지 않는다.
+Java는 JSON/schema 데이터만 받아 검토 hash chain·source 형태/연결/근거·완전성, 이전 batch hash, 3방향 action/field 계산·choices·results·adoptions를 독립 검사한다. Tyr (Týr) 코드를 import/호출하지 않는다. 기존 batch의 원문 parser replay는 Tyr가 수행하며, Java가 vendor parser 해석 정확성을 인증한다고 주장하지 않는다. schema의 교차 버전 참조는 번들 내부 version/file만 허용하며 원격 조회하지 않는다. 최종 승인은 기존 별도 Ed25519 주체의 Bifrost 승인/파일 발행이고 운영 활성화는 하지 않는다.
 
 ## 합성 검증과 현장 PoV
 

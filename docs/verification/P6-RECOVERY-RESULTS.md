@@ -17,7 +17,7 @@ Python·fixture 합계는 897이다. 브라우저 수용 JSON의 41행 중 7행�
 - Bifrost intent 기록 후·release 이동 후·head 이동 후의 예외와 실제 별도 JVM Runtime.halt 종료에서 재시작 복구, 기준 head CAS, 반복 복구의 무변경을 확인했다.
 - 저널 잘림·stage payload/metadata 손상·head 충돌은 거부하며 이전 head와 자료를 보존한다. 미완료 저널은 approve/publish/GC를 차단한다.
 - GC 사전 조회는 후보를 보존하고, 같은 계획으로 실행하면 임시 자료만 quarantine으로 이동한다. 새 조회로 중단 후 재개하며 영구 삭제는 없다. 과거 unheaded 릴리스와 승인·전체 근거 closure는 보존하고 역사적 payload 손상은 거부한다.
-- Týr 실제 프로세스 종료의 커밋 전 rollback/커밋 후 제출 row 보존, 불변 제출본 재조회와 다운로드, 고아 폴더 구분·손상 표시·격리 차단·workspace 유지·SQLite 재개방을 확인했다.
+- Tyr (Týr) 실제 프로세스 종료의 커밋 전 rollback/커밋 후 제출 row 보존, 불변 제출본 재조회와 다운로드, 고아 폴더 구분·손상 표시·격리 차단·workspace 유지·SQLite 재개방을 확인했다.
 - 기존 가져오기 검토/병합 작성·저장·가상 preview·불변 제출·독립 Java 검증·두 키 승인·파일 발행·화면 재조회 경로를 함께 통과했다. 서명용 임시 개인 키는 evidence 밖에서 생성 후 삭제했다.
 
 ## 재현과 증거

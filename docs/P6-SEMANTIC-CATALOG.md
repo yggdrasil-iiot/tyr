@@ -8,7 +8,7 @@
 
 ## 재사용과 새 구현
 
-기존 2.9 submission/approval/release, Ed25519 등록 키·권한·두 확인자, 파일 무결성, registry lock, head CAS, 복구 저널과 보수적 GC를 재사용한다. LogicalStructure의 독립 Java signature와 Týr의 Python signature를 각각 사용하며 코드를 공유하지 않는다.
+기존 2.9 submission/approval/release, Ed25519 등록 키·권한·두 확인자, 파일 무결성, registry lock, head CAS, 복구 저널과 보수적 GC를 재사용한다. LogicalStructure의 독립 Java signature와 Tyr (Týr)의 Python signature를 각각 사용하며 코드를 공유하지 않는다.
 
 새 보고서 계약은 `contracts/2.16.0/semantic-catalog.schema.json`이다. 기존 제안 문서 버전을 올리지 않는다. `mapping catalog <registry>`는 검증한 모든 릴리스와 URI별 signature variant, 정의 ID/버전·전체 authored member 경로·레이블·스트림/릴리스/SHA 근거를 반환한다. 구조 배열은 index별 실행값이 아닌 authored 정의를 기록하며 shape/bounds를 서명에 포함한다. catalogSha256은 자신을 제외한 정렬 JSON의 SHA-256이다. 문서·릴리스 순서를 고정해 같은 역사에서 같은 digest를 계산한다.
 
@@ -20,7 +20,7 @@ pending journal이 있으면 복구 후 조회한다. 과거 릴리스의 파일
 
 13 화면의 ‘의미 카탈로그 조회·작성본 비교’가 `/api/semantic-catalog`를 읽는다. 현재 SQLite revision/workspace SHA와 registry history를 함께 표시한다. 작성본 내부 충돌, 보존 릴리스 충돌, 계약 일치, 신규 URI, registry 미조회를 구분한다. 전체 registry URI의 signature와 각 릴리스 근거도 펼쳐 확인한다. CLI 미설정/구버전/손상/중단 상태를 호환 확인으로 승격하지 않는다.
 
-카탈로그는 파생 조회 자료이며 새 SQLite 테이블·migration·workspace 재작성·캐시를 만들지 않는다. 기존 작성/저장/preview/export 경로를 그대로 이용한다. 카탈로그 비교 자체는 workspace 변경을 막지 않는다. draft에서 충돌을 검토하고 새 URI를 명시적으로 선택할 수 있으며 Bifrost가 승인·발행을 최종 거부한다. Týr HTTP/화면에 승인·개인 키·복구 실행 권위를 추가하지 않는다.
+카탈로그는 파생 조회 자료이며 새 SQLite 테이블·migration·workspace 재작성·캐시를 만들지 않는다. 기존 작성/저장/preview/export 경로를 그대로 이용한다. 카탈로그 비교 자체는 workspace 변경을 막지 않는다. draft에서 충돌을 검토하고 새 URI를 명시적으로 선택할 수 있으며 Bifrost가 승인·발행을 최종 거부한다. Tyr HTTP/화면에 승인·개인 키·복구 실행 권위를 추가하지 않는다.
 
 ## 검증과 현장 PoV
 

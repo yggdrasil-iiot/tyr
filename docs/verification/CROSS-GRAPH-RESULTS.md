@@ -28,7 +28,7 @@ UI 최종 실행에서 반복한 집중 Python 28개와 테스트 묶음 exit ma
 
 ## 호환성과 실행 범위
 
-기존 canonical 파일75(스키마74 포함)·fixture519·평가 계약1·수식 recipe 계약2개의 SHA를 보존했다. 현재 Python/Java의 schema 사본76개는 동일하다. workspaceVersion2.0·기존 SQLite 테이블/CAS·구 compiler/recipe를 유지한다. Bifrost는 기존 MappingBundle과 새 독립 GraphDependencies를 보완하고 2.17 schema·별도 Java 테스트와 wire fixture를 추가했다. Týr 코드를 Java에 공유하거나 가져오지 않는다.
+기존 canonical 파일75(스키마74 포함)·fixture519·평가 계약1·수식 recipe 계약2개의 SHA를 보존했다. 현재 Python/Java의 schema 사본76개는 동일하다. workspaceVersion2.0·기존 SQLite 테이블/CAS·구 compiler/recipe를 유지한다. Bifrost는 기존 MappingBundle과 새 독립 GraphDependencies를 보완하고 2.17 schema·별도 Java 테스트와 wire fixture를 추가했다. Tyr (Týr) 코드를 Java에 공유하거나 가져오지 않는다.
 
 전체 Python 회귀는 `build/cross-graph/20261018-103922`, 최종 UI/새 JAR 연계는 `build/cross-graph/20261018-104900`에서 실행했다. Python 회귀의 기존 CLI 경로는 이전 JAR로 기존 wire 호환을 확인하고, 신규 receiver의 기존 호환은 위 Java138개, 새 계약은 Java18개와 최종 새 JAR UI 연계로 검증했다. 이를 한 JAR/한 실행의 결과처럼 합치지 않는다.
 

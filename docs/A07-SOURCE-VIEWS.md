@@ -24,7 +24,7 @@ view의 rawRepresentation과 접근 정보는 부모 저장 형태를 그대로 
 
 ## 검증과 근거
 
-Týr의 Python과 Bifrost의 Java가 독립적으로 다음을 검사한다. 소스 코드는 공유하지 않고 JSON 스키마와 파일 fixture만 복제한다.
+Tyr (Týr)의 Python과 Bifrost의 Java가 독립적으로 다음을 검사한다. 소스 코드는 공유하지 않고 JSON 스키마와 파일 fixture만 복제한다.
 
 - 부모의 존재·정확한 버전, 순환 및 깊이.
 - 설비·연결·접근 프로파일·접근 필드·rawRepresentation·inputStage·진법 snapshot 일치.
@@ -46,7 +46,7 @@ Týr의 Python과 Bifrost의 Java가 독립적으로 다음을 검사한다. 소
 
 SQLite의 기존 workspace JSON·revision/CAS·시나리오·기준본·검토·제출 테이블을 재사용한다. 기존 문서를 자동 변환하거나 기존 DB를 다시 쓰지 않는다. 새 view 저장과 재조회는 같은 원자적 workspace 저장 경로로 처리한다. schemaVersion 2.10.0 소스는 2.0 authoring workspace에서만 허용한다.
 
-제안 exporter는 선택된 매핑에서 viewOf 체인을 따라 원본 및 모든 근거를 함께 고정한다. MappingProposal 2.7.0과 submission/approval/release 2.9.0은 유지한다. 2.10.0을 모르는 수신자는 새 소스를 승인하지 못한다. capability 이름만으로 호환을 판단하지 않고 스키마·내용을 실제 검증한다. Týr는 승인 권위나 개인 키 저장 기능을 만들지 않는다.
+제안 exporter는 선택된 매핑에서 viewOf 체인을 따라 원본 및 모든 근거를 함께 고정한다. MappingProposal 2.7.0과 submission/approval/release 2.9.0은 유지한다. 2.10.0을 모르는 수신자는 새 소스를 승인하지 못한다. capability 이름만으로 호환을 판단하지 않고 스키마·내용을 실제 검증한다. Tyr는 승인 권위나 개인 키 저장 기능을 만들지 않는다.
 
 Bifrost는 재검증·두 등록 키의 서명 승인·전체 파일 불변 릴리스를 사용한다. 릴리스 파일 발행과 Muninn 런타임 소비/운영 활성화는 별개다. 기존 승인·변조·stale base 규칙을 계속 적용한다.
 
@@ -54,6 +54,6 @@ Bifrost는 재검증·두 등록 키의 서명 승인·전체 파일 불변 릴�
 
 fixtures/a07는 네 PLC의 20개 소스·4개 객체·4개 graph·20개 프로퍼티 매핑과 독립 리터럴 0x8005 기준값을 담는다. 12개 부정 변형은 양쪽 검증기로 검사한다. 별도 tests는 signed high bit·false bit·부모 변경·override·품질·SQLite 재조회·API 원자성을 검사한다.
 
-Týr에서 scripts/test_a07.py --report docs/verification/a07-validation.json, scripts/test_p7.py --report docs/verification/a07-regression.json을 실행한다. 기존 P7 기록은 덮어쓰지 않는다. Bifrost에서 Maven offline MappingPublicationTest/MappingGateTest로 승인·발행과 기존 수신 회귀를 검사한다.
+Tyr에서 scripts/test_a07.py --report docs/verification/a07-validation.json, scripts/test_p7.py --report docs/verification/a07-regression.json을 실행한다. 기존 P7 기록은 덮어쓰지 않는다. Bifrost에서 Maven offline MappingPublicationTest/MappingGateTest로 승인·발행과 기존 수신 회귀를 검사한다.
 
 실행 결과는 verification/A07-RESULTS.md에 남긴다. 이 결과는 실제 현장 PoV나 A14 PC 전체 네트워크 격리 완료가 아니다.

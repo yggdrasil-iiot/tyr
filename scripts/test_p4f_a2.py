@@ -1,4 +1,4 @@
-"""P4-F A2: receive Mímir interpretation snapshots and check Týr editor documents. Offline; no vendor file is read."""
+"""P4-F A2: receive Mimir interpretation snapshots and check Tyr editor documents. Offline; no vendor file is read."""
 import copy, hashlib, json, sys, unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -64,7 +64,7 @@ class MimirSnapshots(unittest.TestCase):
         ii.check_result(mimir("pio-like", "interpret-result.json"), req, mimir("pio-like", "interpretation-snapshot.json"))
 
     def test_tyr_digest_agrees_with_mimirs(self):
-        # Mímir stamped these with its Python script and checks them in Java; this is a third, separate implementation.
+        # Mimir stamped these with its Python script and checks them in Java; this is a third, separate implementation.
         for base in ("pio-like", "kepware-like"):
             for f in ("source-bundle.json", "interpretation-profile.json", "interpretation-snapshot.json"):
                 with self.subTest(f"{base}/{f}"): d = mimir(base, f); self.assertEqual(ii.digest(d), d["digest"])
@@ -99,7 +99,7 @@ class MimirSnapshots(unittest.TestCase):
 
 
 class SI19(unittest.TestCase):
-    """The Týr half of SI19: a tampered pin, an unknown snapshot contract version and an evidence-ownership breach are refused."""
+    """The Tyr half of SI19: a tampered pin, an unknown snapshot contract version and an evidence-ownership breach are refused."""
     def refused(self, code, fn):
         with self.assertRaises(ii.Violation) as e: fn()
         self.assertEqual(e.exception.code, code)

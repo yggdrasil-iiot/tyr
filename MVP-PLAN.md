@@ -1,10 +1,10 @@
-# Týr MVP 구현 계획
+# Tyr MVP 구현 계획
 
 상태: P0~P6 제한된 오프라인 구현과 P7 A07·A14 후속, P3-C B 제한 sqrt/clamp 완료, P3-E B bounded 논리 구조·구조 배열, P3-F B 유한 후보 그래프, P4-A B 검토·재가져오기 병합, P6 후속 프로세스 중단 복구·보수적 GC·파일 무결성, P7 독립 평가 준비 도구, P3-C C 제한 add/multiply/divide와 P6 registry 전체 의미 카탈로그, P3-C D 제한 수식 작성·컴파일 및 P3-C E 숫자·명시적 단위 상수 및 P3-F C 그래프 간 scalar 재사용, P6 의미 URI 개정·폐기 수용 완료. P7 fixture 수용은 16개 충족이다. A14는 브라우저·Python·Java 전체를 Linux OS network namespace에서 격리 검증했다. 호스트 Windows 전체 방화벽 검증 및 실제 현장 PoV는 별도 미수행이다. vendor native 구조 배치·추가 vendor 파일 검증·실제 현장 PoV·운영 활성화는 후속이다.
 작성일: 2026년 10월 17일
 기준 설계: [DESIGN.md](DESIGN.md)
 
-2026-10-20 다음 우선순위: [P4-F PIO·Kepware 공통 수용 모델과 제품별 해석기](docs/P4-F-SOLUTION-INTERPRETATION.md). **설계 반영 완료, A1(Mímir 계약)과 A2는 2026-10-22 완료, A의 나머지와 B 이후는 미착수**이며, 기존 P0~P7 구현/합성 수용 실적과 별도다. 매핑 표현력 확대보다 설정 단독 수용 → 최종 태그 생성 과정 설명 → 쟁점 검토 → 익숙한 산출물 반환을 우선한다. 구체 제품/버전/driver/실제 원본 형식과 현장 PoV는 미확정이다.
+2026-10-20 다음 우선순위: [P4-F PIO·Kepware 공통 수용 모델과 제품별 해석기](docs/P4-F-SOLUTION-INTERPRETATION.md). **설계 반영 완료, A1(Mimir 계약)과 A2는 2026-10-22 완료, A의 나머지와 B 이후는 미착수**이며, 기존 P0~P7 구현/합성 수용 실적과 별도다. 매핑 표현력 확대보다 설정 단독 수용 → 최종 태그 생성 과정 설명 → 쟁점 검토 → 익숙한 산출물 반환을 우선한다. 구체 제품/버전/driver/실제 원본 형식과 현장 PoV는 미확정이다.
 
 이 계획의 구현 대상은 문서·설정·수동 입력에서 PLC 접근 정의를 만들고, 공통 의미에 매핑하며, 근거·변경을 검토한 뒤 Bifrost에 제출하는 오프라인 도구다. P0·P1의 계약·fixture·게이트는 구현했으며, P2~P5의 제한된 오프라인 작성·미리보기·가져오기·변경 검토를 구현했으며, P6 오프라인 승인/파일 발행 연계는 구현했고 P7 fixture 수용 결과는 별도 기록했으며 실제 자료 PoV와 운영 활성화는 후속이다.
 
@@ -30,15 +30,15 @@
 | UDT 계약 | Bifrost definition.schema.json, Member, UdtDefinition | 기존 모델·소비자의 호환 유지 | 별도 의미·소스·매핑 계약과 손실 표시 |
 | 구조적 검증 | CompatibilityChecker·conformance 계층 | 기존 검사를 기존 계약에 적용 | 단위·접근·변환·참조·변경 검사 |
 | 외부 모델 비교 | ModelReconciler | 정규 모델 비교로 유지 | 이름이 다른 신호의 명시 연결, 접근·변환 diff |
-| 외부 설정 어댑터 | IgnitionUdtAdapter 등 | 현재 입력 형태와 제약 참고 | 원본 접근·변환·근거를 보존하는 Týr importer |
+| 외부 설정 어댑터 | IgnitionUdtAdapter 등 | 현재 입력 형태와 제약 참고 | 원본 접근·변환·근거를 보존하는 Tyr (Týr) importer |
 | 내용 무결성 | provenance publish/verify, manifest 기반 | 해시와 파일 발행 패턴 재사용 | 여러 파일의 참조 고정·전체 검증·묶음 발행 |
 | 승인·활성화 | Bifrost의 기존 기록·권한·승인 기반 | 적용 가능한 경로를 조사해 연계 | mapping-release 종류에 대한 승인 연결 |
-| 타입 후보 | Mímir derive | 후속 관측 계약의 출발점 | MVP에서는 수정 없이 선택적 후보 입력으로 유보 |
+| 타입 후보 | Mimir (Mímir) derive | 후속 관측 계약의 출발점 | MVP에서는 수정 없이 선택적 후보 입력으로 유보 |
 | 실행 | Muninn 이름·타입 필터 | 기존 경로 유지 | 후속 승인 매핑 소비 |
 | 파일 처리 | XLSX·JSON/XML 라이브러리 | 파일 구조 처리 재사용 | 현장 양식 프로파일·누락·원문 위치 추적 |
-| 사용자 도구 | 신규 Týr | 프레임워크 기능 활용 | 작성 API·저장·검토·세 작업 화면 |
+| 사용자 도구 | 신규 Tyr | 프레임워크 기능 활용 | 작성 API·저장·검토·세 작업 화면 |
 
-재사용은 상대 저장소의 클래스를 가져오는 뜻이 아니다. Bifrost 내부 확장에서는 해당 앱의 기존 기반을 재사용하고, Týr와의 결합은 공개 JSON·파일·CLI 계약으로 한다.
+재사용은 상대 저장소의 클래스를 가져오는 뜻이 아니다. Bifrost 내부 확장에서는 해당 앱의 기존 기반을 재사용하고, Tyr와의 결합은 공개 JSON·파일·CLI 계약으로 한다.
 
 ### 2.1 현재 구현에 대한 구체적인 주의점
 
@@ -47,11 +47,11 @@
 - 기존 definition.schema.json은 추가 속성을 금지한다. 새 속성을 붙여 기존 게이트를 우회하지 않는다.
 - provenance verify는 현재 latest 항목의 단일 canonical 파일을 검사한다. 이를 버전이 고정된 전체 MappingRelease 검증으로 간주하지 않는다.
 - EgressValidator는 이름·타입 검사다. 매핑이나 변환의 실행기가 아니다.
-- Bifrost의 기존 활성화 기록이 새 릴리스 종류를 지원하는지 먼저 확인한다. 맞지 않으면 작은 계약 확장을 하고 별도의 승인 권위를 Týr에 만들지 않는다.
+- Bifrost의 기존 활성화 기록이 새 릴리스 종류를 지원하는지 먼저 확인한다. 맞지 않으면 작은 계약 확장을 하고 별도의 승인 권위를 Tyr에 만들지 않는다.
 
 ## 3 구현 구조와 저장소 경계
 
-다음은 구현 시의 제안 구조다. 현재 계약·fixture·검증기는 contracts, fixtures, scripts에 구현했다. Týr backend/frontend는 아래 경로에 구현했으며 타 앱 확장은 P6 이후 계획이다.
+다음은 구현 시의 제안 구조다. 현재 계약·fixture·검증기는 contracts, fixtures, scripts에 구현했다. Tyr backend/frontend는 아래 경로에 구현했으며 타 앱 확장은 P6 이후 계획이다.
 
 - tyr/backend: 작성 API, domain, application, persistence, importers, preview, bifrost-adapter
 - tyr/frontend: 자료/소스, 의미/매핑, 변경/제출 화면
@@ -61,7 +61,7 @@
 - bifrost/core: 새 계약 검증·diff·릴리스 지원
 - bifrost/gates: 새 파일 CLI 진입점과 계약 시험
 
-P2는 Python 표준 로컬 서버·SQLite와 HTML/CSS/JavaScript 화면으로 구현했다. P1 검증기를 Týr 안에서 재사용하고 새 프레임워크 의존성을 추가하지 않는 결정이며 [작성 도구 문서](docs/P2-AUTHORING.md)에 근거를 기록했다. 정확한 프레임워크·라이브러리 버전은 P2에서 지원 범위와 호환성을 확인해 고정한다. 첫 구현은 분산 서비스·메시지 브로커·그래프 DB 없이 로컬 DB와 파일 증거 저장소로 시작한다.
+P2는 Python 표준 로컬 서버·SQLite와 HTML/CSS/JavaScript 화면으로 구현했다. P1 검증기를 Tyr 안에서 재사용하고 새 프레임워크 의존성을 추가하지 않는 결정이며 [작성 도구 문서](docs/P2-AUTHORING.md)에 근거를 기록했다. 정확한 프레임워크·라이브러리 버전은 P2에서 지원 범위와 호환성을 확인해 고정한다. 첫 구현은 분산 서비스·메시지 브로커·그래프 DB 없이 로컬 DB와 파일 증거 저장소로 시작한다.
 
 DB는 초안·관측·검토·작업 인덱스를 보관하고, 불변 파일 묶음은 제출·승인 단위로 사용한다. 원본 증거와 실행 계약은 분리한다.
 
@@ -113,7 +113,7 @@ DB는 초안·관측·검토·작업 인덱스를 보관하고, 불변 파일 �
 - revision 기반 동시 편집 충돌을 검출한다.
 
 재사용: 웹·DB 프레임워크의 CRUD·트랜잭션.
-신규: 도메인 모델, Týr 저장 계층, 화면, 편집 검증.
+신규: 도메인 모델, Tyr 저장 계층, 화면, 편집 검증.
 
 종료 조건: 사용자가 네 접근의 소스를 같은 의미에 연결하고 재시작 후 다시 열 수 있다. 파일 importer 없이도 핵심 가치가 동작한다.
 
@@ -172,12 +172,12 @@ DB는 초안·관측·검토·작업 인덱스를 보관하고, 불변 파일 �
 의존성: P1, P5. 예상 작업량 5~7인일. Bifrost 변경 작업을 포함한다.
 
 - Bifrost에서 새 제안 스키마·참조·접근 프로파일·변환·의미·변경을 검증한다.
-- Týr의 사전 검사만 믿지 않고 수신 경계에서 다시 검증한다.
+- Tyr의 사전 검사만 믿지 않고 수신 경계에서 다시 검증한다.
 - 제안 해시와 기준 릴리스를 검사하고 오래된 제출을 충돌로 처리한다.
 - 적용 가능한 기존 승인·기록 기반에 MappingRelease를 연결한다.
 - 디렉터리 묶음의 모든 참조·해시를 고정한다.
 - staging 후 완성된 릴리스만 발행하고, 실패 시 기존 릴리스를 유지한다.
-- Týr는 파일·CLI 어댑터로 제안·결과·승인 상태를 교환한다.
+- Tyr는 파일·CLI 어댑터로 제안·결과·승인 상태를 교환한다.
 - no shared code 원칙을 지키며 두 앱의 독립 구현을 같은 wire fixture로 대조한다.
 
 재사용: Bifrost 내부의 검증 결과·CLI·발행·기록 기반.
@@ -232,7 +232,7 @@ DESIGN.md의 4~6주 제한 PoV 추정은 범위를 줄인 실증의 출발점이
 - 도메인 시험: 디코딩·수치 경계·중복 소스·alias·변환 순서.
 - import 시험: 정상·병합 셀·누락·기본값·미해결 참조·미지원 타입.
 - UI 흐름: 입력→연결→저장→재조회→개정→재검토→제출.
-- seam 시험: Týr 파일을 실제 Bifrost CLI가 읽고 검증·발행하며 Týr가 결과를 다시 읽는다.
+- seam 시험: Tyr 파일을 실제 Bifrost CLI가 읽고 검증·발행하며 Tyr가 결과를 다시 읽는다.
 - 변조 시험: 승인 후 파일 수정·참조 누락·오래된 기준·부분 발행.
 - 오프라인 시험: 외부 네트워크 없이 전체 흐름.
 - 회귀 시험: 변경한 Bifrost 모듈과 기존 계약을 소비하는 경로.
@@ -257,13 +257,13 @@ DESIGN.md의 4~6주 제한 PoV 추정은 범위를 줄인 실증의 출발점이
 
 | 후속 단계 | 내용 | 선행 조건 |
 |---|---|---|
-| Mímir 후보 연계 | ObservationBundle에 원본 노드·타입·시점 보존 | Týr 계약과 후보 검토 흐름 안정 |
+| Mimir 후보 연계 | ObservationBundle에 원본 노드·타입·시점 보존 | Tyr 계약과 후보 검토 흐름 안정 |
 | 추가 문서·제품 | PDF·OCR·다른 솔루션 importer | 실제 자료·독립 기준집 확보 |
 | Muninn 소비 | 릴리스 검증→접근→변환→의미 발행 | 오프라인 변환·계약 통과 후 별도 시험 환경 |
 | 기존 제품 실행 | 승인 매핑의 설정 생성·적용 | 제품별 변환 의미·원복·권한 검증 |
 | 운영 도입 | 실장치·활성화·복구·인증 | 현장 절차·가용성·권한 검토 |
 
-Mímir를 화면 도구로 다시 만들거나 Muninn에 작성 기능을 추가하지 않는다. Huginn 캡처·live browse는 선택적 근거이며 파일 MVP의 필수 기능으로 확대하지 않는다.
+Mimir를 화면 도구로 다시 만들거나 Muninn에 작성 기능을 추가하지 않는다. Huginn 캡처·live browse는 선택적 근거이며 파일 MVP의 필수 기능으로 확대하지 않는다.
 
 ## 10 실행 규율
 
@@ -288,7 +288,7 @@ Mímir를 화면 도구로 다시 만들거나 Muninn에 작성 기능을 추가
 
 ## 12 코드 근거
 
-기준 루트는 로컬 Yggdrasil 작업 폴더이며 Týr와 Bifrost는 그 아래 형제 디렉터리다.
+기준 루트는 로컬 Yggdrasil 작업 폴더이며 Tyr와 Bifrost는 그 아래 형제 디렉터리다.
 
 - mimir/src/main/java/dev/krillin/mimir/DefinitionDeriver.java
 - mimir/src/main/java/dev/krillin/mimir/BrowsedMember.java
@@ -356,7 +356,7 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 
 - P5: 객체 ID/경로·그래프 입력·template override·alias 변경의 전이 영향과 단위/의미 변경을 구분한다. 원문만 바뀐 경우와 전개 결과가 바뀐 경우를 별도 기록한다.
 - P6: Bifrost의 기존 형식으로 표현 가능한 부분과 손실을 분리한다. 승인용 새 계약 및 수신자 capability/unknown-op 거부 검증을 선행한다. 단순 스키마 성공을 실제 승인 연계 완료로 계산하지 않는다.
-- P7: current 실행, gap-probe 재현, planned 대기 수를 따로 보고한다. gap 재현 성공은 기능 지원 성공이 아니다. 기존 A01~A16과 함께 패턴별 정답·오류·저장·UI 결과를 확인한다. 현장 담당자가 익명화된 문서와 설정 export로 정답 매핑을 독립 작성하고 Týr 결과의 수렴/오매핑/누락/손실/검토 시간을 비교한다. 파일럿 자료 제공·실제 제품 검증은 아직 미완료다.
+- P7: current 실행, gap-probe 재현, planned 대기 수를 따로 보고한다. gap 재현 성공은 기능 지원 성공이 아니다. 기존 A01~A16과 함께 패턴별 정답·오류·저장·UI 결과를 확인한다. 현장 담당자가 익명화된 문서와 설정 export로 정답 매핑을 독립 작성하고 Tyr 결과의 수렴/오매핑/누락/손실/검토 시간을 비교한다. 파일럿 자료 제공·실제 제품 검증은 아직 미완료다.
 
 실행 순서는 P3-A → P3-B/C → P3-D와 고정 배열 P3-E이며 P4-A 원문 수용을 병행할 수 있다. B/C는 후속 분기로 둔다. 기존 27~36인일 추정은 확장 전의 제한된 범위에 대한 기록이다. 확장 A 범위의 새 일정은 P3-A 계약과 실제 파일 난도 검토 후 산정한다.
 
@@ -453,8 +453,8 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 - [x] registered Ed25519 두 키·PUBLISH/APPROVE 권한, 제안/전체 묶음/기준 릴리스/수신 변경 보고서 hash에 묶인 승인.
 - [x] 동일 스트림의 같은 semanticId가 다른 role/type/unit으로 바뀌는 개정 거부. 오래된 기준·승인·변조·미확인·unknown-op 거부.
 - [x] staging 재검증·원자적 디렉터리/HEAD 발행과 실패 시 이전 HEAD 유지. 발행은 운영 활성화가 아님.
-- [x] Týr 선택 매핑 복수 export/ZIP·SQLite 제출 이력·CLI 검사/서명 승인/발행 상태 조회, 13 화면.
-- [x] Týr 신규 37 + 회귀 664, Bifrost 기존 614 + 신규 47 직접 검증. A11/A12/A16 오프라인 경계 및 실제 두 앱 seam.
+- [x] Tyr 선택 매핑 복수 export/ZIP·SQLite 제출 이력·CLI 검사/서명 승인/발행 상태 조회, 13 화면.
+- [x] Tyr 신규 37 + 회귀 664, Bifrost 기존 614 + 신규 47 직접 검증. A11/A12/A16 오프라인 경계 및 실제 두 앱 seam.
 
 [설계·권위 경계](docs/P6-BIFROST-PUBLICATION.md) · [fixture](fixtures/p6/README.md) · [검증](docs/verification/P6-RESULTS.md). Bifrost는 codex/tyr-p6-mapping-release 로컬 feature 브랜치에서 변경했으며 commit/push/merge는 하지 않았다.
 
@@ -585,8 +585,8 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 
 [설계·경계](docs/P6-RECOVERY-GC.md) · [fault fixture](fixtures/p6-recovery/README.md) · [수용 결과](docs/verification/P6-RECOVERY-RESULTS.md).
 
-- [x] Bifrost 파일 발행 저널·기준 head CAS 복구·완료 후 반복 실행 무변경. pending journal은 approve/publish/GC 차단. Týr에는 승인/복구 실행 권위를 추가하지 않음.
-- [x] intent/release/head 각 지점의 예외·실제 JVM 종료, Týr 실제 프로세스 종료의 SQLite rollback/commit 보존, 손상·누락·충돌·symlink fault injection.
+- [x] Bifrost 파일 발행 저널·기준 head CAS 복구·완료 후 반복 실행 무변경. pending journal은 approve/publish/GC 차단. Tyr에는 승인/복구 실행 권위를 추가하지 않음.
+- [x] intent/release/head 각 지점의 예외·실제 JVM 종료, Tyr 실제 프로세스 종료의 SQLite rollback/commit 보존, 손상·누락·충돌·symlink fault injection.
 - [x] 과거 승인·unheaded 릴리스·전체 원본/검토 이력 closure 보존. 보수적 GC 사전 조회·내용/root pin 재검증·유예 기간·가역적 격리·중단 후 새 계획 지원. 영구 삭제 없음.
 - [x] 13 화면의 제출 무결성·고아 폴더 조회/격리·corrupt 표시와 차단. 기존 계약·SQLite 테이블/CAS/행 유지, 사용자 기존 DB/registry 보존.
 - [x] 최종 Linux 새 Python 13/13 + 기존 884/884, Windows 매핑 관련 Java 116/116, 격리 Chromium/Python/Java 연계 34/34. 기존 계약 파일 72개(schema 71개)·fixture 500개 SHA 보존, Java schema 사본 동일.
@@ -807,13 +807,13 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 
 [상세 설계·논리 모델·경계·SI01~SI18](docs/P4-F-SOLUTION-INTERPRETATION.md). 아래는 신규 작업이며 기존 P4-A/P4-A B 완료를 실제품 parser 지원으로 확대하지 않는다. 제조사 자료 제공은 선행 조건이 아니다. 허가된 현장 사본·오프라인 시험 자료를 확보하면 제품별 E를 진행한다.
 
-2026-10-20 후속 결정: **vendor 원본은 Mímir만 해석**한다. Mímir가 해석 스냅샷을 파일 계약으로 발행하고 Týr는 그 소비자다. 아래 A의 해석 모델(SourceBundle~UnresolvedItem)은 Mímir wire 계약(A1), 검토·판정·전환 모델은 Týr editor 계약(A2)이다. E의 해석기 구현은 Mímir 작업이며 이 계획에는 Týr 쪽 수신·검증만 남는다. [§3 소유 분리](docs/P4-F-SOLUTION-INTERPRETATION.md)
+2026-10-20 후속 결정: **vendor 원본은 Mimir만 해석**한다. Mimir가 해석 스냅샷을 파일 계약으로 발행하고 Tyr는 그 소비자다. 아래 A의 해석 모델(SourceBundle~UnresolvedItem)은 Mimir wire 계약(A1), 검토·판정·전환 모델은 Tyr editor 계약(A2)이다. E의 해석기 구현은 Mimir 작업이며 이 계획에는 Tyr 쪽 수신·검증만 남는다. [§3 소유 분리](docs/P4-F-SOLUTION-INTERPRETATION.md)
 
 ### 재사용과 신규 구현
 
 | 재사용할 부분 | 보완·새 구현 | 유지할 경계 |
 |---|---|---|
-| 2.6 원본/hash/locator·2.14 불변 관측/검토·CAS/재가져오기 원칙 | Mímir 해석 스냅샷(SourceBundle·profile·native 구조·참조·claim·미해석) 수신·pin 재검증과 Týr editor 계약 | 현재 parser/importRef 검증 우회 금지; unknown 필드를 구 schema에 추가하지 않음 |
+| 2.6 원본/hash/locator·2.14 불변 관측/검토·CAS/재가져오기 원칙 | Mimir 해석 스냅샷(SourceBundle·profile·native 구조·참조·claim·미해석) 수신·pin 재검증과 Tyr editor 계약 | 현재 parser/importRef 검증 우회 금지; unknown 필드를 구 schema에 추가하지 않음 |
 | source/graph/target/mapping/view/구조/selector·템플릿·가상 preview | endpoint closure·다차원 판정·native→canonical 전환 계획과 근거 | 지원하지 않는 상태·정책을 삭제해 동등 전환으로 표시하지 않음 |
 | P5 영향/검토, 다섯 작업 단계·P7 독립 정답 | 쟁점 작업대·이전 판단 유지/재검토·엑셀 정의서/대조표 | 원문/규칙 해석/사람 선언/가상 확인/실제 운영/승인 분리 |
 | 기존 SQLite workspace2.0·시나리오·제출·CAS | opt-in 별도 sidecar·불변 snapshot/결정·plan/receipt 복구 | 기존 DB DDL/자동 재작성 없음; DB 간 분산 원자성 주장 금지 |
@@ -824,10 +824,10 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 - [x] 설계에서 원본·참조·해석 근거·미해석·전환 판정과 제품 해석기 책임, 합성/실제품 수용 기준을 분리했다. 이 체크는 문서 완료만 의미한다.
 - [x] [정준 의미/값 생성·매핑 계약 경계](docs/CANONICAL-SEMANTICS-AND-GENERATION.md)와 PLC·DB·상수·조건식 혼합 템플릿·MG01~MG08의 명세를 추가했다. 문서 완료이며 조건식/업무 적합성 기능·fixture 실행 완료가 아니다.
 - [ ] SemanticContextContract/GenerationContract의 신규 editor 계약과 기존 semantic/source/graph/mapping/record/template 대응·pin·검증 분리. 업무 문맥·코드 사전·유효성/기간/수량 범주와 입력/생성 정책을 분리하고 기존 schema를 바꾸지 않는다.
-- [x] A1 (Mímir): SourceBundle/InterpretationProfile/Snapshot/NativeNode/ReferenceEdge/Claim/UnresolvedItem의 해석 스냅샷 wire Schema·version/hash/locator·한도. Mímir가 소유하고 Týr는 사본을 번들한다. 2026-10-22에 yggdrasil-iiot/mimir PR #3(머지 커밋 `f8691d0`) 머지로 완료됐으며, 스키마 6개(`contracts/interpretation/1.0.0/`), Java 검사기, 표준 라이브러리만 쓰는 독립 Python digest 스크립트, 합성 fixture 두 세트와 거부 사례 목록(`fixtures/interpretation/1.0.0/invalid/cases.json`)이 들어갔다. 해석기(파서)와 실제 제품 자료는 아직 없으며, Týr 사본 번들은 A2에서 한다.
-- [x] A2 (Týr): ReviewDecision/EndpointAssessment/ConversionPlan의 새 editor Schema와 스냅샷 수신·pin 재검증(재파싱 없음)·evidenceBasis 소유 위반 거부(SI19). 기존 계약은 수정하지 않는다. 구현: [P4-F A2](docs/P4-F-A2-INTAKE.md), 2026-10-22 tyr PR #4 머지(`fb5f3f7`, CI 통과). SI19의 저장 쪽 절반은 B에서 함께 시험한다.
-- [ ] native ID/모호한 참조·누락 파일/unknown capture scope·평가 순환/비평가 순환·근거 전이와 endpoint closure 검증. endpoint closure 계산과 검증(모호·누락·외부·미지원 참조, unknown capture 분리 보고, 평가/구조 순환, 깊이 한도, stateful 대체 표시)은 [P4-F closure](docs/P4-F-CLOSURE.md) 에서 구현했고 PR 검토 중이다. 남은 것은 native ID 의 개정 간 동일성(SI11), 근거 전이, 읽기·쓰기·event 구분(Mímir 계약 1.1.0 필요)이다.
-- [ ] synthetic-pio-like/synthetic-kepware-like 독립 입력·oracle 작성. 해석기 쪽 SI06·SI07·SI10·SI12 결정성·SI17 공격 파일 부분은 Mímir 시험으로 둔다. **실제 제품 export 형식이 아닌 가상 프로파일**로 표시. SI01~SI12·SI16·SI17의 계약/결정성/차단 부분을 검증. closure 용 합성 스냅샷 두 세트와 별도 검토자가 쓴 독립 oracle(12건, 구현과 일치)은 추가했고 PR 검토 중이다. synthetic-pio-like·kepware-like 독립 입력과 나머지 SI 는 남아 있다.
+- [x] A1 (Mimir): SourceBundle/InterpretationProfile/Snapshot/NativeNode/ReferenceEdge/Claim/UnresolvedItem의 해석 스냅샷 wire Schema·version/hash/locator·한도. Mimir가 소유하고 Tyr는 사본을 번들한다. 2026-10-22에 yggdrasil-iiot/mimir PR #3(머지 커밋 `f8691d0`) 머지로 완료됐으며, 스키마 6개(`contracts/interpretation/1.0.0/`), Java 검사기, 표준 라이브러리만 쓰는 독립 Python digest 스크립트, 합성 fixture 두 세트와 거부 사례 목록(`fixtures/interpretation/1.0.0/invalid/cases.json`)이 들어갔다. 해석기(파서)와 실제 제품 자료는 아직 없으며, Tyr 사본 번들은 A2에서 한다.
+- [x] A2 (Tyr): ReviewDecision/EndpointAssessment/ConversionPlan의 새 editor Schema와 스냅샷 수신·pin 재검증(재파싱 없음)·evidenceBasis 소유 위반 거부(SI19). 기존 계약은 수정하지 않는다. 구현: [P4-F A2](docs/P4-F-A2-INTAKE.md), 2026-10-22 tyr PR #4 머지(`fb5f3f7`, CI 통과). SI19의 저장 쪽 절반은 B에서 함께 시험한다.
+- [ ] native ID/모호한 참조·누락 파일/unknown capture scope·평가 순환/비평가 순환·근거 전이와 endpoint closure 검증. endpoint closure 계산과 검증(모호·누락·외부·미지원 참조, unknown capture 분리 보고, 평가/구조 순환, 깊이 한도, stateful 대체 표시)은 [P4-F closure](docs/P4-F-CLOSURE.md) 에서 구현했고 PR 검토 중이다. 남은 것은 native ID 의 개정 간 동일성(SI11), 근거 전이, 읽기·쓰기·event 구분(Mimir 계약 1.1.0 필요)이다.
+- [ ] synthetic-pio-like/synthetic-kepware-like 독립 입력·oracle 작성. 해석기 쪽 SI06·SI07·SI10·SI12 결정성·SI17 공격 파일 부분은 Mimir 시험으로 둔다. **실제 제품 export 형식이 아닌 가상 프로파일**로 표시. SI01~SI12·SI16·SI17의 계약/결정성/차단 부분을 검증. closure 용 합성 스냅샷 두 세트와 별도 검토자가 쓴 독립 oracle(12건, 구현과 일치)은 추가했고 PR 검토 중이다. synthetic-pio-like·kepware-like 독립 입력과 나머지 SI 는 남아 있다.
 
 종료 조건: 설정 단독과 이질 가상 구조의 의존 관계를 설명하고, 같은 정의/다른 의미·누락 참조·변환 손실을 분리한다. 원본/미해석 손실0, 미확정 closure의 최종 전환 성공 판정0. fixture 실행 전 통과 수치를 기록하지 않는다.
 
@@ -866,7 +866,7 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 
 종료 조건: 새 합성 해석 기반 제안을 독립 검증하고 기존 승인 경계를 유지한다. 제품 자료 없이 가능한 A~D 완료와 실제 PIO/Kepware 지원은 분리해 기록한다.
 
-### E 제품별 실제 해석기 — Mímir 작업 (자료 확보 후, A와 병행 조사 가능)
+### E 제품별 실제 해석기 — Mimir 작업 (자료 확보 후, A와 병행 조사 가능)
 
 - [ ] PIO: 제품/driver 버전·허가된 설정/백업·단순/복합 태그·화면 대응·기본값/참조/외부 코드 범위 확보. 정확한 parser/profile·원문 locator·제한을 구현/독립 검증.
 - [ ] BEAN TAG MANAGER: 정확한 제품/버전·PIO와의 연결, 공개 TM Core/TM Connector와의 관계를 실제 자료로 확인. 같은 제품으로 추정해 합치지 않음.

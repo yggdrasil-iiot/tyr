@@ -1,4 +1,4 @@
-"""P6 file/CLI adapter. Publication authority and private keys stay outside Týr."""
+"""P6 file/CLI adapter. Publication authority and private keys stay outside Tyr."""
 import base64,copy,hashlib,io,json,re,shutil,subprocess,tempfile,uuid,zipfile,time,os
 from pathlib import Path
 from datetime import datetime,timezone

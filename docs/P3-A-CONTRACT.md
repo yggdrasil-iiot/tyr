@@ -6,7 +6,7 @@
 
 기존 1.0.0/1.1.0 Schema 24개는 바이트 그대로 유지한다. 새 2.0.0에는 common, mapping-proposal, mapping-set, target-instance, value-graph 5개 Schema를 둔다. 소스·의미·근거 문서는 기존 1.0/1.1 형식을 재사용한다. 2.0 proposal은 이 여섯 종류의 실제 문서(source, semantic, evidence, target, graph, mapping 중 common 제외)를 파일 목록으로 고정한다. release/review/승인 계약을 2.0 지원한다고 주장하지 않는다.
 
-Týr가 작성·검증하고 Mímir는 후보만 제공한다. Bifrost의 승인/발행 권한 및 Muninn의 향후 소비 경계는 유지한다. 다른 앱의 코드를 의존하거나 변경하지 않았다.
+Tyr (Týr)가 작성·검증하고 Mimir (Mímir)는 후보만 제공한다. Bifrost의 승인/발행 권한 및 Muninn의 향후 소비 경계는 유지한다. 다른 앱의 코드를 의존하거나 변경하지 않았다.
 
 ## 객체 식별
 

@@ -33,7 +33,7 @@
 
 기존 schema 69개(계약 파일 70개)·fixture 파일 483개 SHA를 유지했다. 기존 2.6 batch/제안·source/semantic/graph 계약과 SQLite schema/migration 경로를 보존한다. 새 workflow를 선택할 때만 해당 batch를 2.14로 승격한다. 기존 DB를 여는 것만으로 body/revision을 다시 쓰지 않는다.
 
-최종 입력 파일 전체와 inventory 및 JAR hash가 수용 snapshot과 일치한다. Týr/Bifrost의 2.14 schema 사본은 byte hash가 같다. Java는 코드 공유 없이 wire만 검증한다. 원래 parser 관측 replay는 Týr가 수행하며 Java가 vendor parser 정답을 인증한다는 의미가 아니다.
+최종 입력 파일 전체와 inventory 및 JAR hash가 수용 snapshot과 일치한다. Tyr (Týr)/Bifrost의 2.14 schema 사본은 byte hash가 같다. Java는 코드 공유 없이 wire만 검증한다. 원래 parser 관측 replay는 Tyr가 수행하며 Java가 vendor parser 정답을 인증한다는 의미가 아니다.
 
 - [전체 수용](p4ab-full-acceptance.json), [P1~P6 회귀](p4ab-regression.json), [A07](p4ab-a07.json)
 - [신규 58 검증 로그](p4ab-new-tests.log), [graph 후보 회귀](p4ab-graph-candidate-regression.log), [논리 구조](p4ab-logical-structure-regression.log), [수학 연산](p4ab-bounded-math-regression.log)

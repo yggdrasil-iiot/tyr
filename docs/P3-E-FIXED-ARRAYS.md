@@ -10,7 +10,7 @@ source-definition의 선택 fixedArray가 배열 저장 형상을 선언한다. 
 
 rank 1~3, 총 요소 최대 256, 가상 버퍼 최대 4096 bytes 또는 Typed slots다. 요소는 기존 수치 타입/Boolean subset이며 codec·문자열·packed bit·native structure·array-of-struct·중첩 객체·가변 배열·런타임 인덱스는 제외한다. fixedArray가 없는 2.4 scalar 정의도 허용한다.
 
-Týr가 정의·근거와 오프라인 검증을 소유한다. Mímir 후보, Bifrost 승인·release, Muninn 실행 및 실제 vendor array 지원을 자동 확장하지 않는다. 다른 앱 코드를 공유하지 않는다.
+Tyr (Týr)가 정의·근거와 오프라인 검증을 소유한다. Mimir (Mímir) 후보, Bifrost 승인·release, Muninn 실행 및 실제 vendor array 지원을 자동 확장하지 않는다. 다른 앱 코드를 공유하지 않는다.
 
 ## shape·stride·범위
 

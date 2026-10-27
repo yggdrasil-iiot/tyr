@@ -5,7 +5,7 @@
 
 ## 실행
 
-Týr 폴더에서 실행한다.
+Tyr (Týr) 폴더에서 실행한다.
 
 ```powershell
 python -m pip install -r requirements-contracts.txt
@@ -45,7 +45,7 @@ MELSEC의 숫자 인덱스는 10진 정수로 입력하고 원문 진법을 별�
 
 - backend/server.py: Python 3.13.5 표준 http.server·sqlite3. 기존 jsonschema 4.26.0 / referencing 의존성은 requirements-contracts.txt를 따른다.
 - frontend: HTML/CSS/JavaScript. 런타임 패키지·외부 CDN·번들러가 없다.
-- P1 contracts와 scripts/validate_contracts.py를 **Týr 내부**에서 재사용한다. Bifrost·Mímir·Muninn 코드를 가져오거나 수정하지 않았다.
+- P1 contracts와 scripts/validate_contracts.py를 **Tyr 내부**에서 재사용한다. Bifrost·Mimir (Mímir)·Muninn 코드를 가져오거나 수정하지 않았다.
 - P0의 JVM 우선 검토를 거쳐, P2 로컬 작성은 이미 검증한 Python 계약 도구를 직접 재사용하는 방식으로 결정했다. 서버 프레임워크·새 JVM 의존성·패키지 다운로드를 추가하지 않고 핵심 작성·저장 경로를 검증한다. 향후 배포 백엔드 선택은 이 파일 계약과 독립적이다.
 - 데이터 저장은 단일 SQLite 행의 전체 workspace JSON과 revision, updated_at이다. 규모를 가정한 서비스 분리·공유 DB는 도입하지 않았다.
 

@@ -12,7 +12,7 @@
 
 ## 정적 의존성 검증
 
-Týr와 Bifrost가 각자 wire 정의를 해석한다. 공유 구현 라이브러리나 상호 코드 의존을 추가하지 않는다. consumer를 producer보다 먼저 저장/제출해도 graph dependency topological order로 타입·단위·근거를 검증한다.
+Tyr (Týr)와 Bifrost가 각자 wire 정의를 해석한다. 공유 구현 라이브러리나 상호 코드 의존을 추가하지 않는다. consumer를 producer보다 먼저 저장/제출해도 graph dependency topological order로 타입·단위·근거를 검증한다.
 
 모든 graph endpoint에서 참조 그래프/정확한 버전/노드 존재, 설비 경계, scalar 여부를 검사한다. 자기 참조·두 그래프·다중 그래프 순환을 차단한다. 참조한 노드 경로가 직접 순환하지 않아도 graph 정의끼리 상호 의존하면 거부한다. 선택되지 않은 selector 후보 및 다른 미사용 노드도 정적 검증 대상이다. 기존 로컬 node cycle 검사도 유지한다.
 
@@ -28,7 +28,7 @@ SQLite는 참조를 그대로 workspace JSON에 저장한다. 새 테이블·기
 
 ## 변경 검토·승인·발행
 
-기존 change-review의 graphRef 재귀 의존 해시와 P7 평가 정의 closure를 재사용한다. upstream 그래프 정의가 바뀌면 consumer의 의존성 pin이 달라진다. 제출은 참조된 graph 전체·재귀 source·artifact를 포함하고 원래 graph 경계를 유지한다. Bifrost가 독립적으로 순환/참조/타입/단위/근거를 재검사한 후 기존 두 키 승인·불변 파일 발행을 수행한다. producer 최신값으로 자동 대체하거나 Týr 식을 Java에서 실행하지 않는다.
+기존 change-review의 graphRef 재귀 의존 해시와 P7 평가 정의 closure를 재사용한다. upstream 그래프 정의가 바뀌면 consumer의 의존성 pin이 달라진다. 제출은 참조된 graph 전체·재귀 source·artifact를 포함하고 원래 graph 경계를 유지한다. Bifrost가 독립적으로 순환/참조/타입/단위/근거를 재검사한 후 기존 두 키 승인·불변 파일 발행을 수행한다. producer 최신값으로 자동 대체하거나 Tyr 식을 Java에서 실행하지 않는다.
 
 ## 합성 수용과 남은 범위
 
