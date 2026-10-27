@@ -1,0 +1,31 @@
+{
+  "kind": "source-bundle",
+  "contractVersion": "1.0.0",
+  "id": "synthetic/closure-b/bundle",
+  "version": "1.0.0",
+  "body": {
+    "origin": "synthetic",
+    "captureScope": "partial",
+    "artifacts": [
+      {
+        "artifactId": "cfg",
+        "path": "artifacts/config.txt",
+        "sha256": "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc1",
+        "sizeBytes": 1,
+        "role": "configuration",
+        "obtained": {
+          "at": "2026-10-22T00:00:00Z",
+          "method": "handed-over"
+        }
+      }
+    ],
+    "productClaims": [
+      {
+        "subject": "product",
+        "value": "synthetic-closure",
+        "basis": "stated-by-provider"
+      }
+    ]
+  },
+  "digest": "01a05e5a0aaabc1a37a32aea61fd83eb1ee9504eaac12876ac706962e2221d86"
+}

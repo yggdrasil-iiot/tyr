@@ -1,0 +1,53 @@
+{
+  "about": "Endpoints whose closures the oracle states. The expected results live in oracle.json, written independently of the implementation.",
+  "cases": [
+    {
+      "snapshot": "closure-a",
+      "endpoint": "n.final"
+    },
+    {
+      "snapshot": "closure-a",
+      "endpoint": "n.deep0"
+    },
+    {
+      "snapshot": "closure-a",
+      "endpoint": "n.cyc-a"
+    },
+    {
+      "snapshot": "closure-a",
+      "endpoint": "n.obj"
+    },
+    {
+      "snapshot": "closure-a",
+      "endpoint": "n.lonely"
+    },
+    {
+      "snapshot": "closure-a",
+      "endpoint": "n.avg"
+    },
+    {
+      "snapshot": "closure-a",
+      "endpoint": "n.line1.temp"
+    },
+    {
+      "snapshot": "closure-b",
+      "endpoint": "n.b-tag"
+    },
+    {
+      "snapshot": "closure-b",
+      "endpoint": "n.b-ext"
+    },
+    {
+      "snapshot": "closure-b",
+      "endpoint": "n.b-uns"
+    },
+    {
+      "snapshot": "closure-b",
+      "endpoint": "n.b-cnt"
+    },
+    {
+      "snapshot": "closure-b",
+      "endpoint": "n.b-ok"
+    }
+  ]
+}

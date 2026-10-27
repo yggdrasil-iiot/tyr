@@ -1,0 +1,36 @@
+{
+  "kind": "interpretation-profile",
+  "contractVersion": "1.0.0",
+  "id": "synthetic/closure-a/profile",
+  "version": "1.0.0",
+  "body": {
+    "interpreter": {
+      "name": "synthetic-closure-interpreter",
+      "version": "0.1.0",
+      "implementationDigest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "supports": [
+      {
+        "product": "synthetic-closure",
+        "versions": [
+          "1"
+        ],
+        "inputFormats": [
+          "synthetic"
+        ]
+      }
+    ],
+    "unknownVersionPolicy": "reject",
+    "rules": [],
+    "limits": {
+      "maxArtifacts": 10,
+      "maxTotalBytes": 1048576,
+      "maxReferenceDepth": 3,
+      "maxNodes": 1000
+    },
+    "knownGaps": [
+      "synthetic closure fixture; no artifact bytes are shipped"
+    ]
+  },
+  "digest": "5343c9bc2338a313846b6da06268d0c21d3d14aba108010ea7f88a5139b76592"
+}

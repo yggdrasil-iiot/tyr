@@ -1,0 +1,673 @@
+{
+  "kind": "interpretation-snapshot",
+  "contractVersion": "1.0.0",
+  "id": "synthetic/closure-a/snapshot",
+  "version": "1.0.0",
+  "body": {
+    "bundleRef": {
+      "kind": "source-bundle",
+      "id": "synthetic/closure-a/bundle",
+      "version": "1.0.0",
+      "digest": "d03f849641f78d34f30d75874b7d815c9156e6342fd894d5753bd4a03e6f2004"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/closure-a/profile",
+      "version": "1.0.0",
+      "digest": "5343c9bc2338a313846b6da06268d0c21d3d14aba108010ea7f88a5139b76592"
+    },
+    "inputManifest": [
+      {
+        "artifactId": "cfg",
+        "sha256": "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc1"
+      }
+    ],
+    "context": [],
+    "nativeNodes": [
+      {
+        "nodeId": "n.plc",
+        "namespace": "synthetic-closure",
+        "nativeId": "plc",
+        "kind": "connection",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      },
+      {
+        "nodeId": "n.final",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Final",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 2
+          }
+        }
+      },
+      {
+        "nodeId": "n.mid",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Mid",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 3
+          }
+        }
+      },
+      {
+        "nodeId": "n.raw",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Raw",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 4
+          }
+        }
+      },
+      {
+        "nodeId": "n.tpl",
+        "namespace": "synthetic-closure",
+        "nativeId": "TemplateA",
+        "kind": "policy",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 5
+          }
+        }
+      },
+      {
+        "nodeId": "n.tpl-default",
+        "namespace": "synthetic-closure",
+        "nativeId": "TemplateA.default",
+        "kind": "policy",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 6
+          }
+        }
+      },
+      {
+        "nodeId": "n.common",
+        "namespace": "synthetic-closure",
+        "nativeId": "CommonScale",
+        "kind": "policy",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 7
+          }
+        }
+      },
+      {
+        "nodeId": "n.deep0",
+        "namespace": "synthetic-closure",
+        "nativeId": "Deep0",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 10
+          }
+        }
+      },
+      {
+        "nodeId": "n.deep1",
+        "namespace": "synthetic-closure",
+        "nativeId": "Deep1",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 11
+          }
+        }
+      },
+      {
+        "nodeId": "n.deep2",
+        "namespace": "synthetic-closure",
+        "nativeId": "Deep2",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 12
+          }
+        }
+      },
+      {
+        "nodeId": "n.deep3",
+        "namespace": "synthetic-closure",
+        "nativeId": "Deep3",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 13
+          }
+        }
+      },
+      {
+        "nodeId": "n.deep4",
+        "namespace": "synthetic-closure",
+        "nativeId": "Deep4",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 14
+          }
+        }
+      },
+      {
+        "nodeId": "n.cyc-a",
+        "namespace": "synthetic-closure",
+        "nativeId": "CycA",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 20
+          }
+        }
+      },
+      {
+        "nodeId": "n.cyc-b",
+        "namespace": "synthetic-closure",
+        "nativeId": "CycB",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 21
+          }
+        }
+      },
+      {
+        "nodeId": "n.obj",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Obj",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 30
+          }
+        }
+      },
+      {
+        "nodeId": "n.obj-part",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Obj.Part",
+        "kind": "group",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 31
+          }
+        }
+      },
+      {
+        "nodeId": "n.lonely",
+        "namespace": "synthetic-closure",
+        "nativeId": "Lonely",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 40
+          }
+        }
+      },
+      {
+        "nodeId": "n.line1.temp",
+        "namespace": "synthetic-closure",
+        "nativeId": "Temp",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 50
+          }
+        },
+        "nativePath": [
+          "Line1",
+          "Temp"
+        ]
+      },
+      {
+        "nodeId": "n.line2.temp",
+        "namespace": "synthetic-closure",
+        "nativeId": "Temp",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 51
+          }
+        },
+        "nativePath": [
+          "Line2",
+          "Temp"
+        ]
+      },
+      {
+        "nodeId": "n.avg",
+        "namespace": "synthetic-closure",
+        "nativeId": "Avg",
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 52
+          }
+        }
+      }
+    ],
+    "referenceEdges": [
+      {
+        "edgeId": "e.final-mid",
+        "owner": {
+          "nodeId": "n.final",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "Line1.Mid",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.mid"
+      },
+      {
+        "edgeId": "e.final-tpl",
+        "owner": {
+          "nodeId": "n.final",
+          "field": "template"
+        },
+        "relation": "inherits",
+        "targetText": "TemplateA",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.tpl"
+      },
+      {
+        "edgeId": "e.final-override",
+        "owner": {
+          "nodeId": "n.final",
+          "field": "scale"
+        },
+        "relation": "overrides",
+        "targetText": "TemplateA.default",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.tpl-default"
+      },
+      {
+        "edgeId": "e.mid-raw",
+        "owner": {
+          "nodeId": "n.mid",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "Line1.Raw",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.raw"
+      },
+      {
+        "edgeId": "e.mid-common",
+        "owner": {
+          "nodeId": "n.mid",
+          "field": "policy"
+        },
+        "relation": "policy",
+        "targetText": "CommonScale",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.common"
+      },
+      {
+        "edgeId": "e.raw-plc",
+        "owner": {
+          "nodeId": "n.raw",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc:D10",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.plc"
+      },
+      {
+        "edgeId": "e.deep0-1",
+        "owner": {
+          "nodeId": "n.deep0",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "Deep1",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.deep1"
+      },
+      {
+        "edgeId": "e.deep1-2",
+        "owner": {
+          "nodeId": "n.deep1",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "Deep2",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.deep2"
+      },
+      {
+        "edgeId": "e.deep2-3",
+        "owner": {
+          "nodeId": "n.deep2",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "Deep3",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.deep3"
+      },
+      {
+        "edgeId": "e.deep3-4",
+        "owner": {
+          "nodeId": "n.deep3",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "Deep4",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.deep4"
+      },
+      {
+        "edgeId": "e.cyc-ab",
+        "owner": {
+          "nodeId": "n.cyc-a",
+          "field": "ref"
+        },
+        "relation": "reference",
+        "targetText": "CycB",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.cyc-b"
+      },
+      {
+        "edgeId": "e.cyc-ba",
+        "owner": {
+          "nodeId": "n.cyc-b",
+          "field": "ref"
+        },
+        "relation": "reference",
+        "targetText": "CycA",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.cyc-a"
+      },
+      {
+        "edgeId": "e.cyc-plc",
+        "owner": {
+          "nodeId": "n.cyc-a",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc:D20",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.plc"
+      },
+      {
+        "edgeId": "e.obj-plc",
+        "owner": {
+          "nodeId": "n.obj",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc:D30",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.plc"
+      },
+      {
+        "edgeId": "e.obj-part",
+        "owner": {
+          "nodeId": "n.obj",
+          "field": "members"
+        },
+        "relation": "contains",
+        "targetText": "Part",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.obj-part"
+      },
+      {
+        "edgeId": "e.part-obj",
+        "owner": {
+          "nodeId": "n.obj-part",
+          "field": "owner"
+        },
+        "relation": "contains",
+        "targetText": "Line1.Obj",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.obj"
+      },
+      {
+        "edgeId": "e.temp1-plc",
+        "owner": {
+          "nodeId": "n.line1.temp",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc:D50",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.plc"
+      },
+      {
+        "edgeId": "e.temp2-plc",
+        "owner": {
+          "nodeId": "n.line2.temp",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc:D51",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.plc"
+      },
+      {
+        "edgeId": "e.avg-temp",
+        "owner": {
+          "nodeId": "n.avg",
+          "field": "arg"
+        },
+        "relation": "reference",
+        "targetText": "Temp",
+        "resolution": "ambiguous",
+        "basis": "synthetic",
+        "candidates": [
+          "n.line1.temp",
+          "n.line2.temp"
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claimId": "c.plc-address",
+        "subject": {
+          "nodeId": "n.plc",
+          "field": "address"
+        },
+        "value": "10.0.0.1",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.tpl-unit",
+        "subject": {
+          "nodeId": "n.tpl",
+          "field": "unit"
+        },
+        "value": "degC",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 5
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.tpl-default-scale",
+        "subject": {
+          "nodeId": "n.tpl-default",
+          "field": "scale"
+        },
+        "value": "0.5",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 6
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.common-factor",
+        "subject": {
+          "nodeId": "n.common",
+          "field": "factor"
+        },
+        "value": "2",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 7
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.deep4-address",
+        "subject": {
+          "nodeId": "n.deep4",
+          "field": "address"
+        },
+        "value": "D99",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 14
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.lonely-guess",
+        "subject": {
+          "nodeId": "n.lonely",
+          "field": "address"
+        },
+        "value": "unknown",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "unknown",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 40
+            }
+          }
+        ]
+      }
+    ],
+    "unresolved": [
+      {
+        "issueId": "u.avg",
+        "code": "ambiguous",
+        "edgeId": "e.avg-temp",
+        "reason": "two tags named Temp",
+        "affectedNodeIds": [
+          "n.avg"
+        ]
+      },
+      {
+        "issueId": "u.deep4",
+        "code": "behavior-unknown",
+        "nodeId": "n.deep4",
+        "reason": "synthetic",
+        "affectedNodeIds": [
+          "n.deep4"
+        ]
+      }
+    ],
+    "coverage": {
+      "capture": "declared-complete",
+      "artifactsRead": 1,
+      "artifactsSkipped": 0
+    },
+    "diagnostics": []
+  },
+  "digest": "4a3aff120f50ecca4f332ec995f13ae2451238d699d9a99884dd107cc6ab799d"
+}
