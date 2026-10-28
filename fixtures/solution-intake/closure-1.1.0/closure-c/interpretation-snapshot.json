@@ -1,0 +1,686 @@
+{
+  "kind": "interpretation-snapshot",
+  "contractVersion": "1.1.0",
+  "id": "synthetic/closure-c/snapshot",
+  "version": "1.0.0",
+  "body": {
+    "bundleRef": {
+      "kind": "source-bundle",
+      "id": "synthetic/closure-c/bundle",
+      "version": "1.0.0",
+      "digest": "bb80d704712445191e27249e834a30caf087cce9db04fef828741e7d353f4840"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/closure-c/profile",
+      "version": "1.0.0",
+      "digest": "7b8276c8bc92d7a4b2443aa581ae170c1c37d1d591448c9113e129599994b776"
+    },
+    "inputManifest": [
+      {
+        "artifactId": "cfg",
+        "sha256": "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc1"
+      }
+    ],
+    "context": [],
+    "nativeNodes": [
+      {
+        "nodeId": "n.c-plc",
+        "namespace": "synthetic-closure",
+        "nativeId": "plc",
+        "kind": "connection",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-raw",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Raw",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 3
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-scale",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Scale",
+        "kind": "operation",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 4
+          }
+        },
+        "state": "stateless",
+        "stateClaimId": "c.c-scale-state"
+      },
+      {
+        "nodeId": "n.c-read",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Read",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 5
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-trigger",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Trigger",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 6
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-alarm",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Alarm",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 8
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-out",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Out",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 9
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-script",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Script",
+        "kind": "operation",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 11
+          }
+        },
+        "state": "stateless",
+        "stateClaimId": "c.c-script-state"
+      },
+      {
+        "nodeId": "n.c-total",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Total",
+        "kind": "operation",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 12
+          }
+        },
+        "state": "stateful",
+        "stateKinds": [
+          "accumulator"
+        ],
+        "stateClaimId": "c.c-total-state"
+      },
+      {
+        "nodeId": "n.c-blind",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Blind",
+        "kind": "opaque",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 13
+          }
+        },
+        "payload": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 13
+          }
+        },
+        "state": "unknown"
+      },
+      {
+        "nodeId": "n.c-guess",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Guess",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 14
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-chain",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Chain",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 15
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-vague",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Vague",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 16
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-deep",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Deep",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 17
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-deep1",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Deep1",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 18
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-deep2",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1.Deep2",
+        "kind": "tag",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 19
+          }
+        }
+      },
+      {
+        "nodeId": "n.c-group",
+        "namespace": "synthetic-closure",
+        "nativeId": "Line1",
+        "kind": "group",
+        "locator": {
+          "artifactId": "cfg",
+          "at": {
+            "kind": "text-line",
+            "line": 20
+          }
+        }
+      }
+    ],
+    "referenceEdges": [
+      {
+        "edgeId": "e.raw-plc",
+        "owner": {
+          "nodeId": "n.c-raw",
+          "field": "device"
+        },
+        "relation": "reference",
+        "access": "read",
+        "targetText": "plc",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-plc"
+      },
+      {
+        "edgeId": "e.scale-raw",
+        "owner": {
+          "nodeId": "n.c-scale",
+          "field": "input"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Raw",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-raw"
+      },
+      {
+        "edgeId": "e.read-scale",
+        "owner": {
+          "nodeId": "n.c-read",
+          "field": "source"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Scale",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-scale"
+      },
+      {
+        "edgeId": "e.alarm-trigger",
+        "owner": {
+          "nodeId": "n.c-alarm",
+          "field": "onChange"
+        },
+        "relation": "input",
+        "access": "event",
+        "targetText": "Line1.Trigger",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-trigger"
+      },
+      {
+        "edgeId": "e.alarm-raw",
+        "owner": {
+          "nodeId": "n.c-alarm",
+          "field": "source"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Raw",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-raw"
+      },
+      {
+        "edgeId": "e.script-raw",
+        "owner": {
+          "nodeId": "n.c-script",
+          "field": "input"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Raw",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-raw"
+      },
+      {
+        "edgeId": "e.script-out",
+        "owner": {
+          "nodeId": "n.c-script",
+          "field": "writeTo"
+        },
+        "relation": "reference",
+        "access": "write",
+        "targetText": "Line1.Out",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-out"
+      },
+      {
+        "edgeId": "e.script-gone",
+        "owner": {
+          "nodeId": "n.c-script",
+          "field": "writeTo"
+        },
+        "relation": "reference",
+        "access": "write",
+        "targetText": "Line9.Missing",
+        "resolution": "missing",
+        "basis": "synthetic"
+      },
+      {
+        "edgeId": "e.total-raw",
+        "owner": {
+          "nodeId": "n.c-total",
+          "field": "input"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Raw",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-raw"
+      },
+      {
+        "edgeId": "e.blind-raw",
+        "owner": {
+          "nodeId": "n.c-blind",
+          "field": "input"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Raw",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-raw"
+      },
+      {
+        "edgeId": "e.guess-plc",
+        "owner": {
+          "nodeId": "n.c-guess",
+          "field": "device"
+        },
+        "relation": "reference",
+        "access": "unknown",
+        "targetText": "plc",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-plc"
+      },
+      {
+        "edgeId": "e.chain-script",
+        "owner": {
+          "nodeId": "n.c-chain",
+          "field": "source"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Script",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-script"
+      },
+      {
+        "edgeId": "e.chain-total",
+        "owner": {
+          "nodeId": "n.c-chain",
+          "field": "count"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Total",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-total"
+      },
+      {
+        "edgeId": "e.vague-gone",
+        "owner": {
+          "nodeId": "n.c-vague",
+          "field": "source"
+        },
+        "relation": "input",
+        "access": "unknown",
+        "targetText": "Line1.Gone",
+        "resolution": "missing",
+        "basis": "synthetic"
+      },
+      {
+        "edgeId": "e.deep-1",
+        "owner": {
+          "nodeId": "n.c-deep",
+          "field": "source"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Deep1",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-deep1"
+      },
+      {
+        "edgeId": "e.deep1-2",
+        "owner": {
+          "nodeId": "n.c-deep1",
+          "field": "source"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Deep2",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-deep2"
+      },
+      {
+        "edgeId": "e.deep2-script",
+        "owner": {
+          "nodeId": "n.c-deep2",
+          "field": "source"
+        },
+        "relation": "input",
+        "access": "read",
+        "targetText": "Line1.Script",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-script"
+      },
+      {
+        "edgeId": "e.group-read",
+        "owner": {
+          "nodeId": "n.c-group",
+          "field": "members"
+        },
+        "relation": "contains",
+        "targetText": "c-read",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-read"
+      },
+      {
+        "edgeId": "e.group-alarm",
+        "owner": {
+          "nodeId": "n.c-group",
+          "field": "members"
+        },
+        "relation": "contains",
+        "targetText": "c-alarm",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-alarm"
+      },
+      {
+        "edgeId": "e.group-script",
+        "owner": {
+          "nodeId": "n.c-group",
+          "field": "members"
+        },
+        "relation": "contains",
+        "targetText": "c-script",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-script"
+      },
+      {
+        "edgeId": "e.group-total",
+        "owner": {
+          "nodeId": "n.c-group",
+          "field": "members"
+        },
+        "relation": "contains",
+        "targetText": "c-total",
+        "resolution": "resolved",
+        "basis": "synthetic",
+        "targetNodeId": "n.c-total"
+      }
+    ],
+    "claims": [
+      {
+        "claimId": "c.c-plc-address",
+        "subject": {
+          "nodeId": "n.c-plc",
+          "field": "address"
+        },
+        "value": "10.0.0.9",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 2
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.c-scale-state",
+        "subject": {
+          "nodeId": "n.c-scale",
+          "field": "state"
+        },
+        "value": "stateless",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 4
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.c-trigger-address",
+        "subject": {
+          "nodeId": "n.c-trigger",
+          "field": "address"
+        },
+        "value": "M10",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 7
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.c-out-address",
+        "subject": {
+          "nodeId": "n.c-out",
+          "field": "address"
+        },
+        "value": "D900",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 10
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.c-script-state",
+        "subject": {
+          "nodeId": "n.c-script",
+          "field": "state"
+        },
+        "value": "stateless",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 11
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c.c-total-state",
+        "subject": {
+          "nodeId": "n.c-total",
+          "field": "state"
+        },
+        "value": "stateful",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "cfg",
+            "at": {
+              "kind": "text-line",
+              "line": 12
+            }
+          }
+        ]
+      }
+    ],
+    "unresolved": [
+      {
+        "issueId": "u.blind",
+        "code": "behavior-unknown",
+        "nodeId": "n.c-blind",
+        "reason": "the script is not executed",
+        "affectedNodeIds": [
+          "n.c-blind"
+        ]
+      },
+      {
+        "issueId": "u.script-gone",
+        "code": "missing",
+        "edgeId": "e.script-gone",
+        "reason": "the write target is not in the export",
+        "affectedNodeIds": []
+      },
+      {
+        "issueId": "u.vague-gone",
+        "code": "missing",
+        "edgeId": "e.vague-gone",
+        "reason": "the source is not in the export",
+        "affectedNodeIds": [
+          "n.c-vague"
+        ]
+      }
+    ],
+    "coverage": {
+      "capture": "declared-complete",
+      "artifactsRead": 1,
+      "artifactsSkipped": 0
+    },
+    "diagnostics": []
+  },
+  "digest": "20cb5ba6c9283548ae39ecbdfa738e95edfd77ba86479390bda4db8528558d3b"
+}

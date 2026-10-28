@@ -1,0 +1,41 @@
+{
+  "about": "Endpoints in the 1.1.0 snapshot whose closures the oracle states. The expected results live in oracle.json, written independently of the implementation.",
+  "cases": [
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-read"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-alarm"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-script"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-total"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-blind"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-guess"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-chain"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-vague"
+    },
+    {
+      "snapshot": "closure-c",
+      "endpoint": "n.c-deep"
+    }
+  ]
+}
