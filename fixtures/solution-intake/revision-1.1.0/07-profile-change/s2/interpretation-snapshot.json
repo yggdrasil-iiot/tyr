@@ -1,0 +1,428 @@
+{
+  "kind": "interpretation-snapshot",
+  "contractVersion": "1.1.0",
+  "id": "synthetic/pio-like/snapshot",
+  "version": "2.0.0",
+  "body": {
+    "bundleRef": {
+      "kind": "source-bundle",
+      "id": "synthetic/pio-like/bundle",
+      "version": "2.0.0",
+      "digest": "18dab8a776a54e07ea5e2defc6937fcb6bcc737d702e45d356c316fb05b521a7"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/pio-like/profile",
+      "version": "1.0.0",
+      "digest": "b165fc2f3fd77e3c70d52f62c69b24afd588c6a8819733526a34b72a337ccdae"
+    },
+    "inputManifest": [
+      {
+        "artifactId": "config",
+        "sha256": "bac8ed702f2de21e52c4257a81866777b01f605a62f8a470c6c6aa46c5e5b1e9"
+      },
+      {
+        "artifactId": "connection-redacted",
+        "sha256": "6558282ee56eef33eca8c9dbba787f4d608fe11f8183ec13a2d8b8193c3c27ec"
+      }
+    ],
+    "context": [
+      {
+        "key": "site",
+        "value": "synthetic"
+      }
+    ],
+    "nativeNodes": [
+      {
+        "nodeId": "n2.plc1",
+        "namespace": "synthetic-pio-like",
+        "nativeId": "plc1",
+        "kind": "connection",
+        "locator": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 3
+          }
+        }
+      },
+      {
+        "nodeId": "n2.line1-temp",
+        "namespace": "synthetic-pio-like",
+        "nativeId": "Line1.Temp",
+        "nativePath": [
+          "Line1",
+          "Temp"
+        ],
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 7
+          }
+        },
+        "outputs": [
+          {
+            "name": "unit",
+            "value": "degC"
+          }
+        ]
+      },
+      {
+        "nodeId": "n2.line1-tempavg",
+        "namespace": "synthetic-pio-like",
+        "nativeId": "Line1.TempAvg",
+        "nativePath": [
+          "Line1",
+          "TempAvg"
+        ],
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 12
+          }
+        }
+      },
+      {
+        "nodeId": "n2.line1-tempavg.script",
+        "namespace": "synthetic-pio-like",
+        "nativeId": "Line1.TempAvg#script",
+        "kind": "opaque",
+        "locator": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 13
+          }
+        },
+        "payload": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 13
+          }
+        },
+        "state": "unknown"
+      },
+      {
+        "nodeId": "n2.line1-count",
+        "namespace": "synthetic-pio-like",
+        "nativeId": "Line1.Count",
+        "nativePath": [
+          "Line1",
+          "Count"
+        ],
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 15
+          }
+        }
+      },
+      {
+        "nodeId": "n2.line1-reset",
+        "namespace": "synthetic-pio-like",
+        "nativeId": "Line1.Reset",
+        "nativePath": [
+          "Line1",
+          "Reset"
+        ],
+        "kind": "map-entry",
+        "locator": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 18
+          }
+        }
+      },
+      {
+        "nodeId": "n2.line1-reset.script",
+        "namespace": "synthetic-pio-like",
+        "nativeId": "Line1.Reset#script",
+        "kind": "opaque",
+        "locator": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 19
+          }
+        },
+        "payload": {
+          "artifactId": "config",
+          "at": {
+            "kind": "text-line",
+            "line": 19
+          }
+        },
+        "state": "stateful",
+        "stateKinds": [
+          "edge-detect"
+        ],
+        "stateClaimId": "c2.reset-state"
+      }
+    ],
+    "referenceEdges": [
+      {
+        "edgeId": "e2.temp-source",
+        "owner": {
+          "nodeId": "n2.line1-temp",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc1:D100",
+        "resolution": "resolved",
+        "targetNodeId": "n2.plc1",
+        "basis": "the name before ':' matches the [connection plc1] section",
+        "access": "read"
+      },
+      {
+        "edgeId": "e2.avg-input",
+        "owner": {
+          "nodeId": "n2.line1-tempavg.script",
+          "field": "script"
+        },
+        "relation": "reference",
+        "targetText": "Line1.Temp",
+        "resolution": "resolved",
+        "targetNodeId": "n2.line1-temp",
+        "basis": "the script argument names the [map Line1.Temp] section",
+        "access": "read"
+      },
+      {
+        "edgeId": "e2.count-source",
+        "owner": {
+          "nodeId": "n2.line1-count",
+          "field": "source"
+        },
+        "relation": "input",
+        "targetText": "plc2:D200",
+        "resolution": "missing",
+        "basis": "no [connection plc2] section in any artifact of the bundle",
+        "access": "read"
+      },
+      {
+        "edgeId": "e2.reset-trigger",
+        "owner": {
+          "nodeId": "n2.line1-reset.script",
+          "field": "script"
+        },
+        "relation": "input",
+        "access": "event",
+        "targetText": "Line1.Count",
+        "resolution": "resolved",
+        "targetNodeId": "n2.line1-count",
+        "basis": "on_change(Line1.Count) runs the script when the value changes"
+      },
+      {
+        "edgeId": "e2.reset-write",
+        "owner": {
+          "nodeId": "n2.line1-reset.script",
+          "field": "script"
+        },
+        "relation": "reference",
+        "access": "write",
+        "targetText": "plc1:D300",
+        "resolution": "resolved",
+        "targetNodeId": "n2.plc1",
+        "basis": "write(plc1:D300, 0) names connection plc1; the write is recorded, never run"
+      }
+    ],
+    "claims": [
+      {
+        "claimId": "c2.plc1-address",
+        "subject": {
+          "nodeId": "n2.plc1",
+          "field": "address"
+        },
+        "value": "10.0.0.10",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "config",
+            "at": {
+              "kind": "text-line",
+              "line": 4
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c2.plc1-credential",
+        "subject": {
+          "nodeId": "n2.plc1",
+          "field": "password"
+        },
+        "value": "present, removed from the copy",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "connection-redacted",
+            "at": {
+              "kind": "text-line",
+              "line": 6
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c2.temp-address",
+        "subject": {
+          "nodeId": "n2.line1-temp",
+          "field": "address"
+        },
+        "value": "D100",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "config",
+            "at": {
+              "kind": "text-line",
+              "line": 8
+            }
+          }
+        ],
+        "dependsOn": {
+          "edgeIds": [
+            "e2.temp-source"
+          ]
+        }
+      },
+      {
+        "claimId": "c2.temp-scale",
+        "subject": {
+          "nodeId": "n2.line1-temp",
+          "field": "scale"
+        },
+        "value": "0.1",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "config",
+            "at": {
+              "kind": "text-line",
+              "line": 9
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c2.temp-engineering",
+        "subject": {
+          "nodeId": "n2.line1-temp",
+          "field": "engineeringValue"
+        },
+        "value": "raw * 0.1",
+        "evidenceBasis": "derived-by-rule",
+        "status": "asserted",
+        "rule": {
+          "ruleId": "synthetic-pio-like.scale",
+          "version": "1.1.0"
+        },
+        "locators": [
+          {
+            "artifactId": "config",
+            "at": {
+              "kind": "text-line",
+              "line": 9
+            }
+          }
+        ],
+        "dependsOn": {
+          "claimIds": [
+            "c2.temp-scale",
+            "c2.temp-address"
+          ]
+        }
+      },
+      {
+        "claimId": "c2.temp-unit",
+        "subject": {
+          "nodeId": "n2.line1-temp",
+          "field": "unit"
+        },
+        "value": "degC",
+        "evidenceBasis": "observed-in-artifact",
+        "status": "asserted",
+        "locators": [
+          {
+            "artifactId": "config",
+            "at": {
+              "kind": "text-line",
+              "line": 10
+            }
+          }
+        ]
+      },
+      {
+        "claimId": "c2.reset-state",
+        "subject": {
+          "nodeId": "n2.line1-reset.script",
+          "field": "state"
+        },
+        "value": "stateful",
+        "evidenceBasis": "derived-by-rule",
+        "status": "asserted",
+        "rule": {
+          "ruleId": "synthetic-pio-like.state-by-function",
+          "version": "1.0.0"
+        },
+        "locators": [
+          {
+            "artifactId": "config",
+            "at": {
+              "kind": "text-line",
+              "line": 19
+            }
+          }
+        ]
+      }
+    ],
+    "unresolved": [
+      {
+        "issueId": "u2.avg-script",
+        "code": "behavior-unknown",
+        "nodeId": "n2.line1-tempavg.script",
+        "reason": "the script's evaluation is not modelled; its text is kept and never run",
+        "affectedNodeIds": [
+          "n2.line1-tempavg"
+        ]
+      },
+      {
+        "issueId": "u2.count-source",
+        "code": "missing",
+        "edgeId": "e2.count-source",
+        "reason": "connection plc2 is not in the bundle",
+        "affectedNodeIds": [
+          "n2.line1-count"
+        ]
+      }
+    ],
+    "coverage": {
+      "capture": "partial",
+      "artifactsRead": 2,
+      "artifactsSkipped": 1
+    },
+    "diagnostics": [
+      {
+        "code": "artifact.secret-not-read",
+        "severity": "info",
+        "message": "connection holds a secret; its redacted copy was read instead"
+      }
+    ]
+  },
+  "digest": "41c69c7e2e43de65411bc9b4ab131fa77e5c311975d9043f4cca54639453fe23",
+  "envelope": {
+    "createdAt": "2026-10-21T00:00:00Z",
+    "requestId": "synthetic/pio-like/request-1"
+  }
+}

@@ -1,0 +1,500 @@
+{
+  "pair": "09-closure-c-context",
+  "input": "a",
+  "globals": {
+    "profileChanged": false,
+    "contextChanged": true,
+    "captureChanged": false
+  },
+  "correspondence": [
+    {
+      "type": "claim",
+      "fromId": "c.c-out-address",
+      "toId": "c2.c-out-address",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.c-plc-address",
+      "toId": "c2.c-plc-address",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.c-scale-state",
+      "toId": "c2.c-scale-state",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.c-script-state",
+      "toId": "c2.c-script-state",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.c-total-state",
+      "toId": "c2.c-total-state",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.c-trigger-address",
+      "toId": "c2.c-trigger-address",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.alarm-raw",
+      "toId": "e2.alarm-raw",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.alarm-trigger",
+      "toId": "e2.alarm-trigger",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.blind-raw",
+      "toId": "e2.blind-raw",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.chain-script",
+      "toId": "e2.chain-script",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.chain-total",
+      "toId": "e2.chain-total",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.deep-1",
+      "toId": "e2.deep-1",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.deep1-2",
+      "toId": "e2.deep1-2",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.deep2-script",
+      "toId": "e2.deep2-script",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.group-alarm",
+      "toId": "e2.group-alarm",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.group-read",
+      "toId": "e2.group-read",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.group-script",
+      "toId": "e2.group-script",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.group-total",
+      "toId": "e2.group-total",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.guess-plc",
+      "toId": "e2.guess-plc",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.raw-plc",
+      "toId": "e2.raw-plc",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.read-scale",
+      "toId": "e2.read-scale",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.scale-raw",
+      "toId": "e2.scale-raw",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.script-gone",
+      "toId": "e2.script-gone",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.script-out",
+      "toId": "e2.script-out",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.script-raw",
+      "toId": "e2.script-raw",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.total-raw",
+      "toId": "e2.total-raw",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.vague-gone",
+      "toId": "e2.vague-gone",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "issue",
+      "fromId": "u.blind",
+      "toId": "u2.blind",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "issue",
+      "fromId": "u.script-gone",
+      "toId": "u2.script-gone",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "issue",
+      "fromId": "u.vague-gone",
+      "toId": "u2.vague-gone",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-alarm",
+      "toId": "n2.c-alarm",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-blind",
+      "toId": "n2.c-blind",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-chain",
+      "toId": "n2.c-chain",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-deep",
+      "toId": "n2.c-deep",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-deep1",
+      "toId": "n2.c-deep1",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-deep2",
+      "toId": "n2.c-deep2",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-group",
+      "toId": "n2.c-group",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-guess",
+      "toId": "n2.c-guess",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-out",
+      "toId": "n2.c-out",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-plc",
+      "toId": "n2.c-plc",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-raw",
+      "toId": "n2.c-raw",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-read",
+      "toId": "n2.c-read",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-scale",
+      "toId": "n2.c-scale",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-script",
+      "toId": "n2.c-script",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-total",
+      "toId": "n2.c-total",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-trigger",
+      "toId": "n2.c-trigger",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.c-vague",
+      "toId": "n2.c-vague",
+      "outcome": "same",
+      "candidates": []
+    }
+  ],
+  "superseded": [
+    {
+      "decision": "synthetic/closure-c/decision-1",
+      "supersededBy": "synthetic/closure-c/decision-2"
+    }
+  ],
+  "verdicts": [
+    {
+      "kind": "conversion-plan",
+      "id": "synthetic/closure-c/plan-chain",
+      "verdict": "stale",
+      "target": {
+        "type": "assessment",
+        "fromId": "synthetic/closure-c/assessment-chain",
+        "toId": null
+      },
+      "reasons": [
+        {
+          "code": "assessment-not-reusable",
+          "ref": "synthetic/closure-c/assessment-chain"
+        },
+        {
+          "code": "context-changed",
+          "ref": "context"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/closure-c/decision-4"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "conversion-plan",
+      "id": "synthetic/closure-c/plan-read",
+      "verdict": "stale",
+      "target": {
+        "type": "assessment",
+        "fromId": "synthetic/closure-c/assessment-read",
+        "toId": null
+      },
+      "reasons": [
+        {
+          "code": "assessment-not-reusable",
+          "ref": "synthetic/closure-c/assessment-read"
+        },
+        {
+          "code": "context-changed",
+          "ref": "context"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/closure-c/decision-1"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/closure-c/decision-2"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/closure-c/assessment-chain",
+      "verdict": "stale",
+      "target": {
+        "type": "node",
+        "fromId": "n.c-chain",
+        "toId": "n2.c-chain"
+      },
+      "reasons": [
+        {
+          "code": "context-changed",
+          "ref": "context"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/closure-c/decision-4"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/closure-c/assessment-read",
+      "verdict": "stale",
+      "target": {
+        "type": "node",
+        "fromId": "n.c-read",
+        "toId": "n2.c-read"
+      },
+      "reasons": [
+        {
+          "code": "context-changed",
+          "ref": "context"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/closure-c/decision-1"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/closure-c/decision-2"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "review-decision",
+      "id": "synthetic/closure-c/decision-2",
+      "verdict": "re-review",
+      "target": {
+        "type": "node",
+        "fromId": "n.c-read",
+        "toId": "n2.c-read"
+      },
+      "reasons": [
+        {
+          "code": "context-changed",
+          "ref": "context"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "review-decision",
+      "id": "synthetic/closure-c/decision-3",
+      "verdict": "re-review",
+      "target": {
+        "type": "claim",
+        "fromId": "c.c-scale-state",
+        "toId": "c2.c-scale-state"
+      },
+      "reasons": [
+        {
+          "code": "context-changed",
+          "ref": "context"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "review-decision",
+      "id": "synthetic/closure-c/decision-4",
+      "verdict": "re-review",
+      "target": {
+        "type": "node",
+        "fromId": "n.c-chain",
+        "toId": "n2.c-chain"
+      },
+      "reasons": [
+        {
+          "code": "context-changed",
+          "ref": "context"
+        }
+      ],
+      "candidates": []
+    }
+  ],
+  "carried": []
+}

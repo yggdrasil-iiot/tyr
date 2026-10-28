@@ -1,0 +1,33 @@
+{
+  "kind": "review-decision",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/closure-c/decision-2",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/closure-c/snapshot",
+      "version": "1.0.0",
+      "digest": "20cb5ba6c9283548ae39ecbdfa738e95edfd77ba86479390bda4db8528558d3b"
+    },
+    "target": {
+      "type": "node",
+      "id": "n.c-read"
+    },
+    "decision": "confirm",
+    "evidenceBasis": "verified-by-virtual-case",
+    "virtualCase": {
+      "caseId": "synthetic/line1-temp-scale",
+      "harnessVersion": "1.0.0",
+      "inputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "expectedDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+      "observedDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "reviewer": "synthetic reviewer",
+    "reason": "raw 250 gives 25.0 degC in the virtual case, as expected",
+    "decidedAt": "2026-10-22T00:02:00Z",
+    "previousDecisionDigest": "9dc81ce5a128a3ef5e8565bb3fd08b9ce6f89968318d495740b5d7cf134260e9",
+    "evidenceRefs": []
+  },
+  "digest": "257b4217d73894a0ed3954f7eb055026b6444bd55a83277753b9a248ccfc7cca"
+}

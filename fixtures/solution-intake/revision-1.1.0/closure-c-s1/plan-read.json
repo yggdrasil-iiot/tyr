@@ -1,0 +1,66 @@
+{
+  "kind": "conversion-plan",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/closure-c/plan-read",
+  "version": "1.0.0",
+  "body": {
+    "assessmentRef": {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/closure-c/assessment-read",
+      "version": "1.0.0",
+      "digest": "9869f38196f68bf0d34560262a0d491aa2b0a2142aee2c93711b2beb655f6412"
+    },
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/closure-c/snapshot",
+      "version": "1.0.0",
+      "digest": "20cb5ba6c9283548ae39ecbdfa738e95edfd77ba86479390bda4db8528558d3b"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/closure-c/profile",
+      "version": "1.0.0",
+      "digest": "7b8276c8bc92d7a4b2443aa581ae170c1c37d1d591448c9113e129599994b776"
+    },
+    "decisionRefs": [
+      {
+        "kind": "review-decision",
+        "id": "synthetic/closure-c/decision-1",
+        "version": "1.0.0",
+        "digest": "9dc81ce5a128a3ef5e8565bb3fd08b9ce6f89968318d495740b5d7cf134260e9"
+      },
+      {
+        "kind": "review-decision",
+        "id": "synthetic/closure-c/decision-2",
+        "version": "1.0.0",
+        "digest": "257b4217d73894a0ed3954f7eb055026b6444bd55a83277753b9a248ccfc7cca"
+      }
+    ],
+    "workspace": {
+      "revision": 7,
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "mappings": [
+      {
+        "nativeNodeId": "n.c-read",
+        "target": {
+          "kind": "source-definition",
+          "id": "line1-temp"
+        },
+        "basis": "address D100 on plc1 with scale 0.1",
+        "assumptions": [
+          "plc1 is the device named in the workspace"
+        ]
+      }
+    ],
+    "losses": [],
+    "validation": {
+      "status": "passed",
+      "results": [
+        "synthetic/line1-temp-scale"
+      ]
+    },
+    "status": "candidate"
+  },
+  "digest": "a56c961cb651b74fb5936ed7f5122a86096d781a9ff1a837ce64d557612daee9"
+}

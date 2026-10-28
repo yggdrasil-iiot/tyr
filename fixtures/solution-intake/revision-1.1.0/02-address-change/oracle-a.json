@@ -1,0 +1,300 @@
+{
+  "pair": "02-address-change",
+  "input": "a",
+  "globals": {
+    "profileChanged": false,
+    "contextChanged": false,
+    "captureChanged": false
+  },
+  "correspondence": [
+    {
+      "type": "claim",
+      "fromId": "c.plc1-address",
+      "toId": "c2.plc1-address",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.plc1-credential",
+      "toId": "c2.plc1-credential",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.reset-state",
+      "toId": "c2.reset-state",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.temp-address",
+      "toId": "c2.temp-address",
+      "outcome": "changed",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.temp-engineering",
+      "toId": "c2.temp-engineering",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.temp-scale",
+      "toId": "c2.temp-scale",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "claim",
+      "fromId": "c.temp-unit",
+      "toId": "c2.temp-unit",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.avg-input",
+      "toId": "e2.avg-input",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.count-source",
+      "toId": "e2.count-source",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.reset-trigger",
+      "toId": "e2.reset-trigger",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.reset-write",
+      "toId": "e2.reset-write",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "edge",
+      "fromId": "e.temp-source",
+      "toId": "e2.temp-source",
+      "outcome": "changed",
+      "candidates": []
+    },
+    {
+      "type": "issue",
+      "fromId": "u.avg-script",
+      "toId": "u2.avg-script",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "issue",
+      "fromId": "u.count-source",
+      "toId": "u2.count-source",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.line1-count",
+      "toId": "n2.line1-count",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.line1-reset",
+      "toId": "n2.line1-reset",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.line1-reset.script",
+      "toId": "n2.line1-reset.script",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.line1-temp",
+      "toId": "n2.line1-temp",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.line1-tempavg",
+      "toId": "n2.line1-tempavg",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.line1-tempavg.script",
+      "toId": "n2.line1-tempavg.script",
+      "outcome": "same",
+      "candidates": []
+    },
+    {
+      "type": "node",
+      "fromId": "n.plc1",
+      "toId": "n2.plc1",
+      "outcome": "same",
+      "candidates": []
+    }
+  ],
+  "superseded": [],
+  "verdicts": [
+    {
+      "kind": "conversion-plan",
+      "id": "synthetic/pio-like/plan-line1-count",
+      "verdict": "reusable",
+      "target": {
+        "type": "assessment",
+        "fromId": "synthetic/pio-like/assessment-line1-count",
+        "toId": null
+      },
+      "reasons": [],
+      "candidates": []
+    },
+    {
+      "kind": "conversion-plan",
+      "id": "synthetic/pio-like/plan-line1-temp",
+      "verdict": "stale",
+      "target": {
+        "type": "assessment",
+        "fromId": "synthetic/pio-like/assessment-line1-temp",
+        "toId": null
+      },
+      "reasons": [
+        {
+          "code": "assessment-not-reusable",
+          "ref": "synthetic/pio-like/assessment-line1-temp"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/pio-like/decision-3"
+        },
+        {
+          "code": "evidence-changed",
+          "ref": "n.line1-temp"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/pio-like/assessment-line1-count",
+      "verdict": "reusable",
+      "target": {
+        "type": "node",
+        "fromId": "n.line1-count",
+        "toId": "n2.line1-count"
+      },
+      "reasons": [],
+      "candidates": []
+    },
+    {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/pio-like/assessment-line1-temp",
+      "verdict": "stale",
+      "target": {
+        "type": "node",
+        "fromId": "n.line1-temp",
+        "toId": "n2.line1-temp"
+      },
+      "reasons": [
+        {
+          "code": "closure-changed",
+          "ref": "n.line1-temp"
+        },
+        {
+          "code": "decision-not-carried",
+          "ref": "synthetic/pio-like/decision-3"
+        },
+        {
+          "code": "evidence-changed",
+          "ref": "e.temp-source"
+        },
+        {
+          "code": "evidence-changed",
+          "ref": "n.line1-temp"
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "kind": "review-decision",
+      "id": "synthetic/pio-like/decision-1",
+      "verdict": "carried",
+      "target": {
+        "type": "claim",
+        "fromId": "c.temp-scale",
+        "toId": "c2.temp-scale"
+      },
+      "reasons": [],
+      "candidates": []
+    },
+    {
+      "kind": "review-decision",
+      "id": "synthetic/pio-like/decision-2",
+      "verdict": "carried",
+      "target": {
+        "type": "issue",
+        "fromId": "u.count-source",
+        "toId": "u2.count-source"
+      },
+      "reasons": [],
+      "candidates": []
+    },
+    {
+      "kind": "review-decision",
+      "id": "synthetic/pio-like/decision-3",
+      "verdict": "re-review",
+      "target": {
+        "type": "node",
+        "fromId": "n.line1-temp",
+        "toId": "n2.line1-temp"
+      },
+      "reasons": [
+        {
+          "code": "closure-changed",
+          "ref": "n.line1-temp"
+        },
+        {
+          "code": "evidence-changed",
+          "ref": "c.temp-address"
+        },
+        {
+          "code": "evidence-changed",
+          "ref": "e.temp-source"
+        }
+      ],
+      "candidates": []
+    }
+  ],
+  "carried": [
+    {
+      "from": "synthetic/pio-like/decision-1",
+      "to": "synthetic/pio-like/decision-1.carried.21ab61743141",
+      "targetId": "c2.temp-scale"
+    },
+    {
+      "from": "synthetic/pio-like/decision-2",
+      "to": "synthetic/pio-like/decision-2.carried.21ab61743141",
+      "targetId": "u2.count-source"
+    }
+  ]
+}
