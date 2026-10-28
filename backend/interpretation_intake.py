@@ -284,7 +284,7 @@ def check_decisions(decisions, snapshot):
 
 def check_assessment(assessment, snapshot, profile, decisions=()):
     """The declared closure must be the computed one (§5); a complete claim over an incomplete closure is an over-claim."""
-    check(assessment); check(snapshot); check(profile); b = assessment["body"]
+    check(assessment); check(snapshot); check(profile); _same_version(snapshot, profile); b = assessment["body"]
     _ref(b["snapshotRef"], snapshot, "pin.snapshot-mismatch")
     _ref(snapshot["body"]["profileRef"], profile, "pin.profile-mismatch")
     t = _targets(snapshot)

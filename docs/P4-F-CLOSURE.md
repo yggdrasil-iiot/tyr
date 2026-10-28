@@ -111,4 +111,4 @@
 | `n.c-vague` | access unknown, 대상 누락 | `access-unknown`·`edge-missing`·`unresolved-issue` |
 | `n.c-deep` | 깊이 한도의 쓰기 스크립트 | `depth-limit`, `writeTargets` 0 |
 
-- 검증 (2026-10-28): `scripts/test_p4f_closure.py`의 18개 테스트를 통과했다(두 버전 oracle 일치, 목록 순서 셔플링, 쓰기 미추적, unknown access 미추적, 선언된 상태 판독, 1.0.0 결과 형상 불변, 계획 차단). 주입된 9개 결함도 각각 감지했다(쓰기 추적, unknown access 추적, `access-unknown` 사유 누락, 1.1.0에서 1.0.0 상태 대리자 사용, 이벤트 목록 누락, 계획 차단 제거, 혼합 버전 허용, 상태 검사 제거, 1.1.0 거부).
+- 검증 (2026-10-28): `scripts/test_p4f_closure.py`의 19개 테스트를 통과했다(두 버전 oracle 일치, 목록 순서 셔플링, 쓰기 미추적, unknown access 미추적, 선언된 상태 판독, 1.0.0 결과 형상 불변, 계획 차단, 스냅샷·프로파일 버전 일치). 주입된 9개 결함도 각각 감지했다(쓰기 추적, unknown access 추적, `access-unknown` 사유 누락, 1.1.0에서 1.0.0 상태 대리자 사용, 이벤트 목록 누락, 계획 차단 제거, 혼합 버전 허용, 상태 검사 제거, 1.1.0 거부).

@@ -131,6 +131,13 @@ class PlanBlock(unittest.TestCase):
                 with self.assertRaises(ii.Violation) as e: ii.check_plan(*self.documents(endpoint))
                 self.assertEqual(e.exception.code, "editor.plan-blocked"); self.assertIn(ref, str(e.exception))
 
+    def test_snapshot_and_profile_share_a_version(self):
+        plan, a, s, _ = self.documents("n.c-read")
+        for run in (lambda: ii.check_assessment(a, s, load("closure-a", "interpretation-profile.json")),
+                    lambda: ii.check_plan(plan, a, s, load("closure-a", "interpretation-profile.json"))):
+            with self.assertRaises(ii.Violation) as e: run()
+            self.assertEqual(e.exception.code, "contract.version-mixed")
+
     def test_a_blocked_plan_may_say_so(self):
         ii.check_plan(*self.documents("n.c-script", status="blocked"))
 

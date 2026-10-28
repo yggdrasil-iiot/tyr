@@ -90,6 +90,6 @@
 
 - 사본 동기화: Mimir 계약 1.1.0 스키마 6개를 `vendor-contracts/mimir/interpretation/1.1.0/`에, fixture를 `fixtures/solution-intake/mimir-1.1.0/`에 바이트 단위로 복사했다. `PIN.json`은 소스 커밋 `yggdrasil-iiot/mimir` `b7e8c60` 기준으로 두 버전을 명시한다. Mimir에서 1.0.0 거부 사례 하나를 변경함에 따라(1.1.0을 받아들이므로 미지원 버전을 `1.2.0`으로 변경) 1.0.0 사본도 갱신했다.
 - 수신 범위: 스냅샷 계약 `1.0.0`과 `1.1.0`을 받아들인다. editor 계약은 2.0.0을 유지한다. 각 문서는 자체 버전에 맞는 스키마로 검증한다.
-- 버전 일치: 함께 검사하는 문서군(`check_pinned`, `check_request`, `check_result`)은 동일한 계약 버전을 공유해야 한다. 버전이 섞인 묶음은 `contract.version-mixed`로 거부한다.
+- 버전 일치: 함께 검사하는 문서군(`check_pinned`, `check_request`, `check_result`, `check_assessment`의 스냅샷·프로파일)은 동일한 계약 버전을 공유해야 한다. 버전이 섞인 묶음은 `contract.version-mixed`로 거부한다.
 - 1.1.0 상태 검사: 확인된 상태(`stateless`/`stateful`)는 동일 노드, `state` 필드, 동일 값을 단언한 claim을 `stateClaimId`에 지정해야 한다(`snapshot.claim-missing`, `snapshot.state-claim-mismatch`). `unknown` 상태 노드는 `behavior-unknown` 항목을 갖추어야 한다(`snapshot.state-unknown-unexplained`).
-- 검증: Mimir 거부 사례를 Tyr 검사기에서 실행해 동일한 코드를 얻었다(1.0.0 37개, 1.1.0 25개). 두 버전의 fixture digest 모두 Mimir와 일치한다. `scripts/test_p4f_a2.py` 11개 테스트를 통과했으며, CI 동등 로컬 실행(31개 모듈, 1,080개 테스트) 결과 실패는 0건이다.
+- 검증: Mimir 거부 사례를 Tyr 검사기에서 실행해 동일한 코드를 얻었다(1.0.0 37개, 1.1.0 25개). 두 버전의 fixture digest 모두 Mimir와 일치한다. `scripts/test_p4f_a2.py` 11개 테스트를 통과했으며, CI 동등 로컬 실행(31개 모듈, 1,081개 테스트) 결과 실패는 0건이다.
