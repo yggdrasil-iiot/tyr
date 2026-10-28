@@ -1,0 +1,52 @@
+{
+  "kind": "conversion-plan",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/closure-c/plan-chain",
+  "version": "1.0.0",
+  "body": {
+    "assessmentRef": {
+      "kind": "endpoint-assessment",
+      "id": "synthetic/closure-c/assessment-chain",
+      "version": "1.0.0",
+      "digest": "dd5df544b2ffbac3cf401ecedd773414eba0e214c39b9d217b374715bdff1bd0"
+    },
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/closure-c/snapshot",
+      "version": "1.0.0",
+      "digest": "20cb5ba6c9283548ae39ecbdfa738e95edfd77ba86479390bda4db8528558d3b"
+    },
+    "profileRef": {
+      "kind": "interpretation-profile",
+      "id": "synthetic/closure-c/profile",
+      "version": "1.0.0",
+      "digest": "7b8276c8bc92d7a4b2443aa581ae170c1c37d1d591448c9113e129599994b776"
+    },
+    "decisionRefs": [
+      {
+        "kind": "review-decision",
+        "id": "synthetic/closure-c/decision-4",
+        "version": "1.0.0",
+        "digest": "b28c561568106ad13f0f30fb9a78b05978d6ffbcf24604b540e89abe986728a7"
+      }
+    ],
+    "workspace": {
+      "revision": 7,
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "mappings": [],
+    "losses": [
+      {
+        "nodeId": "n.line1-count",
+        "kind": "missing-input",
+        "description": "connection plc2 is not in the bundle"
+      }
+    ],
+    "validation": {
+      "status": "not-run",
+      "results": []
+    },
+    "status": "blocked"
+  },
+  "digest": "788915621a77f9cbfb6b491a8424c6a6166ae74e8b65fb758d4d9417c8d985bd"
+}

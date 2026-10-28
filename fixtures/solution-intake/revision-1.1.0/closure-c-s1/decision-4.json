@@ -1,0 +1,28 @@
+{
+  "kind": "review-decision",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/closure-c/decision-4",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/closure-c/snapshot",
+      "version": "1.0.0",
+      "digest": "20cb5ba6c9283548ae39ecbdfa738e95edfd77ba86479390bda4db8528558d3b"
+    },
+    "target": {
+      "type": "node",
+      "id": "n.c-chain"
+    },
+    "decision": "confirm",
+    "evidenceBasis": "declared-by-reviewer",
+    "reviewer": "synthetic reviewer",
+    "reason": "the scale matches the synthetic configuration sheet",
+    "decidedAt": "2026-10-22T00:00:00Z",
+    "previousDecisionDigest": "749333c6517eeef2f6d7268dc4c42c52e030cf57d0e8ab3787606aa888792c15",
+    "evidenceRefs": [
+      "synthetic configuration sheet, row Line1.Temp"
+    ]
+  },
+  "digest": "b28c561568106ad13f0f30fb9a78b05978d6ffbcf24604b540e89abe986728a7"
+}

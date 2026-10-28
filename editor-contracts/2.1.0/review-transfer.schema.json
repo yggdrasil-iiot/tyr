@@ -1,0 +1,488 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tyr:editor:2.1.0:review-transfer.schema.json",
+  "title": "ReviewTransfer — which review work over one snapshot still applies to a later revision of the same source (SI11); it carries, it never approves",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "review-transfer"
+    },
+    "contractVersion": {
+      "const": "2.1.0"
+    },
+    "id": {
+      "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/id"
+    },
+    "version": {
+      "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/version"
+    },
+    "body": {
+      "type": "object",
+      "properties": {
+        "identityRule": {
+          "const": "si11-1"
+        },
+        "snapshotContractVersion": {
+          "enum": [
+            "1.0.0",
+            "1.1.0"
+          ]
+        },
+        "from": {
+          "type": "object",
+          "properties": {
+            "snapshot": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/snapshotRef"
+            },
+            "bundle": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/bundleRef"
+            },
+            "profile": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/profileRef"
+            },
+            "artifactPins": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/artifactPin"
+              }
+            }
+          },
+          "required": [
+            "snapshot",
+            "bundle",
+            "profile",
+            "artifactPins"
+          ],
+          "additionalProperties": false
+        },
+        "to": {
+          "type": "object",
+          "properties": {
+            "snapshot": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/snapshotRef"
+            },
+            "bundle": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/bundleRef"
+            },
+            "profile": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/profileRef"
+            },
+            "artifactPins": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/artifactPin"
+              }
+            }
+          },
+          "required": [
+            "snapshot",
+            "bundle",
+            "profile",
+            "artifactPins"
+          ],
+          "additionalProperties": false
+        },
+        "sourceContinuity": {
+          "type": "object",
+          "properties": {
+            "evidenceBasis": {
+              "const": "declared-by-reviewer"
+            },
+            "reviewer": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+            },
+            "reason": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+            },
+            "evidenceRefs": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+              }
+            },
+            "declaredAt": {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/timestamp"
+            }
+          },
+          "required": [
+            "evidenceBasis",
+            "reviewer",
+            "reason",
+            "evidenceRefs",
+            "declaredAt"
+          ],
+          "additionalProperties": false
+        },
+        "workspace": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "sha256": {
+                  "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/sha256"
+                }
+              },
+              "required": [
+                "revision",
+                "sha256"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/nodeKey"
+              },
+              "to": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/nodeKey"
+              },
+              "evidenceBasis": {
+                "const": "declared-by-reviewer"
+              },
+              "reviewer": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+              },
+              "reason": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+              },
+              "evidenceRefs": {
+                "type": "array",
+                "items": {
+                  "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+                }
+              },
+              "declaredAt": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/timestamp"
+              }
+            },
+            "required": [
+              "from",
+              "to",
+              "evidenceBasis",
+              "reviewer",
+              "reason",
+              "evidenceRefs",
+              "declaredAt"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "retired": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/nodeKey"
+              },
+              "reviewer": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+              },
+              "reason": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/text"
+              },
+              "declaredAt": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/timestamp"
+              }
+            },
+            "required": [
+              "key",
+              "reviewer",
+              "reason",
+              "declaredAt"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "globals": {
+          "type": "object",
+          "properties": {
+            "profileChanged": {
+              "type": "boolean"
+            },
+            "contextChanged": {
+              "type": "boolean"
+            },
+            "captureChanged": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "profileChanged",
+            "contextChanged",
+            "captureChanged"
+          ],
+          "additionalProperties": false
+        },
+        "correspondence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "node",
+                  "edge",
+                  "claim",
+                  "issue"
+                ]
+              },
+              "fromId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "toId": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "outcome": {
+                "enum": [
+                  "same",
+                  "changed",
+                  "absent",
+                  "ambiguous"
+                ]
+              },
+              "candidates": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              }
+            },
+            "required": [
+              "type",
+              "fromId",
+              "toId",
+              "outcome",
+              "candidates"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "fromDecisionChainHead": {
+          "oneOf": [
+            {
+              "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/decisionRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "superseded": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/decisionRef"
+              },
+              "supersededBy": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/decisionRef"
+              }
+            },
+            "required": [
+              "decision",
+              "supersededBy"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "verdicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "document": {
+                "oneOf": [
+                  {
+                    "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/decisionRef"
+                  },
+                  {
+                    "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/assessmentRef"
+                  },
+                  {
+                    "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/planRef"
+                  }
+                ]
+              },
+              "verdict": {
+                "enum": [
+                  "carried",
+                  "re-review",
+                  "needs-mapping",
+                  "orphaned",
+                  "reusable",
+                  "stale"
+                ]
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "node",
+                      "edge",
+                      "claim",
+                      "issue",
+                      "assessment"
+                    ]
+                  },
+                  "fromId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "toId": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "fromId",
+                  "toId"
+                ],
+                "additionalProperties": false
+              },
+              "reasons": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "enum": [
+                        "target-absent",
+                        "target-ambiguous",
+                        "target-unkeyed",
+                        "scope-item-absent",
+                        "scope-item-ambiguous",
+                        "evidence-changed",
+                        "closure-changed",
+                        "profile-changed",
+                        "context-changed",
+                        "capture-changed",
+                        "decision-not-carried",
+                        "assessment-not-reusable",
+                        "workspace-changed"
+                      ]
+                    },
+                    "ref": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "ref"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "candidates": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              }
+            },
+            "required": [
+              "document",
+              "verdict",
+              "target",
+              "reasons",
+              "candidates"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "carried": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/decisionRef"
+              },
+              "to": {
+                "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/decisionRef"
+              }
+            },
+            "required": [
+              "from",
+              "to"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "identityRule",
+        "snapshotContractVersion",
+        "from",
+        "to",
+        "sourceContinuity",
+        "workspace",
+        "mappings",
+        "retired",
+        "globals",
+        "correspondence",
+        "fromDecisionChainHead",
+        "superseded",
+        "verdicts",
+        "carried"
+      ],
+      "additionalProperties": false
+    },
+    "digest": {
+      "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/sha256"
+    },
+    "envelope": {
+      "$ref": "urn:tyr:editor:2.1.0:common.schema.json#/$defs/envelope"
+    }
+  },
+  "required": [
+    "kind",
+    "contractVersion",
+    "id",
+    "version",
+    "body",
+    "digest"
+  ],
+  "additionalProperties": false
+}

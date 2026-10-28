@@ -1,0 +1,80 @@
+{
+  "kind": "endpoint-assessment",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/closure-c/assessment-read",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/closure-c/snapshot",
+      "version": "1.0.0",
+      "digest": "20cb5ba6c9283548ae39ecbdfa738e95edfd77ba86479390bda4db8528558d3b"
+    },
+    "endpoint": {
+      "nodeId": "n.c-read"
+    },
+    "closure": {
+      "nodeIds": [
+        "n.c-plc",
+        "n.c-raw",
+        "n.c-read",
+        "n.c-scale"
+      ],
+      "edgeIds": [
+        "e.raw-plc",
+        "e.read-scale",
+        "e.scale-raw"
+      ],
+      "completeness": "complete",
+      "basis": "the only reference is resolved and no unresolved item touches these nodes"
+    },
+    "axes": {
+      "capture": {
+        "status": "partial",
+        "basis": "the snapshot's own coverage is partial",
+        "blockers": []
+      },
+      "structure": {
+        "status": "complete",
+        "basis": "address, scale and unit are all read; the reference is resolved",
+        "blockers": []
+      },
+      "representation": {
+        "status": "representable",
+        "basis": "a source definition with a linear scale expresses it",
+        "blockers": []
+      },
+      "virtualEquivalence": {
+        "status": "passed-within-scope",
+        "basis": "synthetic/line1-temp-scale, one input",
+        "blockers": []
+      },
+      "meaning": {
+        "status": "reviewer-confirmed",
+        "basis": "decision-1 and decision-3",
+        "blockers": []
+      },
+      "approval": {
+        "status": "not-submitted",
+        "basis": "nothing has been sent to Bifrost",
+        "blockers": []
+      }
+    },
+    "decisionRefs": [
+      {
+        "kind": "review-decision",
+        "id": "synthetic/closure-c/decision-1",
+        "version": "1.0.0",
+        "digest": "9dc81ce5a128a3ef5e8565bb3fd08b9ce6f89968318d495740b5d7cf134260e9"
+      },
+      {
+        "kind": "review-decision",
+        "id": "synthetic/closure-c/decision-2",
+        "version": "1.0.0",
+        "digest": "257b4217d73894a0ed3954f7eb055026b6444bd55a83277753b9a248ccfc7cca"
+      }
+    ],
+    "assessedAt": "2026-10-22T00:03:00Z"
+  },
+  "digest": "9869f38196f68bf0d34560262a0d491aa2b0a2142aee2c93711b2beb655f6412"
+}

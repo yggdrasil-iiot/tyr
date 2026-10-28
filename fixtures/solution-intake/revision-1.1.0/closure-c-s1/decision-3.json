@@ -1,0 +1,28 @@
+{
+  "kind": "review-decision",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/closure-c/decision-3",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/closure-c/snapshot",
+      "version": "1.0.0",
+      "digest": "20cb5ba6c9283548ae39ecbdfa738e95edfd77ba86479390bda4db8528558d3b"
+    },
+    "target": {
+      "type": "claim",
+      "id": "c.c-scale-state"
+    },
+    "decision": "confirm",
+    "evidenceBasis": "declared-by-reviewer",
+    "reviewer": "synthetic reviewer",
+    "reason": "the scale matches the synthetic configuration sheet",
+    "decidedAt": "2026-10-22T00:00:00Z",
+    "previousDecisionDigest": "257b4217d73894a0ed3954f7eb055026b6444bd55a83277753b9a248ccfc7cca",
+    "evidenceRefs": [
+      "synthetic configuration sheet, row Line1.Temp"
+    ]
+  },
+  "digest": "749333c6517eeef2f6d7268dc4c42c52e030cf57d0e8ab3787606aa888792c15"
+}

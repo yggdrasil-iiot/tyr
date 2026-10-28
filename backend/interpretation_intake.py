@@ -19,13 +19,14 @@ import interpretation_closure
 R = Path(__file__).resolve().parents[1]
 MIMIR = R/"vendor-contracts"/"mimir"/"interpretation"
 EDITOR = R/"editor-contracts"/"2.0.0"
-EDITOR_PREFIX = "urn:tyr:editor:2.0.0:"
+EDITOR_VERSIONS = ("2.0.0", "2.1.0")
 SNAPSHOT_KINDS = {"source-bundle", "interpretation-profile", "interpretation-snapshot", "interpret-request", "interpret-result"}
 EDITOR_KINDS = {"review-decision", "endpoint-assessment", "conversion-plan"}
-DIGESTED = {"source-bundle", "interpretation-profile", "interpretation-snapshot"} | EDITOR_KINDS
+TRANSFER_KINDS = {"review-transfer"}  # editor 2.1.0 (SI11); the 2.0.0 kinds stay on 2.0.0
+DIGESTED = {"source-bundle", "interpretation-profile", "interpretation-snapshot"} | EDITOR_KINDS | TRANSFER_KINDS
 SNAPSHOT_VERSIONS = ("1.0.0", "1.1.0")
 UNMARKED_VERSIONS = ("1.0.0",)  # no edge access, no node state: a write or state cannot be ruled out
-VERSIONS = {**{k: SNAPSHOT_VERSIONS for k in SNAPSHOT_KINDS}, **{k: ("2.0.0",) for k in EDITOR_KINDS}}
+VERSIONS = {**{k: SNAPSHOT_VERSIONS for k in SNAPSHOT_KINDS}, **{k: ("2.0.0",) for k in EDITOR_KINDS}, **{k: ("2.1.0",) for k in TRANSFER_KINDS}}
 MIMIR_EVIDENCE = {"observed-in-artifact", "derived-by-rule"}
 TYR_EVIDENCE = {"declared-by-reviewer", "verified-by-virtual-case"}
 MAX_SAFE = 2**53 - 1
@@ -99,7 +100,7 @@ def _no_remote(uri): raise ValueError("External schema retrieval prohibited: " +
 @lru_cache(maxsize=1)
 def _registry():
     reg = Registry(retrieve=_no_remote)
-    for p in [p for v in SNAPSHOT_VERSIONS for p in (MIMIR/v).glob("*.schema.json")] + list(EDITOR.glob("*.schema.json")):
+    for p in [p for v in SNAPSHOT_VERSIONS for p in (MIMIR/v).glob("*.schema.json")] + [p for v in EDITOR_VERSIONS for p in (EDITOR.parent/v).glob("*.schema.json")]:
         s = json.loads(p.read_text(encoding="utf-8")); Draft202012Validator.check_schema(s)
         reg = reg.with_resource(s["$id"], Resource.from_contents(s))
     return reg
@@ -107,7 +108,7 @@ def _registry():
 
 @lru_cache(maxsize=32)
 def _validator(kind, version):
-    prefix = EDITOR_PREFIX if kind in EDITOR_KINDS else f"urn:mimir:interpretation:{version}:"
+    prefix = f"urn:tyr:editor:{version}:" if kind in EDITOR_KINDS | TRANSFER_KINDS else f"urn:mimir:interpretation:{version}:"
     return Draft202012Validator(_registry().contents(prefix + kind + ".schema.json"), registry=_registry())
 
 
@@ -129,6 +130,11 @@ def check(doc):
             if c.get("evidenceBasis") in TYR_EVIDENCE: raise Violation("snapshot.evidence-basis-not-owned", str(c.get("claimId")))
     if kind == "review-decision" and doc.get("body", {}).get("evidenceBasis") in MIMIR_EVIDENCE:
         raise Violation("editor.evidence-basis-not-owned", str(doc.get("id")))
+    if kind == "review-transfer":
+        body = doc.get("body", {})
+        if body.get("sourceContinuity", {}).get("evidenceBasis") != "declared-by-reviewer": raise Violation("transfer.continuity-missing", str(doc.get("id")))
+        for m in body.get("mappings", []):
+            if m.get("evidenceBasis") != "declared-by-reviewer": raise Violation("transfer.mapping-evidence-not-owned", str(m.get("from")))
     _schema(doc, kind)
     if kind in DIGESTED and digest(doc) != doc["digest"]: raise Violation("digest.mismatch", f"{kind}:{doc['id']}")
     if kind == "source-bundle": _bundle(doc["body"])

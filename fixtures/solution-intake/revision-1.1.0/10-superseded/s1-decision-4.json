@@ -1,0 +1,28 @@
+{
+  "kind": "review-decision",
+  "contractVersion": "2.0.0",
+  "id": "synthetic/pio-like/decision-4",
+  "version": "1.0.0",
+  "body": {
+    "snapshotRef": {
+      "kind": "interpretation-snapshot",
+      "id": "synthetic/pio-like/snapshot",
+      "version": "1.0.0",
+      "digest": "8da4a51645761e01196c43c13562a51c311e2a72f23d660073fb9e8d25d4ee96"
+    },
+    "target": {
+      "type": "claim",
+      "id": "c.temp-scale"
+    },
+    "decision": "hold",
+    "evidenceBasis": "declared-by-reviewer",
+    "reviewer": "synthetic reviewer",
+    "reason": "the scale is being re-checked on site",
+    "decidedAt": "2026-10-22T00:00:00Z",
+    "previousDecisionDigest": "75e21591e997f0c3f348790c2a17e5211e4e154d733454d817528baece56c739",
+    "evidenceRefs": [
+      "synthetic configuration sheet, row Line1.Temp"
+    ]
+  },
+  "digest": "c9de77671f905113c2418850379ce59a4d4cd337a086781bdc6fb04a28b01248"
+}
