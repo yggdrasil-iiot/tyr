@@ -8,7 +8,7 @@
 
 그래프 source lineage·기존 HEX/Typed 디코더·수치 변환·최종 cast·revision snapshot·SQLite JSON/CAS를 재사용했다. sample_quality.py, 가상 DataValue·시간/품질 preflight·별도 시나리오 저장/API·quality.js는 신규다. 평가기는 datetime.now를 사용하지 않는다.
 
-Týr가 작성·검증을 소유한다. Mímir 후보, Bifrost 승인·release, Muninn 실행/품질 전파의 실제 수신 지원은 이번 변경으로 확정되지 않는다. 프로젝트 간 코드 공유는 없다.
+Tyr (Týr)가 작성·검증을 소유한다. Mimir (Mímir) 후보, Bifrost 승인·release, Muninn 실행/품질 전파의 실제 수신 지원은 이번 변경으로 확정되지 않는다. 프로젝트 간 코드 공유는 없다.
 
 ## 매핑의 temporalPolicy
 

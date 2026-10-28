@@ -27,7 +27,7 @@ workspace 2.0에 선택적 `semanticLifecycles` 배열을 추가한다. 기존 S
 
 13 화면의 기존 immutable submission/서명 승인/파일 릴리스 경로를 재사용한다. 매핑을 선택하면 관련 소스·그래프·근거와 함께 모든 관리 의미 정의 및 선행 이벤트를 고정한다. 개정 이력이 있으면 매핑을 선택하지 않고 lifecycle-only 제안도 제출할 수 있다. 이 경우 매핑과 쓰기 정의는 포함하지 않는다. 이력이 없는 구 작업공간의 빈 제안은 허용하지 않는다.
 
-Týr의 작성자 필드는 선언 메타데이터다. 승인 권위는 등록 키와 두 확인자를 요구하는 Bifrost 서명이다. 이벤트 본문·제안·파일 묶음·변경 diff가 기존 승인 해시에 묶인다. approve/publish/recover가 기존 registry lock 안에서 모든 보존 이력과 다시 병합 검증한다. 승인 뒤 다른 스트림이 URI를 폐기한 경우에도 발행 시 재검사하여 오래된 매핑을 거부한다. 구 bundle에서 lifecycle 문서를 생략해도 registry의 폐기 정책을 우회할 수 없다.
+Tyr (Týr)의 작성자 필드는 선언 메타데이터다. 승인 권위는 등록 키와 두 확인자를 요구하는 Bifrost 서명이다. 이벤트 본문·제안·파일 묶음·변경 diff가 기존 승인 해시에 묶인다. approve/publish/recover가 기존 registry lock 안에서 모든 보존 이력과 다시 병합 검증한다. 승인 뒤 다른 스트림이 URI를 폐기한 경우에도 발행 시 재검사하여 오래된 매핑을 거부한다. 구 bundle에서 lifecycle 문서를 생략해도 registry의 폐기 정책을 우회할 수 없다.
 
 `java -jar bifrost-gates.jar mapping lifecycle <registry>`는 검증된 전체 이력·URI 상태·읽기/쓰기 영향과 canonical catalogSha256을 반환한다. 기존 `mapping catalog` 2.16 응답 계약은 유지한다. 서명·파일 무결성 오류, 미복구 transaction은 정상적인 빈 이력으로 처리하지 않는다. 구 릴리스와 head가 없는 보존 릴리스도 삭제하지 않는다.
 

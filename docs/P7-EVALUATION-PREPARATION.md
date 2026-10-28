@@ -14,7 +14,7 @@
 | 신규 | scripts/pov_evaluation.py, 별도 evaluation-contracts/1.0.0, 독립 oracle/시간 집계·report pin, 16 화면·파일 입출력, 합성 정상/손실 fixture와 검증 |
 | 보존 | 기존 contracts 파일과 Bifrost schema/JAR, SQLite 테이블·기존 행·마이그레이션 정책·불변 제출본 |
 
-평가 pack/report는 별도 로컬 산출물이다. Bifrost 승인 계약이나 canonical Source/Semantic/Mapping 버전이 아니다. Bifrost·Mímir·Muninn 코드는 공유하거나 수정하지 않는다. SQLite에 평가 테이블을 추가하거나 workspace를 재작성하지 않는다.
+평가 pack/report는 별도 로컬 산출물이다. Bifrost 승인 계약이나 canonical Source/Semantic/Mapping 버전이 아니다. Bifrost·Mimir (Mímir)·Muninn 코드는 공유하거나 수정하지 않는다. SQLite에 평가 테이블을 추가하거나 workspace를 재작성하지 않는다.
 
 ## 평가 계약 1.0.0
 

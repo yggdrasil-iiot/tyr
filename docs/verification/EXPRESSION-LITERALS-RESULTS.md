@@ -17,7 +17,7 @@ Bare number는 무차원, quantity는 명시적 단위다. 네 PLC synthetic fix
 
 17 화면의 버전 선택/원문 위치/상수 값·단위·synthetic 근거 표시, compile 읽기 전용, 원자 source/graph/recipe 저장·재개방, 06 화면의 상수 포함 근거 자동 수집·매핑 저장, 기존 09 단계별 계산과 입력 목록의 상수 제외를 확인했다. 변경된 상수는 새 ID를 만들고 구 소스·이력을 보존한다. 기존 ID의 수동 변경은 stale 및 재컴파일 충돌로 탐지하고 덮어쓰지 않는다. transaction fault 시 소스·graph·recipe 전부 rollback한다. 기존 1.0 API·recipe·SQLite 재개방도 통과했다.
 
-생성 상수와 근거가 포함된 동일 기존 2.7/2.15 wire package를 변경 없는 Bifrost JAR로 검증·두 키 승인·파일 발행했다. 잘못된 출력 단위와 재작성된 manifest SHA도 receiver가 거부했다. Java는 Týr 코드나 수식 원문을 실행하지 않는다. 기존 매핑 관련 Java JUnit 138개는 이번 실행 수에 더하지 않았으며 이번에는 실제 CLI 경로를 재실행했다.
+생성 상수와 근거가 포함된 동일 기존 2.7/2.15 wire package를 변경 없는 Bifrost JAR로 검증·두 키 승인·파일 발행했다. 잘못된 출력 단위와 재작성된 manifest SHA도 receiver가 거부했다. Java는 Tyr (Týr) 코드나 수식 원문을 실행하지 않는다. 기존 매핑 관련 Java JUnit 138개는 이번 실행 수에 더하지 않았으며 이번에는 실제 CLI 경로를 재실행했다.
 
 ## 호환성과 증거
 

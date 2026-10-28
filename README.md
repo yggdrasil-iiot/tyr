@@ -1,4 +1,4 @@
-# Týr
+# Tyr
 
 PLC별 접근 정의와 상위 의미의 매핑을 작성·검토하는 Yggdrasil 모델링 작업대.
 
@@ -13,7 +13,7 @@ DESIGN.md는 2026년 10월 17일 초기 설계 스냅샷을 가져온 뒤 P0·P1
 
 ## 역할
 
-Týr는 작성·검토, Mímir는 후보 도출과 vendor 설정 원본 해석(원본을 읽는 유일한 곳, 계획 단계), Bifrost는 검증·승인·기록, Muninn은 승인된 계약의 실행을 담당한다. 앱들은 데이터·파일 계약으로만 결합하며 공유 코드를 만들지 않는다.
+Tyr (Týr)는 작성·검토, Mimir (Mímir)는 후보 도출과 vendor 설정 원본 해석(원본을 읽는 유일한 곳, 계획 단계), Bifrost는 검증·승인·기록, Muninn은 승인된 계약의 실행을 담당한다. 앱들은 데이터·파일 계약으로만 결합하며 공유 코드를 만들지 않는다.
 
 ## 저장소 포함 범위
 
@@ -35,7 +35,7 @@ P0·P1은 가상 문서·설정으로 정준 의미의 수렴·구분·수치/�
 
 ## 로컬 작성 화면
 
-Týr 폴더에서 python backend/server.py를 실행하고 출력된 로컬 주소를 연다. 기본 데이터는 build/p2/workspace.sqlite3에 저장한다. [P2 실행·사용 방법](docs/P2-AUTHORING.md)과 [검증 결과](docs/verification/P2-RESULTS.md)를 참조한다.
+Tyr 폴더에서 python backend/server.py를 실행하고 출력된 로컬 주소를 연다. 기본 데이터는 build/p2/workspace.sqlite3에 저장한다. [P2 실행·사용 방법](docs/P2-AUTHORING.md)과 [검증 결과](docs/verification/P2-RESULTS.md)를 참조한다.
 
 ## 객체 매핑과 확장 메모리맵
 
@@ -93,7 +93,7 @@ Týr 폴더에서 python backend/server.py를 실행하고 출력된 로컬 주�
 
 ## P6 오프라인 Bifrost 연계
 
-선택한 매핑/근거를 파일로 고정하고 Bifrost가 독립 수신 검증·두 등록 키의 서명 승인·불변 릴리스 발행을 담당한다. Týr는 승인 권위를 만들지 않는다. 기존 작성본/검토/시나리오는 보존한다. [설계](docs/P6-BIFROST-PUBLICATION.md) · [검증](docs/verification/P6-RESULTS.md). 실제 장치·외부 SQL·쓰기 실행·운영 활성화는 제외한다.
+선택한 매핑/근거를 파일로 고정하고 Bifrost가 독립 수신 검증·두 등록 키의 서명 승인·불변 릴리스 발행을 담당한다. Tyr는 승인 권위를 만들지 않는다. 기존 작성본/검토/시나리오는 보존한다. [설계](docs/P6-BIFROST-PUBLICATION.md) · [검증](docs/verification/P6-RESULTS.md). 실제 장치·외부 SQL·쓰기 실행·운영 활성화는 제외한다.
 
 
 ## P7 오프라인 수용

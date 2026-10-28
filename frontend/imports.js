@@ -23,7 +23,7 @@ function importView(){
  const batches=state.imports||[];
  $('view').innerHTML='<p class="step">10 / 파일에서 접근 정의 초안 만들기</p><p>원본 파일과 미해석 항목을 보존합니다. 엑셀 첫 행은 열 이름입니다. 설정 JSON은 tyr-config-v1 교환 형식입니다. 가져오기는 승인 또는 장치 접속을 수행하지 않습니다.</p><section class="card"><div id="import-fields" class="fields">'+
  field('import-id','가져오기 ID','field-'+Date.now(),'text',true)+select('import-equipment','소속 설비',state.equipment.map(e=>[e.id,e.label]))+
- select('import-format','파일 형식',[['xlsx','Excel .xlsx'],['tyr-config-json-v1','Týr 설정 JSON v1']],'xlsx')+
+ select('import-format','파일 형식',[['xlsx','Excel .xlsx'],['tyr-config-json-v1','Tyr 설정 JSON v1']],'xlsx')+
  '<label>원본 파일 (최대 512 KiB)<input type="file" id="import-file" accept=".xlsx,.json"></label>'+
  area('import-columns','엑셀 열 대응 JSON · 원본 이름 → 표준 이름','{}')+
  select('import-origin','자료 출처',[['field','현장 자료'],['synthetic','가상 자료']],'field')+

@@ -8,7 +8,7 @@
 | 독립 Java | 174 고유 검사 통과 | 기존156 + 신규18. 최종 lifecycle/CLI20 재검사는 중복 합산하지 않음 |
 | URI 연계 | 27 검사 통과 | 불변 driver pin, 브라우저·HTTP·SQLite·실제 두 키 승인·파일 발행. 반복 unit27 제외 |
 | 기존 화면 연계 | 58 검사 통과 | 그래프·수식·미리보기·제출·승인·발행·카탈로그·기존 DB. 반복 unit28 제외 |
-| 호환성 | 기존 contract77·fixture582·evaluation1·editor2 파일 SHA 유지 | 현재 Schema79개 ID 고유, Týr/Bifrost 사본 및 JAR 내 schema 일치 |
+| 호환성 | 기존 contract77·fixture582·evaluation1·editor2 파일 SHA 유지 | 현재 Schema79개 ID 고유, Tyr (Týr)/Bifrost 사본 및 JAR 내 schema 일치 |
 | SQLite | 이전 행·스키마 조회 보존, CAS·재개방·rollback 통과 | workspace2.0 선택 배열, 불변 이벤트 수정/삭제 및 stale revision 거부 |
 
 최종 JAR SHA256: `36fae664449c16544b5060206d5edb3034a62e6b722cc4cba0af07c517d11bbe`. JAR의 MappingRegistry/MappingBundle/SemanticLifecycle class가 현재 compiled class와 일치한다. 신 fixture는 현재 Java 수신기에 수용되고 구 수신기에 거부된다.

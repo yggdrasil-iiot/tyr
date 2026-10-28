@@ -1,4 +1,4 @@
-"""P4-F §5: endpoint closure over Mímir snapshots, checked against an oracle written independently of the code."""
+"""P4-F §5: endpoint closure over Mimir snapshots, checked against an oracle written independently of the code."""
 import copy, json, random, sys, unittest
 from pathlib import Path
 R = Path(__file__).resolve().parents[1]; sys.path[:0] = [str(R/"backend"), str(R/"scripts")]

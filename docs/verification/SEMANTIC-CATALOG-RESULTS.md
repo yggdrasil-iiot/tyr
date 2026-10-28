@@ -18,7 +18,7 @@ Java는 MappingPublicationTest 133, LogicalStructureTest 3, MappingGateTest 2다
 
 독립 Java 시험은 실제 파일 registry 두 스트림에서 같은 계약 재사용, 역할 충돌, 이름/URI 분리, 다른 스트림 발행 후 기존 승인으로 발행 우회 불가, 중첩 말단 변경, unheaded 역사, 기존 충돌 역사 표시/새 승인 차단, pending 복구, 손상 거부를 검증했다. 별도 CLI 프로세스 사이의 카탈로그 결과도 동일했다.
 
-기존 canonical 계약 파일 74개(스키마 73개 포함)·fixture 511개·평가 계약 1개의 SHA가 유지됐다. 현재 스키마 74개는 Týr/Java 사본이 바이트 동일하다. 새 SQLite 테이블·migration은 없고 기존 DB 사본의 재개방 전후 행이 동일했다. 원래 사용자 DB/registry는 수정하지 않았다.
+기존 canonical 계약 파일 74개(스키마 73개 포함)·fixture 511개·평가 계약 1개의 SHA가 유지됐다. 현재 스키마 74개는 Tyr (Týr)/Java 사본이 바이트 동일하다. 새 SQLite 테이블·migration은 없고 기존 DB 사본의 재개방 전후 행이 동일했다. 원래 사용자 DB/registry는 수정하지 않았다.
 
 ## 재현과 증거
 

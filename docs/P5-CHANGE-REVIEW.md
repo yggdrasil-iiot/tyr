@@ -11,7 +11,7 @@ P4-B 다음 주 단계인 P5를 구현한다. P3-E native/nested 구조, 임의 
 재사용: 기존 작성본·PLC/혼합 소스·의미·객체·그래프·읽기/쓰기 정의·import 근거, 계약 검증 finding, canonical JSON SHA-256, SQLite transaction/revision, Host/Origin 보호.
 신규: change_review.py의 비교·의존 관계·검토 판단, 2.8.0 로컬 audit 계약 3종, 불변 기준본/검토 테이블, 비교/검토 API, 12 변경과 검토 화면, P5 fixture와 검증.
 
-Bifrost/Mímir/Muninn 코드 의존을 추가하지 않는다. 기존 53개 schema를 변경하지 않는다. 작성 workspaceVersion 2.0과 기존 proposal 2.7 등 내보내기 버전은 유지한다. 새 audit 문서를 기존 proposal에 조용히 넣거나 기존 review-record 1.0으로 가장하지 않는다. P6에서 실제 수신 계약을 별도로 연결한다.
+Bifrost/Mimir (Mímir)/Muninn 코드 의존을 추가하지 않는다. 기존 53개 schema를 변경하지 않는다. 작성 workspaceVersion 2.0과 기존 proposal 2.7 등 내보내기 버전은 유지한다. 새 audit 문서를 기존 proposal에 조용히 넣거나 기존 review-record 1.0으로 가장하지 않는다. P6에서 실제 수신 계약을 별도로 연결한다.
 
 ## 비교 모델
 

@@ -2,9 +2,9 @@
 
 ## 역할과 재사용
 
-Týr는 선택한 객체 매핑과 전이 의존 문서·원본 근거를 불변 제출본으로 내보낸다. Bifrost는 별도 Java 수신 검증기로 동일 wire 데이터를 다시 검사하고 등록 키·권한·두 확인자로 승인한 묶음을 파일 릴리스로 발행한다. Python 코드를 JVM에서 실행하거나 Maven 의존으로 결합하지 않는다. 공유하는 것은 버전별 JSON Schema의 바이트 동일한 데이터 사본뿐이다. 기존 계약 56개는 유지한다.
+Tyr (Týr)는 선택한 객체 매핑과 전이 의존 문서·원본 근거를 불변 제출본으로 내보낸다. Bifrost는 별도 Java 수신 검증기로 동일 wire 데이터를 다시 검사하고 등록 키·권한·두 확인자로 승인한 묶음을 파일 릴리스로 발행한다. Python 코드를 JVM에서 실행하거나 Maven 의존으로 결합하지 않는다. 공유하는 것은 버전별 JSON Schema의 바이트 동일한 데이터 사본뿐이다. 기존 계약 56개는 유지한다.
 
-재사용: Týr package/evidence builder·P3 검증·SQLite/CAS, Bifrost JSON/identity/Ed25519·KeyFileLedgerSigner preflight·ActivationAuthorizer·ActivationPolicyStore.
+재사용: Tyr package/evidence builder·P3 검증·SQLite/CAS, Bifrost JSON/identity/Ed25519·KeyFileLedgerSigner preflight·ActivationAuthorizer·ActivationPolicyStore.
 신규: 독립 bundle/schema/type/unit/graph 검증기, mapping registry/CLI, PUBLISH 권한, 제출·승인·릴리스 wire 계약과 scoped export/화면.
 
 기존 ActivationService/운영 activation ledger를 호출하지 않는다. PUBLISH와 APPROVE 권한은 target=mapping-publication, kind=mapping-release, ref=streamId에 적용한다. ACTIVATE 권한을 갖고 있다고 매핑 발행 권한을 부여하지 않는다.
@@ -26,7 +26,7 @@ Bifrost는 자체 classpath Schema만 사용하며 caller URI를 가져오지 �
 
 네 접근 프로파일과 pinned equipment/connection 일치, source readiness/표현/폭/codec/배열 geometry, semanticId 충돌, 객체 완전성, 그래프 순환·입력·타입·단위·근거, selector 후보/정수 인덱스/기본 후보, 읽기·쓰기 변환과 목적지 방향/중복을 다시 검사한다. 가상 수치 계산·SQL/provider/device 실행은 하지 않는다.
 
-Týr 작성 도구가 미확인 단위를 경고로 보존하더라도 Bifrost 발행은 확인된 단위를 요구한다. 미해석 import, draft, 2.x view, native/nested/임의 주소식 및 미지원 연산은 거부한다. importer의 template/alias 의미를 새 vendor parser로 재구현한 것은 아니다. 원본 hash/locator·선언된 미해석 상태·확정 source 계약을 검증하고 원문/관측을 보존한다.
+Tyr 작성 도구가 미확인 단위를 경고로 보존하더라도 Bifrost 발행은 확인된 단위를 요구한다. 미해석 import, draft, 2.x view, native/nested/임의 주소식 및 미지원 연산은 거부한다. importer의 template/alias 의미를 새 vendor parser로 재구현한 것은 아니다. 원본 hash/locator·선언된 미해석 상태·확정 source 계약을 검증하고 원문/관측을 보존한다.
 
 최대 파일 4096개·묶음 32MiB와 단일 파일 검사 한도를 둔다. 실제 현장 파일럿·vendor parser 완전성·통신 정확도는 별도다.
 

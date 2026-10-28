@@ -8,7 +8,7 @@
 ## 1. 입력과 탐색 규칙
 
 계산기는 다음 입력을 받는다.
-- Mímir 해석 스냅샷(계약 1.0.0)을 받는다.
+- Mimir (Mímir) 해석 스냅샷(계약 1.0.0)을 받는다.
 - endpoint `nodeId` 를 받는다.
 - profile 의 `limits.maxReferenceDepth`(D) 를 받는다.
 
@@ -16,7 +16,7 @@
 - **평가 edge 만 closure edge 로 넣는다.** relation 이 `input`, `reference`, `inherits`, `overrides`, `policy`, `external` 인 edge 다.
 - 구조 edge 인 `contains` 는 평가 edge 로 따라가지 않는다.
 - 깊이 d < D 인 노드에서는 평가 edge 를 모두 closure edge 로 넣고, `resolved` 인 edge 대상만 노드로 넣는다.
-- 모호한 edge 의 후보는 넣지 않는다. 해석기도 Týr 도 고르지 않는다.
+- 모호한 edge 의 후보는 넣지 않는다. 해석기도 Tyr (Týr) 도 고르지 않는다.
 - 깊이 D 에서 평가 edge 를 가진 노드는 더 펼치지 않고 `depth-limit` 사유를 남긴다.
 
 ## 2. 불완전 사유와 완결성
@@ -43,7 +43,7 @@
 계약 1.0.0 의 공백은 다음과 같이 처리한다(사용자 결정에 따라 1.0.0 으로 진행).
 - edge 에 읽기·쓰기·event 구분이 없어 셋을 가르지 못한다.
 - stateful 을 직접 표시하는 필드가 없다. opaque 노드이면서 `behavior-unknown` 미해석 항목이 걸린 노드를 대신 stateful 로 본다.
-- 두 가지는 실제 해석기를 만들기 전에 Mímir 계약 1.1.0 에서 다룬다.
+- 두 가지는 실제 해석기를 만들기 전에 Mimir 계약 1.1.0 에서 다룬다.
 
 ## 4. A2 검증 강화
 

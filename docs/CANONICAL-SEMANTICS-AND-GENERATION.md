@@ -168,7 +168,7 @@ output = { equipmentId: equipmentIdentity,
 
 P4-F A에서 새 editor 문서 버전을 확정하고 B의 opt-in sidecar에 해석/의미 문맥/생성 계약/원문 대응/검토 pin을 저장하는 방식을 설계한다. 기존 SQLite를 여는 것만으로 sidecar를 만들거나 기존 정의를 재해석·재분류하지 않는다. 구2.19/2.20/2.21/2.22를 새 의미 계약으로 소급 승인하지 않는다.
 
-P4-F C에서 두 계약과 원본의 대응·적합성·기존 계약 전환 후보를 dry-run한다. 일반 조건·업무 문맥·상태를 표현할 수 없으면 partial/unsupported를 유지한다. P4-F D에서 새 wire 근거 closure와 독립 Java 검증 준비 후에만 새 해석 기반 채택·제출을 허용한다. 기존 Bifrost 경로는 보존하고 Týr가 별도 승인 권위를 만들지 않는다. 승인/발행이 MES 전송·운영 활성화·SQL/장치 실행을 뜻하지 않는다.
+P4-F C에서 두 계약과 원본의 대응·적합성·기존 계약 전환 후보를 dry-run한다. 일반 조건·업무 문맥·상태를 표현할 수 없으면 partial/unsupported를 유지한다. P4-F D에서 새 wire 근거 closure와 독립 Java 검증 준비 후에만 새 해석 기반 채택·제출을 허용한다. 기존 Bifrost 경로는 보존하고 Tyr (Týr)가 별도 승인 권위를 만들지 않는다. 승인/발행이 MES 전송·운영 활성화·SQL/장치 실행을 뜻하지 않는다.
 
 ## 9 추가 fixture·완료 기준 (명세만, 미작성/미실행)
 

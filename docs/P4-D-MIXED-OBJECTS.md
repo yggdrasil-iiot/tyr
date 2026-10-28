@@ -4,7 +4,7 @@
 
 ## 구현 경계
 
-하나의 target-instance 프로퍼티에 PLC source, 상수, 외부 값, 가상 DB 레코드 필드 또는 기존 값 그래프를 함께 연결한다. 새 혼합 객체 runtime이나 SQL 엔진을 만들지 않는다. 기존2.0 target/memberPath,2.x source/graph/mapping,2.19 template/application과2.20 record-mapping을 재사용한다. Python Týr와 Java Bifrost는 wire 데이터만 공유하며 각자 독립 검증한다. 실제 장치 통신·외부 SQL·쓰기 실행·runtime 활성화는 제외한다.
+하나의 target-instance 프로퍼티에 PLC source, 상수, 외부 값, 가상 DB 레코드 필드 또는 기존 값 그래프를 함께 연결한다. 새 혼합 객체 runtime이나 SQL 엔진을 만들지 않는다. 기존2.0 target/memberPath,2.x source/graph/mapping,2.19 template/application과2.20 record-mapping을 재사용한다. Python Tyr (Týr)와 Java Bifrost는 wire 데이터만 공유하며 각자 독립 검증한다. 실제 장치 통신·외부 SQL·쓰기 실행·runtime 활성화는 제외한다.
 
 ## 레코드 필드 소스 계약
 

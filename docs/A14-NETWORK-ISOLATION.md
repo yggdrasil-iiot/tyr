@@ -1,6 +1,6 @@
 # A14 격리 오프라인 수용 환경
 
-Týr 작성 화면·Python 저장/미리보기·Bifrost Java 검증/서명/파일 발행을 하나의 Linux network namespace에서 실행한다. 실제 장치 통신·외부 SQL·쓰기 실행·Muninn 운영 활성화는 제외한다. SQLite 자체의 로컬 저장 SQL은 외부 값 소스의 SQL 실행과 구분한다.
+Tyr (Týr) 작성 화면·Python 저장/미리보기·Bifrost Java 검증/서명/파일 발행을 하나의 Linux network namespace에서 실행한다. 실제 장치 통신·외부 SQL·쓰기 실행·Muninn 운영 활성화는 제외한다. SQLite 자체의 로컬 저장 SQL은 외부 값 소스의 SQL 실행과 구분한다.
 
 [실행 스크립트·상세 재현](../scripts/a14/README.md) · [수용 결과](verification/A14-RESULTS.md).
 
@@ -37,7 +37,7 @@ Týr 작성 화면·Python 저장/미리보기·Bifrost Java 검증/서명/파�
 
 14 새 alias 작성·기존 view 편집 → 의존 근거 없는 부모 변경 거부/원자성 → 06 공통 의미 매핑 → 재로드/SQLite 재개방 → 09 가상 바이트·bit·alias·cast → 13 불변 제출 → Java 독립 validate → 두 등록 키 approve → 파일 publish → 화면 재조회·ZIP 및 릴리스 파일 해시 → 재로드한다.
 
-개인 키는 컨테이너 /tmp의 TemporaryDirectory에서 생성하고 삭제한다. 브라우저·SQLite·반출 증거에는 개인 키를 기록하지 않는다. 공개 등록 키·서명 receipt만 registry에 남긴다. Týr는 승인·발행을 웹에서 실행하지 않으며 상태만 조회한다.
+개인 키는 컨테이너 /tmp의 TemporaryDirectory에서 생성하고 삭제한다. 브라우저·SQLite·반출 증거에는 개인 키를 기록하지 않는다. 공개 등록 키·서명 receipt만 registry에 남긴다. Tyr는 승인·발행을 웹에서 실행하지 않으며 상태만 조회한다.
 
 기존 fixture의 디코딩·low/high·단위·스케일·파생식·품질·배열·selector·가져오기·변경 검토·변조/충돌 검사는 같은 격리 경계에서 회귀 실행한다. 직접 브라우저 수용 흐름은 alias/Boolean 대표 경로이며 모든 폼 조합의 브라우저 coverage를 주장하지 않는다.
 

@@ -45,20 +45,20 @@ Yggdrasil 하위에서 XLSX·XLS·CSV·PDF 및 Ignition·Kepware 관련 파일�
 
 | 영역 | 결정 | 코드 근거 |
 |---|---|---|
-| 작성·검토 | Týr가 초안·근거·매핑을 소유 | 신규 기능 |
-| 후보 도출 | Mímir 유지, 현재 수정 없음 | DefinitionDeriver, BrowsedMember |
+| 작성·검토 | Tyr (Týr)가 초안·근거·매핑을 소유 | 신규 기능 |
+| 후보 도출 | Mimir (Mímir) 유지, 현재 수정 없음 | DefinitionDeriver, BrowsedMember |
 | 승인 SSOT | Bifrost 유지 | 레지스트리·검증 기반 |
 | 런타임 | Muninn 후속 확장, 현재 수정 없음 | EgressValidator |
 | 기존 UDT | 기존 계약 유지, 새 계약과 분리 | definition.schema.json |
 | 구조적 비교 | 기존 기능을 기존 모델에 재사용 | CompatibilityChecker, ModelReconciler |
-| 원본 설정 | Týr 새 importer 필요 | IgnitionUdtAdapter는 접근·스케일 손실 가능 |
+| 원본 설정 | Tyr 새 importer 필요 | IgnitionUdtAdapter는 접근·스케일 손실 가능 |
 | 해시 발행 | Bifrost 내부 패턴 재사용 | RecipePublish, RecipeManifest |
 | 전체 묶음 | 새 릴리스 검증 필요 | 기존 verify는 latest 단일 파일 검사 |
 | 활성화 | 새 ArtifactResolver 후보, P6에서 구현 | ActivationService·ArtifactResolver |
 
 ActivationRequest는 kind/ref/version을 받고 ArtifactResolver는 바이트 해시를 반환하므로 향후 mapping-release resolver를 연결할 자리가 있다. 그러나 ActivationService는 ACTIVATE/ROLLBACK와 운영 target을 기록한다. 이번 작성 승인과 동일한 행위로 재사용하지 않는다.
 
-P6에서는 검증·검토 승인·불변 발행을 연결하고 운영 활성화는 별도 상태로 둔다. Týr에 두 번째 승인 권위를 만들지 않는다. 기존 코드의 존재를 mapping-release가 이미 구현됐다는 근거로 사용하지 않는다.
+P6에서는 검증·검토 승인·불변 발행을 연결하고 운영 활성화는 별도 상태로 둔다. Tyr에 두 번째 승인 권위를 만들지 않는다. 기존 코드의 존재를 mapping-release가 이미 구현됐다는 근거로 사용하지 않는다.
 
 ## 4 계약 결정
 

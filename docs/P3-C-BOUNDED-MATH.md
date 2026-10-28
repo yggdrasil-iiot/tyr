@@ -27,7 +27,7 @@ clamp 경계는 입력 단위로 해석한다. bar → kPa 같은 변환을 먼�
 | 신규 | 2.11.0 graph/common schema, Python 정적 검증과 제한 평가 분기, graph 편집 필드·미리보기 요약, 독립 Java 단위/경계 검증, 가상 oracle·부정/시간 fixture, 브라우저→SQLite→Bifrost 수용 경로 |
 | 제외 | 일반 식/eval, 임의 정밀도 선택, 단위 제곱근·일반 차원 분석, 온도 delta, 실장치 통신, 외부 SQL, 쓰기 실행, Muninn 활성화 |
 
-Java는 JSON 계약을 독립 검증하며 Python 평가 코드를 공유하지 않는다. Bifrost는 연산 정의를 승인·파일 발행한다. 실제 값의 수치 평가는 Týr의 가상 preview 범위다.
+Java는 JSON 계약을 독립 검증하며 Python 평가 코드를 공유하지 않는다. Bifrost는 연산 정의를 승인·파일 발행한다. 실제 값의 수치 평가는 Tyr (Týr)의 가상 preview 범위다.
 
 ## 화면과 저장
 

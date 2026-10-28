@@ -7,7 +7,7 @@
 - Python·fixture 고유 **1,195/1,195**. 전체18묶음은 신규29건을 포함해1,194건 통과했고, 최종 신규30건으로 교체해 합산했다. P7의 Ran544는 fixture701에 포함되므로 별도 중복 계산하지 않았다. 기존 경로1,165 + 최종 신규30이다.
 - 독립 Java 고유 **237/237**. Publication133 + Logical3 + CrossGraph18 + Broadcast18 + MixedObjects17 + RecordMappings15 + Lifecycle18 + Templates13 + Gate2. 최초16건을 최종18건으로 교체하고 두 Maven 실행의 겹치는 클래스는 한 번만 계산했다. Publication133을 먼저 실행한 뒤 공통 핀 이력 방어를 보강하고 관련104건/최종JAR를 재검증했다. 새 방어는 실제 registry 승인 거부를 포함한18건으로 확인했다.
 - 최종 network-none 브라우저·HTTP·SQLite·실제 Java 승인·발행 **36/36**. 별도의 중간 BrowserOnly 검증은 이 수에 합산하지 않는다.
-- 기존 계약·fixture·evaluation·editor **858개 파일 SHA 보존**, 현재 Týr 계약 **96개**와 Bifrost resource/JAR bytes 동일, mapping 클래스21개 compiled/JAR bytes 동일.
+- 기존 계약·fixture·evaluation·editor **858개 파일 SHA 보존**, 현재 Tyr (Týr) 계약 **96개**와 Bifrost resource/JAR bytes 동일, mapping 클래스21개 compiled/JAR bytes 동일.
 - 최종 JAR SHA256: `1811e443b1f6993d94a3e2f536f08648124ce7f0229cc2cc0cd54ac3ee16ea0d`.
 
 ## 확인한 동작

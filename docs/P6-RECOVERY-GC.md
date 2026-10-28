@@ -4,7 +4,7 @@
 
 ## 책임과 복구
 
-Bifrost만 승인·발행 권위를 가진다. Týr에는 개인 키나 recover/publish 실행 API를 추가하지 않는다.
+Bifrost만 승인·발행 권위를 가진다. Tyr (Týr)에는 개인 키나 recover/publish 실행 API를 추가하지 않는다.
 
 1. Bifrost는 staging payload를 독립 검증하고 release.json을 만든다.
 2. transactions/<UUID>.json에 streamId, id, releaseVersion, release SHA, staging 이름, baseRelease를 기록한다. 저널 파일 force 후 release 폴더를 atomic move한다.
@@ -12,15 +12,15 @@ Bifrost만 승인·발행 권위를 가진다. Týr에는 개인 키나 recover/
 4. `java -jar bifrost-gates.jar mapping recover <registry>`는 registry lock 안에서 서명·파일 digest·inventory·submission·기준 head를 검증한다. head가 base와 같으면 원래 작업을 완료하고, 이미 target이면 저널만 정리한다. 반복 호출은 빈 actions를 반환한다.
 5. 저널 잘림·release/payload 손상·head 충돌·symlink는 거부하고 자료를 보존한다. 임의의 head 롤백이나 잘못된 파일 자동 재생성은 없다. 관리자가 원인과 보존 사본을 조사해야 한다.
 
-Týr export는 SQLite BEGIN IMMEDIATE 안에서 파일 작성/검증과 제출 row insert를 수행한다. 커밋 전 중단은 row가 롤백되고 고아 파일이 남는다. 커밋 후 중단은 기존 불변 제출본을 재조회한다. 고아 폴더를 제출 기록으로 자동 채택하지 않는다. refresh 재시도는 기존 submissionRevision CAS를 유지한다.
+Tyr export는 SQLite BEGIN IMMEDIATE 안에서 파일 작성/검증과 제출 row insert를 수행한다. 커밋 전 중단은 row가 롤백되고 고아 파일이 남는다. 커밋 후 중단은 기존 불변 제출본을 재조회한다. 고아 폴더를 제출 기록으로 자동 채택하지 않는다. refresh 재시도는 기존 submissionRevision CAS를 유지한다.
 
 ## GC: 조회 후 가역적 격리
 
 - Bifrost `mapping gc <registry> <grace-seconds>`로 사전 조회한다. `--quarantine <planSha256>`를 붙이면 같은 lock 안에서 후보/내용/root pin을 재계산해 일치할 때만 이동한다.
 - grace는 3600~31536000초. `.staging-*`, approvals의 UUID `.pending`, heads의 UUID 임시 `.json`만 후보로 삼는다. 이름을 모르는 파일은 보존한다.
 - 모든 승인과 모든 릴리스(현재 head에서 벗어난 과거 포함), payload 전체·원본 근거·import 검토/이전 batch closure, identity 파일을 보존한다. 손상된 역사적 릴리스가 있으면 GC를 거부한다.
-- Týr 13 화면의 무결성 검사·GC 조회/격리는 `/api/submission-maintenance`를 사용한다. `{graceSeconds}` 조회, `{graceSeconds,planSha256}` 격리. 화면은 24시간 기준이다. 저장된 row의 폴더는 무조건 보존하고 검증한다. row가 없는 `<submission-id>-<32 hex>` 폴더만 후보로 삼는다.
-- Týr는 SQLite 쓰기 lock으로 export/GC를 직렬화하며 row/내용/mtime pin이 달라지면 거부한다. 손상된 제출본은 조회에 corrupt를 표시하고 격리·다운로드·refresh를 거부한다.
+- Tyr 13 화면의 무결성 검사·GC 조회/격리는 `/api/submission-maintenance`를 사용한다. `{graceSeconds}` 조회, `{graceSeconds,planSha256}` 격리. 화면은 24시간 기준이다. 저장된 row의 폴더는 무조건 보존하고 검증한다. row가 없는 `<submission-id>-<32 hex>` 폴더만 후보로 삼는다.
+- Tyr는 SQLite 쓰기 lock으로 export/GC를 직렬화하며 row/내용/mtime pin이 달라지면 거부한다. 손상된 제출본은 조회에 corrupt를 표시하고 격리·다운로드·refresh를 거부한다.
 - 격리는 각 관리 root의 quarantine/<UUID>/ 아래 atomic move한다. 파일 영구 삭제, 승인/릴리스 삭제, workspace/import 이력 압축은 이번 GC에 없다. GC 도중 중단해도 이미 이동한 파일은 격리에 남고 새 조회로 나머지를 처리할 수 있다.
 
 ## 검증과 재현

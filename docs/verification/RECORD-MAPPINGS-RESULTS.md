@@ -11,7 +11,7 @@
 
 ## 계약과 바이너리 보존
 
-`docs/verification/record-mappings-baseline-pins.json`의 기존 **797파일**(contracts84=83schema+README, fixtures710, evaluation1, editor2) SHA를 유지했다. 기존 계약 파일은 수정하지 않고2.20의4개 schema만 추가했다. 현재87개 schema의 Týr↔Bifrost resource 사본 및 최종 JAR entry bytes가 같다. Java mapping compiled class bytes와 JAR도 일치한다.
+`docs/verification/record-mappings-baseline-pins.json`의 기존 **797파일**(contracts84=83schema+README, fixtures710, evaluation1, editor2) SHA를 유지했다. 기존 계약 파일은 수정하지 않고2.20의4개 schema만 추가했다. 현재87개 schema의 Tyr (Týr)↔Bifrost resource 사본 및 최종 JAR entry bytes가 같다. Java mapping compiled class bytes와 JAR도 일치한다.
 
 최종 `bifrost-gates.jar` SHA256: `084654260d8a4d7e49bc39a762d19af6191fd08a7eb40b9e56638f647b828efe`. 최종 browser driver가 사용한 JAR SHA도 같다. 이전 demo/DB를 변경하지 않았다. 별도 `build/record-mappings-ui/editor.sqlite3` revision4와 signed registry/불변 제출본을 복제하여 **http://127.0.0.1:59788/**에서 실행했다. Docker 내부 경로인 로컬 제출본 handle만 재배치했고 workspace revision/body는 동일하게 보존했다. `relocations.json`에 경로/원본 SHA 기록, private key는 복제하지 않았다.
 

@@ -1,4 +1,4 @@
-# Týr 데이터 정의·값 생성과 의미 매핑 설계서
+# Tyr 데이터 정의·값 생성과 의미 매핑 설계서
 
 > P0·P1 반영: 시작 범위는 AB Logix 심볼, S7-1500 OPC UA, S7-300 DB, Mitsubishi MELSEC의 네 가지다. wire 계약은 contracts/1.0.0과 docs/P0-DECISIONS.md를 따른다. 아래 초기 JSON 예시는 도식이며 P1의 id/version 참조로 구체화했다.
 
@@ -8,11 +8,11 @@
 
 같은 날 [정준 의미 계약과 값 생성·매핑 계약의 경계](docs/CANONICAL-SEMANTICS-AND-GENERATION.md)를 보완했다. 정준화는 PLC 메모리맵뿐 아니라 MES가 받는 값의 뜻과 PLC·DB·상수·조건을 조합한 생성 정의를 포함한다. 업무 문맥/유효성과 소스·연산·정책을 별도 계약으로 고정하며 혼합 템플릿 사례와 미구현 검증 범위를 명시한다.
 
-Týr는 PLC마다 다른 주소·오프셋·심볼 접근 정의를 보존하면서, 이를 상위 애플리케이션이 사용할 공통 의미에 연결하는 모델링 작업대다. 기존 문서와 솔루션 설정 파일, 수동 입력으로 시작하며 사용자는 화면에서 접근 정의·변환·의미·근거를 함께 관리한다.
+Tyr (Týr)는 PLC마다 다른 주소·오프셋·심볼 접근 정의를 보존하면서, 이를 상위 애플리케이션이 사용할 공통 의미에 연결하는 모델링 작업대다. 기존 문서와 솔루션 설정 파일, 수동 입력으로 시작하며 사용자는 화면에서 접근 정의·변환·의미·근거를 함께 관리한다.
 
 정준화 범위는 PLC 입력에 한정하지 않는다. DB 레코드·상수·외부 값과 조건/변환을 조합한 최종 객체도 대상으로 하며, 소비자가 받을 뜻을 정하는 정준 의미 계약과 그 값을 만드는 값 생성·매핑 계약을 분리한다. 일반 조건·업무 문맥·상태 모델의 지원 수준은 후속 설계/구현 범위에 명시한다.
 
-Yggdrasil에서 Týr는 작성·검토, Mímir는 모델 후보 도출, Bifrost는 검증·승인·기록, Muninn은 승인된 매핑의 실행을 담당한다. 초기 MVP는 운영 설비에 접속하지 않고 파일과 독립적인 시험 데이터로 검증한다. 명칭 Týr와 명령·저장소 이름 tyr를 사용한다. 아래 데이터 계약과 추가 기능은 구현 제안이다.
+Yggdrasil에서 Tyr는 작성·검토, Mimir (Mímir)는 모델 후보 도출, Bifrost는 검증·승인·기록, Muninn은 승인된 매핑의 실행을 담당한다. 초기 MVP는 운영 설비에 접속하지 않고 파일과 독립적인 시험 데이터로 검증한다. 명칭 Tyr와 명령·저장소 이름 tyr를 사용한다. 아래 데이터 계약과 추가 기능은 구현 제안이다.
 
 # 1 문제와 목표
 
@@ -54,9 +54,9 @@ PLC마다 레지스터·비트 위치, DB·바이트 오프셋, 구조체 심볼
 
 접근 방식은 구조화해 보존하고 공통 의미는 독립적으로 재사용한다. 원시 저장 타입, 디코딩 값의 타입, 상위 결과 타입을 분리한다. 기존 설정을 출처 있는 관측 정의로 수용하되 공통 계약의 권위로 자동 승격하지 않는다.
 
-앱들은 공개된 데이터·파일 계약으로 결합한다. 공유 Java 모듈이나 다른 앱의 내부 클래스를 의존하지 않는다. Týr 초안 저장소는 Bifrost의 승인 레지스트리와 구분하며 별도의 승인 SSOT를 만들지 않는다.
+앱들은 공개된 데이터·파일 계약으로 결합한다. 공유 Java 모듈이나 다른 앱의 내부 클래스를 의존하지 않는다. Tyr 초안 저장소는 Bifrost의 승인 레지스트리와 구분하며 별도의 승인 SSOT를 만들지 않는다.
 
-전체 제품은 PDF·추가 솔루션·Mímir 관측·런타임 소비로 확장한다. 초기 범위에는 PLC 쓰기, 전 벤더 드라이버, 운영 설정 자동 수정, 임의 스크립트 실행을 포함하지 않는다.
+전체 제품은 PDF·추가 솔루션·Mimir 관측·런타임 소비로 확장한다. 초기 범위에는 PLC 쓰기, 전 벤더 드라이버, 운영 설정 자동 수정, 임의 스크립트 실행을 포함하지 않는다.
 
 # 3 현재 구현과 보완 대상
 
@@ -64,15 +64,15 @@ PLC마다 레지스터·비트 위치, DB·바이트 오프셋, 구조체 심볼
 
 | 구성 요소 | 현재 기능 | 보완 |
 |---|---|---|
-| Mímir | OPC UA ObjectType의 이름·타입·EURange에서 UDT 제안 | 접근 정보와 관측 근거를 보존한 후보 계약 |
+| Mimir | OPC UA ObjectType의 이름·타입·EURange에서 UDT 제안 | 접근 정보와 관측 근거를 보존한 후보 계약 |
 | Bifrost | UDT 검증·레지스트리·provenance·활성화 기반 | 접근·의미·매핑 검증과 릴리스 승인 |
 | vendor 비교 | 파일을 정규 UDT로 변환해 멤버 차이 대조 | 접근·변환 손실 없는 입력과 대조 |
 | Muninn | 정의 무결성 확인·OPC UA 이름/타입 검사·일회성 발행 | 후속 매핑·변환 소비 |
 | spec | raw 주소→typed metric과 Git 관리 방향 | 접근·의미·매핑 계약 및 사용자 작업 흐름 |
 
-현재 Mímir의 semanticId는 타입·멤버 이름에서 합성된다. 서로 다른 장비의 명칭을 공통 개념으로 연결하는 의미 사전이 아니다. BrowsedMember와 Member에는 원본 노드 위치·단위·변환·출처가 없다.
+현재 Mimir의 semanticId는 타입·멤버 이름에서 합성된다. 서로 다른 장비의 명칭을 공통 개념으로 연결하는 의미 사전이 아니다. BrowsedMember와 Member에는 원본 노드 위치·단위·변환·출처가 없다.
 
-Bifrost의 model-reconcile은 파일 입력 기반으로 재사용할 수 있다. 다만 기존 TemplateAdapter를 거쳐 UDT로 투영하면 접근·변환 정보가 사라질 수 있다. 기존 모델 비교는 유지하고 Týr 입력은 필요한 정보를 보존하는 별도 계약으로 수용한다.
+Bifrost의 model-reconcile은 파일 입력 기반으로 재사용할 수 있다. 다만 기존 TemplateAdapter를 거쳐 UDT로 투영하면 접근·변환 정보가 사라질 수 있다. 기존 모델 비교는 유지하고 Tyr 입력은 필요한 정보를 보존하는 별도 계약으로 수용한다.
 
 현재 구조적 호환성 게이트의 PASS를 의미·접근·변환 전체에 대한 승인으로 사용하지 않는다.
 
@@ -80,26 +80,26 @@ Bifrost의 model-reconcile은 파일 입력 기반으로 재사용할 수 있다
 
 | 앱 | 책임 | 입력 | 출력 |
 |---|---|---|---|
-| Týr | import·수동 작성·의미 선택·매핑·근거 검토·제출 | 파일·수동 입력·후보·승인 계약 | 초안·검토·제안 묶음 |
-| Mímir | 타입·모델 후보 도출 | 선택적 OPC UA, 향후 오프라인 타입 자료 | 관측 묶음·모델 후보 |
-| Bifrost | 검증·변경 규칙·승인·발행·기록 | Týr 등 생산자의 제안 | 검사 결과·승인 릴리스 |
+| Tyr | import·수동 작성·의미 선택·매핑·근거 검토·제출 | 파일·수동 입력·후보·승인 계약 | 초안·검토·제안 묶음 |
+| Mimir | 타입·모델 후보 도출 | 선택적 OPC UA, 향후 오프라인 타입 자료 | 관측 묶음·모델 후보 |
+| Bifrost | 검증·변경 규칙·승인·발행·기록 | Tyr 등 생산자의 제안 | 검사 결과·승인 릴리스 |
 | Muninn | 승인 매핑으로 값 취득·변환·발행 | 릴리스·별도 연결 설정 | 의미 있는 값·품질 |
 
-Týr는 승인 레지스트리를 직접 덮어쓰지 않는다. Mímir는 의미를 확정하거나 승인하지 않는다. Muninn에는 작성·승인 기능을 넣지 않는다.
+Tyr는 승인 레지스트리를 직접 덮어쓰지 않는다. Mimir는 의미를 확정하거나 승인하지 않는다. Muninn에는 작성·승인 기능을 넣지 않는다.
 
-기본 흐름은 “문서·설정·수동 입력·Mímir 후보 → Týr 작성과 검토 → Bifrost 검증과 승인 → 승인 릴리스 → Muninn 또는 기존 실행 제품”이다. 검사 결과와 승인 상태는 Týr 화면으로 돌아온다.
+기본 흐름은 “문서·설정·수동 입력·Mimir 후보 → Tyr 작성과 검토 → Bifrost 검증과 승인 → 승인 릴리스 → Muninn 또는 기존 실행 제품”이다. 검사 결과와 승인 상태는 Tyr 화면으로 돌아온다.
 
 Huginn 관측은 선택적 보조 근거다. 통신 흔적이 업무 의미를 확정하지 않으며 패킷 캡처는 도입의 선행 조건이 아니다.
 
-## 4.1 Týr와 Mímir
+## 4.1 Tyr와 Mimir
 
-Týr가 파일 import와 UI 작업을 소유한다. Mímir의 기존 도출 기능은 선택적 입력 생산자로 유지한다. 생성한 local IRI는 suggestedSemanticId와 생성 방식으로 전달해 확인된 의미와 구분한다.
+Tyr가 파일 import와 UI 작업을 소유한다. Mimir의 기존 도출 기능은 선택적 입력 생산자로 유지한다. 생성한 local IRI는 suggestedSemanticId와 생성 방식으로 전달해 확인된 의미와 구분한다.
 
-Mímir 후속 관측 계약은 원본 NodeId·namespace URI·원본 타입 식별자·관측 시점·범위를 보존한다. NodeId의 문자열·숫자·GUID·opaque 종류를 구분하고 BrowseName과 문자열 NodeId가 같다는 전제를 일반화하지 않는다.
+Mimir 후속 관측 계약은 원본 NodeId·namespace URI·원본 타입 식별자·관측 시점·범위를 보존한다. NodeId의 문자열·숫자·GUID·opaque 종류를 구분하고 BrowseName과 문자열 NodeId가 같다는 전제를 일반화하지 않는다.
 
 ## 4.2 구현 배치
 
-Týr는 독립된 사용자 도구다. UI·작성 API·파서·검증·로컬 저장소를 한 배포 단위로 시작한다. Bifrost와는 로컬 파일·CLI로 연계한다. HTTP는 동일 계약의 후속 전달 수단이다. 분산 서비스·브로커·그래프 DB는 MVP 필수 의존성이 아니다.
+Tyr는 독립된 사용자 도구다. UI·작성 API·파서·검증·로컬 저장소를 한 배포 단위로 시작한다. Bifrost와는 로컬 파일·CLI로 연계한다. HTTP는 동일 계약의 후속 전달 수단이다. 분산 서비스·브로커·그래프 DB는 MVP 필수 의존성이 아니다.
 
 # 5 데이터 모델
 
@@ -254,16 +254,16 @@ MappingSet은 설비 인스턴스가 의미 모델 멤버를 어떻게 제공하
 
 | 계약 | 생산자 | 소비자 | 내용 |
 |---|---|---|---|
-| ObservationBundle | Týr importer 또는 확장 Mímir | Týr | 관측과 후보·근거 |
-| MappingProposal | Týr | Bifrost | 정의·매핑·검토·기준 릴리스 |
-| ValidationReport | Bifrost | Týr | 검사·차이·제안 해시 |
-| MappingRelease | Bifrost | Týr·실행 소비자 | 승인 계약·버전·해시 |
+| ObservationBundle | Tyr importer 또는 확장 Mimir | Tyr | 관측과 후보·근거 |
+| MappingProposal | Tyr | Bifrost | 정의·매핑·검토·기준 릴리스 |
+| ValidationReport | Bifrost | Tyr | 검사·차이·제안 해시 |
+| MappingRelease | Bifrost | Tyr·실행 소비자 | 승인 계약·버전·해시 |
 
 MVP는 JSON·디렉터리 묶음으로 교환한다. proposal.json, semantic-definitions, sources, mapping-sets, evidence/index.json, reviews를 묶는다. 원본 문서 전체는 실행 계약과 분리된 증거 저장소에 둔다. 실행 환경은 원본 문서 조회에 의존하지 않는다.
 
 ## 8.1 검증과 발행
 
-1. Týr가 파일 목록·해시·기준 릴리스를 고정한 제안을 생성한다.
+1. Tyr가 파일 목록·해시·기준 릴리스를 고정한 제안을 생성한다.
 
 2. Bifrost가 형식·참조·접근 프로파일·변환·의미·변경 규칙을 검사한다.
 
@@ -373,7 +373,7 @@ MVP의 실장치 상태는 not-performed다. 자료 대조 확인은 제공된 �
 
 ## 12.2 후속 범위
 
-PDF·OCR, 추가 제품, Mímir 관측 입력, 복합 타입·배열, 다중 소스 계산, 운영 인증, 실장치 시험, Muninn 소비, 기존 설정 생성·배포는 후속 단계다.
+PDF·OCR, 추가 제품, Mimir 관측 입력, 복합 타입·배열, 다중 소스 계산, 운영 인증, 실장치 시험, Muninn 소비, 기존 설정 생성·배포는 후속 단계다.
 
 오프라인 모드는 live connector를 구성하지 않는다. 파일의 매크로·외부 링크·스크립트·외부 엔티티를 실행하거나 조회하지 않는다. AI는 선택적 후보 생성으로 사용하며 승인된 환경만 사용한다. 원본 전체 외부 전송은 기본 동작으로 두지 않는다.
 
@@ -445,7 +445,7 @@ fixture 기대값은 동일 생성기에만 의존하지 않는다. 독립적으
 |---|---|---|
 | 원본·버전 | 기존 저장소·Git·OT 구성 관리 | 설비·개정·근거 인덱스 |
 | 추출 | 라이브러리·제품 export | 현장 프로파일·관측 어댑터 |
-| 후보 | Mímir 타입 도출 | 접근·근거·후보 상태 |
+| 후보 | Mimir 타입 도출 | 접근·근거·후보 상태 |
 | 승인 | Bifrost 기반 | 새 계약·매핑 규칙 |
 | 비교 | model-reconcile | 이름이 다른 연결·접근·변환 대조 |
 | 실행 | 기존 어댑터·솔루션·Muninn | 승인 매핑 소비 |
@@ -459,7 +459,7 @@ fixture 기대값은 동일 생성기에만 의존하지 않는다. 독립적으
 
 - IT OT 거버넌스 보고서: 제품 역추출을 출처 있는 관측으로 수용하고 권위와 입력 경로를 구분한다. 기존 제품이 없다는 단정 대신 기능 평가 후 공백 구현 기준을 둔다.
 
-- Mímir README: 현재 도출과 후속 관측 계약을 구분한다.
+- Mimir README: 현재 도출과 후속 관측 계약을 구분한다.
 
 - Bifrost 계약·README: UDT 검증과 전체 매핑 검증을 구분한다.
 
@@ -467,7 +467,7 @@ fixture 기대값은 동일 생성기에만 의존하지 않는다. 독립적으
 
 - Muninn README: 현재 이름·타입 검사와 후속 매핑 소비를 구분한다.
 
-첫 설정 형식은 실제 자료와 검토자가 있는 제품 하나로 선정한다. 의미 사전은 대상 설비에 필요한 범위로 시작한다. 초안은 Týr 로컬 저장소, 승인 계약은 Bifrost, 전달은 파일·CLI를 기본으로 한다.
+첫 설정 형식은 실제 자료와 검토자가 있는 제품 하나로 선정한다. 의미 사전은 대상 설비에 필요한 범위로 시작한다. 초안은 Tyr 로컬 저장소, 승인 계약은 Bifrost, 전달은 파일·CLI를 기본으로 한다.
 
 # 15 구현 근거
 
@@ -487,7 +487,7 @@ fixture 기대값은 동일 생성기에만 의존하지 않는다. 독립적으
 | bifrost docs/ADOPTION.md | 도입 순서·파일 비교 |
 | muninn README.md·EgressValidator.java | 일회성 feeder·이름/타입 검사 |
 
-관련 공개 저장소: [Mímir](https://github.com/yggdrasil-iiot/mimir), [Bifrost](https://github.com/yggdrasil-iiot/bifrost), [Muninn](https://github.com/yggdrasil-iiot/muninn).
+관련 공개 저장소: [Mimir](https://github.com/yggdrasil-iiot/mimir), [Bifrost](https://github.com/yggdrasil-iiot/bifrost), [Muninn](https://github.com/yggdrasil-iiot/muninn).
 
 현재 구현과 제안 기능은 3절에서 구분한다. 최초 계약 리뷰에서는 접근 종류별 필수 필드, 단위 코드, 타입 어휘, 변환 연산, 승인 권한과 릴리스 형식을 확정한다.
 
@@ -536,7 +536,7 @@ D1000(actual), D2000(target), D3000(state)를 한 객체의 세 프로퍼티로 
 
 현재 P2 비교 화면에는 네 PLC의 8개 프로퍼티와 원문 이름·단위·변환을 보여준다. 후속 화면은 객체 ID/경로 편집, 원문↔해석 결과, 템플릿 전개/override, 입력별 디코딩 단계, 다중 입력 그래프와 미해석 진단을 단계별 추가한다. UI 작성·API 저장·정적 검증·샘플 평가가 모두 확인돼야 해당 지원 축을 yes로 올린다.
 
-Týr는 위 정의·근거·변경의 작성과 오프라인 검증을 소유한다. Mímir는 후보를 제공하며 그 후보가 정준 의미를 자동 확정하지 않는다. Bifrost는 승인·버전·릴리스 권한을 갖는다. Muninn은 향후 승인된 계약을 소비하며 이번 작업에서 실행 엔진이나 통신 어댑터를 구현하지 않는다. 각 프로젝트 코드는 독립적으로 유지하며 published 계약과 fixture만 교환한다.
+Tyr는 위 정의·근거·변경의 작성과 오프라인 검증을 소유한다. Mimir는 후보를 제공하며 그 후보가 정준 의미를 자동 확정하지 않는다. Bifrost는 승인·버전·릴리스 권한을 갖는다. Muninn은 향후 승인된 계약을 소비하며 이번 작업에서 실행 엔진이나 통신 어댑터를 구현하지 않는다. 각 프로젝트 코드는 독립적으로 유지하며 published 계약과 fixture만 교환한다.
 
 신규 필드는 새 계약 버전 검토·마이그레이션 예시·수신자 capability 협의를 거쳐 도입한다. 기존 1.0.0/1.1.0 문서를 같은 버전으로 확장하지 않는다. 구 소비자가 알 수 없는 op/codec/시간 정책은 제출/수용 시 실패해야 한다. fixtureSpecVersion은 시험 명세 버전이며 제품 schemaVersion과 무관하다. 실제 제품 export 검증 전에는 제품 전체 호환성을 주장하지 않는다.
 
@@ -558,7 +558,7 @@ Týr는 위 정의·근거·변경의 작성과 오프라인 검증을 소유한
 
 ## P3-D 시간·품질 평가 경계
 
-[가상 DataValue·시간 정책](docs/P3-D-TIME-QUALITY.md)을 구현했다. temporalPolicy를 매핑에 명시하고 실제 현재 시각 대신 evaluationContext.at을 고정한다. source/server 시각을 구분하고 age/skew·결측·bad·uncertain·가상 sequence를 검사한다. 시간·품질 오류는 수치 계산 전에 차단하며 파생 시각/원자성을 추정하지 않는다. 2.3 작성 계약과 별도 가상 시나리오를 기존 SQLite에 추가한다. Mímir/Bifrost/Muninn의 실제 실행·품질 수신은 확장하지 않는다.
+[가상 DataValue·시간 정책](docs/P3-D-TIME-QUALITY.md)을 구현했다. temporalPolicy를 매핑에 명시하고 실제 현재 시각 대신 evaluationContext.at을 고정한다. source/server 시각을 구분하고 age/skew·결측·bad·uncertain·가상 sequence를 검사한다. 시간·품질 오류는 수치 계산 전에 차단하며 파생 시각/원자성을 추정하지 않는다. 2.3 작성 계약과 별도 가상 시나리오를 기존 SQLite에 추가한다. Mimir/Bifrost/Muninn의 실제 실행·품질 수신은 확장하지 않는다.
 
 ## P3-E 고정 scalar 배열
 
@@ -570,7 +570,7 @@ Týr는 위 정의·근거·변경의 작성과 오프라인 검증을 소유한
 
 ## P4-A 파일 정의와 근거 보존
 
-[파일 가져오기 설계](docs/P4-A-FILE-IMPORT.md)는 원본·관측·채택 초안을 분리한다. 새 import-batch/proposal 2.6은 raw bytes/hash·locator·template/alias 경로·미해석을 보존한다. 기존 source/semantic/graph/mapping과 SQLite CAS를 재사용한다. 파일 해석 결과는 모두 draft이며 미해석은 승인 차단 finding으로 남긴다. Mímir·Bifrost·Muninn의 역할과 실제 통신 경계는 확대하지 않는다.
+[파일 가져오기 설계](docs/P4-A-FILE-IMPORT.md)는 원본·관측·채택 초안을 분리한다. 새 import-batch/proposal 2.6은 raw bytes/hash·locator·template/alias 경로·미해석을 보존한다. 기존 source/semantic/graph/mapping과 SQLite CAS를 재사용한다. 파일 해석 결과는 모두 draft이며 미해석은 승인 차단 finding으로 남긴다. Mimir·Bifrost·Muninn의 역할과 실제 통신 경계는 확대하지 않는다.
 
 ## P4-B 혼합 소스와 방향 경계
 
@@ -584,7 +584,7 @@ Týr는 위 정의·근거·변경의 작성과 오프라인 검증을 소유한
 
 ## P6 오프라인 Bifrost 연계
 
-선택한 매핑/근거를 파일로 고정하고 Bifrost가 독립 수신 검증·두 등록 키의 서명 승인·불변 릴리스 발행을 담당한다. Týr는 승인 권위를 만들지 않는다. 기존 작성본/검토/시나리오는 보존한다. [설계](docs/P6-BIFROST-PUBLICATION.md) · [검증](docs/verification/P6-RESULTS.md). 실제 장치·외부 SQL·쓰기 실행·운영 활성화는 제외한다.
+선택한 매핑/근거를 파일로 고정하고 Bifrost가 독립 수신 검증·두 등록 키의 서명 승인·불변 릴리스 발행을 담당한다. Tyr는 승인 권위를 만들지 않는다. 기존 작성본/검토/시나리오는 보존한다. [설계](docs/P6-BIFROST-PUBLICATION.md) · [검증](docs/verification/P6-RESULTS.md). 실제 장치·외부 SQL·쓰기 실행·운영 활성화는 제외한다.
 
 
 ## P7 오프라인 수용 기록
@@ -626,7 +626,7 @@ A01~A16의 fixture 실행과 화면·저장 경로를 검증했다. 14개 충족
 
 ## P6 후속: 중단 복구와 파일 보존
 
-[복구·GC 설계](docs/P6-RECOVERY-GC.md)는 Bifrost의 파일 발행에 저널과 기준 head CAS 복구를 추가한다. Týr는 SQLite 제출 row를 보존하고 13 화면에서 무결성·고아 폴더 조회/격리를 제공한다. 양쪽 GC는 과거 승인·릴리스·원본 근거를 삭제하지 않고 임시 고아 자료만 가역적으로 격리한다. 기존 정준 계약·SQLite 테이블은 유지한다. 프로세스 중단 수용과 전원 손실 durability·운영 IAM·외부 anchor·실제 현장 PoV는 분리한다.
+[복구·GC 설계](docs/P6-RECOVERY-GC.md)는 Bifrost의 파일 발행에 저널과 기준 head CAS 복구를 추가한다. Tyr는 SQLite 제출 row를 보존하고 13 화면에서 무결성·고아 폴더 조회/격리를 제공한다. 양쪽 GC는 과거 승인·릴리스·원본 근거를 삭제하지 않고 임시 고아 자료만 가역적으로 격리한다. 기존 정준 계약·SQLite 테이블은 유지한다. 프로세스 중단 수용과 전원 손실 durability·운영 IAM·외부 anchor·실제 현장 PoV는 분리한다.
 
 
 ## P7 독립 정답 기반 평가 준비
@@ -684,7 +684,7 @@ A01~A16의 fixture 실행과 화면·저장 경로를 검증했다. 14개 충족
 
 ## P4-F PIO·Kepware 공통 수용과 제품별 해석기 (설계·미구현)
 
-[상세 모델·계약 경계·fixture 계획](docs/P4-F-SOLUTION-INTERPRETATION.md). Mímir: SourceBundle → 제품별 Interpreter → InterpretationSnapshot(native 노드·참조·claim·미해석)을 파일 계약으로 발행 → Týr: 스냅샷 pin 재검증 → endpoint 의존 closure/차원별 판정 → ConversionPlan → 기존 정준 작성본으로 이어진다. 사실 추출과 의미 확인, 계약 표현 가능성과 가상 동등성·Bifrost 승인·운영 일치를 분리한다. 제품 해석기는 Mímir에 두며(2026-10-20 후속 결정, 원본 형식마다 해석하는 곳은 한 곳) 제공 bytes와 고정된 로컬 규칙만 읽고 workspace/registry에 쓰지 않는다. Týr와 Bifrost는 vendor 원본을 직접 파싱하지 않는다.
+[상세 모델·계약 경계·fixture 계획](docs/P4-F-SOLUTION-INTERPRETATION.md). Mimir: SourceBundle → 제품별 Interpreter → InterpretationSnapshot(native 노드·참조·claim·미해석)을 파일 계약으로 발행 → Tyr: 스냅샷 pin 재검증 → endpoint 의존 closure/차원별 판정 → ConversionPlan → 기존 정준 작성본으로 이어진다. 사실 추출과 의미 확인, 계약 표현 가능성과 가상 동등성·Bifrost 승인·운영 일치를 분리한다. 제품 해석기는 Mimir에 두며(2026-10-20 후속 결정, 원본 형식마다 해석하는 곳은 한 곳) 제공 bytes와 고정된 로컬 규칙만 읽고 workspace/registry에 쓰지 않는다. Tyr와 Bifrost는 vendor 원본을 직접 파싱하지 않는다.
 
 기존 P4-A 2.6/P4-A B 2.14는 유지하며 복합 vendor 정의를 scalar source로 위장하지 않는다. 신규 editor 계약/별도 opt-in sidecar SQLite를 계획한다. 기존 workspaceVersion2.0·DDL·API·wire·JAR 변경은 이번에 없다. 새 해석 기반 채택·제출은 신규 근거 closure 수신 계약과 독립 Bifrost 검증이 준비되기 전 차단한다. 합성 SI01~SI18은 작성 예정이며, PIO/Kepware의 제품·버전·driver·원본 형식 지원과 실제 현장 PoV는 별도 미완료다. 장치 통신·외부 SQL·쓰기 실행·vendor 코드 실행·운영 설정 생성/활성화는 제외한다.
 

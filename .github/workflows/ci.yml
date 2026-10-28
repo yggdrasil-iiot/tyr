@@ -1,4 +1,4 @@
-# Týr with a sibling Bifrost checkout. Bifrost's mapping gate is on its main branch
+# Tyr with a sibling Bifrost checkout. Bifrost's mapping gate is on its main branch
 # (yggdrasil-iiot/bifrost#21), so the seam tests that read ../bifrost — its bundled
 # mapping-contracts copies, gates/target/bifrost-gates.jar and its mapping sources — run here.
 name: CI
@@ -20,6 +20,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: tyr
+
+      - name: Product names in ASCII
+        working-directory: tyr
+        run: bash scripts/check-ascii-names.sh
 
       - name: Check out Bifrost as a sibling
         uses: actions/checkout@v4

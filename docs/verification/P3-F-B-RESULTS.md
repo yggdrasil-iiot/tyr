@@ -31,7 +31,7 @@ Docker network none + DNS 127.0.0.1 + cap-drop ALL로 외부 네트워크를 차
 
 ## 호환성과 실행 증거
 
-기존 schema 67개(계약 파일 68개), fixture 파일 475개 SHA를 보존했다. SQLite schema 변경·기존 작성본 재작성 없이 기존 버전과 CAS/시나리오 경로를 검증했다. Bifrost의 2.13 schema 사본은 Týr와 byte hash가 같다. 최종 입력 파일 전체와 JAR가 수용 snapshot hash에 일치한다.
+기존 schema 67개(계약 파일 68개), fixture 파일 475개 SHA를 보존했다. SQLite schema 변경·기존 작성본 재작성 없이 기존 버전과 CAS/시나리오 경로를 검증했다. Bifrost의 2.13 schema 사본은 Tyr (Týr)와 byte hash가 같다. 최종 입력 파일 전체와 JAR가 수용 snapshot hash에 일치한다.
 
 - [전체 수용](p3fb-full-acceptance.json), [기존 701 검증](p3fb-regression.json), [A07](p3fb-a07.json)
 - [신규 39 검증 로그](p3fb-new-tests.log), [논리 구조 회귀](p3fb-logical-structure-regression.log), [수학 연산 회귀](p3fb-bounded-math-regression.log)

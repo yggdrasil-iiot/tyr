@@ -6,7 +6,7 @@
 
 새 2.2.0 common/source-definition/semantic-definition/value-graph/mapping-set을 추가했다. 기존 1.0/1.1/2.0/2.1 Schema는 변경하지 않는다. target-instance와 mapping-proposal, workspace envelope는 2.0.0을 유지하고 문서별 schemaVersion을 검증한다. 소스·대상·노드 참조는 id/version으로 고정하며 서로 다른 설비의 입력을 혼합하지 않는다.
 
-Týr가 파생 정의와 근거를 작성하고 Mímir 후보를 검토한다. Bifrost의 승인/릴리스, Muninn의 소비·실행 계약은 별도이며 2.2 지원을 가정하지 않는다. 프로젝트 간 코드를 공유하지 않는다.
+Tyr (Týr)가 파생 정의와 근거를 작성하고 Mimir (Mímir) 후보를 검토한다. Bifrost의 승인/릴리스, Muninn의 소비·실행 계약은 별도이며 2.2 지원을 가정하지 않는다. 프로젝트 간 코드를 공유하지 않는다.
 
 | 노드 op | 이름 있는 입력 | 구성 | 출력 |
 |---|---|---|---|

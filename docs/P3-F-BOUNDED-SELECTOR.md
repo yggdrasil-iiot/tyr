@@ -6,7 +6,7 @@
 
 기존 44개 Schema는 보존하고 common/value-graph 2.5.0을 추가했다. source-definition, target-instance, mapping-set, preview-scenario와 workspaceVersion 2.0.0은 재사용한다. 같은 설비 안의 서로 다른 PLC profile/논리 연결도 참조할 수 있다. 후보의 디코딩 타입·단위는 같아야 한다.
 
-Týr가 정의와 근거를 작성한다. Mímir의 관측, Bifrost의 승인·발행, Muninn의 실행 계약은 확대하지 않는다. preview의 출처 비교는 승인된 런타임 감사 이력이 아니다.
+Tyr (Týr)가 정의와 근거를 작성한다. Mimir (Mímir)의 관측, Bifrost의 승인·발행, Muninn의 실행 계약은 확대하지 않는다. preview의 출처 비교는 승인된 런타임 감사 이력이 아니다.
 
 ## 노드 모델
 
