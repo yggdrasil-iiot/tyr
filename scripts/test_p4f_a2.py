@@ -12,7 +12,29 @@ EDITOR = R/"fixtures/solution-intake/editor-2.0.0"
 
 
 def mimir(base, file, version="1.0.0"): return ii.load(MIMIR_VERSIONS[version]/"valid"/base/file)
-def editor(file): return ii.load(EDITOR/"valid"/file)
+EDITOR_FILES = [f"decision-{i}.json" for i in (1, 2, 3)] + [f"{k}-line1-{n}.json" for k in ("assessment", "plan") for n in ("temp", "count")]
+
+
+def repin(docs, snapshot):
+    """The editor set pinned to another snapshot: each digest it carries is swapped in dependency order, then restamped."""
+    swap = {docs["decision-1.json"]["body"]["snapshotRef"]["digest"]: snapshot["digest"],
+            docs["plan-line1-temp.json"]["body"]["profileRef"]["digest"]: snapshot["body"]["profileRef"]["digest"]}
+    def walk(x):
+        if isinstance(x, dict): return {k: walk(v) for k, v in x.items()}
+        if isinstance(x, list): return [walk(v) for v in x]
+        return swap.get(x, x)
+    out = {}
+    for f in EDITOR_FILES:
+        doc = walk({k: v for k, v in docs[f].items() if k != "digest"}); doc["digest"] = ii.digest(doc)
+        swap[docs[f]["digest"]] = doc["digest"]; out[f] = doc
+    return out
+
+
+def editor(file, version="1.1.0"):
+    """The fixtures are pinned to the 1.1.0 pio-like snapshot; another version is the same set re-pinned."""
+    docs = {f: ii.load(EDITOR/"valid"/f) for f in EDITOR_FILES}
+    if version != "1.1.0": docs = repin(docs, mimir("pio-like", "interpretation-snapshot.json", version))
+    return copy.deepcopy(docs[file])
 
 
 def apply(doc, edit):
@@ -134,9 +156,9 @@ class SI19(unittest.TestCase):
 
 
 class EditorDocuments(unittest.TestCase):
-    def snapshot(self): return mimir("pio-like", "interpretation-snapshot.json")
-    def profile(self): return mimir("pio-like", "interpretation-profile.json")
-    def decisions(self): return [editor(f"decision-{i}.json") for i in (1, 2, 3)]
+    def snapshot(self, v="1.1.0"): return mimir("pio-like", "interpretation-snapshot.json", v)
+    def profile(self, v="1.1.0"): return mimir("pio-like", "interpretation-profile.json", v)
+    def decisions(self, v="1.1.0"): return [editor(f"decision-{i}.json", v) for i in (1, 2, 3)]
 
     def test_valid_set(self):
         s, ds = self.snapshot(), self.decisions(); ii.check_decisions(ds, s)
@@ -148,19 +170,30 @@ class EditorDocuments(unittest.TestCase):
         cases = json.loads((EDITOR/"invalid/cases.json").read_text(encoding="utf-8"))["cases"]; ran = 0
         for c in cases:
             with self.subTest(c["name"]):
-                doc = edited(editor(c["file"]), c); s, ds = self.snapshot(), self.decisions()
+                v = c.get("snapshot", "1.1.0"); doc = edited(editor(c["file"], v), c); s, ds, p = self.snapshot(v), self.decisions(v), self.profile(v)
                 if c["file"].startswith("decision-"):
                     i = int(c["file"][9]) - 1; ds = ds[:i] + [doc]
                 run = {"single": lambda: ii.check(doc),
                        "decisions": lambda: ii.check_decisions(ds, s),
-                       "assessment": lambda: ii.check_assessment(doc, s, self.profile(), ds),
-                       "plan": lambda: ii.check_plan(doc, editor(c["assessment"]), s, self.profile(), ds)}[c["mode"]]
+                       "assessment": lambda: ii.check_assessment(doc, s, p, ds),
+                       "plan": lambda: ii.check_plan(doc, editor(c["assessment"], v), s, p, ds)}[c["mode"]]
                 if c["expect"] is None: run()
                 else:
                     with self.assertRaises(ii.Violation) as e: run()
                     self.assertEqual(e.exception.code, c["expect"], str(e.exception))
                 ran += 1
-        self.assertEqual(ran, len(cases)); self.assertGreaterEqual(ran, 28)
+        self.assertEqual(ran, len(cases)); self.assertGreaterEqual(ran, 30)
+
+    def test_candidate_needs_access_and_state(self):
+        """1.0.0 carries no edge access or node state, so a write or state cannot be ruled out: draft and blocked only."""
+        v = "1.0.0"; s, p, ds = self.snapshot(v), self.profile(v), self.decisions(v); a = editor("assessment-line1-temp.json", v)
+        with self.assertRaises(ii.Violation) as e: ii.check_plan(editor("plan-line1-temp.json", v), a, s, p, ds)
+        self.assertEqual((e.exception.code, str(e.exception).count("access-unmarked:1.0.0")), ("editor.plan-blocked", 1))
+        for status in ("draft", "blocked"):
+            with self.subTest(status):
+                plan = edited(editor("plan-line1-temp.json", v), {"edits": [{"op": "set", "path": "/body/status", "value": status}], "restamp": True})
+                ii.check_plan(plan, a, s, p, ds)
+        ii.check_assessment(editor("assessment-line1-count.json", v), s, p, ds)
 
 
 if __name__ == "__main__":

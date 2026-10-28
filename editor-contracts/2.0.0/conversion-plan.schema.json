@@ -70,7 +70,7 @@
           "additionalProperties": false
         },
         "status": {
-          "description": "candidate only when the assessment allows it; adopting or submitting stays blocked until P4-F D.",
+          "description": "candidate only when the assessment allows it and the snapshot is contract 1.1.0; adopting or submitting stays blocked until P4-F D.",
           "enum": ["draft", "blocked", "candidate"]
         }
       },

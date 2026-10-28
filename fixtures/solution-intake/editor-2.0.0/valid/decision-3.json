@@ -8,7 +8,7 @@
       "kind": "interpretation-snapshot",
       "id": "synthetic/pio-like/snapshot",
       "version": "1.0.0",
-      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+      "digest": "8da4a51645761e01196c43c13562a51c311e2a72f23d660073fb9e8d25d4ee96"
     },
     "target": {
       "type": "node",
@@ -26,8 +26,8 @@
     "reviewer": "synthetic reviewer",
     "reason": "raw 250 gives 25.0 degC in the virtual case, as expected",
     "decidedAt": "2026-10-22T00:02:00Z",
-    "previousDecisionDigest": "3fd8138e9ed631fc6cf355cbe64e57a5bdde06eac3b7d97327dba12b70a49475",
+    "previousDecisionDigest": "b7989c6283b4b1d006c9c66e6315baa5ae9168ce5503141d77346846c43440e9",
     "evidenceRefs": []
   },
-  "digest": "6afd3a4e166bcf664929c8e728b1663464745b567e9e09ddec0f43532d29074e"
+  "digest": "75e21591e997f0c3f348790c2a17e5211e4e154d733454d817528baece56c739"
 }
