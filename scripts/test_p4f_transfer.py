@@ -124,9 +124,17 @@ class Checker(unittest.TestCase):
             ("transfer.globals-mismatch", "01-reorder", lambda b, c: b["globals"].update(captureChanged=True)),
             ("transfer.carried-verdict-not-carried", "01-reorder", lambda b, c: b["carried"].pop()),
             ("transfer.carried-copy-missing", "01-reorder", lambda b, c: c.pop(0)),
+            ("transfer.mapping-conflict", "01-reorder", lambda b, c: b["mappings"].append(m("Line1.TempAvg", "Line1.Temp"))),
         ]
         for code, pair, edit in cases:
             with self.subTest(code): self.refused(code, pair, edit)
+
+    def test_a_decision_id_names_one_decision(self):
+        """Two S1 decisions sharing an id would let a superseded one pass as a head; the checker refuses the chain."""
+        t, copies, (sn1, b1, p1, sn2, b2, p2, d, a, c) = transfer_doc("10-superseded", "a")
+        twin = copy.deepcopy(d[-1]); twin["id"] = d[0]["id"]; twin["body"]["previousDecisionDigest"] = d[-1]["digest"]; restamp(twin)
+        with self.assertRaises(ii.Violation) as e: tr.check_transfer(t, sn1, b1, p1, sn2, b2, p2, d + [twin], a, c, copies)
+        self.assertEqual((e.exception.code, str(e.exception).endswith("duplicate decision id")), ("transfer.decision-chain-invalid", True))
 
     def test_digest_is_checked(self):
         t, copies, args = transfer_doc("01-reorder", "a"); t = copy.deepcopy(t); t["body"]["globals"]["profileChanged"] = True

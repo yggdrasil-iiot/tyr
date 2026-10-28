@@ -49,7 +49,7 @@ Determinism: output is independent of the order of `nativeNodes`, `referenceEdge
 ### 2.3 Correspondence of an S1 item (outcome ∈ `same | changed | absent | ambiguous`)
 
 Node `n`:
-- `N1` = S1 nodes with `nodeKey == nodeKey(n)`; `N2` = S2 nodes with `nodeKey == σ(nodeKey(n))`.
+- `N1` = S1 nodes with `σ(nodeKey) == σ(nodeKey(n))`; `N2` = S2 nodes with `nodeKey == σ(nodeKey(n))`.
 - `|N1| > 1` or `|N2| > 1` → `ambiguous`. `|N2| == 0` → `absent`. Else matched to the single S2 node.
 
 Edge `e` (owner node must be matched; otherwise the edge takes the owner's `absent`/`ambiguous` outcome):
@@ -233,10 +233,10 @@ Violation codes, in check order:
 | `transfer.mapping-source-missing` | `from` key not in S1 |
 | `transfer.mapping-target-missing` | `to` key not in S2 |
 | `transfer.mapping-target-ambiguous` | `to` key held by more than one S2 node |
-| `transfer.mapping-conflict` | two mappings share `from`, or two `from` share one `to` |
+| `transfer.mapping-conflict` | two mappings share `from`, two `from` share one `to`, or a `to` is the key of another S1 node that no mapping moves |
 | `transfer.retired-key-present` | a retired key exists in S2 |
 | `transfer.workspace-missing` | plans listed and `workspace` null |
-| `transfer.decision-chain-invalid` | D1 fails the 2.0.0 chain check against S1, or `fromDecisionChainHead` ≠ last of D1 |
+| `transfer.decision-chain-invalid` | two D1 decisions share an `id`, D1 fails the 2.0.0 chain check against S1, or `fromDecisionChainHead` ≠ last of D1 |
 | `transfer.input-document-invalid` | an A1/C1 document fails its 2.0.0 check against S1/P1 |
 | `transfer.globals-mismatch` / `transfer.correspondence-mismatch` / `transfer.superseded-mismatch` / `transfer.verdict-mismatch` | recomputation per §2–§4 differs from the recorded value (ref = first differing entry) |
 | `transfer.carried-source-missing` | `carried[].from` not in D1 |

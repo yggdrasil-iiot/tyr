@@ -145,9 +145,9 @@ class Match:
         self.v1, self.v2 = v1, v2
         self.out = {}  # (type, s1 id) -> (outcome, s2 id or None)
         by = lambda m: {k: [i for i in m if m[i] == k] for k in set(m.values())}
-        n1, n2 = by(v1.raw), by(v2.key)
+        n1, n2 = by(v1.key), by(v2.key)
         for i in v1.nodes:
-            here, there = n1[v1.raw[i]], n2.get(v1.key[i], [])
+            here, there = n1[v1.key[i]], n2.get(v1.key[i], [])
             self.out[("node", i)] = ("ambiguous", None) if len(here) > 1 or len(there) > 1 else ("absent", None) if not there else ("matched", there[0])
         for type_, owner, base1, base2, refine in (
                 ("edge", lambda i: v1.edges[i]["owner"]["nodeId"], v1.edge_base, v2.edge_base, lambda v, i: v.edges[i]["targetText"]),
@@ -252,7 +252,7 @@ def _assessment_verdict(a, m, g, decision_ok):
     view1, r1 = v1.closure_view(x, members=False)
     reasons = (m.nodes_by_hop([n for n in r1["nodeIds"] if n != x or found], found)
                | m.classify([("edge", e) for e in r1["edgeIds"]], found) | _global_reasons(g, True)
-               | {("decision-not-carried", r["id"]) for r in a["body"].get("decisionRefs", []) if not decision_ok(r["id"])})
+               | {("decision-not-carried", r["id"]) for r in a["body"].get("decisionRefs", []) if not decision_ok(r["digest"])})
     if o == "absent": return _record(a, "orphaned", target, reasons | {("target-absent", x)}, m.candidates(x))
     if o == "ambiguous": return _record(a, "needs-mapping", target, reasons | {("target-ambiguous", x)})
     view2, r2 = v2.closure_view(j, members=False)
@@ -268,7 +268,7 @@ def _plan_verdict(c, m, g, assessments, decision_ok, workspace):
     b = c["body"]; target = {"type": "assessment", "fromId": b["assessmentRef"]["id"], "toId": None}
     av = assessments[b["assessmentRef"]["id"]]["verdict"]
     reasons = (_global_reasons(g, True) | m.nodes_by_hop([mp["nativeNodeId"] for mp in b["mappings"]])
-               | {("decision-not-carried", r["id"]) for r in b.get("decisionRefs", []) if not decision_ok(r["id"])})
+               | {("decision-not-carried", r["id"]) for r in b.get("decisionRefs", []) if not decision_ok(r["digest"])})
     if av != "reusable": reasons.add(("assessment-not-reusable", b["assessmentRef"]["id"]))
     if b["workspace"] != workspace: reasons.add(("workspace-changed", "workspace"))
     if av == "orphaned": return _record(c, "orphaned", target, reasons)
@@ -297,17 +297,17 @@ def transfer(s1, b1, p1, s2, b2, p2, d1, a1, c1, declaration):
     m, g = Match(v1, v2), _globals(s1, p1, s2, p2)
     last = {}
     for d in d1: last[(d["body"]["target"]["type"], d["body"]["target"]["id"])] = d
-    heads = {d["id"] for d in last.values()}
+    heads = {d["digest"] for d in last.values()}
     superseded = [{"decision": ii._pin(d), "supersededBy": ii._pin(last[(d["body"]["target"]["type"], d["body"]["target"]["id"])])}
-                  for d in d1 if d["id"] not in heads]
-    decisions = {d["id"]: _decision_verdict(d, m, g) for d in d1 if d["id"] in heads}
-    ok = lambda i: i in decisions and decisions[i]["verdict"] == "carried"
+                  for d in d1 if d["digest"] not in heads]
+    decisions = {d["digest"]: _decision_verdict(d, m, g) for d in d1 if d["digest"] in heads}
+    ok = lambda digest: digest in decisions and decisions[digest]["verdict"] == "carried"
     assessments = {a["id"]: _assessment_verdict(a, m, g, ok) for a in a1}
     plans = {c["id"]: _plan_verdict(c, m, g, assessments, ok, declaration["workspace"]) for c in c1}
     copies, carried, previous = [], [], None
     for d in d1:
-        if d["id"] in decisions and decisions[d["id"]]["verdict"] == "carried":
-            c = _carry(d, s2, decisions[d["id"]]["target"]["toId"], previous); previous = c["digest"]
+        if d["digest"] in decisions and decisions[d["digest"]]["verdict"] == "carried":
+            c = _carry(d, s2, decisions[d["digest"]]["target"]["toId"], previous); previous = c["digest"]
             copies.append(c); carried.append({"from": ii._pin(d), "to": ii._pin(c)})
     correspondence = []
     for (t, i) in sorted(m.out):
@@ -363,9 +363,13 @@ def check_transfer(t, s1, b1, p1, s2, b2, p2, d1, a1, c1, d2):
         if k2.count(to) > 1: raise ii.Violation("transfer.mapping-target-ambiguous", to[1])
         if f in froms or to in tos: raise ii.Violation("transfer.mapping-conflict", f[1])
         froms.add(f); tos.add(to)
+    for to in tos:
+        if to in k1 and to not in froms: raise ii.Violation("transfer.mapping-conflict", to[1] + " is another S1 node's key")
     for x in b["retired"]:
         if (x["key"]["namespace"], x["key"]["nativeId"]) in k2: raise ii.Violation("transfer.retired-key-present", x["key"]["nativeId"])
     if c1 and b["workspace"] is None: raise ii.Violation("transfer.workspace-missing")
+    ids = [d["id"] for d in d1]
+    if len(set(ids)) != len(ids): raise ii.Violation("transfer.decision-chain-invalid", "duplicate decision id")
     try: ii.check_decisions(d1, s1)
     except ii.Violation as e: raise ii.Violation("transfer.decision-chain-invalid", str(e))
     if b["fromDecisionChainHead"] != (ii._pin(d1[-1]) if d1 else None): raise ii.Violation("transfer.decision-chain-invalid", "chain head")
@@ -378,15 +382,15 @@ def check_transfer(t, s1, b1, p1, s2, b2, p2, d1, a1, c1, d2):
     computed, copies = transfer(s1, b1, p1, s2, b2, p2, d1, a1, c1, declaration)
     for field, name in (("globals", "globals"), ("correspondence", "correspondence"), ("superseded", "superseded"), ("verdicts", "verdict")):
         _first_difference(b[field], computed[field], name)
-    by_id, superseded = {d["id"]: d for d in d1}, {x["decision"]["id"] for x in b["superseded"]}
-    verdict = {r["document"]["id"]: r for r in b["verdicts"]}
+    pinned, superseded = [ii._pin(d) for d in d1], {x["decision"]["digest"] for x in b["superseded"]}
+    verdict = {r["document"]["digest"]: r for r in b["verdicts"]}
     for x in b["carried"]:
-        if x["from"]["id"] not in by_id or x["from"] != ii._pin(by_id[x["from"]["id"]]): raise ii.Violation("transfer.carried-source-missing", x["from"]["id"])
-        if x["from"]["id"] in superseded: raise ii.Violation("transfer.carried-source-superseded", x["from"]["id"])
-        if verdict[x["from"]["id"]]["verdict"] != "carried": raise ii.Violation("transfer.carried-verdict-not-carried", x["from"]["id"])
-    listed = [x["from"]["id"] for x in b["carried"]]
+        if x["from"] not in pinned: raise ii.Violation("transfer.carried-source-missing", x["from"]["id"])
+        if x["from"]["digest"] in superseded: raise ii.Violation("transfer.carried-source-superseded", x["from"]["id"])
+        if verdict[x["from"]["digest"]]["verdict"] != "carried": raise ii.Violation("transfer.carried-verdict-not-carried", x["from"]["id"])
+    listed = [x["from"]["digest"] for x in b["carried"]]
     for r in b["verdicts"]:
-        if r["verdict"] == "carried" and r["document"]["id"] not in listed: raise ii.Violation("transfer.carried-verdict-not-carried", r["document"]["id"])
+        if r["verdict"] == "carried" and r["document"]["digest"] not in listed: raise ii.Violation("transfer.carried-verdict-not-carried", r["document"]["id"])
     pins = [ii._pin(d) for d in d2]
     for n, (x, want) in enumerate(zip(b["carried"], copies)):
         if x["to"] not in pins: raise ii.Violation("transfer.carried-copy-missing", x["to"]["id"])
