@@ -7,10 +7,11 @@ import interpretation_intake as ii
 
 PIN = R/"vendor-contracts/mimir/interpretation/PIN.json"
 MIMIR = R/"fixtures/solution-intake/mimir-1.0.0"
+MIMIR_VERSIONS = {"1.0.0": MIMIR, "1.1.0": R/"fixtures/solution-intake/mimir-1.1.0"}
 EDITOR = R/"fixtures/solution-intake/editor-2.0.0"
 
 
-def mimir(base, file): return ii.load(MIMIR/"valid"/base/file)
+def mimir(base, file, version="1.0.0"): return ii.load(MIMIR_VERSIONS[version]/"valid"/base/file)
 def editor(file): return ii.load(EDITOR/"valid"/file)
 
 
@@ -33,13 +34,16 @@ def edited(doc, case_or_spec):
 
 class Pins(unittest.TestCase):
     def test_vendored_files_match_the_pin_list(self):
-        pin = json.loads(PIN.read_text(encoding="utf-8")); self.assertEqual(pin["source"]["commit"], "f8691d0")
-        for group, root in (("contracts", R/"vendor-contracts/mimir/interpretation/1.0.0"), ("fixtures", MIMIR)):
-            listed = {e["path"]: e["sha256"] for e in pin[group]}
-            present = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
-            self.assertEqual(set(listed), present, group)
-            for path, sha in listed.items(): self.assertEqual(hashlib.sha256((root/path).read_bytes()).hexdigest(), sha, path)
-        self.assertEqual(len(pin["contracts"]), 6)
+        pin = json.loads(PIN.read_text(encoding="utf-8")); self.assertEqual(pin["source"]["commit"], "b7e8c60")
+        self.assertEqual(sorted(pin["versions"]), sorted(MIMIR_VERSIONS))
+        for version, entry in pin["versions"].items():
+            for group, root in (("contractFiles", R/"vendor-contracts/mimir/interpretation"/version), ("fixtureFiles", MIMIR_VERSIONS[version])):
+                listed = {e["path"]: e["sha256"] for e in entry[group]}
+                present = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+                self.assertEqual(set(listed), present, f"{version} {group}")
+                for path, sha in listed.items(): self.assertEqual(hashlib.sha256((root/path).read_bytes()).hexdigest(), sha, path)
+            self.assertEqual(len(entry["contractFiles"]), 6)
+        self.assertEqual(ii.SNAPSHOT_VERSIONS, ("1.0.0", "1.1.0"))
 
 
 class Jcs(unittest.TestCase):
@@ -56,36 +60,44 @@ class Jcs(unittest.TestCase):
 
 class MimirSnapshots(unittest.TestCase):
     def test_valid_sets_are_received(self):
-        for base in ("pio-like", "kepware-like"):
-            with self.subTest(base):
-                ii.check_pinned(mimir(base, "interpretation-snapshot.json"), mimir(base, "source-bundle.json"), mimir(base, "interpretation-profile.json"))
-        req = mimir("pio-like", "interpret-request.json")
-        ii.check_request(req, mimir("pio-like", "source-bundle.json"), mimir("pio-like", "interpretation-profile.json"))
-        ii.check_result(mimir("pio-like", "interpret-result.json"), req, mimir("pio-like", "interpretation-snapshot.json"))
+        for v in MIMIR_VERSIONS:
+            for base in ("pio-like", "kepware-like"):
+                with self.subTest(f"{v}/{base}"):
+                    ii.check_pinned(mimir(base, "interpretation-snapshot.json", v), mimir(base, "source-bundle.json", v), mimir(base, "interpretation-profile.json", v))
+            req = mimir("pio-like", "interpret-request.json", v)
+            ii.check_request(req, mimir("pio-like", "source-bundle.json", v), mimir("pio-like", "interpretation-profile.json", v))
+            ii.check_result(mimir("pio-like", "interpret-result.json", v), req, mimir("pio-like", "interpretation-snapshot.json", v))
 
     def test_tyr_digest_agrees_with_mimirs(self):
         # Mimir stamped these with its Python script and checks them in Java; this is a third, separate implementation.
-        for base in ("pio-like", "kepware-like"):
-            for f in ("source-bundle.json", "interpretation-profile.json", "interpretation-snapshot.json"):
-                with self.subTest(f"{base}/{f}"): d = mimir(base, f); self.assertEqual(ii.digest(d), d["digest"])
+        for v in MIMIR_VERSIONS:
+            for base in ("pio-like", "kepware-like"):
+                for f in ("source-bundle.json", "interpretation-profile.json", "interpretation-snapshot.json"):
+                    with self.subTest(f"{v}/{base}/{f}"): d = mimir(base, f, v); self.assertEqual(ii.digest(d), d["digest"])
 
     def test_receiving_never_opens_a_vendor_artifact(self):
         opened = []
         real = Path.read_bytes
         def spy(self_): opened.append(self_); return real(self_)
         docs = [mimir("pio-like", f) for f in ("interpretation-snapshot.json", "source-bundle.json", "interpretation-profile.json")]
-        for kind in ("interpretation-snapshot", "source-bundle", "interpretation-profile"): ii._validator(kind)  # schemas are read once, before the spy
+        for kind in ("interpretation-snapshot", "source-bundle", "interpretation-profile"): ii._validator(kind, "1.0.0")  # schemas are read once, before the spy
         with patch.object(Path, "read_bytes", spy), patch.object(Path, "read_text", lambda *a, **k: (_ for _ in ()).throw(AssertionError("read_text"))):
             ii.check_pinned(*docs)
         self.assertFalse([p for p in opened if "artifacts" in p.parts])
 
     def test_mimir_rejection_cases(self):
-        cases = json.loads((MIMIR/"invalid/cases.json").read_text(encoding="utf-8"))["cases"]; ran = 0
+        ran = {}
+        for v, root in MIMIR_VERSIONS.items():
+            ran[v] = self.run_cases(v, json.loads((root/"invalid/cases.json").read_text(encoding="utf-8"))["cases"])
+        self.assertEqual(ran, {"1.0.0": 37, "1.1.0": 25})
+
+    def run_cases(self, v, cases):
+        ran = 0
         for c in cases:
-            with self.subTest(c["name"]):
-                base = c["base"]; doc = edited(mimir(base, c["file"]), c); comp = c.get("companions", {})
+            with self.subTest(f"{v}:{c['name']}"):
+                base = c["base"]; doc = edited(mimir(base, c["file"], v), c); comp = c.get("companions", {})
                 def other(role, file):
-                    spec = comp.get(role, {}); return edited(mimir(spec.get("base", base), file), spec)
+                    spec = comp.get(role, {}); return edited(mimir(spec.get("base", base), file, spec.get("version", v)), spec)
                 run = {"single": lambda: ii.check(doc),
                        "pinned": lambda: ii.check_pinned(doc, other("bundle", "source-bundle.json"), other("profile", "interpretation-profile.json")),
                        "request": lambda: ii.check_request(doc, other("bundle", "source-bundle.json"), other("profile", "interpretation-profile.json")),
@@ -95,7 +107,7 @@ class MimirSnapshots(unittest.TestCase):
                     with self.assertRaises(ii.Violation) as e: run()
                     self.assertEqual(e.exception.code, c["expect"], str(e.exception))
                 ran += 1
-        self.assertEqual(ran, 37)
+        return ran
 
 
 class SI19(unittest.TestCase):
@@ -111,7 +123,7 @@ class SI19(unittest.TestCase):
         self.refused("pin.artifact-mismatch", lambda: ii.check_pinned(s, mimir("pio-like", "source-bundle.json"), mimir("pio-like", "interpretation-profile.json")))
 
     def test_unknown_snapshot_contract_version(self):
-        s = mimir("pio-like", "interpretation-snapshot.json"); s["contractVersion"] = "1.1.0"; s["digest"] = ii.digest(s)
+        s = mimir("pio-like", "interpretation-snapshot.json"); s["contractVersion"] = "1.2.0"; s["digest"] = ii.digest(s)
         self.refused("contract.version-unsupported", lambda: ii.check(s))
 
     def test_evidence_ownership_both_ways(self):

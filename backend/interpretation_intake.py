@@ -1,8 +1,9 @@
-"""P4-F A2: receive Mimir interpretation snapshots (contract 1.0.0) and check Tyr's editor documents (2.0.0).
+"""P4-F A2: receive Mimir interpretation snapshots (contract 1.0.0 or 1.1.0) and check Tyr's editor documents (2.0.0).
 
 Tyr never parses a vendor file. It checks what Mimir published — schema, digest, internal references and pins
 against the bundle/profile/request it names — and its own review, assessment and plan documents against that
-snapshot. Nothing here writes: storage (sidecar) is P4-F B.
+snapshot. Nothing here writes: storage (sidecar) is P4-F B. Documents checked together must share one snapshot
+contract version; a mixed set is refused, not reconciled.
 
 Digest (both contracts): SHA-256 over the UTF-8 bytes of the RFC 8785 (JCS) form of the document without its
 top-level "digest" and "envelope". Numbers are integers within +/-(2**53-1); a decimal travels as a string.
@@ -18,12 +19,12 @@ import interpretation_closure
 R = Path(__file__).resolve().parents[1]
 MIMIR = R/"vendor-contracts"/"mimir"/"interpretation"
 EDITOR = R/"editor-contracts"/"2.0.0"
-MIMIR_PREFIX = "urn:mimir:interpretation:1.0.0:"
 EDITOR_PREFIX = "urn:tyr:editor:2.0.0:"
 SNAPSHOT_KINDS = {"source-bundle", "interpretation-profile", "interpretation-snapshot", "interpret-request", "interpret-result"}
 EDITOR_KINDS = {"review-decision", "endpoint-assessment", "conversion-plan"}
 DIGESTED = {"source-bundle", "interpretation-profile", "interpretation-snapshot"} | EDITOR_KINDS
-VERSIONS = {**{k: "1.0.0" for k in SNAPSHOT_KINDS}, **{k: "2.0.0" for k in EDITOR_KINDS}}
+SNAPSHOT_VERSIONS = ("1.0.0", "1.1.0")
+VERSIONS = {**{k: SNAPSHOT_VERSIONS for k in SNAPSHOT_KINDS}, **{k: ("2.0.0",) for k in EDITOR_KINDS}}
 MIMIR_EVIDENCE = {"observed-in-artifact", "derived-by-rule"}
 TYR_EVIDENCE = {"declared-by-reviewer", "verified-by-virtual-case"}
 MAX_SAFE = 2**53 - 1
@@ -97,21 +98,21 @@ def _no_remote(uri): raise ValueError("External schema retrieval prohibited: " +
 @lru_cache(maxsize=1)
 def _registry():
     reg = Registry(retrieve=_no_remote)
-    for p in list((MIMIR/"1.0.0").glob("*.schema.json")) + list(EDITOR.glob("*.schema.json")):
+    for p in [p for v in SNAPSHOT_VERSIONS for p in (MIMIR/v).glob("*.schema.json")] + list(EDITOR.glob("*.schema.json")):
         s = json.loads(p.read_text(encoding="utf-8")); Draft202012Validator.check_schema(s)
         reg = reg.with_resource(s["$id"], Resource.from_contents(s))
     return reg
 
 
-@lru_cache(maxsize=16)
-def _validator(kind):
-    prefix = EDITOR_PREFIX if kind in EDITOR_KINDS else MIMIR_PREFIX
+@lru_cache(maxsize=32)
+def _validator(kind, version):
+    prefix = EDITOR_PREFIX if kind in EDITOR_KINDS else f"urn:mimir:interpretation:{version}:"
     return Draft202012Validator(_registry().contents(prefix + kind + ".schema.json"), registry=_registry())
 
 
 def _schema(doc, kind):
     # A decimal token is a str subclass; the number rule has already rejected it before this point.
-    errors = sorted(_validator(kind).iter_errors(doc), key=lambda e: list(map(str, e.path)))
+    errors = sorted(_validator(kind, doc["contractVersion"]).iter_errors(doc), key=lambda e: list(map(str, e.path)))
     if errors: raise Violation("contract.schema", errors[0].message)
 
 
@@ -120,7 +121,7 @@ def check(doc):
     if not isinstance(doc, dict): raise Violation("contract.not-an-object")
     kind = doc.get("kind")
     if kind not in VERSIONS: raise Violation("contract.kind-unknown", str(kind))
-    if doc.get("contractVersion") != VERSIONS[kind]: raise Violation("contract.version-unsupported", str(doc.get("contractVersion")))
+    if doc.get("contractVersion") not in VERSIONS[kind]: raise Violation("contract.version-unsupported", str(doc.get("contractVersion")))
     jcs(doc)
     if kind == "interpretation-snapshot":
         for c in doc.get("body", {}).get("claims", []):
@@ -130,7 +131,13 @@ def check(doc):
     _schema(doc, kind)
     if kind in DIGESTED and digest(doc) != doc["digest"]: raise Violation("digest.mismatch", f"{kind}:{doc['id']}")
     if kind == "source-bundle": _bundle(doc["body"])
-    if kind == "interpretation-snapshot": _snapshot(doc["body"])
+    if kind == "interpretation-snapshot": _snapshot(doc["body"], doc["contractVersion"])
+
+
+def _same_version(first, *others):
+    for o in others:
+        if o["contractVersion"] != first["contractVersion"]:
+            raise Violation("contract.version-mixed", f"{first['contractVersion']} and {o['contractVersion']}")
 
 
 def _ref(ref, doc, code):
@@ -150,6 +157,7 @@ def _artifacts(bundle): return {a["artifactId"]: a["sha256"] for a in bundle["bo
 def check_pinned(snapshot, bundle, profile):
     """A snapshot against the bundle and profile it names. This is the SI19 receive check: no vendor file is read."""
     for d in (snapshot, bundle, profile): check(d)
+    _same_version(snapshot, bundle, profile)
     b = snapshot["body"]; _ref(b["bundleRef"], bundle, "pin.bundle-mismatch"); _ref(b["profileRef"], profile, "pin.profile-mismatch")
     known = _artifacts(bundle); _pins(b["inputManifest"], known)
     if b["coverage"]["artifactsRead"] + b["coverage"]["artifactsSkipped"] > len(known):
@@ -161,15 +169,16 @@ def check_pinned(snapshot, bundle, profile):
 
 def check_request(request, bundle, profile):
     for d in (request, bundle, profile): check(d)
+    _same_version(request, bundle, profile)
     _ref(request["bundleRef"], bundle, "pin.bundle-mismatch"); _ref(request["profileRef"], profile, "pin.profile-mismatch")
     _pins(request["artifactPins"], _artifacts(bundle))
 
 
 def check_result(result, request, snapshot):
-    check(result); check(request)
+    check(result); check(request); _same_version(result, request)
     if result["requestId"] != request["requestId"]: raise Violation("result.request-mismatch", result["requestId"])
     if "snapshotRef" not in result: return
-    check(snapshot); _ref(result["snapshotRef"], snapshot, "pin.snapshot-mismatch")
+    check(snapshot); _same_version(result, snapshot); _ref(result["snapshotRef"], snapshot, "pin.snapshot-mismatch")
     b = snapshot["body"]
     if b["bundleRef"] != request["bundleRef"]: raise Violation("pin.bundle-mismatch", "snapshot and request name different bundles")
     if b["profileRef"] != request["profileRef"]: raise Violation("pin.profile-mismatch", "snapshot and request name different profiles")
@@ -197,7 +206,7 @@ def _unique(items, field):
     return seen
 
 
-def _snapshot(b):
+def _snapshot(b, version):
     pinned = set()
     for p in b["inputManifest"]:
         if p["artifactId"] in pinned: raise Violation("snapshot.id-duplicate", "inputManifest:" + p["artifactId"])
@@ -232,6 +241,23 @@ def _snapshot(b):
         for a in u["affectedNodeIds"]: node(a)
     for d in b["diagnostics"]:
         if "locator" in d: loc(d["locator"])
+    if version != "1.0.0": _state(b)
+
+
+def _state(b):
+    """1.1.0: a known state rests on an asserted claim about that node's "state" with the same value; an unknown
+    state comes with a behavior-unknown item on that node. The interpreter does not guess, and neither does Tyr."""
+    claims = {c["claimId"]: c for c in b["claims"]}
+    behavior_unknown = {u["nodeId"] for u in b["unresolved"] if u["code"] == "behavior-unknown" and "nodeId" in u}
+    for n in b["nativeNodes"]:
+        if "state" not in n: continue
+        if n["state"] == "unknown":
+            if n["nodeId"] not in behavior_unknown: raise Violation("snapshot.state-unknown-unexplained", n["nodeId"])
+            continue
+        c = claims.get(n["stateClaimId"])
+        if c is None: raise Violation("snapshot.claim-missing", n["stateClaimId"])
+        if (c["subject"]["nodeId"], c["subject"]["field"], c["value"], c["status"]) != (n["nodeId"], "state", n["state"], "asserted"):
+            raise Violation("snapshot.state-claim-mismatch", n["nodeId"])
 
 
 # ---- Tyr editor documents (2.0.0) -------------------------------------------------------------------------
@@ -304,3 +330,6 @@ def check_plan(plan, assessment, snapshot, profile, decisions=()):
                  and axes["virtualEquivalence"]["status"] == "passed-within-scope" and not b["losses"]
                  and not any(x["blockers"] for x in axes.values()))
         if not ready: raise Violation("editor.plan-overclaimed", plan["id"])
+        computed = interpretation_closure.closure(snapshot, a["endpoint"]["nodeId"], profile["body"]["limits"]["maxReferenceDepth"])
+        blockers = interpretation_closure.conversion_blockers(computed)
+        if blockers: raise Violation("editor.plan-blocked", ",".join(f"{k}:{r}" for k, r in blockers))
