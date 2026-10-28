@@ -42,6 +42,7 @@
 
 스냅샷 계약 버전에 맞춰 edge 추적과 상태 판단을 분기한다.
 - 1.0.0 스냅샷: 1.0.0 규칙을 유지한다. 모든 평가 edge를 따라가며, `behavior-unknown` 항목을 가진 불투명 노드를 상태 유지(stateful) 노드로 대체 취급한다.
+- 1.0.0 스냅샷 위에서는 edge `access`와 노드 `state`가 없어 쓰기나 상태를 배제할 수 없으므로 계획이 `candidate`가 될 수 없다(§7).
 - 1.1.0 스냅샷: edge `access`와 노드 `state`를 담고 있으며, 세부 규칙은 §7에 기술한다.
 
 ## 4. A2 검증 강화
@@ -96,7 +97,7 @@
 - `write` edge: closure edge가 아니며 결코 따라가지 않는다. 소유 노드가 대상에 작용하는 관계이며 대상은 입력이 아니기 때문이다. 확장 노드(깊이 < D)가 소유한 모든 쓰기 edge는 `writeTargets`에 `edgeId`, `owner`, `targetText`, `resolution`, 대상이 있을 때 `targetNodeId`를 담아 보고한다. 이는 쓰기가 일어난다는 사실과 목적지를 기록하는 설계 문서 §3의 계층 3 규칙이다. 쓰기 edge는 해결 상태와 무관하게 사유(reason)를 추가하지 않는다.
 - `unknown` access: closure edge로 취급하지만, 해결된 상태라도 대상을 따라가지 않으며 사유 `access-unknown`을 추가한다. 해결 상태가 `resolved`가 아니면 일치하는 edge 사유도 함께 추가한다. 평가 순환 검사에는 쓰지 않는다.
 - 선언된 상태 판독: 선언된 값을 그대로 읽는다. `statefulNodeIds`에는 상태가 `stateful`인 closure 노드를 담고, `stateUnknownNodeIds`에는 상태가 `unknown`인 closure 노드를 담는다. 상태 자체만으로는 사유를 추가하지 않는다(알 수 없는 상태 노드는 이미 `unresolved-issue`를 추가하는 `behavior-unknown` 항목을 항상 동반한다).
-- 계획 차단(plan block): 쓰기와 상태는 closure를 불완전하게 만들지 않으며 변환을 차단한다. `check_plan`은 endpoint closure에 쓰기 edge, 상태 유지 노드, 상태 미확인 노드가 포함된 `candidate` 계획을 `editor.plan-blocked`로 거부하며, 거부 목록에 각 대상을 명시한다(`write:<edgeId>`, `stateful:<nodeId>`, `state-unknown:<nodeId>`). 동일한 endpoint를 두고 상태가 `blocked`인 계획은 받아들인다.
+- 계획 차단(plan block): 쓰기와 상태는 closure를 불완전하게 만들지 않으며 변환을 차단한다. `check_plan`은 endpoint closure에 쓰기 edge, 상태 유지 노드, 상태 미확인 노드가 포함된 `candidate` 계획을 `editor.plan-blocked`로 거부하며, 거부 목록에 각 대상을 명시한다(`write:<edgeId>`, `stateful:<nodeId>`, `state-unknown:<nodeId>`). 동일한 endpoint를 두고 상태가 `blocked`인 계획은 받아들인다. `check_plan`은 1.0.0 스냅샷 위의 `candidate` 계획을 `editor.plan-blocked`(ref `access-unmarked:1.0.0`)로 거부한다.
 - 독립 oracle: 합성 1.1.0 스냅샷 `fixtures/solution-intake/closure-1.1.0/closure-c`(D=3, capture는 declared-complete 선언)와 `cases.json`의 9개 endpoint를 사용했다. 독립 검토자(Codex)가 구현 코드를 보지 않고 이 규칙들과 fixture만으로 `oracle.json`을 직접 도출했으며, 모호함이 없다고 보고했다. 구현 결과는 9개 사례 전체에서 필드 단위로 일치했다.
 
 | endpoint | 특징 | 결과 |

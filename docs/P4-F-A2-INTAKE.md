@@ -49,7 +49,7 @@
 - `conversion-plan`:
   - native 항목을 기존 Tyr 계약 후보에 대응시키고 assessment, snapshot, profile, 판단, workspace revision/hash를 pin으로 고정한다.
   - 상태: `draft`, `blocked`, `candidate`.
-  - **`candidate` 허용 조건**: closure 완결, 구조 `complete`, 표현 `representable`, 의미 `reviewer-confirmed`, 가상 동등성 `passed-within-scope`, 손실 0, blocker 0일 때만 허용한다.
+  - **`candidate` 허용 조건**: closure 완결, 구조 `complete`, 표현 `representable`, 의미 `reviewer-confirmed`, 가상 동등성 `passed-within-scope`, 손실 0, blocker 0일 때만 허용한다. 스냅샷은 계약 1.1.0이어야 하며, 1.0.0 스냅샷은 `editor.plan-blocked`(`access-unmarked:1.0.0`)로 거부한다.
   - 계획을 적용하는 일은 별도 작업이며, 새 해석 기반 채택과 제출은 P4-F D 전까지 차단한다.
 
 ## 6. 증거 소유 및 검사 차단 항목
@@ -72,7 +72,7 @@
 
 - editor 2.0.0 fixture(`fixtures/solution-intake/editor-2.0.0/`):
   - `valid/`: 판단 3개, assessment 2개(`Line1.Temp`는 완결 및 `candidate` 계획, `Line1.Count`는 누락 참조로 `incomplete` 및 `blocked` 계획), 계획 2개.
-  - `invalid/cases.json`: 30건(거부 29건, 통과 1건). 2건은 closure 일치 검사용이며 [P4-F closure](P4-F-CLOSURE.md) 에서 추가했다.
+  - `invalid/cases.json`: 32건(거부 30건, 통과 2건). 2건은 closure 일치 검사용이며 [P4-F closure](P4-F-CLOSURE.md) 에서 추가했다.
 - Mimir 거부 사례 37건도 Tyr 검사기에서 그대로 실행하여 동일한 위반 코드를 확인한다.
 - 모든 fixture는 합성 자료이며 실제 제품 형식이 아니다.
 - **2026-10-22 로컬 검증**: `python -B scripts/test_p4f_a2.py` 11개 시험을 통과했다.
@@ -92,4 +92,5 @@
 - 수신 범위: 스냅샷 계약 `1.0.0`과 `1.1.0`을 받아들인다. editor 계약은 2.0.0을 유지한다. 각 문서는 자체 버전에 맞는 스키마로 검증한다.
 - 버전 일치: 함께 검사하는 문서군(`check_pinned`, `check_request`, `check_result`, `check_assessment`의 스냅샷·프로파일)은 동일한 계약 버전을 공유해야 한다. 버전이 섞인 묶음은 `contract.version-mixed`로 거부한다.
 - 1.1.0 상태 검사: 확인된 상태(`stateless`/`stateful`)는 동일 노드, `state` 필드, 동일 값을 단언한 claim을 `stateClaimId`에 지정해야 한다(`snapshot.claim-missing`, `snapshot.state-claim-mismatch`). `unknown` 상태 노드는 `behavior-unknown` 항목을 갖추어야 한다(`snapshot.state-unknown-unexplained`).
+- **1.0.0 위의 `candidate` 거부**: `check_plan`은 1.0.0 스냅샷 위의 `candidate` 계획을 `editor.plan-blocked`(ref `access-unmarked:1.0.0`)로 거부하며, 거부 여부는 문서 `version`이 아니라 스냅샷의 `contractVersion`으로 판정한다. 1.0.0 스냅샷 자체는 계속 받아들이며 그 위의 assessment와 `draft`/`blocked` 계획도 받아들인다. editor 2.0.0 fixture 세트(`fixtures/solution-intake/editor-2.0.0/valid/`)는 1.1.0 pio-like 스냅샷으로 고정되었고, 사례 필드 `snapshot`으로 실행 전 전체 세트를 다른 계약 버전의 pio-like 스냅샷으로 재고정할 수 있으며, 두 신규 사례 `plan-candidate-over-unmarked-snapshot`과 `plan-draft-over-unmarked-snapshot`을 추가했다.
 - 검증: Mimir 거부 사례를 Tyr 검사기에서 실행해 동일한 코드를 얻었다(1.0.0 37개, 1.1.0 25개). 두 버전의 fixture digest 모두 Mimir와 일치한다. `scripts/test_p4f_a2.py` 11개 테스트를 통과했으며, CI 동등 로컬 실행(31개 모듈, 1,081개 테스트) 결과 실패는 0건이다.

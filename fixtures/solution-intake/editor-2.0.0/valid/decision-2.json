@@ -8,7 +8,7 @@
       "kind": "interpretation-snapshot",
       "id": "synthetic/pio-like/snapshot",
       "version": "1.0.0",
-      "digest": "761d55e2b7e33842158fc6b7d40fd5a498d31c81cec172764ad4e790c039d2db"
+      "digest": "8da4a51645761e01196c43c13562a51c311e2a72f23d660073fb9e8d25d4ee96"
     },
     "target": {
       "type": "issue",
@@ -19,8 +19,8 @@
     "reviewer": "synthetic reviewer",
     "reason": "connection plc2 has to be found in another export before Line1.Count can be judged",
     "decidedAt": "2026-10-22T00:01:00Z",
-    "previousDecisionDigest": "9fd1461f6322f893fbac4d8b9874ad49010291a9cd3c543fbdac01a9ed33a28a",
+    "previousDecisionDigest": "1e3f72bf17a51a5cfca1535d6e690fc1ec1fb6f9d4538bd4a7be9b6281ab1ebf",
     "evidenceRefs": []
   },
-  "digest": "3fd8138e9ed631fc6cf355cbe64e57a5bdde06eac3b7d97327dba12b70a49475"
+  "digest": "b7989c6283b4b1d006c9c66e6315baa5ae9168ce5503141d77346846c43440e9"
 }

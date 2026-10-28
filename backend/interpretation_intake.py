@@ -24,6 +24,7 @@ SNAPSHOT_KINDS = {"source-bundle", "interpretation-profile", "interpretation-sna
 EDITOR_KINDS = {"review-decision", "endpoint-assessment", "conversion-plan"}
 DIGESTED = {"source-bundle", "interpretation-profile", "interpretation-snapshot"} | EDITOR_KINDS
 SNAPSHOT_VERSIONS = ("1.0.0", "1.1.0")
+UNMARKED_VERSIONS = ("1.0.0",)  # no edge access, no node state: a write or state cannot be ruled out
 VERSIONS = {**{k: SNAPSHOT_VERSIONS for k in SNAPSHOT_KINDS}, **{k: ("2.0.0",) for k in EDITOR_KINDS}}
 MIMIR_EVIDENCE = {"observed-in-artifact", "derived-by-rule"}
 TYR_EVIDENCE = {"declared-by-reviewer", "verified-by-virtual-case"}
@@ -330,6 +331,8 @@ def check_plan(plan, assessment, snapshot, profile, decisions=()):
                  and axes["virtualEquivalence"]["status"] == "passed-within-scope" and not b["losses"]
                  and not any(x["blockers"] for x in axes.values()))
         if not ready: raise Violation("editor.plan-overclaimed", plan["id"])
+        if snapshot["contractVersion"] in UNMARKED_VERSIONS:
+            raise Violation("editor.plan-blocked", "access-unmarked:" + snapshot["contractVersion"])
         computed = interpretation_closure.closure(snapshot, a["endpoint"]["nodeId"], profile["body"]["limits"]["maxReferenceDepth"])
         blockers = interpretation_closure.conversion_blockers(computed)
         if blockers: raise Violation("editor.plan-blocked", ",".join(f"{k}:{r}" for k, r in blockers))
