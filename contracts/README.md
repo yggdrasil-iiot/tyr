@@ -19,6 +19,8 @@
 
 스키마는 필드·종류·문법을 검증한다. scripts/validate_contracts.py는 참조, ready 완전성, 타입·길이, 결과 단위·타입, 검토 해시, 묶음 바이트 해시 등 파일 간 규칙을 추가 검증한다. 이는 P1 계약 시험 도구이며 Bifrost 승인 구현이 아니다.
 
+스키마의 `format`(`uri`, `date-time`)은 실제로 검사한다. `jsonschema`는 `uri` 검사용 패키지가 설치돼 있을 때만 이 형식을 검사하고 없으면 조용히 건너뛰므로, 검사 패키지(`rfc3986-validator`, `rfc3339-validator`)를 `requirements-contracts.txt`에 버전 고정했다. `validate_contracts.py`는 계약 스키마가 쓰는 형식 중 검사기가 없는 것이 있으면 불러오는 시점에 실패한다.
+
 draft의 null은 초안 저장에 허용된다. ready의 필수 null은 패키지 검증에서 source.incomplete로 거부된다. semantic 결과 단위 unknown도 제출 패키지에서 거부된다. 원시값의 단위 미확인은 매핑이 결과 단위를 명시하면 보존할 수 있다.
 
 accessProfileRef 네 값은 P0에서 확정한 대상 표현의 버전 ID다. P1 검사는 기본 구조·타입·길이까지만 확인한다. 실제 CPU의 메모리 범위·심볼 존재·OPC UA 접근 권한·MELSEC 프레임 가능성은 검사하지 않는다. 프로파일의 의미를 바꾸면 계약 버전 또는 프로파일 버전을 바꾼다.

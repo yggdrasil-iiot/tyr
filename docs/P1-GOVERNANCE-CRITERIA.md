@@ -7,6 +7,10 @@
 - 접근 정의는 PLC별 구체적 표현을 보존한다. D1000, DB10 byte 20, Logix 심볼, OPC UA NodeId를 서로 치환하지 않는다.
 - 개념 식별은 semanticId다. role·결과 타입·단위는 해당 ID의 정준 표현을 제약한다. 같은 ID에서 이들이 충돌하면 semantic.identity-conflict다. 단위가 다른 표현을 사용하려면 변환 후 동일 정준 단위에 맞춘다.
 - `common.schema.json`의 `$defs/unit` 단위 코드는 UCUM(https://ucum.org) 대소문자 구분 코드인 `1`, `1/s`, `Cel`, `K`, `N.m`, `mN.m`, `Pa`, `kPa`, `bar`를 따른다. 유일한 예외인 `rpm`은 UCUM 코드가 아니며 이에 대응하는 UCUM 코드는 `/min`이지만, 이미 발행한 계약 버전은 수정하지 않으므로 그대로 둔다.
+- `semanticId`는 계약의 `"format": "uri"`대로 RFC 3986 절대 URI여야 한다. Tyr는 이 형식을 `rfc3986-validator`로 검사하고 Bifrost(`json-schema-validator`)와 같은 판정을 낸다. 두 판정이 같다는 것은 `fixtures/uri-format/bifrost-vectors.json`의 19개 입력으로 시험한다.
+- IEC CDD·ECLASS의 IRDI 원형(예: `0173-1#02-AAO677#002`, `0112/2///61360_4#AAA123#001`)은 URI가 아니므로 현재 계약에서 거부된다. IRDI를 그대로 받으려면 새 계약 버전이 필요하다.
+- OPC UA의 `nsu=…;i=…` 형태 노드 표기와 세션마다 달라지는 `ns=2` 같은 네임스페이스 인덱스는 URI가 아니며 의미 ID로 쓰지 않는다.
+- ECLASS 개념은 작성자가 직접 입력한 식별자만 저장한다. ECLASS의 정의 텍스트나 사전 내용은 어떤 파일에도 옮겨 적지 않는다. `description`에는 작성자가 쓴 업무 설명을 둔다.
 - 의미 ID가 같아도 설비 인스턴스는 별개다. 개념 재사용과 개별 관측의 동일성을 구분한다. 실제 관측 문맥은 equipmentInstanceId와 개념·멤버 연결에 남긴다.
 - name은 표시 이름이다. 이름·주소·수치의 일치만으로 의미를 추론하거나 병합하지 않는다. 같은 이름의 실제 속도와 목표 속도는 별도 의미 ID와 role로 공존한다.
 - 의미 ID는 근거와 검토를 바탕으로 작성자가 부여한다. 이 게이트는 선언의 일관성을 검증하며, 물리적 측정 위치나 업무 의미를 자동으로 증명하지 않는다. 정의가 애매하면 초안/재검토로 남긴다.
