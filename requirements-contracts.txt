@@ -6,3 +6,4 @@ rpds-py==0.30.0
 tzdata==2025.3
 rfc3339-validator==0.1.4
 six==1.17.0
+rfc3986-validator==0.1.1

@@ -34,6 +34,16 @@ for p in (ROOT/"contracts").glob("*/*.schema.json"):
     s=load(p); Draft202012Validator.check_schema(s)
     resource=Resource.from_contents(s)
     registry=registry.with_resource(p.as_uri(),resource).with_resource(s["$id"],resource)
+def schema_formats(node):
+    if isinstance(node,dict):
+        f=node.get("format");yield from ([f] if isinstance(f,str) else [])
+        for v in node.values():yield from schema_formats(v)
+    elif isinstance(node,list):
+        for v in node:yield from schema_formats(v)
+# jsonschema registers "uri" only when an optional checker package imports; without it the format is silently not asserted.
+CONTRACT_FORMATS={f for p in (ROOT/"contracts").glob("*/*.schema.json") for f in schema_formats(load(p))}
+MISSING_FORMATS=CONTRACT_FORMATS-set(FormatChecker.checkers)
+if MISSING_FORMATS:raise RuntimeError("format checker not installed for: "+", ".join(sorted(MISSING_FORMATS))+" (pip install -r requirements-contracts.txt)")
 # Base URI is the local file, allowing relative refs while registry never retrieves remotely.
 @lru_cache(maxsize=64)
 def schema_validator(kind,version):
