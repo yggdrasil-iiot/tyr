@@ -139,3 +139,8 @@ Tyr 폴더에서 python backend/server.py를 실행하고 출력된 로컬 주�
 
 
 현재 작업자 메뉴는 자료 준비 → 객체 선택 → 연결 → 검증 → 검토·제출로 구성한다. 결과 스키마는 독립 저장해 객체 배열에서 바로 사용한다. [작업 흐름과 호환성](docs/OPERATOR-WORKFLOW.md)을 참조한다.
+
+
+## AAS 개념 정의 내보내기
+
+`scripts/aas_export.py`는 의미 정의 하나를 AAS v3.1 ConceptDescriptions(`aas-core3.1==1.0.0`)와 서명 없는 in-toto/SLSA provenance 진술서라는 두 형제 파일로 저장하며, 정의 텍스트 언어는 `--language`로 지정하고 반드시 영어여야 한다. 이 파일들은 매핑 번들이나 제안에 들어가지 않고 어떤 계약도 변경하지 않으며, 진술서 또한 승인을 뜻하지 않는다. 세부 설계와 규칙은 다음을 참고한다: [설계·규칙](docs/AAS-EXPORT.md)
