@@ -35,7 +35,9 @@ jobs:
         with:
           python-version: '3.13'
           cache: pip
-          cache-dependency-path: tyr/requirements-contracts.txt
+          cache-dependency-path: |
+            tyr/requirements-contracts.txt
+            tyr/requirements-aas.txt
 
       - uses: actions/setup-java@v4
         with:
@@ -47,9 +49,9 @@ jobs:
         working-directory: bifrost
         run: mvn -B -ntp -pl gates -am package -DskipTests
 
-      - name: Install pinned contract dependencies
+      - name: Install pinned contract and AAS dependencies
         working-directory: tyr
-        run: python -m pip install -r requirements-contracts.txt
+        run: python -m pip install -r requirements-contracts.txt -r requirements-aas.txt
 
       - name: P1 contract and governance gate (network denied)
         working-directory: tyr
