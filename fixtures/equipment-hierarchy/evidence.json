@@ -1,0 +1,19 @@
+[
+  {
+    "id": "plant-register",
+    "version": "1.0.0",
+    "label": "Synthetic plant equipment register",
+    "format": "csv",
+    "bytesBase64": "ZXF1aXBtZW50X2lkLGxhYmVsLGxldmVsLHBhcmVudApzeW50aGV0aWMtc2l0ZSxTeW50aGV0aWMgc2l0ZSxTSVRFXzEsCnJlY29yZC1saW5lLWEsTGluZSBBLFBST0RVQ1RJT05MSU5FXzUsc3ludGhldGljLXNpdGUKcmVjb3JkLWxpbmUtYixMaW5lIEIsUFJPRFVDVElPTkxJTkVfNSxzeW50aGV0aWMtc2l0ZQo=",
+    "sha256": "68b22bf73c87a56f13225aa1b4bd612fee3d303fd95c9328bb81c0bf7335bacd",
+    "origin": "synthetic",
+    "capturedAt": "2026-10-31T00:00:00Z",
+    "reviewer": "fixture-reviewer",
+    "product": null,
+    "scope": [
+      "synthetic-site",
+      "record-line-a",
+      "record-line-b"
+    ]
+  }
+]

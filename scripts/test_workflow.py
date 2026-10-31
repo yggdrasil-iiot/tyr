@@ -63,7 +63,7 @@ class Workflow(unittest.TestCase):
    with st.connect() as c:self.assertEqual(before,list(c.execute("SELECT name,sql FROM sqlite_master WHERE type='table' ORDER BY name")))
  def test_all_legacy_navigation_entries_preserved(self):
   import re
-  s=(R/'frontend/index.html').read_text(encoding='utf-8');tabs=re.findall(r'<button data-tab="([^"]+)"',s);self.assertEqual(len(tabs),23);self.assertEqual(len(set(tabs)),23);self.assertEqual(len(re.findall('data-workflow-group=',s)),5)
+  s=(R/'frontend/index.html').read_text(encoding='utf-8');tabs=re.findall(r'<button data-tab="([^"]+)"',s);self.assertEqual(len(tabs),24);self.assertEqual(len(set(tabs)),24);self.assertEqual(len(re.findall('data-workflow-group=',s)),5)
  def test_baseline_files_byte_identical(self):
   pins=server.contracts.load(R/'docs/verification/workflow-baseline-pins.json');self.assertEqual([n for n,h in pins.items() if hashlib.sha256((R/n).read_bytes()).hexdigest()!=h],[])
 if __name__=='__main__':unittest.main(verbosity=2)

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tyr:editor:hierarchy-evidence:1.0.0",
+  "description": "Editor-side evidence for an equipment-hierarchy: a reviewer note or a plant register, packaged as an evidence-artifact with id 'hierarchy-' + id.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,63}$"
+    },
+    "version": {
+      "$ref": "#/$defs/version"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "format": {
+      "enum": [
+        "text",
+        "csv",
+        "xlsx"
+      ]
+    },
+    "bytesBase64": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1398104,
+      "pattern": "^[A-Za-z0-9+/]*={0,2}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "origin": {
+      "enum": [
+        "synthetic",
+        "field"
+      ]
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "product": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          },
+          "required": [
+            "name",
+            "version"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._/-]*$",
+        "maxLength": 256
+      },
+      "minItems": 1,
+      "maxItems": 2048,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "label",
+    "format",
+    "bytesBase64",
+    "sha256",
+    "origin",
+    "capturedAt",
+    "reviewer",
+    "product",
+    "scope"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    }
+  }
+}

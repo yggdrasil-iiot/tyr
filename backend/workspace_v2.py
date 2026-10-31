@@ -54,6 +54,8 @@ def build(state,folder,legacy_build):
     import record_mappings
     record_mappings.build(state,folder,p)
     if any(r["definition"].get("recordField") for r in state["sources"]) and p['schemaVersion']!='2.22.0':p["schemaVersion"]="2.21.0"
+    import hierarchy_evidence
+    hierarchy_evidence.build(state,folder,p)
     if state.get("equipmentHierarchies"):
         (folder/"hierarchy").mkdir(exist_ok=True)
         p["schemaVersion"]="2.23.0"
@@ -70,7 +72,7 @@ def findings(state,legacy_build):
 
 def check(state,legacy_check,legacy_build):
     keys={"workspaceVersion","equipment","connections","sources","semantics","mappings","targets","graphs"}
-    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies"}:raise ValueError("workspace: unexpected/missing fields")
+    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence"}:raise ValueError("workspace: unexpected/missing fields")
     if state["workspaceVersion"]!=VERSION:raise ValueError("Unsupported workspaceVersion")
     for k in keys-{"workspaceVersion"}:
         if not isinstance(state[k],list) or len(state[k])>1000:raise ValueError(k+": expected list")
@@ -111,7 +113,10 @@ def check(state,legacy_check,legacy_build):
         if not isinstance(hs,list) or len(hs)>1:raise ValueError("hierarchy.multiple")
         for d in hs:
             if p3.schema_errors(eh.KIND,d):raise ValueError(eh.KIND+": schema validation failed")
-        eh.validate(hs,equip)
+        eh.validate(hs,equip,evidence_scope=False)
+    if "hierarchyEvidence" in state:
+        import hierarchy_evidence
+        hierarchy_evidence.check(state,equip)
     # Incomplete objects and changed semantic constraints may remain drafts.
     draft={"lifecycle.retired-binding","view.snapshot-mismatch","view.parent-not-ready","source.timezone-required","source.bit-coordinate-required","workspace.empty","mapping.incomplete-object","mapping.type","mapping.unit","mapping.unit-conversion-required",
            "mapping.input-unit-unknown-preserved","semantic.identity-conflict","semantic.unit","semantic.range",

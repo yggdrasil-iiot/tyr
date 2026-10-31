@@ -33,6 +33,7 @@ import mapping_templates
 import record_mappings
 import record_authoring
 import result_schemas
+import hierarchy_authoring
 import record_preview
 import broadcast_authoring
 import broadcast_preview
@@ -232,6 +233,7 @@ class Store:
             record_mappings.check_transition(json.loads(current_body),state)
             __import__("record_fields").transition(json.loads(current_body),state)
             result_schemas.transition(json.loads(current_body),state)
+            __import__("hierarchy_evidence").transition(json.loads(current_body),state)
             try:import_workflow.check_transition(json.loads(current_body),state)
             except ValueError as e:raise Invalid(str(e)) from e
             cursor = c.execute("UPDATE workspace SET revision=revision+1,body=?,updated_at=? WHERE id=1 AND revision=?",
@@ -317,6 +319,7 @@ def make_server(store, port=8765, bifrost_jar=None, mapping_registry=None):
                 return self.reply(403, {"error": "Local origin required"})
             try:
                 if self.path == "/api/result-schemas":return self.reply(200,result_schemas.listing(store))
+                if self.path == "/api/equipment-hierarchy":return self.reply(200,hierarchy_authoring.listing(store,build_package))
                 if self.path == "/api/records":return self.reply(200,record_authoring.listing(store))
                 if self.path == "/api/workspace":
                     return self.reply(200, store.read())
@@ -331,7 +334,7 @@ def make_server(store, port=8765, bifrost_jar=None, mapping_registry=None):
                 if self.path == "/api/expressions":return self.reply(200,expression_authoring.listing(store))
                 if self.path == "/api/semantic-catalog":return self.reply(200,semantic_catalog.report(store,publication_adapter))
                 if self.path == "/api/submissions":return self.reply(200,publication.listing(store,publication_adapter))
-                assets = {"/empty-start.js": ("empty-start.js","text/javascript; charset=utf-8"),"/operator-ux.js": ("operator-ux.js","text/javascript; charset=utf-8"), "/workflow.js": ("workflow.js","text/javascript; charset=utf-8"),"/result-schemas.js": ("result-schemas.js","text/javascript; charset=utf-8"),"/broadcast.js": ("broadcast.js","text/javascript; charset=utf-8"),"/mixed-objects.js": ("mixed-objects.js","text/javascript; charset=utf-8"),"/records.js": ("records.js","text/javascript; charset=utf-8"),"/templates.js": ("templates.js","text/javascript; charset=utf-8"),"/lifecycle.js": ("lifecycle.js","text/javascript; charset=utf-8"),"/expressions.js": ("expressions.js","text/javascript; charset=utf-8"),"/pov.js": ("pov.js","text/javascript; charset=utf-8"),"/structures.js": ("structures.js","text/javascript; charset=utf-8"),"/views.js": ("views.js","text/javascript; charset=utf-8"),"/publication.js": ("publication.js","text/javascript; charset=utf-8"),"/review.js": ("review.js", "text/javascript; charset=utf-8"),"/mixed.js": ("mixed.js", "text/javascript; charset=utf-8"),"/imports.js": ("imports.js", "text/javascript; charset=utf-8"),"/": ("index.html", "text/html; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8"), "/v2.js": ("v2.js", "text/javascript; charset=utf-8"), "/preview.js": ("preview.js", "text/javascript; charset=utf-8"), "/quality.js": ("quality.js", "text/javascript; charset=utf-8"), "/arrays.js": ("arrays.js", "text/javascript; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
+                assets = {"/empty-start.js": ("empty-start.js","text/javascript; charset=utf-8"),"/hierarchy.js": ("hierarchy.js","text/javascript; charset=utf-8"),"/operator-ux.js": ("operator-ux.js","text/javascript; charset=utf-8"), "/workflow.js": ("workflow.js","text/javascript; charset=utf-8"),"/result-schemas.js": ("result-schemas.js","text/javascript; charset=utf-8"),"/broadcast.js": ("broadcast.js","text/javascript; charset=utf-8"),"/mixed-objects.js": ("mixed-objects.js","text/javascript; charset=utf-8"),"/records.js": ("records.js","text/javascript; charset=utf-8"),"/templates.js": ("templates.js","text/javascript; charset=utf-8"),"/lifecycle.js": ("lifecycle.js","text/javascript; charset=utf-8"),"/expressions.js": ("expressions.js","text/javascript; charset=utf-8"),"/pov.js": ("pov.js","text/javascript; charset=utf-8"),"/structures.js": ("structures.js","text/javascript; charset=utf-8"),"/views.js": ("views.js","text/javascript; charset=utf-8"),"/publication.js": ("publication.js","text/javascript; charset=utf-8"),"/review.js": ("review.js", "text/javascript; charset=utf-8"),"/mixed.js": ("mixed.js", "text/javascript; charset=utf-8"),"/imports.js": ("imports.js", "text/javascript; charset=utf-8"),"/": ("index.html", "text/html; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8"), "/v2.js": ("v2.js", "text/javascript; charset=utf-8"), "/preview.js": ("preview.js", "text/javascript; charset=utf-8"), "/quality.js": ("quality.js", "text/javascript; charset=utf-8"), "/arrays.js": ("arrays.js", "text/javascript; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
                 if self.path in assets:
                     name, mime = assets[self.path]
                     return self.reply(200, (ROOT / "frontend" / name).read_bytes(), mime)
@@ -341,7 +344,7 @@ def make_server(store, port=8765, bifrost_jar=None, mapping_registry=None):
         def do_PUT(self):
             if not self.origin_ok() or self.headers.get("X-Tyr-Editor") != "1":
                 return self.reply(403, {"error": "Local editor request required"})
-            if self.path not in ("/api/result-schema-plan","/api/result-schema-apply","/api/broadcast-compose","/api/broadcast-preview","/api/broadcast-scenarios","/api/mixed-object-compose","/api/mixed-object-apply","/api/record-compose","/api/record-plan","/api/record-apply","/api/record-preview","/api/record-scenarios","/api/template-capture","/api/template-save","/api/template-choices","/api/template-plan","/api/template-apply","/api/semantic-lifecycle-apply","/api/expression-compile","/api/expression-apply","/api/workspace","/api/migrate","/api/preview","/api/logical-preview","/api/scenarios","/api/array-index","/api/import-review","/api/import-adopt-reviewed","/api/import-merge-preview","/api/import-merge-apply","/api/import-preview","/api/import-apply","/api/review-baselines","/api/review-diff","/api/reviews","/api/submissions","/api/submission-refresh","/api/submission-download","/api/submission-maintenance","/api/pov-template","/api/pov-evaluate"):
+            if self.path not in ("/api/equipment-hierarchy-plan","/api/equipment-hierarchy-apply","/api/result-schema-plan","/api/result-schema-apply","/api/broadcast-compose","/api/broadcast-preview","/api/broadcast-scenarios","/api/mixed-object-compose","/api/mixed-object-apply","/api/record-compose","/api/record-plan","/api/record-apply","/api/record-preview","/api/record-scenarios","/api/template-capture","/api/template-save","/api/template-choices","/api/template-plan","/api/template-apply","/api/semantic-lifecycle-apply","/api/expression-compile","/api/expression-apply","/api/workspace","/api/migrate","/api/preview","/api/logical-preview","/api/scenarios","/api/array-index","/api/import-review","/api/import-adopt-reviewed","/api/import-merge-preview","/api/import-merge-apply","/api/import-preview","/api/import-apply","/api/review-baselines","/api/review-diff","/api/reviews","/api/submissions","/api/submission-refresh","/api/submission-download","/api/submission-maintenance","/api/pov-template","/api/pov-evaluate"):
                 return self.reply(404, {"error": "Not found"})
             try:
                 length = int(self.headers.get("Content-Length", "-1"))
@@ -349,6 +352,8 @@ def make_server(store, port=8765, bifrost_jar=None, mapping_registry=None):
                 require(self.headers.get("Content-Type", "").split(";")[0] == "application/json", "JSON required")
                 raw = self.rfile.read(length).decode("utf-8")
                 value = json.loads(raw, object_pairs_hook=contracts.pairs, parse_constant=lambda x: (_ for _ in ()).throw(Invalid("Nonfinite JSON")))
+                if self.path == "/api/equipment-hierarchy-plan":return self.reply(200,hierarchy_authoring.plan(store,value,Conflict,check_state)[0])
+                if self.path == "/api/equipment-hierarchy-apply":return self.reply(200,hierarchy_authoring.apply(store,value,Conflict))
                 if self.path == "/api/result-schema-plan":return self.reply(200,result_schemas.plan(store,value,Conflict)[0])
                 if self.path == "/api/result-schema-apply":return self.reply(200,result_schemas.apply(store,value,Conflict))
                 if self.path == "/api/broadcast-compose":return self.reply(200,broadcast_authoring.compose(store,value,Conflict))
