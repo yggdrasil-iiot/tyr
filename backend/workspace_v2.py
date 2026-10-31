@@ -54,6 +54,12 @@ def build(state,folder,legacy_build):
     import record_mappings
     record_mappings.build(state,folder,p)
     if any(r["definition"].get("recordField") for r in state["sources"]) and p['schemaVersion']!='2.22.0':p["schemaVersion"]="2.21.0"
+    if state.get("equipmentHierarchies"):
+        (folder/"hierarchy").mkdir(exist_ok=True)
+        p["schemaVersion"]="2.23.0"
+        for i,d in enumerate(state["equipmentHierarchies"]):
+            rel="hierarchy/"+str(i)+".json";vc.save(folder/rel,d)
+            p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
     vc.save(folder/"proposal.json",p)
 def findings(state,legacy_build):
     if not any(state[k] for k in ("sources","semantics","targets","graphs","mappings")) and not state.get("imports") and not state.get("writes"):return [{"ruleCode":"workspace.empty","path":None}]
@@ -64,7 +70,7 @@ def findings(state,legacy_build):
 
 def check(state,legacy_check,legacy_build):
     keys={"workspaceVersion","equipment","connections","sources","semantics","mappings","targets","graphs"}
-    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas"}:raise ValueError("workspace: unexpected/missing fields")
+    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies"}:raise ValueError("workspace: unexpected/missing fields")
     if state["workspaceVersion"]!=VERSION:raise ValueError("Unsupported workspaceVersion")
     for k in keys-{"workspaceVersion"}:
         if not isinstance(state[k],list) or len(state[k])>1000:raise ValueError(k+": expected list")
@@ -99,6 +105,13 @@ def check(state,legacy_check,legacy_build):
     for d in state.get("writes",[]):
         if p3.schema_errors("write-definition",d) or d["id"] in ids or d["equipmentInstanceId"] not in equip:raise ValueError("write-definition: schema/id/equipment")
         ids.add(d["id"])
+    if "equipmentHierarchies" in state:
+        import equipment_hierarchy as eh
+        hs=state["equipmentHierarchies"]
+        if not isinstance(hs,list) or len(hs)>1:raise ValueError("hierarchy.multiple")
+        for d in hs:
+            if p3.schema_errors(eh.KIND,d):raise ValueError(eh.KIND+": schema validation failed")
+        eh.validate(hs,equip)
     # Incomplete objects and changed semantic constraints may remain drafts.
     draft={"lifecycle.retired-binding","view.snapshot-mismatch","view.parent-not-ready","source.timezone-required","source.bit-coordinate-required","workspace.empty","mapping.incomplete-object","mapping.type","mapping.unit","mapping.unit-conversion-required",
            "mapping.input-unit-unknown-preserved","semantic.identity-conflict","semantic.unit","semantic.range",
