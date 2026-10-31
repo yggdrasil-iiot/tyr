@@ -42,6 +42,8 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
         if include_writes:selected|={k for k,d in docs.items() if k[0]=="write-definition" and d["targetInstanceRef"]["id"] in targets}
         if state.get("semanticLifecycles"):
             selected|={k for k in docs if k[0] in ("semantic-lifecycle","semantic-definition")}
+        # The hierarchy is the context every published equipmentInstanceId resolves against.
+        selected|={k for k in docs if k[0]=="equipment-hierarchy"}
         # Template/application documents contain historical snapshots, not live recursive refs.
         active=[d for d in docs.values() if d["kind"]=="template-application" and any((g["kind"],g["id"],g["version"]) in selected for g in d["generated"] if g["kind"]=="mapping-set")]
         def include(kind,ref):
