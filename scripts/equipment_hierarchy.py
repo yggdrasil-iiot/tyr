@@ -22,8 +22,9 @@ def check(h):
    require(depth<=MAX_DEPTH,'hierarchy.depth');p=by[p]['parentEquipmentInstanceId']
  return by
 
-def validate(docs,equipment=None):
- """docs: every document in one package or workspace. equipment: workspace equipment ids, when known."""
+def validate(docs,equipment=None,evidence_scope=True):
+ """docs: every document in one package or workspace. equipment: workspace equipment ids, when known.
+ evidence_scope: docs include the evidence artifacts, so each node must cite one whose scope names it."""
  docs=list(docs);hs=[d for d in docs if d.get('kind')==KIND]
  if not hs:return None
  require(len(hs)==1,'hierarchy.multiple')
@@ -31,4 +32,7 @@ def validate(docs,equipment=None):
  if equipment is not None:require(set(by)<=set(equipment),'hierarchy.context-equipment')
  for d in docs:
   if d.get('kind')!=KIND and 'equipmentInstanceId' in d:require(d['equipmentInstanceId'] in by,'hierarchy.unresolved-instance')
+ if evidence_scope:
+  scope={d['id']:set(d['scope']) for d in docs if d.get('kind')=='evidence-artifact'}
+  for n in hs[0]['nodes']:require(any(n['equipmentInstanceId'] in scope.get(r['artifactId'],()) for r in n['evidenceRefs']),'hierarchy.evidence-scope')
  return hs[0]
