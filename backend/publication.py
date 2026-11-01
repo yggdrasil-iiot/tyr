@@ -56,6 +56,8 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             if r['previousMappingRef'] is not None:include_record(include("record-mapping",r['previousMappingRef']))
         for k in list(selected):
             if k[0]=="record-mapping":include_record(docs[k])
+        # A metric travels with the record-mapping result it is computed over.
+        selected|={k for k,d in docs.items() if k[0]=="metric-definition" and ("record-mapping",d["dataset"]["recordMappingRef"]["id"],d["dataset"]["recordMappingRef"]["version"]) in selected}
         def include_application(a):
             include("template-application",a);include_template(a["templateRef"])
             if a["previousApplicationRef"] is not None:include_application(include("template-application",a["previousApplicationRef"]))

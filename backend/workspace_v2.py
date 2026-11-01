@@ -62,6 +62,12 @@ def build(state,folder,legacy_build):
         for i,d in enumerate(state["equipmentHierarchies"]):
             rel="hierarchy/"+str(i)+".json";vc.save(folder/rel,d)
             p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
+    if state.get("metricDefinitions"):
+        (folder/"metrics").mkdir(exist_ok=True)
+        p["schemaVersion"]="2.24.0"
+        for i,d in enumerate(state["metricDefinitions"]):
+            rel="metrics/"+str(i)+".json";vc.save(folder/rel,d)
+            p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
     vc.save(folder/"proposal.json",p)
 def findings(state,legacy_build):
     if not any(state[k] for k in ("sources","semantics","targets","graphs","mappings")) and not state.get("imports") and not state.get("writes"):return [{"ruleCode":"workspace.empty","path":None}]
@@ -72,7 +78,7 @@ def findings(state,legacy_build):
 
 def check(state,legacy_check,legacy_build):
     keys={"workspaceVersion","equipment","connections","sources","semantics","mappings","targets","graphs"}
-    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence"}:raise ValueError("workspace: unexpected/missing fields")
+    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence","metricDefinitions"}:raise ValueError("workspace: unexpected/missing fields")
     if state["workspaceVersion"]!=VERSION:raise ValueError("Unsupported workspaceVersion")
     for k in keys-{"workspaceVersion"}:
         if not isinstance(state[k],list) or len(state[k])>1000:raise ValueError(k+": expected list")
@@ -114,6 +120,15 @@ def check(state,legacy_check,legacy_build):
         for d in hs:
             if p3.schema_errors(eh.KIND,d):raise ValueError(eh.KIND+": schema validation failed")
         eh.validate(hs,equip,evidence_scope=False)
+    if "metricDefinitions" in state:
+        import metric_definition as md
+        ms=state["metricDefinitions"]
+        if not isinstance(ms,list) or len(ms)>64:raise ValueError("metric.limit")
+        ids=set()
+        for d in ms:
+            if p3.schema_errors(md.KIND,d):raise ValueError(md.KIND+": schema validation failed")
+            if d["id"] in ids:raise ValueError(md.KIND+": duplicate id")
+            ids.add(d["id"])
     if "hierarchyEvidence" in state:
         import hierarchy_evidence
         hierarchy_evidence.check(state,equip)
