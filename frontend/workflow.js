@@ -1,6 +1,6 @@
 /* Operator workflow shell. Legacy views/APIs remain reachable and keep their identifiers. */
 const workflowStages=[['prepare','자료 준비','설비·원본 자료·소스·결과 스키마를 준비합니다.'],['object','객체 선택','완성할 객체의 의미 모델 또는 재사용 템플릿을 선택합니다.'],['connect','연결','프로퍼티와 입력을 연결하고 변환·오류 정책을 지정합니다.'],['verify','검증','가상 입력으로 결과·출처·오류·변환 손실을 확인합니다.'],['review','검토·제출','변경 근거를 검토하고 Bifrost에 제출합니다.']];
-const workflowMembership={prepare:['context','hierarchy','imports','sources','writes','resultSchemas','migration'],object:['semantics','structures','targets','templates'],connect:['mixedObjects','broadcast','mappings','graphs','expressions','views','records'],verify:['preview','comparison','pov'],review:['review','lifecycle','publication']};
+const workflowMembership={prepare:['context','hierarchy','imports','sources','writes','resultSchemas','migration'],object:['semantics','structures','targets','templates'],connect:['mixedObjects','broadcast','mappings','graphs','expressions','views','records','commandBindings'],verify:['preview','comparison','pov'],review:['review','lifecycle','publication']};
 let workflowStage='prepare',workflowIntent='',workflowEpoch=0,workflowApplied='',workflowContext={equipment:'',model:'',schema:'',template:''};
 try{workflowContext={...workflowContext,...JSON.parse(sessionStorage.getItem('tyr-workflow-context')||'{}')};}catch(e){}
 function workflowRemember(){sessionStorage.setItem('tyr-workflow-context',JSON.stringify(workflowContext));workflowBar();}

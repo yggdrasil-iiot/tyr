@@ -5,6 +5,7 @@ from datetime import datetime,timezone
 import sample_quality as sq
 import p3a_contracts as p3
 import validate_contracts as vc
+import command_binding as cb
 ID=re.compile(r"^[a-z][a-z0-9._-]{0,127}$")
 def require(v,message):
     if not v:raise ValueError(message)
@@ -58,6 +59,14 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             if k[0]=="record-mapping":include_record(docs[k])
         # A metric travels with the record-mapping result it is computed over.
         selected|={k for k,d in docs.items() if k[0]=="metric-definition" and ("record-mapping",d["dataset"]["recordMappingRef"]["id"],d["dataset"]["recordMappingRef"]["version"]) in selected}
+        # A command link travels with the mapping set its read binding reads; readBindingRef then brings the read binding.
+        def read_binding(ref):
+            a=docs.get(("evidence-artifact",ref["id"],ref["version"]))
+            return None if a is None else cb.profile((root/a["file"]["path"]).read_bytes())
+        def read_set(c):
+            b=read_binding(c["readBindingRef"])
+            return None if b is None else ("mapping-set",b["mappingSetRef"]["id"],b["mappingSetRef"]["version"])
+        selected|={k for k,d in docs.items() if k[0]==cb.KIND and read_set(d) in selected}
         def include_application(a):
             include("template-application",a);include_template(a["templateRef"])
             if a["previousApplicationRef"] is not None:include_application(include("template-application",a["previousApplicationRef"]))
@@ -65,7 +74,7 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             include_application(a)
             for g in a["generated"]:include(g["kind"],g)
             for s in a["sourceSnapshots"]:include("source-definition",s)
-        refs={"recordMappingRef":"record-mapping","sourceRef":"source-definition","destinationRef":"source-definition","graphRef":"value-graph","targetInstanceRef":"target-instance","semanticDefinitionRef":"semantic-definition","viewOf":"source-definition","previousBatchRef":"import-batch"}
+        refs={"recordMappingRef":"record-mapping","sourceRef":"source-definition","destinationRef":"source-definition","graphRef":"value-graph","targetInstanceRef":"target-instance","semanticDefinitionRef":"semantic-definition","viewOf":"source-definition","previousBatchRef":"import-batch","readBindingRef":"evidence-artifact"}
         def visit(v):
             if isinstance(v,dict):
                 for name,x in v.items():
@@ -117,6 +126,9 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             if k[0]=="record-mapping":include_record(docs[k])
             if k[0] not in ("mapping-template","template-application"):visit(docs[k])
             done.add(k)
+        # Vor reads a binding only under the stream it names: a profile commissioned for another stream needs a new one.
+        for k in selected:
+            if k[0]=="evidence-artifact" and k[1].startswith(cb.PREFIX):require(read_binding({"id":k[1],"version":k[2]})["streamId"]==stream,"read-binding.stream")
         folder.mkdir(parents=True,exist_ok=False)
         p["files"]=[entries[k] for k in sorted(selected)]
         p["baseRelease"]=copy.deepcopy(base)

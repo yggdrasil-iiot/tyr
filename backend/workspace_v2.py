@@ -56,6 +56,8 @@ def build(state,folder,legacy_build):
     if any(r["definition"].get("recordField") for r in state["sources"]) and p['schemaVersion']!='2.22.0':p["schemaVersion"]="2.21.0"
     import hierarchy_evidence
     hierarchy_evidence.build(state,folder,p)
+    import read_bindings
+    read_bindings.build(state,folder,p)
     if state.get("equipmentHierarchies"):
         (folder/"hierarchy").mkdir(exist_ok=True)
         p["schemaVersion"]="2.23.0"
@@ -68,6 +70,12 @@ def build(state,folder,legacy_build):
         for i,d in enumerate(state["metricDefinitions"]):
             rel="metrics/"+str(i)+".json";vc.save(folder/rel,d)
             p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
+    if state.get("commandBindings"):
+        (folder/"command-bindings").mkdir(exist_ok=True)
+        p["schemaVersion"]="2.25.0"
+        for i,d in enumerate(state["commandBindings"]):
+            rel="command-bindings/"+str(i)+".json";vc.save(folder/rel,d)
+            p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
     vc.save(folder/"proposal.json",p)
 def findings(state,legacy_build):
     if not any(state[k] for k in ("sources","semantics","targets","graphs","mappings")) and not state.get("imports") and not state.get("writes"):return [{"ruleCode":"workspace.empty","path":None}]
@@ -78,7 +86,7 @@ def findings(state,legacy_build):
 
 def check(state,legacy_check,legacy_build):
     keys={"workspaceVersion","equipment","connections","sources","semantics","mappings","targets","graphs"}
-    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence","metricDefinitions"}:raise ValueError("workspace: unexpected/missing fields")
+    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence","metricDefinitions","readBindings","commandBindings"}:raise ValueError("workspace: unexpected/missing fields")
     if state["workspaceVersion"]!=VERSION:raise ValueError("Unsupported workspaceVersion")
     for k in keys-{"workspaceVersion"}:
         if not isinstance(state[k],list) or len(state[k])>1000:raise ValueError(k+": expected list")
@@ -132,6 +140,18 @@ def check(state,legacy_check,legacy_build):
     if "hierarchyEvidence" in state:
         import hierarchy_evidence
         hierarchy_evidence.check(state,equip)
+    if "readBindings" in state:
+        import read_bindings
+        read_bindings.check(state,equip)
+    if "commandBindings" in state:
+        import command_binding as cb
+        cs=state["commandBindings"]
+        if not isinstance(cs,list) or len(cs)>256:raise ValueError("command-binding.limit")
+        ids=set()
+        for d in cs:
+            if p3.schema_errors(cb.KIND,d):raise ValueError(cb.KIND+": schema validation failed")
+            if d["id"] in ids:raise ValueError(cb.KIND+": duplicate id")
+            ids.add(d["id"])
     # Incomplete objects and changed semantic constraints may remain drafts.
     draft={"lifecycle.retired-binding","view.snapshot-mismatch","view.parent-not-ready","source.timezone-required","source.bit-coordinate-required","workspace.empty","mapping.incomplete-object","mapping.type","mapping.unit","mapping.unit-conversion-required",
            "mapping.input-unit-unknown-preserved","semantic.identity-conflict","semantic.unit","semantic.range",

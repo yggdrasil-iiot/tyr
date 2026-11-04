@@ -1,0 +1,517 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "synthetic-site",
+      "label": "Synthetic site"
+    },
+    {
+      "id": "line1",
+      "label": "Line 1"
+    },
+    {
+      "id": "mixer1",
+      "label": "Mixer 1"
+    },
+    {
+      "id": "mixer2",
+      "label": "Mixer 2"
+    }
+  ],
+  "connections": [
+    {
+      "id": "sim-opcua",
+      "label": "Sim OPC UA mixer 1",
+      "equipmentInstanceId": "mixer1",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "sim-opcua-mixer2",
+      "label": "Sim OPC UA mixer 2",
+      "equipmentInstanceId": "mixer2",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixer1-temp",
+        "version": "1.0.0",
+        "equipmentInstanceId": "mixer1",
+        "connectionProfileRef": "sim-opcua",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line1/Mixer1.Temp",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line1/Mixer1.Temp"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float64"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "Cel"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixer1-temp",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "mixer1-temp",
+      "note": "Mixer1 temperature: nsu=urn:bifrost:opcua:sim;s=Line1/Mixer1.Temp, Double, Cel\nMixer1 method: nsu=urn:bifrost:opcua:sim;s=Line1/Mixer1.SetTemperature, input targetTemperature, Double, Cel",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-01T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "mixer2-temp",
+        "version": "1.0.0",
+        "equipmentInstanceId": "mixer2",
+        "connectionProfileRef": "sim-opcua-mixer2",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line1/Mixer2.Temp",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line1/Mixer2.Temp"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float64"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "Cel"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-mixer2-temp",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "mixer2-temp",
+      "note": "Mixer2 temperature: nsu=urn:bifrost:opcua:sim;s=Line1/Mixer2.Temp, Double, Cel\nMixer2 method: nsu=urn:bifrost:opcua:sim;s=Line1/Mixer2.SetTemperature, input targetTemperature, Double, Cel",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-01T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.12.0",
+      "id": "mixer-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "temp",
+          "name": "Temp",
+          "semanticId": "urn:bifrost:sem:Mixer/Temp",
+          "description": "Mixer process temperature",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "role": "measurement",
+          "range": {
+            "low": "0",
+            "high": "450"
+          }
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "mixer1",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixer1",
+      "label": "Mixer 1",
+      "semanticDefinitionRef": {
+        "id": "mixer-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-mixer1-temp",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "mixer2",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixer2",
+      "label": "Mixer 2",
+      "semanticDefinitionRef": {
+        "id": "mixer-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-mixer2-temp",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "mixer1-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixer1",
+      "targetInstanceRef": {
+        "id": "mixer1",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "temp",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixer1-temp",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "temp"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixer1-temp",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "mixer2-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "mixer2",
+      "targetInstanceRef": {
+        "id": "mixer2",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "temp-mixer2",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "mixer2-temp",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "temp"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "Cel"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-mixer2-temp",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    }
+  ],
+  "equipmentHierarchies": [
+    {
+      "kind": "equipment-hierarchy",
+      "schemaVersion": "2.23.0",
+      "id": "vor-plant",
+      "version": "1.0.0",
+      "label": "Synthetic plant",
+      "levelVocabulary": "opc-10030-1.00-isa95-equipment-element-level-enum",
+      "nodes": [
+        {
+          "equipmentInstanceId": "synthetic-site",
+          "label": "Synthetic site",
+          "equipmentLevel": "SITE_1",
+          "parentEquipmentInstanceId": null,
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 2
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "line1",
+          "label": "Line 1",
+          "equipmentLevel": "PRODUCTIONLINE_5",
+          "parentEquipmentInstanceId": "synthetic-site",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 3
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "mixer1",
+          "label": "Mixer 1",
+          "equipmentLevel": "WORKCELL_6",
+          "parentEquipmentInstanceId": "line1",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 4
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "mixer2",
+          "label": "Mixer 2",
+          "equipmentLevel": "WORKCELL_6",
+          "parentEquipmentInstanceId": "line1",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 5
+              }
+            }
+          ]
+        }
+      ],
+      "evidenceRefs": []
+    }
+  ],
+  "hierarchyEvidence": [
+    {
+      "id": "plant-register",
+      "version": "1.0.0",
+      "label": "Synthetic plant register",
+      "format": "csv",
+      "scope": [
+        "synthetic-site",
+        "line1",
+        "mixer1",
+        "mixer2"
+      ],
+      "bytesBase64": "ZXF1aXBtZW50SW5zdGFuY2VJZCxsYWJlbCxlcXVpcG1lbnRMZXZlbCxwYXJlbnQKc3ludGhldGljLXNpdGUsU3ludGhldGljIHNpdGUsU0lURV8xLApsaW5lMSxMaW5lIDEsUFJPRFVDVElPTkxJTkVfNSxzeW50aGV0aWMtc2l0ZQptaXhlcjEsTWl4ZXIgMSxXT1JLQ0VMTF82LGxpbmUxCm1peGVyMixNaXhlciAyLFdPUktDRUxMXzYsbGluZTEK",
+      "sha256": "9c66ba69fd4e5917fc1fb7da98412a1f2dddb137321d5e016d424ac5289b0df8",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-01T00:00:00Z",
+      "reviewer": "fixture-reviewer",
+      "product": null
+    }
+  ],
+  "readBindings": [
+    {
+      "id": "mixer1-temp",
+      "version": "1.0.0",
+      "label": "Mixer 1 Temp read binding",
+      "bytesBase64": "ewogICJwcm9maWxlVmVyc2lvbiI6ICIwLjEuMCIsCiAgInN0cmVhbUlkIjogImxpbmUxIiwKICAibWFwcGluZ1NldFJlZiI6IHsKICAgICJpZCI6ICJtaXhlcjEtbWFwcGluZyIsCiAgICAidmVyc2lvbiI6ICIxLjAuMCIKICB9LAogICJtYXBwaW5nSWQiOiAidGVtcCIsCiAgImVxdWlwbWVudEluc3RhbmNlSWQiOiAibWl4ZXIxIiwKICAic2VtYW50aWNJZCI6ICJ1cm46Ymlmcm9zdDpzZW06TWl4ZXIvVGVtcCIsCiAgImdyb3VwIjogIkJpZnJvc3Q6TGluZTEiLAogICJlZGdlIjogInJlY2lwZS1lZGdlIiwKICAiZGV2aWNlIjogInN5bnRoZXRpYy1zaXRlOmxpbmUxOm1peGVyMSIsCiAgIm1ldHJpYyI6ICJUZW1wIiwKICAiZ292ZXJuZWREZWZpbml0aW9uUmVmIjogewogICAgInRlbXBsYXRlUmVmIjogIkxpbmUxLU1peGVyIiwKICAgICJ2ZXJzaW9uIjogIjEuMC4wIiwKICAgICJzaGEyNTYiOiAiYTMwMjVjYzIzZWE0YzhkNTg0YTY5M2QyMWM4NGI2M2E5MmJjNDUyM2RkNmEzMTM4M2M5NzNkZjRkZmE2MGUyYiIKICB9LAogICJwcm9qZWN0aW9uIjogImlkZW50aXR5Igp9Cg==",
+      "sha256": "f3102587f64ff348558c3602e5876facf70ae5eaf829110031f66d72a3b8d1f1",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-01T00:00:00Z",
+      "reviewer": "fixture-reviewer",
+      "product": null
+    },
+    {
+      "id": "mixer2-temp",
+      "version": "1.0.0",
+      "label": "Mixer 2 Temp read binding",
+      "bytesBase64": "ewogICJwcm9maWxlVmVyc2lvbiI6ICIwLjEuMCIsCiAgInN0cmVhbUlkIjogImxpbmUxIiwKICAibWFwcGluZ1NldFJlZiI6IHsKICAgICJpZCI6ICJtaXhlcjItbWFwcGluZyIsCiAgICAidmVyc2lvbiI6ICIxLjAuMCIKICB9LAogICJtYXBwaW5nSWQiOiAidGVtcC1taXhlcjIiLAogICJlcXVpcG1lbnRJbnN0YW5jZUlkIjogIm1peGVyMiIsCiAgInNlbWFudGljSWQiOiAidXJuOmJpZnJvc3Q6c2VtOk1peGVyL1RlbXAiLAogICJncm91cCI6ICJCaWZyb3N0OkxpbmUxIiwKICAiZWRnZSI6ICJyZWNpcGUtZWRnZSIsCiAgImRldmljZSI6ICJzeW50aGV0aWMtc2l0ZTpsaW5lMTptaXhlcjIiLAogICJtZXRyaWMiOiAiVGVtcCIsCiAgImdvdmVybmVkRGVmaW5pdGlvblJlZiI6IHsKICAgICJ0ZW1wbGF0ZVJlZiI6ICJMaW5lMS1NaXhlciIsCiAgICAidmVyc2lvbiI6ICIxLjAuMCIsCiAgICAic2hhMjU2IjogImEzMDI1Y2MyM2VhNGM4ZDU4NGE2OTNkMjFjODRiNjNhOTJiYzQ1MjNkZDZhMzEzODNjOTczZGY0ZGZhNjBlMmIiCiAgfSwKICAicHJvamVjdGlvbiI6ICJpZGVudGl0eSIKfQo=",
+      "sha256": "131d5f432cbf652e09bad1c33369c5b4662ad16fca985177349111c894657c09",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-01T00:00:00Z",
+      "reviewer": "fixture-reviewer",
+      "product": null
+    }
+  ],
+  "commandBindings": [
+    {
+      "kind": "command-binding",
+      "schemaVersion": "2.25.0",
+      "id": "mixer1-set-temperature",
+      "version": "1.0.0",
+      "equipmentRef": {
+        "id": "vor-plant",
+        "version": "1.0.0",
+        "equipmentInstanceId": "mixer1"
+      },
+      "readBindingRef": {
+        "id": "read-binding-mixer1-temp",
+        "version": "1.0.0"
+      },
+      "command": {
+        "group": "Bifrost:Line1",
+        "edge": "recipe-edge"
+      },
+      "method": {
+        "objectNodeId": "nsu=urn:bifrost:opcua:sim;s=Line1/Mixer1",
+        "methodNodeId": "nsu=urn:bifrost:opcua:sim;s=Line1/Mixer1.SetTemperature",
+        "inputs": [
+          {
+            "name": "targetTemperature",
+            "type": "Double",
+            "unit": "Cel"
+          }
+        ]
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-mixer1-temp",
+          "locator": {
+            "kind": "text-line",
+            "line": 3
+          }
+        }
+      ]
+    },
+    {
+      "kind": "command-binding",
+      "schemaVersion": "2.25.0",
+      "id": "mixer2-set-temperature",
+      "version": "1.0.0",
+      "equipmentRef": {
+        "id": "vor-plant",
+        "version": "1.0.0",
+        "equipmentInstanceId": "mixer2"
+      },
+      "readBindingRef": {
+        "id": "read-binding-mixer2-temp",
+        "version": "1.0.0"
+      },
+      "command": {
+        "group": "Bifrost:Line1",
+        "edge": "recipe-edge"
+      },
+      "method": {
+        "objectNodeId": "nsu=urn:bifrost:opcua:sim;s=Line1/Mixer2",
+        "methodNodeId": "nsu=urn:bifrost:opcua:sim;s=Line1/Mixer2.SetTemperature",
+        "inputs": [
+          {
+            "name": "targetTemperature",
+            "type": "Double",
+            "unit": "Cel"
+          }
+        ]
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-mixer2-temp",
+          "locator": {
+            "kind": "text-line",
+            "line": 3
+          }
+        }
+      ]
+    }
+  ]
+}
