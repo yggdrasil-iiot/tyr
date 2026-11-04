@@ -78,6 +78,14 @@ class CommandBinding(unittest.TestCase):
  def test_link_to_another_equipments_read_binding(self):
   self.refused(relinked(lambda c:c['readBindingRef'].update(id='read-binding-mixer1-temp'),1),'command-binding.device-path')
  def test_unknown_read_binding(self):self.refused(relinked(lambda c:c['readBindingRef'].update(version='9.9.9')),'command-binding.unresolved')
+ def test_link_to_an_artifact_that_is_not_an_imported_read_binding(self):
+  # A valid profile under another evidence id would skip reconciliation scope and the export stream check.
+  p=load(BUNDLE/'proposal.json');docs=[load(BUNDLE/e['path']) for e in p['files']]
+  for d in docs:
+   if d['kind']=='evidence-artifact' and d['id']=='read-binding-mixer1-temp':d['id']='commissioning-mixer1-temp'
+   if d['kind']==cb.KIND and d['readBindingRef']['id']=='read-binding-mixer1-temp':d['readBindingRef']['id']='commissioning-mixer1-temp'
+  self.assertRaisesRegex(ValueError,'command-binding.unresolved',cb.validate,docs,lambda q:(BUNDLE/q).read_bytes())
+  cb.validate([load(BUNDLE/e['path']) for e in p['files']],lambda q:(BUNDLE/q).read_bytes())
  def test_unknown_equipment_node(self):self.refused(relinked(lambda c:c['equipmentRef'].update(equipmentInstanceId='mixer9')),'command-binding.unresolved')
  def test_two_inputs(self):
   self.refused(relinked(lambda c:c['method']['inputs'].append(dict(c['method']['inputs'][0],name='rampRate'))),'command-binding.inputs')

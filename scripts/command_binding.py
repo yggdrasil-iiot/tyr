@@ -64,12 +64,12 @@ def reconcile(b,docs,h):
 def validate(docs,read):
  """docs: every document in one package; read(path) returns a data file's bytes. Returns the profiles by artifact id."""
  docs=list(docs);hs=[d for d in docs if d.get('kind')=='equipment-hierarchy'];links=[d for d in docs if d.get('kind')==KIND]
- arts={d['id']:d for d in docs if d.get('kind')=='evidence-artifact'}
- bound={c['readBindingRef']['id'] for c in links}
- if not links and not any(i.startswith(PREFIX) for i in arts):return {}
+ # A link names its read binding by id@version, and only an imported read binding (the prefixed artifact) can be one.
+ for c in links:require(c['readBindingRef']['id'].startswith(PREFIX),'command-binding.unresolved')
+ arts={(d['id'],d['version']):d for d in docs if d.get('kind')=='evidence-artifact' and d['id'].startswith(PREFIX)}
+ if not links and not arts:return {}
  profiles={}
  for i,a in arts.items():
-  if not (i.startswith(PREFIX) or i in bound):continue
   b=profile(read(a['file']['path']));require(len(hs)==1,'command-binding.unresolved')
   reconcile(b,docs,hs[0]);profiles[i]=b
  units=ucum();keys=set()
@@ -77,7 +77,7 @@ def validate(docs,read):
   eq=c['equipmentRef'];h=find(docs,'equipment-hierarchy',eq);a=find(docs,'evidence-artifact',c['readBindingRef'])
   require(h is not None and a is not None and a['schemaVersion']=='1.1.0','command-binding.unresolved')
   require(any(n['equipmentInstanceId']==eq['equipmentInstanceId'] for n in h['nodes']),'command-binding.unresolved')
-  b=profiles[a['id']]
+  b=profiles[(a['id'],a['version'])]
   require(b['equipmentInstanceId']==eq['equipmentInstanceId'] and b['device']==path(h,eq['equipmentInstanceId']),'command-binding.device-path')
   ins=c['method']['inputs']
   require(len(ins)==1 and ins[0]['name']!='' and ins[0]['type']=='Double' and ins[0]['unit'] in units,'command-binding.inputs')

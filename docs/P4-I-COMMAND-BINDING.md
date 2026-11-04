@@ -79,7 +79,7 @@ API로는 목록을 조회하는 `GET /api/command-binding`, 요청을 검증하
 두 시스템 사이에 공유 코드는 없다. Bifrost는 2.25.0 스키마의 바이트 단위 동일 사본과 자체 구현체(`CommandBindings`, `ReadBindingProfile`)를 유지하며 동일한 번들을 독립 검증한다. 명령 시점에 `gates command approve`와 Heimdall이 발행된 릴리스에서 링크를 확인한다.
 
 ## 시험
-`scripts/test_command_binding.py`에 35개 시험을 둔다. 픽스처 `fixtures/command-binding/workspace.json`은 설비 `synthetic-site`, `line1`, `mixer1`, `mixer2`, 믹서당 하나의 OPC UA 소스, 타깃, 매핑 세트, ISA-95 계층, 가져온 read binding 2개(Bifrost의 `vor-read` 픽스처 프로필 바이트를 변경 없이 사용), 링크 2개(`mixer1-set-temperature`, `mixer2-set-temperature`)로 구성된다. `fixtures/command-binding/bundle/`은 스트림 `line1`에서 빌드한 발행 산출물이다.
+`scripts/test_command_binding.py`에 36개 시험을 둔다. 픽스처 `fixtures/command-binding/workspace.json`은 설비 `synthetic-site`, `line1`, `mixer1`, `mixer2`, 믹서당 하나의 OPC UA 소스, 타깃, 매핑 세트, ISA-95 계층, 가져온 read binding 2개(Bifrost의 `vor-read` 픽스처 프로필 바이트를 변경 없이 사용), 링크 2개(`mixer1-set-temperature`, `mixer2-set-temperature`)로 구성된다. `fixtures/command-binding/bundle/`은 스트림 `line1`에서 빌드한 발행 산출물이다.
 
 시험 하나는 작업공간에서 번들을 다시 빌드하여 바이트를 비교한다. 다른 시험은 번들을 Bifrost 사본(`core/src/test/resources/mapping-fixtures/command-binding`, Bifrost의 `MappingTyrCommandBindingTest`가 실행함)과 바이트 단위로 비교하고 Bifrost의 `gates mapping validate`를 실행한다.
 
