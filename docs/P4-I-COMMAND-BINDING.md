@@ -17,6 +17,27 @@ Bifrost에서 바이트 단위로 동일하게 `contracts/2.25.0/` 디렉터리�
 
 링크에는 Method 시그니처(입력 이름, 타입, 단위)가 포함된다. 허용 범위(최솟값, 최댓값)는 각 에지의 명령 정책(command policy)에 남는다.
 
+## 계약 2.26.0과 서버 인증서
+
+계약 2.26.0은 Bifrost에서 바이트 단위로 그대로 `contracts/2.26.0/`(`command-binding`, `common`, `mapping-proposal`)에 복사된다. `common`과 `mapping-proposal`은 버전 문자열만 2.25.0과 다르다. `command-binding`에는 필수 필드인 `endpointRef: {applicationUri, certificates: [{thumbprintSha1, certificateRef: {id, version}}]}`가 추가된다. `thumbprintSha1`은 인증서 DER의 SHA-1 값인 소문자 16진수 40자리이며, `certificates` 목록은 1개에서 8개 항목을 담는다. 후임 인증서를 추가하고 전임 인증서를 제거하는 릴리스를 거쳐 겹침 구간을 두는 서버 인증서 교체가 이 목록으로 허용된다. Bifrost와 Heimdall은 명령 시점에 `endpointRef`가 없는 모든 링크(모든 2.25.0 링크)를 `command.link.endpoint`(`missing`)로 거절한다. Tyr는 2.26.0 링크만 작성한다. 작업공간에서 `schemaVersion`이 `2.26.0`이 아니거나 2.26.0 스키마 검증에 실패한(예: `endpointRef` 누락) `commandBindings` 항목은 거절된다(`command-binding: schema validation failed`). 패키지 빌더는 링크가 있으면 제안서 `schemaVersion`을 2.26.0으로 설정한다(이전에는 2.25.0이었다).
+
+서버 인증서 가져오기에서는 작업공간 키 `serverCertificates`에 최대 256개 레코드를 보관한다. 편집기 스키마는 `editor-contracts/1.0.0/server-certificate-import.schema.json`이며, `id`, `version`, `label`, `bytesBase64`, `sha256`, `origin`(`synthetic` 또는 `field`), `capturedAt`, `reviewer`, `product`, `scope`(서버가 담당하는 설비인 1~256개의 고유 설비 ID) 필드가 정의되어 있다. 인증서는 최대 16 KiB 크기의 DER로 저장된다. `backend/server_certificates.py`에서 다음 항목을 검사한다:
+- 스키마 형식(`server-certificate.schema`)
+- 중복 `id`(`server-certificate.duplicate`)
+- Base64(`server-certificate.bytes`)
+- 크기 한도(`server-certificate.limit`)
+- 바이트의 SHA-256(`server-certificate.digest`)
+- DER 형식의 정확히 단 하나의 X.509 인증서 바이트(`server-certificate.der`)
+- 정확히 단 하나의 subjectAltName URI(없거나 둘 이상이면 거절)(`server-certificate.san-uri`)
+- 작업공간 설비와 일치하는 모든 `scope` 항목(`server-certificate.equipment`)
+- 변경된 기존 레코드의 새 버전 요구(`server-certificate.version-required`)
+
+파싱에는 `cffi`, `pycparser`와 함께 `requirements-contracts.txt`에 추가된 `cryptography` 패키지와 Tyr 자체 코드인 `scripts/server_certificate.py`를 사용한다. 여기서 DER의 SHA-1 지문(소문자 16진수)과 단 하나의 subjectAltName URI를 도출한다. 이 값은 Bifrost가 발행 시점에 다시 도출하고 Heimdall이 실제 OPC UA 세션과 대조하는 값이다. DER은 다시 인코딩되지 않으며, 바이트는 인증서 자체의 DER 인코딩과 같아야 한다.
+
+가져오기 단계인 `POST /api/server-certificate-import`는 선택한 파일(DER 또는 PEM)의 `{bytesBase64}`를 받는다. PEM은 정확히 단 하나의 `CERTIFICATE` 블록만 받아들이며, base64 본문을 DER로 디코딩한다(블록이 둘이거나, 다른 블록 타입이거나, DER 뒤에 남은 바이트가 있으면 `server-certificate.der`로 거절한다). 이 요청은 DER(`bytesBase64`), `sha256`, `thumbprintSha1`, `applicationUri`를 반환하며 아무것도 저장하지 않는다.
+
+패키지 빌더는 DER을 변경 없이 그대로 `data/server-certificate-<n>.der`에 작성하고 `evidence/server-certificate-<n>.json`(evidence-artifact `schemaVersion` `1.1.0`, `id` = `server-certificate-` + 레코드 `id`, 미디어 타입 `application/pkix-cert`, `scope` = 레코드의 `scope`)으로 감싼다.
+
 ## read binding 가져오기
 작업공간 키 `readBindings`에 최대 256개 레코드를 허용한다. 편집기 스키마 `editor-contracts/1.0.0/read-binding-import.schema.json`에는 `id`, `version`, `label`, `bytesBase64`, `sha256`, `origin`(`synthetic` 또는 `field`), `capturedAt`, `reviewer`, `product` 필드가 정의되어 있다. 프로필 바이트 크기는 최대 64 KiB이다.
 
@@ -50,19 +71,21 @@ Tyr는 `scripts/command_binding.py`에 검사 규칙을 구현하며, 규칙을 
 링크 자체 검사 규칙(Bifrost 발행 검사 코드와 동일):
 - `command-binding.unresolved`: 계층, read binding의 evidence-artifact(`schemaVersion` `1.1.0`), 설비 노드를 찾을 수 없을 때 반환한다.
 - `command-binding.device-path`: 프로필의 설비가 링크의 설비와 다르거나, 프로필의 `device`가 링크 설비의 계층 경로와 다를 때 반환한다.
-- `command-binding.inputs`: `inputs`가 비어 있지 않은 이름, `Double` 타입, 2.25.0 공통 스키마에 나열된 UCUM 코드가 있는 단 하나의 입력이 아닐 때 반환한다.
+- `command-binding.inputs`: `inputs`가 비어 있지 않은 이름, `Double` 타입, 링크 자체의 계약 버전 공통 스키마에 나열된 UCUM 코드가 있는 단 하나의 입력이 아닐 때 반환한다.
+- `command-binding.endpoint`: 나열된 `certificateRef`가 `schemaVersion` `1.1.0`, id 접두사 `server-certificate-`, 미디어 타입 `application/pkix-cert`인 evidence-artifact로 확인되지 않거나, 파일 파싱에 실패하거나, SHA-1이 `thumbprintSha1`과 일치하지 않거나, subjectAltName URI가 링크의 `applicationUri`와 일치하지 않거나, 인증서가 중복으로 나열되었을 때 반환한다.
+- `command-binding.envelope`: `schemaVersion`이 `2.26.0`이 아닌 제안서에 2.26.0 문서가 포함되었을 때 반환한다.
 - `command-binding.duplicate`: 두 링크가 read binding의 `device`와 `methodNodeId`를 공유할 때 반환한다.
 
 작업공간 검사 단계에서는 스키마 형식 오류와 중복된 링크 `id`도 차단한다.
 
 ## 발행
-작업공간 키 `commandBindings`에 최대 256개 링크를 허용한다. 빌더는 `command-bindings/<n>.json`을 작성하고 제안서 `schemaVersion`을 2.25.0으로 설정한다. 링크가 없는 패키지는 이전 버전을 유지한다.
+작업공간 키 `commandBindings`에 최대 256개 링크를 허용한다. 빌더는 `command-bindings/<n>.json`을 작성하고 제안서 `schemaVersion`을 2.26.0으로 설정한다. 링크가 없는 패키지는 이전 버전을 유지한다.
 
-링크는 read binding이 읽는 매핑 세트와 함께만 발행된다. 이때 `readBindingRef`를 따라 read binding의 evidence-artifact와 데이터 파일이 제출물에 함께 실린다.
+링크는 read binding이 읽는 매핑 세트와 함께만 발행된다. 이때 `readBindingRef`를 따라 read binding의 evidence-artifact와 데이터 파일이 제출물에 함께 실린다. `readBindingRef`와 마찬가지로, `certificateRef`를 따라 지정된 각 서버 인증서 산출물과 DER 파일이 제출물에 함께 실린다.
 
 내보내기 단계에서 발행 대상 프로필의 `streamId`가 내보내기 스트림과 다르면 `read-binding.stream` 코드로 거절한다. 아무 파일도 작성하지 않으며 가져온 바이트는 그대로 유지된다. 다른 스트림에는 시운전에서 새로 만든 프로필을 가져와야 한다.
 
-2.24.0 제안서는 새 종류를 나열할 수 없어 스키마 검증에 실패한다. 2.21 레코드 필드 검사와 2.22 브로드캐스트 봉투 검사는 2.25.0을 받아들인다.
+2.24.0 제안서는 새 종류를 나열할 수 없어 스키마 검증에 실패한다. 2.26.0 링크를 담은 2.25.0 제안서는 `command-binding.envelope`로 거절된다. 2.21 레코드 필드 검사와 2.22 브로드캐스트 봉투 검사는 2.25.0과 2.26.0을 받아들인다.
 
 ## 작성 화면
 Tyr의 연결 단계에는 명령 링크 화면(프런트엔드 `frontend/command-binding.js`, 백엔드 `backend/command_binding_authoring.py`)이 있다. 승인은 Bifrost가 한다.
@@ -70,26 +93,24 @@ API로는 목록을 조회하는 `GET /api/command-binding`, 요청을 검증하
 
 - plan과 apply에는 작업공간 리비전을 담으며, 오래된 리비전은 충돌로 거절하고 검증된 plan과 다른 요청은 `command-binding.plan-changed`로 저장을 거절한다.
 - 목록에는 가져온 read binding마다 evidence-artifact `id`(`read-binding-` + 레코드 `id`), 버전, 출처, 검토자, 바이트에서 디코딩한 프로필 텍스트, SHA-256, 작업공간 대조 결과(`ok` 또는 거절 코드)를 표시한다.
-- 링크, 설비 계층구조와 설비, 2.25.0 공통 스키마의 UCUM 단위, 링크가 인용할 수 있는 근거 자료 목록도 함께 표시한다.
+- 링크, 설비 계층구조와 설비, 2.26.0 공통 스키마의 UCUM 단위, 링크가 인용할 수 있는 근거 자료 목록도 함께 표시한다.
 - 프로필 가져오기는 선택한 `.json` 파일(최대 64 KiB)을 읽어 바이트와 SHA-256을 원본 그대로 저장하며, 기존 레코드를 바꿀 때는 새 버전이 필요하다.
 - 각 링크에서 운영자는 read binding과 별개로 Method가 속한 설비를 선택하며, 프로필의 설비와 다르면 `command-binding.device-path`로 검증을 거절한다.
 - 계층 참조는 작업공간의 설비 계층에서 채우고 입력 형식은 `Double`이며, 허용 범위(최솟값, 최댓값)는 각 에지의 명령 정책에 둔다.
+- 작성 화면(`frontend/command-binding.js`, `backend/command_binding_authoring.py`)의 계획(plan) 및 적용(apply) 요청에는 `readBindings`, `commandBindings`와 함께 `serverCertificates`가 실린다. 목록에는 각 인증서의 `evidence-artifact` `id`(`server-certificate-` + 레코드 `id`), 버전, 출처, 검토자, 범위(`scope`), DER SHA-256과 도출된 `applicationUri` 및 SHA-1 지문(`thumbprintSha1`)이 표시된다.
+- 인증서 가져오기는 가져오기 단계에서 DER 또는 PEM 파일을 읽어 도출된 값을 표시한다.
+- 각 링크에는 가져온 인증서를 하나 이상(교체 중에는 둘) 지정한다. 지정한 인증서 값으로 `applicationUri`와 `thumbprintSha1`을 채우며, 검증 시점에 DER 바이트와 다시 대조한다.
 
 ## Bifrost와의 경계
-두 시스템 사이에 공유 코드는 없다. Bifrost는 2.25.0 스키마의 바이트 단위 동일 사본과 자체 구현체(`CommandBindings`, `ReadBindingProfile`)를 유지하며 동일한 번들을 독립 검증한다. 명령 시점에 `gates command approve`와 Heimdall이 발행된 릴리스에서 링크를 확인한다.
+두 시스템 사이에 공유 코드는 없다. Bifrost는 2.25.0·2.26.0 스키마의 바이트 단위 동일 사본과 자체 구현체(`CommandBindings`, `ReadBindingProfile`, `ServerCertificates`)를 유지하며 동일한 번들을 독립 검증한다. 명령 시점에 `gates command approve`와 Heimdall이 발행된 릴리스에서 링크를 확인한다.
 
 ## 시험
-`scripts/test_command_binding.py`에 36개 시험을 둔다. 픽스처 `fixtures/command-binding/workspace.json`은 설비 `synthetic-site`, `line1`, `mixer1`, `mixer2`, 믹서당 하나의 OPC UA 소스, 타깃, 매핑 세트, ISA-95 계층, 가져온 read binding 2개(Bifrost의 `vor-read` 픽스처 프로필 바이트를 변경 없이 사용), 링크 2개(`mixer1-set-temperature`, `mixer2-set-temperature`)로 구성된다. `fixtures/command-binding/bundle/`은 스트림 `line1`에서 빌드한 발행 산출물이다.
+`scripts/test_command_binding.py`에는 52개 시험(`CommandBinding` 32개, `Endpoint` 15개, `Authoring` 5개)이 있다. 픽스처 작업공간에는 설비 `synthetic-site`, `line1`, `mixer1`, `mixer2`, 믹서당 하나의 OPC UA 소스, 타깃, 매핑 세트, ISA-95 계층, 변경 없는 Bifrost의 `vor-read` 픽스처 프로필 바이트를 가져온 두 read binding, 두 링크(`mixer1-set-temperature`, `mixer2-set-temperature`)가 있다. 여기에 서버 인증서 `sim`(Bifrost의 `vor-read` 픽스처 `server-certificate-sim.der`의 DER 바이트, SAN URI `urn:bifrost:opcua:sim-server`, 범위 `line1`)을 추가하였으며 두 링크에 모두 이 인증서를 지정한다.
 
-시험 하나는 작업공간에서 번들을 다시 빌드하여 바이트를 비교한다. 다른 시험은 번들을 Bifrost 사본(`core/src/test/resources/mapping-fixtures/command-binding`, Bifrost의 `MappingTyrCommandBindingTest`가 실행함)과 바이트 단위로 비교하고 Bifrost의 `gates mapping validate`를 실행한다.
+`fixtures/command-binding/bundle/`은 스트림 `line1`용으로 빌드한 발행 산출물이다. 한 시험에서는 작업공간에서 번들을 다시 빌드하여 바이트를 대조한다. 다른 시험에서는 번들을 Bifrost의 사본(`core/src/test/resources/mapping-fixtures/command-binding`, Bifrost의 `MappingTyrCommandBindingTest`가 실행)과 바이트 단위로 대조하고 Bifrost의 `gates mapping validate`를 실행한다. 바이트 일치 시험에서는 탭으로 들여쓴 프로필을 가져와 동일한 바이트와 해시로 패키징하는지 확인한다.
 
-바이트 동일성 시험에서는 탭으로 들여쓰기를 바꾼 프로필을 가져왔을 때 동일한 바이트와 해시로 패키징되는지 확인한다.
+모든 거절 코드마다 전용 시험이 있다. 새 시험에서는 픽스처 인증서가 Bifrost의 바이트와 일치하며 링크 값을 도출하는지, DER을 변경하지 않고 `application/pkix-cert`로 패키징하는지, DER과 PEM 가져오기가 동일한 DER을 생성하는지 확인한다. 또한 가져오기 거절(PEM 블록 2개, 인증서가 아닌 바이트, 뒤따르는 바이트, 잘못된 PEM 블록 유형, SAN URI 없음, SAN URI 2개, 크기 초과)과 모든 `server-certificate.*` 코드의 작업공간 거절을 확인한다. `endpointRef`가 없거나 2.25.0 버전인 링크는 작성하지 않는다. 잘못된 지문, 잘못된 `applicationUri`, 알 수 없는 인증서, 두 번 나열된 인증서, 다른 서버의 인증서, 서버 인증서가 아닌 산출물 참조에는 `command-binding.endpoint` 거절을 확인한다. 한 서버의 인증서 둘이 겹치는 교체 중첩은 받아들여 발행한다. 바뀐 DER은 패키지 검사만으로 거절한다. 2.26.0 스키마가 2.25.0 스키마와 오직 `endpointRef`로만 다른 점과, 2.26.0 링크를 담은 2.25.0 제안서를 `command-binding.envelope`로 거절하는 점도 검증한다. 시험용 인증서는 시험 안에서 `cryptography`로 생성한다.
 
-모든 거절 코드에는 전용 시험이 있다.
+`Authoring` 클래스의 5개 시험에서는 목록(프로필 텍스트, SHA-256, `ok` 대조 결과와 각 인증서에서 도출한 지문, `applicationUri`, 범위), `device`가 대조되지 않는 프로필의 계획 거절(`command-binding.device-path`), 적용 저장 및 비우기(`serverCertificates` 포함), 오래된 리비전, 계획 후 변경된 요청(`command-binding.plan-changed`), 버전 없는 프로필 변경(`read-binding.version-required`) 및 버전 없는 인증서 변경(`server-certificate.version-required`), 가져오기 단계를 포함한 HTTP 경로를 검사한다.
 
-검사를 하나씩 비활성화하며 수동으로 실행하는 결함 주입(fault injection) 결과는 다음과 같다.
-- 대조 검사를 제거하면 7개 시험이 실패한다.
-- 바이트 복사를 다시 직렬화하는 작성기로 교체하면 바이트 동일성 시험이 실패한다 (픽스처 프로필 형식이 직렬화기 형식과 일치하므로 픽스처 프로필만으로는 이를 발견할 수 없다).
-- 스트림 검사를 제거하면 스트림 시험이 실패한다.
-
-`scripts/test_command_binding.py`의 `Authoring` 클래스에 있는 시험 5개 가운데 4개에서는 두 픽스처 프로필의 바이트와 일치하는 프로필 텍스트, SHA-256, `ok` 대조 결과가 목록에 나타나는지 확인하고, `device`가 대조되지 않는 프로필을 plan에서 `command-binding.device-path`로 거절하는지 검증한다. 또한 apply로 저장을 확인하고 빈 요청으로 `readBindings`와 `commandBindings`를 비우며, 오래된 리비전, plan 이후 변경된 요청(`command-binding.plan-changed`), 새 버전이 없는 프로필 변경(`read-binding.version-required`)을 거절하는지 시험한다. plan의 버전 규칙을 제거하면 마지막 시험이 실패한다.
+이전 결함 주입에서는 대조를 제거하면 7개 시험이 실패하고, 다시 직렬화하는 작성기는 바이트 일치 시험에서 실패하며(픽스처 프로필 자체는 직렬화기 형식과 일치하므로 단독으로는 차이를 드러내지 못한다), 스트림 검사를 제거하면 스트림 시험이 실패한다. 계획의 버전 규칙을 제거하면 버전 변경을 검사하는 마지막 시험이 실패한다. 수동으로 진행한 결함 주입에서는 엔드포인트 검사를 제거하면 7개 시험이 실패하고, 봉투 규칙을 제거하면 봉투 시험이 실패한다.

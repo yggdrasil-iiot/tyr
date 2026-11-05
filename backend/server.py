@@ -236,6 +236,7 @@ class Store:
             result_schemas.transition(json.loads(current_body),state)
             __import__("hierarchy_evidence").transition(json.loads(current_body),state)
             __import__("read_bindings").transition(json.loads(current_body),state)
+            __import__("server_certificates").transition(json.loads(current_body),state)
             try:import_workflow.check_transition(json.loads(current_body),state)
             except ValueError as e:raise Invalid(str(e)) from e
             cursor = c.execute("UPDATE workspace SET revision=revision+1,body=?,updated_at=? WHERE id=1 AND revision=?",
@@ -347,7 +348,7 @@ def make_server(store, port=8765, bifrost_jar=None, mapping_registry=None):
         def do_PUT(self):
             if not self.origin_ok() or self.headers.get("X-Tyr-Editor") != "1":
                 return self.reply(403, {"error": "Local editor request required"})
-            if self.path not in ("/api/equipment-hierarchy-plan","/api/equipment-hierarchy-apply","/api/command-binding-plan","/api/command-binding-apply","/api/result-schema-plan","/api/result-schema-apply","/api/broadcast-compose","/api/broadcast-preview","/api/broadcast-scenarios","/api/mixed-object-compose","/api/mixed-object-apply","/api/record-compose","/api/record-plan","/api/record-apply","/api/record-preview","/api/record-scenarios","/api/template-capture","/api/template-save","/api/template-choices","/api/template-plan","/api/template-apply","/api/semantic-lifecycle-apply","/api/expression-compile","/api/expression-apply","/api/workspace","/api/migrate","/api/preview","/api/logical-preview","/api/scenarios","/api/array-index","/api/import-review","/api/import-adopt-reviewed","/api/import-merge-preview","/api/import-merge-apply","/api/import-preview","/api/import-apply","/api/review-baselines","/api/review-diff","/api/reviews","/api/submissions","/api/submission-refresh","/api/submission-download","/api/submission-maintenance","/api/pov-template","/api/pov-evaluate"):
+            if self.path not in ("/api/equipment-hierarchy-plan","/api/equipment-hierarchy-apply","/api/command-binding-plan","/api/command-binding-apply","/api/server-certificate-import","/api/result-schema-plan","/api/result-schema-apply","/api/broadcast-compose","/api/broadcast-preview","/api/broadcast-scenarios","/api/mixed-object-compose","/api/mixed-object-apply","/api/record-compose","/api/record-plan","/api/record-apply","/api/record-preview","/api/record-scenarios","/api/template-capture","/api/template-save","/api/template-choices","/api/template-plan","/api/template-apply","/api/semantic-lifecycle-apply","/api/expression-compile","/api/expression-apply","/api/workspace","/api/migrate","/api/preview","/api/logical-preview","/api/scenarios","/api/array-index","/api/import-review","/api/import-adopt-reviewed","/api/import-merge-preview","/api/import-merge-apply","/api/import-preview","/api/import-apply","/api/review-baselines","/api/review-diff","/api/reviews","/api/submissions","/api/submission-refresh","/api/submission-download","/api/submission-maintenance","/api/pov-template","/api/pov-evaluate"):
                 return self.reply(404, {"error": "Not found"})
             try:
                 length = int(self.headers.get("Content-Length", "-1"))
@@ -359,6 +360,7 @@ def make_server(store, port=8765, bifrost_jar=None, mapping_registry=None):
                 if self.path == "/api/equipment-hierarchy-apply":return self.reply(200,hierarchy_authoring.apply(store,value,Conflict))
                 if self.path == "/api/command-binding-plan":return self.reply(200,command_binding_authoring.plan(store,value,Conflict,check_state)[0])
                 if self.path == "/api/command-binding-apply":return self.reply(200,command_binding_authoring.apply(store,value,Conflict))
+                if self.path == "/api/server-certificate-import":return self.reply(200,__import__("server_certificates").imported(value))
                 if self.path == "/api/result-schema-plan":return self.reply(200,result_schemas.plan(store,value,Conflict)[0])
                 if self.path == "/api/result-schema-apply":return self.reply(200,result_schemas.apply(store,value,Conflict))
                 if self.path == "/api/broadcast-compose":return self.reply(200,broadcast_authoring.compose(store,value,Conflict))

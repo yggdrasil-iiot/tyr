@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tyr:editor:server-certificate-import:1.0.0",
+  "description": "An imported OPC UA server certificate in DER, carried unchanged as an evidence-artifact (mediaType application/pkix-cert) with id 'server-certificate-' + id. A command link's endpointRef names it; Tyr derives its SHA-1 thumbprint and single subjectAltName URI and never edits it. scope lists the equipment the server serves.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,63}$"
+    },
+    "version": {
+      "$ref": "#/$defs/version"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "bytesBase64": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 21848,
+      "pattern": "^[A-Za-z0-9+/]*={0,2}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "origin": {
+      "enum": [
+        "synthetic",
+        "field"
+      ]
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "product": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          },
+          "required": [
+            "name",
+            "version"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "label",
+    "bytesBase64",
+    "sha256",
+    "origin",
+    "capturedAt",
+    "reviewer",
+    "product",
+    "scope"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    }
+  }
+}
