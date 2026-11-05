@@ -434,10 +434,26 @@
       "product": null
     }
   ],
+  "serverCertificates": [
+    {
+      "id": "sim",
+      "version": "1.0.0",
+      "label": "Line 1 OPC UA server",
+      "bytesBase64": "MIIDCTCCAfGgAwIBAgIJAMl/xr+qIZ9MMA0GCSqGSIb3DQEBCwUAMB0xGzAZBgNVBAMTEmJpZnJvc3QgdGVzdCBzaW0tYTAgFw0yNjEwMzExODU3NTBaGA8yMTI2MTAwNzE4NTc1MFowHTEbMBkGA1UEAxMSYmlmcm9zdCB0ZXN0IHNpbS1hMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2ke66+mXyARb/Rr0TgfapXoqZ2LraVaE7HhEvoxF06OYmObviQwr/5hCUMilExGc76ph+OvQt6QXVnz2BovYjhGfVgerXyKFFznWUmdzVqenh8bd2QhiRgCBk4EXL+SQs4vo6TrZdUNETYRn/R4KAYzGkkA3ne8BZtIEqSaC9vQfpszm1EU25PVrFdjSejSrYlyhHY13CDSWBEnii+ITHVfn5zpUykc1KBeGYuGUfvu3lvRSKu/qk1htlbtKGZz3f7s84L2KrxM7FsSGiLLAWW7ciFh5MJHYE7mBfpZbC/rJHxuU4oogvmC8eIBRKQcL2LOzjHQB8qfEUzmxAKpXgwIDAQABo0owSDAdBgNVHQ4EFgQUuhxcUeh/916tXR+bDk/nIX1VvHswJwYDVR0RBCAwHoYcdXJuOmJpZnJvc3Q6b3BjdWE6c2ltLXNlcnZlcjANBgkqhkiG9w0BAQsFAAOCAQEAsni0pB+ANlfHmqA9lXIzsYCnjmDfEAT7Fej3/BfjXfDCngVD8QY4Riv9G7OnrxrieoXMgoXIuDX8Mh3xy8A5Hs+xR6Sk9bBbQQykHG1wQk6xUlYtap3qgAQj+J3gJX55gI8HoTXgil46I1P4Ne2SeaNPXVUKTji0UTMcMF+F3xchZ4BzmaiX6dX8MZVZkckEdnnTgfhc+ceeP8OcLLxcmAcKC4bcg7I1SybN8PrNtOXBf0JrxHubub/sn5yGgjjH/+lq22qBQl5J8YJc4b9LMNVVbcCXgUkqS3m9x45LDwROaFEKBqAkKTtX2yB5KTzhiLBmHVJs7an79Ueq9LfRqA==",
+      "sha256": "5bad0585b4344dac5715d019731ede4de6f108fb9dbe7986c33aa879eae3b6f3",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-05T00:00:00Z",
+      "reviewer": "fixture-reviewer",
+      "product": null,
+      "scope": [
+        "line1"
+      ]
+    }
+  ],
   "commandBindings": [
     {
       "kind": "command-binding",
-      "schemaVersion": "2.25.0",
+      "schemaVersion": "2.26.0",
       "id": "mixer1-set-temperature",
       "version": "1.0.0",
       "equipmentRef": {
@@ -464,6 +480,18 @@
           }
         ]
       },
+      "endpointRef": {
+        "applicationUri": "urn:bifrost:opcua:sim-server",
+        "certificates": [
+          {
+            "thumbprintSha1": "f1b10d79fbe4ee83c978761ebc506bec9a123c5c",
+            "certificateRef": {
+              "id": "server-certificate-sim",
+              "version": "1.0.0"
+            }
+          }
+        ]
+      },
       "evidenceRefs": [
         {
           "artifactId": "manual-mixer1-temp",
@@ -476,7 +504,7 @@
     },
     {
       "kind": "command-binding",
-      "schemaVersion": "2.25.0",
+      "schemaVersion": "2.26.0",
       "id": "mixer2-set-temperature",
       "version": "1.0.0",
       "equipmentRef": {
@@ -500,6 +528,18 @@
             "name": "targetTemperature",
             "type": "Double",
             "unit": "Cel"
+          }
+        ]
+      },
+      "endpointRef": {
+        "applicationUri": "urn:bifrost:opcua:sim-server",
+        "certificates": [
+          {
+            "thumbprintSha1": "f1b10d79fbe4ee83c978761ebc506bec9a123c5c",
+            "certificateRef": {
+              "id": "server-certificate-sim",
+              "version": "1.0.0"
+            }
           }
         ]
       },

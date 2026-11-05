@@ -58,6 +58,8 @@ def build(state,folder,legacy_build):
     hierarchy_evidence.build(state,folder,p)
     import read_bindings
     read_bindings.build(state,folder,p)
+    import server_certificates
+    server_certificates.build(state,folder,p)
     if state.get("equipmentHierarchies"):
         (folder/"hierarchy").mkdir(exist_ok=True)
         p["schemaVersion"]="2.23.0"
@@ -72,7 +74,7 @@ def build(state,folder,legacy_build):
             p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
     if state.get("commandBindings"):
         (folder/"command-bindings").mkdir(exist_ok=True)
-        p["schemaVersion"]="2.25.0"
+        p["schemaVersion"]="2.26.0"
         for i,d in enumerate(state["commandBindings"]):
             rel="command-bindings/"+str(i)+".json";vc.save(folder/rel,d)
             p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
@@ -86,7 +88,7 @@ def findings(state,legacy_build):
 
 def check(state,legacy_check,legacy_build):
     keys={"workspaceVersion","equipment","connections","sources","semantics","mappings","targets","graphs"}
-    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence","metricDefinitions","readBindings","commandBindings"}:raise ValueError("workspace: unexpected/missing fields")
+    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence","metricDefinitions","readBindings","serverCertificates","commandBindings"}:raise ValueError("workspace: unexpected/missing fields")
     if state["workspaceVersion"]!=VERSION:raise ValueError("Unsupported workspaceVersion")
     for k in keys-{"workspaceVersion"}:
         if not isinstance(state[k],list) or len(state[k])>1000:raise ValueError(k+": expected list")
@@ -143,13 +145,17 @@ def check(state,legacy_check,legacy_build):
     if "readBindings" in state:
         import read_bindings
         read_bindings.check(state,equip)
+    if "serverCertificates" in state:
+        import server_certificates
+        server_certificates.check(state,equip)
     if "commandBindings" in state:
         import command_binding as cb
         cs=state["commandBindings"]
         if not isinstance(cs,list) or len(cs)>256:raise ValueError("command-binding.limit")
         ids=set()
         for d in cs:
-            if p3.schema_errors(cb.KIND,d):raise ValueError(cb.KIND+": schema validation failed")
+            # A link Tyr writes names its server (2.26.0): a 2.25.0 link would publish but authorize no command.
+            if d.get("schemaVersion")!=cb.VERSION or p3.schema_errors(cb.KIND,d):raise ValueError(cb.KIND+": schema validation failed")
             if d["id"] in ids:raise ValueError(cb.KIND+": duplicate id")
             ids.add(d["id"])
     # Incomplete objects and changed semantic constraints may remain drafts.

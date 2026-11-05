@@ -5,19 +5,23 @@ Tyr reads profile 0.1.0 with its own parser and reconciles every field it can de
 mapping, target, semantic member, source node, unit, hierarchy path). group, edge and governedDefinitionRef are
 deployment facts it cannot see and takes as given; streamId is checked against the export stream at publication.
 The command-binding.* codes are the ones Bifrost's publish check uses; read-binding.* are Tyr's reconciliation.
+From 2.26 a link names the OPC UA server it may reach (endpointRef): every listed certificate must resolve to an imported
+server-certificate artifact whose DER yields the listed thumbprint and the link's applicationUri.
 """
-import json
+import json,functools
 from semantic_lifecycle import require
 import validate_contracts as vc
+import server_certificate as sc
 KIND='command-binding'
-VERSION='2.25.0'
+VERSION='2.26.0'
 PROFILE='0.1.0'
 PREFIX='read-binding-'
 FIELDS={'profileVersion','streamId','mappingSetRef','mappingId','equipmentInstanceId','semanticId','group','edge','device','metric','governedDefinitionRef','projection'}
 TEXT=('streamId','mappingId','equipmentInstanceId','semanticId','group','edge','device','metric')
 
-def ucum():
- return set(vc.load(vc.ROOT/'contracts/2.25.0/common.schema.json')['$defs']['unit']['oneOf'][0]['properties']['code']['enum'])
+@functools.cache
+def ucum(version=VERSION):
+ return set(vc.load(vc.ROOT/'contracts'/version/'common.schema.json')['$defs']['unit']['oneOf'][0]['properties']['code']['enum'])
 
 def text(d,k):return isinstance(d.get(k),str) and d[k]!=''
 
@@ -61,6 +65,16 @@ def reconcile(b,docs,h):
  require(a.get('kind')=='opcua-node' and str(a.get('identifier','')).endswith('.'+b['metric']),'read-binding.source-node')
  require(m['outputUnit']==member['unit'],'read-binding.output-unit')
 
+def endpoint(c,docs,read):
+ """Bifrost's publish check for endpointRef: each certificate resolves, parses, and yields the listed values, once."""
+ e=c['endpointRef'];seen=set()
+ for x in e['certificates']:
+  a=find(docs,'evidence-artifact',x['certificateRef'])
+  require(a is not None and a['schemaVersion']=='1.1.0' and a['id'].startswith(sc.PREFIX) and a['file']['mediaType']==sc.MEDIA,'command-binding.endpoint')
+  try:t,u=sc.parse(read(a['file']['path']))
+  except ValueError as err:raise ValueError('command-binding.endpoint') from err
+  require(t==x['thumbprintSha1'] and u==e['applicationUri'] and t not in seen,'command-binding.endpoint');seen.add(t)
+
 def validate(docs,read):
  """docs: every document in one package; read(path) returns a data file's bytes. Returns the profiles by artifact id."""
  docs=list(docs);hs=[d for d in docs if d.get('kind')=='equipment-hierarchy'];links=[d for d in docs if d.get('kind')==KIND]
@@ -72,7 +86,7 @@ def validate(docs,read):
  for i,a in arts.items():
   b=profile(read(a['file']['path']));require(len(hs)==1,'command-binding.unresolved')
   reconcile(b,docs,hs[0]);profiles[i]=b
- units=ucum();keys=set()
+ keys=set()
  for c in links:
   eq=c['equipmentRef'];h=find(docs,'equipment-hierarchy',eq);a=find(docs,'evidence-artifact',c['readBindingRef'])
   require(h is not None and a is not None and a['schemaVersion']=='1.1.0','command-binding.unresolved')
@@ -80,6 +94,7 @@ def validate(docs,read):
   b=profiles[(a['id'],a['version'])]
   require(b['equipmentInstanceId']==eq['equipmentInstanceId'] and b['device']==path(h,eq['equipmentInstanceId']),'command-binding.device-path')
   ins=c['method']['inputs']
-  require(len(ins)==1 and ins[0]['name']!='' and ins[0]['type']=='Double' and ins[0]['unit'] in units,'command-binding.inputs')
+  require(len(ins)==1 and ins[0]['name']!='' and ins[0]['type']=='Double' and ins[0]['unit'] in ucum(c['schemaVersion']),'command-binding.inputs')
+  if c['schemaVersion']==VERSION:endpoint(c,docs,read)
   key=(b['device'],c['method']['methodNodeId']);require(key not in keys,'command-binding.duplicate');keys.add(key)
  return profiles

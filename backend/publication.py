@@ -59,7 +59,8 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             if k[0]=="record-mapping":include_record(docs[k])
         # A metric travels with the record-mapping result it is computed over.
         selected|={k for k,d in docs.items() if k[0]=="metric-definition" and ("record-mapping",d["dataset"]["recordMappingRef"]["id"],d["dataset"]["recordMappingRef"]["version"]) in selected}
-        # A command link travels with the mapping set its read binding reads; readBindingRef then brings the read binding.
+        # A command link travels with the mapping set its read binding reads; readBindingRef then brings the read binding
+        # and each certificateRef the server certificate it names.
         def read_binding(ref):
             a=docs.get(("evidence-artifact",ref["id"],ref["version"]))
             return None if a is None else cb.profile((root/a["file"]["path"]).read_bytes())
@@ -74,7 +75,7 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             include_application(a)
             for g in a["generated"]:include(g["kind"],g)
             for s in a["sourceSnapshots"]:include("source-definition",s)
-        refs={"recordMappingRef":"record-mapping","sourceRef":"source-definition","destinationRef":"source-definition","graphRef":"value-graph","targetInstanceRef":"target-instance","semanticDefinitionRef":"semantic-definition","viewOf":"source-definition","previousBatchRef":"import-batch","readBindingRef":"evidence-artifact"}
+        refs={"recordMappingRef":"record-mapping","sourceRef":"source-definition","destinationRef":"source-definition","graphRef":"value-graph","targetInstanceRef":"target-instance","semanticDefinitionRef":"semantic-definition","viewOf":"source-definition","previousBatchRef":"import-batch","readBindingRef":"evidence-artifact","certificateRef":"evidence-artifact"}
         def visit(v):
             if isinstance(v,dict):
                 for name,x in v.items():

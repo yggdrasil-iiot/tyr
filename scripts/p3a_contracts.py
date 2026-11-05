@@ -24,7 +24,7 @@ NUMERIC={"Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Double",
 INTEGER={"Int16":16,"UInt16":16,"Int32":32,"UInt32":32,"Int64":64}
 def schema_errors(kind,doc):
     v=doc.get("schemaVersion")
-    if v=='2.25.0' and kind in ('mapping-proposal','command-binding'):return list(vc.schema_validator(kind,v).iter_errors(doc))
+    if v in ('2.25.0','2.26.0') and kind in ('mapping-proposal','command-binding'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v=='2.24.0' and kind in ('mapping-proposal','metric-definition'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v=='2.23.0' and kind in ('mapping-proposal','equipment-hierarchy'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v=='2.22.0' and kind in ('mapping-proposal','record-mapping'):return list(vc.schema_validator(kind,v).iter_errors(doc))
@@ -63,12 +63,14 @@ def validate_package(root):
             docs[key]=d
         except (OSError,ValueError):add("bundle.unreadable",e["path"])
     if any(d.get('schemaVersion')=='2.21.0' for d in docs.values()):
-        if proposal['schemaVersion'] not in ('2.21.0','2.22.0','2.23.0','2.24.0','2.25.0'):add('record-field.envelope','proposal.json')
+        if proposal['schemaVersion'] not in ('2.21.0','2.22.0','2.23.0','2.24.0','2.25.0','2.26.0'):add('record-field.envelope','proposal.json')
         try:
             import record_fields
             record_fields.validate(docs.values())
         except ValueError as e:add(str(e),'record-field')
-    if any(d.get('schemaVersion')=='2.22.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.22.0','2.23.0','2.24.0','2.25.0'):add('broadcast.envelope','proposal.json')
+    if any(d.get('schemaVersion')=='2.22.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.22.0','2.23.0','2.24.0','2.25.0','2.26.0'):add('broadcast.envelope','proposal.json')
+    # As Bifrost: a 2.26.0 document travels only in a 2.26.0 proposal, whose links all name their server.
+    if any(d.get('schemaVersion')=='2.26.0' for d in docs.values()) and proposal['schemaVersion']!='2.26.0':add('command-binding.envelope','proposal.json')
     if errors:return errors,{}
     def resolve(kind,ref,path):
         d=docs.get((kind,ref["id"],ref["version"]))
