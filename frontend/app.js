@@ -53,7 +53,7 @@ function accessFields(profile,access={},raw={}){
  if(kind==="device-register")html=field("deviceArea","디바이스 영역",access.deviceArea||"")+field("addressIndex","주소 인덱스 (10진 정수)",access.addressIndex??"","number")+select("addressRadix","원문 주소 진법",[[8,"8진"],[10,"10진"],[16,"16진"]],raw.radix,false)+field("wordCount","워드 수 (16비트)",access.wordCount??"","number")+field("bitOffset","비트 오프셋 (선택)",access.bitOffset??"","number");
  const bytes=["device-register","db-offset"].includes(kind);
  html+='<p class="hint full">원시 표현: '+(bytes?"바이트 · 저장 타입과 순서를 명시합니다.":"Typed 값 · 바이트 순서를 적용하지 않습니다.")+'</p>';
- html+=select("rawType","원시 값 타입",["Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Boolean"].map(x=>[x,x]),raw.valueType,false);
+ html+=select("rawType","원시 값 타입",(bytes?["Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Boolean"]:["Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Boolean","String"]).map(x=>[x,x]),raw.valueType,false);
  if(bytes)html+=select("byteOrder","워드 내 바이트 순서",[["little","Little endian"],["big","Big endian"]],raw.byteOrder,false)+select("wordOrder","워드 순서",[["low-first","낮은 워드 먼저"],["high-first","높은 워드 먼저"]],raw.wordOrder,false);
  return html;
 }

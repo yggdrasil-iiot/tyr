@@ -22,6 +22,19 @@ def publish(state,folder,sets=SETS,stream='line2',id='attribution-fixture'):
  _,_,findings=publication.build(state,folder,id,stream,'proposer',None,list(sets),False,server.build_package)
  return load(folder/'proposal.json'),findings
 def tree(root):return {p.relative_to(root).as_posix():p.read_bytes() for p in root.rglob('*') if p.is_file()}
+import contextlib
+@contextlib.contextmanager
+def urllib_served(case):
+ """The frontend as the server serves it (test_http_routes precedent): yields get(path) -> bytes."""
+ import threading,urllib.request
+ tmp=tempfile.TemporaryDirectory();store=server.Store(Path(tmp.name)/'db.sqlite3');store.migrate(0,{})
+ http=server.make_server(store,0);threading.Thread(target=http.serve_forever,daemon=True).start()
+ try:
+  base='http://127.0.0.1:'+str(http.server_address[1])
+  def get(path):
+   with urllib.request.urlopen(base+path) as r:return r.read()
+  yield get
+ finally:http.shutdown();http.server_close();tmp.cleanup()
 def repinned(root):
  """Re-pin a mutated package: every evidence file digest, every proposal entry digest, the submission's proposal digest."""
  p=load(root/'proposal.json')
@@ -86,4 +99,11 @@ class StringSource(unittest.TestCase):
   state=load('fixtures/realistic/workspace.json');self.assertNotIn('workspaceVersion',state)   # the committed 1.x workspace with an OPC UA connection (logical-ua)
   string_source(state,'line-a-unit','line-a-motor-ua','logical-ua','LineA/Motor.UnitId')
   self.assertRaisesRegex(ValueError,'2.0 authoring workspace',server.check_state,state)
+ def test_plc_source_form_offers_string_for_typed_access_and_writes_2_27(self):
+  app=(R/'frontend/app.js').read_text(encoding='utf-8');mixed=(R/'frontend/mixed.js').read_text(encoding='utf-8')
+  line=next(l for l in app.splitlines() if 'select("rawType"' in l)
+  self.assertIn('bytes?["Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Boolean"]:["Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Boolean","String"]',line)
+  plc=next(l for l in mixed.splitlines() if "if(kind==='plc'){const r=draftBeforeMixed()" in l)
+  self.assertIn("schemaVersion:r.definition.rawRepresentation?.valueType==='String'?'2.27.0':'2.7.0'",plc)
+  with urllib_served(self) as get:self.assertIn(b'"String"]',get('/app.js'));self.assertIn(b"'2.27.0':'2.7.0'",get('/mixed.js'))
 if __name__=='__main__':unittest.main()
