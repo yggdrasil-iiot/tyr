@@ -339,4 +339,103 @@ class PlcStamped(unittest.TestCase):
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',PLC_BUNDLE);self.assertTrue(v['accepted'],v)
+def java(*args):
+ p=subprocess.run(['java','-jar',str(JAR),*map(str,args)],capture_output=True,text=True,encoding='utf-8',timeout=120)
+ assert p.returncode in (0,1),p.stderr;return json.loads(p.stdout)
+def approved(bundle,tmp,stream='line2'):
+ """A two-key registry whose activation policy names the stream, then Bifrost's approve: the step-2 completion gate."""
+ reg=tmp/'registry';keys=tmp/'keys';(reg/'identity').mkdir(parents=True)
+ lines=[java('identity','keygen',who,'--out',keys) for who in ('proposer','approver')]
+ (reg/'identity/authorized-keys.jsonl').write_text(''.join(json.dumps(v)+'\n' for v in lines),encoding='utf-8')
+ policy={'version':'1.0.0','default':'deny','rules':[{'id':'p','principal':'proposer','action':'publish','target':'mapping-publication','kind':'mapping-release','ref':stream},{'id':'a','principal':'approver','action':'approve','target':'mapping-publication','kind':'mapping-release','ref':stream}]}
+ (reg/'identity/activation-policy.json').write_text(json.dumps(policy),encoding='utf-8')
+ return reg,java('mapping','approve',reg,bundle,'approval-1','--by','proposer','--by-key',keys/'proposer.key','--approved-by','approver','--approved-by-key',keys/'approver.key')
+def edit(rel,f):
+ """A parity mutation: load one file of the bundle, change it, save it (re-pinning is the caller's)."""
+ def apply(root):
+  d=load(root/rel);f(d);server.contracts.save(root/rel,d)
+ return apply
+def profile_edit(rel,f):return edit(rel,f)
+def raw_edit(rel,f):
+ """A parity mutation on the bytes of a data file: what a JSON load/save would normalise away (a duplicate key)."""
+ def apply(root):(root/rel).write_bytes(f((root/rel).read_bytes()))
+ return apply
+RULE,IMPACT,OCC,INC='attribution-rules/0.json','impact-rules/0.json','data/occupancy-binding-0.json','data/incident-binding-0.json'
+PARITY=[
+ # name, bundle, mutation, code expected from Tyr's pre-check and from Bifrost's jar
+ ('hierarchy-missing',BUNDLE,edit(RULE,lambda r:r['equipmentRef'].update(version='9.9.9')),'attribution.hierarchy-missing'),
+ ('station-unresolved',BUNDLE,edit(RULE,lambda r:r['stations'].__setitem__(1,'synthetic-site:line2:station9')),'attribution.station-unresolved'),
+ ('station-nested',BUNDLE,edit(RULE,lambda r:r['stations'].append('synthetic-site:line2:station1:nutrunner1')),'attribution.station-nested'),
+ ('member-unresolved',BUNDLE,edit(RULE,lambda r:r['members'][0].update(metric='torque')),'attribution.member-unresolved'),
+ ('member-equipment',BUNDLE,edit(RULE,lambda r:(r.update(stations=['synthetic-site:line2:station2']),r.update(activity=[{'equipmentPath':'synthetic-site:line2:station2','memberRef':'station2-running','activeWhen':True}]))),'attribution.member-equipment'),
+ ('activity-member',BUNDLE,edit(RULE,lambda r:r['activity'][2].update(memberRef='nutrunner1-torque')),'attribution.activity-member'),
+ ('binding-unresolved',BUNDLE,edit(RULE,lambda r:r['occupancyBindingRef'].update(version='9.9.9')),'attribution.binding-unresolved'),
+ ('binding-profile-artifact',BUNDLE,edit(RULE,lambda r:r['occupancyBindingRef'].update(id='hierarchy-plant-register')),'attribution.binding-profile'),
+ ('binding-profile-pattern',BUNDLE,profile_edit(OCC,lambda p:p['identity'].update(pattern='^A$')),'attribution.binding-profile'),
+ ('binding-profile-extra-field',BUNDLE,profile_edit(OCC,lambda p:p.update(note='x')),'attribution.binding-profile'),
+ ('binding-profile-bound-above-int',BUNDLE,profile_edit(OCC,lambda p:p['identity'].update(pattern='a{2147483648}')),'attribution.binding-profile'),
+ ('binding-profile-bound-above-uint',BUNDLE,profile_edit(OCC,lambda p:p['identity'].update(pattern='a{4294967296}')),'attribution.binding-profile'),
+ ('binding-profile-bound-above-long',BUNDLE,profile_edit(OCC,lambda p:p['identity'].update(pattern='a{1,99999999999999999999}')),'attribution.binding-profile'),
+ ('binding-profile-duplicate-key',BUNDLE,raw_edit(OCC,lambda b:b.replace(b'"topic": "mfg.occupancy"',b'"topic": "ignored",\n  "topic": "mfg.occupancy"')),'attribution.binding-profile'),
+ ('binding-profile-deep-json',BUNDLE,raw_edit(OCC,lambda b:b'['*10000+b'0'+b']'*10000),'attribution.binding-profile'),
+ ('identity-member',PLC_BUNDLE,edit(RULE,lambda r:r['identity']['members'][0].update(presentMemberRef='station1-running')),'attribution.identity-member'),
+ ('identity-equipment',PLC_BUNDLE,edit(RULE,lambda r:r['identity']['members'].pop(1)),'attribution.identity-equipment'),
+ ('temporal-order',BUNDLE,edit(RULE,lambda r:r['temporal'].update(outOfOrdernessMs=800000)),'attribution.temporal-order'),
+ ('impact.attribution-missing',BUNDLE,edit(IMPACT,lambda r:r['attributionRuleRef'].update(version='9.9.9')),'impact.attribution-missing'),
+ ('impact.scope-containment',BUNDLE,edit(IMPACT,lambda r:r['incidentScope'].__setitem__(0,'synthetic-site:line2')),'impact.scope-containment'),
+ ('impact.binding-unresolved',BUNDLE,edit(IMPACT,lambda r:r['incidentBindingRef'].update(version='9.9.9')),'impact.binding-unresolved'),
+ ('impact.binding-profile-artifact',BUNDLE,edit(IMPACT,lambda r:r['incidentBindingRef'].update(id='occupancy-binding-line2')),'impact.binding-profile'),
+ ('impact.binding-profile-kinds',BUNDLE,profile_edit(INC,lambda p:p.update(kinds=[])),'impact.binding-profile'),
+ ('impact.binding-profile-duplicate-key',BUNDLE,raw_edit(INC,lambda b:b.replace(b'"topic": "mfg.incidents"',b'"topic": "ignored",\n  "topic": "mfg.incidents"')),'impact.binding-profile'),
+ ('impact.binding-profile-deep-json',BUNDLE,raw_edit(INC,lambda b:b'['*10000+b'0'+b']'*10000),'impact.binding-profile'),
+ ('impact.retention-order',BUNDLE,edit(IMPACT,lambda r:r['retention'].update(workRecordsMs=3600000)),'impact.retention-order'),
+]
+def case_bundle(tmp,bundle,mutate):
+ b=tmp/'bundle';shutil.copytree(bundle,b);mutate(b);return repinned(b)
+class Parity(unittest.TestCase):
+ """Owner decision Q3: for every refusal code of the attribution, impact and binding-profile tables, Tyr's pre-check and Bifrost's
+ jar refuse the same mutated bundle with the same code (Bifrost fail-first: exactly one finding; Tyr: the code is among its findings)."""
+ def test_every_refusal_code_agrees_with_bifrost(self):
+  for name,bundle,mutate,code in PARITY:
+   with self.subTest(name):
+    with tempfile.TemporaryDirectory() as t:
+     b=case_bundle(Path(t),bundle,mutate)
+     self.assertIn(code,[x['ruleCode'] for x in server.v2.p3.validate_package(b)[0]],name)
+     v=publication.Adapter(JAR,Path(t)/'registry').call('validate',b);self.assertFalse(v['accepted'],name);self.assertEqual([x['ruleCode'] for x in v['findings']],[code],name)
+ def test_rule_envelope_and_the_accepted_patterns_agree_with_bifrost(self):
+  # rule.envelope: a Tyr-published bundle whose 2.27.0 documents are the four String sources and nothing else (the plc-stamped
+  # workspace minus its rules; publish() carries only the selected mapping sets' closure, and these sources are mapped), in a
+  # 2.26.0 proposal. The presence of a 2.27.0 source in the published proposal is asserted before the version is lowered.
+  state=plc();del state['attributionRules'],state['impactRules']
+  with tempfile.TemporaryDirectory() as t:
+   b=Path(t)/'b';p,findings=publish(state,b,id='envelope-case');self.assertEqual(findings,[])
+   self.assertEqual(sorted(e['id'] for e in p['files'] if e['kind']=='source-definition' and load(b/e['path'])['schemaVersion']=='2.27.0'),['nutrunner1-unit','nutrunner1-visit','station1-unit','station1-visit'])
+   p['schemaVersion']='2.26.0';server.contracts.save(b/'proposal.json',p);repinned(b)
+   self.assertEqual([x['ruleCode'] for x in server.v2.p3.validate_package(b)[0]],['rule.envelope'])
+   v=publication.Adapter(JAR,Path(t)/'registry').call('validate',b);self.assertEqual([x['ruleCode'] for x in v['findings']],['rule.envelope'])
+  # accepted by both: the largest bound Java accepts (the rows above cover the first one it refuses), and a bound written with
+  # 4,500 leading zeros (Bifrost does not parse {m}; Pattern.compile accumulates the zeros; Python's int() alone would refuse the digits)
+  for pattern in ('[A-Z]{1,2147483647}','[A-Z]{'+'0'*4500+'17}'):
+   with tempfile.TemporaryDirectory() as t:
+    b=case_bundle(Path(t),BUNDLE,profile_edit(OCC,lambda p,pattern=pattern:p['identity'].update(pattern=pattern)))
+    self.assertEqual(server.v2.p3.validate_package(b)[0],[],pattern[:24]);v=publication.Adapter(JAR,Path(t)/'registry').call('validate',b);self.assertTrue(v['accepted'],pattern[:24])
+  # accepted by both: a UTF-8 BOM before either profile file (Jackson's byte reader skips it; json.loads on bytes detects utf-8-sig)
+  for rel in (OCC,INC):
+   with tempfile.TemporaryDirectory() as t:
+    b=case_bundle(Path(t),BUNDLE,raw_edit(rel,lambda x:b'\xef\xbb\xbf'+x))
+    self.assertEqual(server.v2.p3.validate_package(b)[0],[],rel);v=publication.Adapter(JAR,Path(t)/'registry').call('validate',b);self.assertTrue(v['accepted'],rel)
+class Approval(unittest.TestCase):
+ """Owner decision Q1 / spec row 2: Bifrost's two-key approval of the committed bundles Tyr built, through the CLI Tyr's CI builds."""
+ def approves(self,bundle):
+  with tempfile.TemporaryDirectory() as t:
+   reg,receipt=approved(bundle,Path(t))
+   self.assertEqual(receipt.get('kind'),'mapping-approval',receipt);self.assertEqual((receipt['payload']['streamId'],receipt['payload']['execution']),('line2','excluded'))
+   self.assertTrue((reg/'mappings/approvals/approval-1.json').is_file());self.assertTrue((reg/'mappings/attestations/approval-1.dsse.json').is_file())
+ def test_bifrost_approves_the_occupancy_join_bundle(self):self.approves(BUNDLE)
+ def test_bifrost_approves_the_plc_stamped_bundle(self):self.approves(PLC_BUNDLE)
+ def test_a_refused_bundle_leaves_no_receipt(self):
+  with tempfile.TemporaryDirectory() as t:
+   b=case_bundle(Path(t),BUNDLE,edit(IMPACT,lambda r:r['retention'].update(workRecordsMs=3600000)))
+   reg,refused=approved(b,Path(t)/'r');self.assertTrue(str(refused.get('error','')).startswith('mapping.validation-refused:') and 'impact.retention-order' in refused['error'],refused)
+   self.assertFalse((reg/'mappings/approvals/approval-1.json').exists())
 if __name__=='__main__':unittest.main()
