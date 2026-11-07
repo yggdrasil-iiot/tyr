@@ -29,4 +29,34 @@ class IncidentProfile(unittest.TestCase):
   self.refused(raw(PROFILE).replace(b'"topic": "mfg.incidents"',b'"topic": "ignored", "topic": "mfg.incidents"'))
  def test_utf8_bom_is_accepted_as_bifrost_accepts_it(self):self.assertEqual(ir.incident_profile(b'\xef\xbb\xbf'+raw(PROFILE))['topic'],'mfg.incidents')
  def test_deep_nesting_is_refused_not_a_crash(self):self.refused(b'['*10000+b'0'+b']'*10000);self.refused(b'['*1500+b'0'+b']'*1500)
+class ImpactRule(unittest.TestCase):
+ """Spec 156-188 on the occupancy-join workspace."""
+ def refused(self,state,code):self.assertRaisesRegex(ValueError,code,server.check_state,state)
+ def test_accepted_with_its_attribution_rule(self):
+  state=w();server.check_state(state);self.assertEqual(server.findings_for(state),[])
+ def test_attribution_missing(self):self.refused(impacted(lambda r:r['attributionRuleRef'].update(version='9.9.9')),'impact.attribution-missing')
+ def test_scope_must_be_in_the_hierarchy(self):self.refused(impacted(lambda r:r['incidentScope'].__setitem__(0,'synthetic-site:line2:station1:nutrunner9')),'impact.scope-containment')
+ def test_scope_must_be_under_an_attribution_station(self):self.refused(impacted(lambda r:r['incidentScope'].__setitem__(0,'synthetic-site:line2')),'impact.scope-containment')
+ def test_a_station_itself_is_in_scope(self):server.check_state(impacted(lambda r:r.update(incidentScope=['synthetic-site:line2:station1'])))
+ def test_duplicate_or_empty_scope_is_a_schema_refusal(self):
+  self.refused(impacted(lambda r:r['incidentScope'].append(r['incidentScope'][0])),'impact-rule: schema validation failed');self.refused(impacted(lambda r:r.update(incidentScope=[])),'impact-rule: schema validation failed')
+ def test_binding_unresolved(self):
+  self.refused(impacted(lambda r:r['incidentBindingRef'].update(version='9.9.9')),'impact.binding-unresolved')
+  self.refused(impacted(lambda r:r['incidentBindingRef'].update(id='manual-nutrunner1-torque')),'impact.binding-unresolved')   # an artifact, but 1.0.0
+ def test_binding_artifact_must_carry_the_prefix_and_media_type(self):self.refused(impacted(lambda r:r['incidentBindingRef'].update(id='occupancy-binding-line2')),'impact.binding-profile')
+ def test_binding_profile_refused_on_the_package_alone(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);package(w(),root);(root/'data/incident-binding-0.json').write_bytes(b'{}\n');repinned(root)
+   self.assertIn('impact.binding-profile',[x['ruleCode'] for x in server.v2.p3.validate_package(root)[0]])
+ def test_retention_order(self):
+  self.refused(impacted(lambda r:r['retention'].update(workRecordsMs=3600000)),'impact.retention-order')
+  server.check_state(impacted(lambda r:r['retention'].update(workRecordsMs=86400000)))   # equal to the horizon is accepted
+ def test_retention_above_90_days_is_a_schema_refusal(self):self.refused(impacted(lambda r:r['retention'].update(workRecordsMs=7776000001)),'impact-rule: schema validation failed')
+ def test_duplicate_id(self):
+  state=w();state['impactRules'].append(copy.deepcopy(state['impactRules'][0]));self.refused(state,'impact-rule: duplicate id')
+ def test_older_version_is_not_written(self):self.refused(impacted(lambda r:r.update(schemaVersion='2.26.0')),'impact-rule: schema validation failed')
+ def test_package_without_the_attribution_rule(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);p=package(w(),root);p['files']=[e for e in p['files'] if e['kind']!=ar.KIND];server.contracts.save(root/'proposal.json',p)
+   self.assertIn('impact.attribution-missing',[x['ruleCode'] for x in server.v2.p3.validate_package(root)[0]])
 if __name__=='__main__':unittest.main()

@@ -27,3 +27,17 @@ def incident_profile(raw,code='impact.binding-profile'):
  f=b['format'];require(ar.names(f)=={'schemaId','schemaSha256'} and f['schemaId']==SCHEMA_ID and ar.digest_form(f['schemaSha256']),code)
  ar.strings(b['kinds'],code)
  return b
+def check(r,docs,read):
+ """One rule, the spec's impact.* codes in Bifrost's order; the first failure stops it."""
+ a=ar.find(docs,ar.KIND,r['attributionRuleRef']);require(a is not None,'impact.attribution-missing')
+ h=ar.find(docs,'equipment-hierarchy',a['equipmentRef']);known=set(ar.paths(h).values()) if h is not None else set();stations=list(a['stations'])
+ for s in r['incidentScope']:require(s in known and ar.within(stations,s),'impact.scope-containment')
+ e=ar.find(docs,'evidence-artifact',r['incidentBindingRef']);require(e is not None and e['schemaVersion']=='1.1.0','impact.binding-unresolved')
+ require(e['id'].startswith(PREFIX) and e['file']['mediaType']==MEDIA,'impact.binding-profile')
+ incident_profile(read(e['file']['path']),'impact.binding-profile')
+ require(a['temporal']['horizonMs']<=r['retention']['workRecordsMs'],'impact.retention-order')
+def validate(docs,read):
+ """docs: every document in one package; read(path) returns a data file's bytes. Attribution rules are validated first."""
+ docs=list(docs)
+ for r in docs:
+  if r.get('kind')==KIND:check(r,docs,read)

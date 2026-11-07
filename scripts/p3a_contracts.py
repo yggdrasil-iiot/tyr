@@ -126,6 +126,8 @@ def validate_package(root):
     if hierarchy_ok:
         try:attribution_rule.validate(docs.values(),lambda p:vc.safe(root,p).read_bytes())
         except (OSError,ValueError) as e:add(str(e) if isinstance(e,ValueError) else "attribution.binding-profile",attribution_rule.KIND)
+        try:impact_rule.validate(docs.values(),lambda p:vc.safe(root,p).read_bytes())
+        except (OSError,ValueError) as e:add(str(e) if isinstance(e,ValueError) else "impact.binding-profile",impact_rule.KIND)
     concepts={};targets={};members={}
     for key,d in docs.items():
         path=d["kind"]+":"+d["id"]
