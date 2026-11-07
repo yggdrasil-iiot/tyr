@@ -3,7 +3,7 @@ binding profiles, every attribution.* refusal, publication closure, receiver par
 import sys,copy,json,shutil,subprocess,tempfile,unittest
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];sys.path[:0]=[str(R/'backend'),str(R/'scripts')]
-import server,publication,binding_profiles as bp,attribution_rule as ar,impact_rule as ir
+import server,publication,binding_profiles as bp,attribution_rule as ar,impact_rule as ir,attribution_authoring as aa
 FIX=R/'fixtures/attribution-rule'
 BUNDLE=FIX/'bundle'
 PLC_BUNDLE=FIX/'plc-stamped-bundle'
@@ -438,4 +438,49 @@ class Approval(unittest.TestCase):
    b=case_bundle(Path(t),BUNDLE,edit(IMPACT,lambda r:r['retention'].update(workRecordsMs=3600000)))
    reg,refused=approved(b,Path(t)/'r');self.assertTrue(str(refused.get('error','')).startswith('mapping.validation-refused:') and 'impact.retention-order' in refused['error'],refused)
    self.assertFalse((reg/'mappings/approvals/approval-1.json').exists())
+class Authoring(unittest.TestCase):
+ """The screen's API: the member catalog and paths Tyr derives, plan and apply under revision CAS, HTTP routes."""
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory();self.store=server.Store(Path(self.tmp.name)/'db.sqlite3');self.store.migrate(0,{})
+  state=w();self.body={k:state.pop(k) for k in ('occupancyBindings','incidentBindings','attributionRules','impactRules')};self.store.save(1,state)
+ def tearDown(self):self.tmp.cleanup()
+ def rev(self):return self.store.read()['revision']
+ def req(self,body=None,revision=None):
+  body=self.body if body is None else body   # {} means "delete every section" and must not fall back to the fixture body
+  return {'revision':self.rev() if revision is None else revision,**{k:body.get(k,[]) for k in ('occupancyBindings','incidentBindings','attributionRules','impactRules')}}
+ def plan(self,body=None,revision=None):return aa.plan(self.store,self.req(body,revision),server.Conflict,server.check_state)[0]
+ def apply(self,body=None):
+  p=self.plan(body);return aa.apply(self.store,{**self.req(body),'planSha256':p['planSha256']},server.Conflict)
+ def test_listing_offers_members_paths_profiles_and_citable_evidence(self):
+  self.apply();l=aa.listing(self.store,server.build_package)
+  self.assertEqual(l['hierarchy']['paths']['nutrunner1'],'synthetic-site:line2:station1:nutrunner1')
+  torque=next(m for m in l['members'] if m['mappingId']=='nutrunner1-torque');self.assertEqual((torque['equipmentPath'],torque['metric'],torque['semanticId'],torque['valueType'],torque['mappingSetRef']),('synthetic-site:line2:station1:nutrunner1','Torque','urn:bifrost:sem:Tool/Torque','Double',{'id':'nutrunner1-mapping','version':'1.0.0'}))
+  self.assertEqual([r['id'] for r in l['attributionRules']],['line2-attribution']);self.assertEqual([r['id'] for r in l['impactRules']],['line2-impact'])
+  self.assertEqual(l['occupancyBindings'][0]['artifactId'],'occupancy-binding-line2');self.assertIn('manual-nutrunner1-torque',l['citable']);self.assertEqual(l['findings'],[]);self.assertEqual(l['approvalAuthority'],'bifrost')
+ def test_plan_refuses_with_the_spec_code(self):
+  body=copy.deepcopy(self.body);body['attributionRules'][0]['stations'][1]='synthetic-site:line2:station9'
+  self.assertRaisesRegex(ValueError,'attribution.station-unresolved',self.plan,body)
+ def test_apply_saves_and_clears(self):
+  r=self.apply();saved=r['saved']['workspace'];self.assertEqual([x['id'] for x in saved['attributionRules']],['line2-attribution']);self.assertEqual(len(saved['occupancyBindings']),1)
+  r=self.apply({});self.assertFalse(any(k in r['saved']['workspace'] for k in ('occupancyBindings','incidentBindings','attributionRules','impactRules')))
+ def test_stale_revision_changed_plan_and_unversioned_change(self):
+  p=self.plan();self.assertRaises(server.Conflict,self.plan,None,self.rev()-1)
+  other=copy.deepcopy(self.body);other['impactRules'][0]['label']='Other'
+  self.assertRaisesRegex(ValueError,'attribution-rule.plan-changed',aa.apply,self.store,{**self.req(other),'planSha256':p['planSha256']},server.Conflict)
+  self.apply();changed=copy.deepcopy(self.body);changed['occupancyBindings'][0]['profile']['topic']='mfg.occupancy.v2'
+  self.assertRaisesRegex(ValueError,'occupancy-binding.version-required',self.plan,changed)
+ def test_http_routes(self):
+  import threading,urllib.request
+  http=server.make_server(self.store,0);threading.Thread(target=http.serve_forever,daemon=True).start()
+  try:
+   base_url='http://127.0.0.1:'+str(http.server_address[1])
+   def call(path,body=None):
+    req=urllib.request.Request(base_url+path,data=None if body is None else json.dumps(body).encode(),method='GET' if body is None else 'POST',headers={'Content-Type':'application/json','X-Tyr-Editor':'1','Origin':base_url})
+    with urllib.request.urlopen(req) as r:return json.loads(r.read())
+   self.assertEqual(call('/api/attribution-rule')['attributionRules'],[])
+   p=call('/api/attribution-rule-plan',self.req());s=call('/api/attribution-rule-apply',{**self.req(),'planSha256':p['planSha256']})
+   self.assertEqual(s['saved']['findings'],[]);self.assertEqual([r['id'] for r in call('/api/attribution-rule')['attributionRules']],['line2-attribution'])
+   with urllib.request.urlopen(base_url+'/attribution-rule.js') as r:self.assertIn(b'attributionRuleView',r.read())
+   with urllib.request.urlopen(base_url+'/') as r:self.assertIn(b'data-tab="attributionRules"',r.read())
+  finally:http.shutdown();http.server_close()
 if __name__=='__main__':unittest.main()
