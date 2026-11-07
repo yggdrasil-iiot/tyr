@@ -117,3 +117,80 @@ def pattern_accepted(p):
   with warnings.catch_warnings():warnings.simplefilter('ignore',FutureWarning);re.compile(b.normalised())
   return True
  except (ValueError,re.error,OverflowError):return False
+def find(docs,kind,ref):
+ return next((d for d in docs if d.get('kind')==kind and d.get('id')==ref.get('id') and d.get('version')==ref.get('version')),None)
+def key(ref):return ref['id']+'@'+ref['version']
+def paths(h):
+ """Each node's hierarchy path, root first, joined with ':': the string Muninn publishes as the Sparkplug device id and the
+ occupancy readPoint carries (the rule of command_binding.path). equipment_hierarchy.check runs first, so a duplicate node, a
+ missing parent, a cycle or an over-deep chain raises the hierarchy's own code (spec 130) instead of looping or failing on a key."""
+ by=eh.check(h);out={}
+ for i in by:
+  p=[];c=i
+  while c is not None:p.insert(0,c);c=by[c]['parentEquipmentInstanceId']
+  out[i]=':'.join(p)
+ return out
+def within(stations,path):
+ """A path is a station of the rule or a descendant of one (a tool). Ids carry no ':', so the prefix test is exact."""
+ return any(path==s or path.startswith(s+':') for s in stations)
+def distinct_names(sem):
+ """Spec 132: within one semantic definition no two leaf members share a name (a station and a tool may, across definitions)."""
+ try:nodes=ls.layout(sem)['definitions']
+ except ls.StructureError:return False
+ seen=set()
+ for m in nodes:
+  if m['valueType'] in ls.CONTAINERS:continue
+  if m['name'] in seen:return False
+  seen.add(m['name'])
+ return True
+def members(docs,paths_):
+ """Every mapping of the package by mappingId: its set key, its equipment's hierarchy path, the semantic leaf it maps, whether
+ its memberPath is one step, whether its definition's leaf names are distinct, and its OPC UA node identifier (None unless
+ the source is an opcua-node). A mapping whose target, definition, equipment or member path does not resolve is left out and
+ is then attribution.member-unresolved; p3a_contracts reports its own code for it as well."""
+ out={};distinct={}
+ for s in docs:
+  if s.get('kind')!='mapping-set':continue
+  t=find(docs,'target-instance',s['targetInstanceRef'] or {});sem=find(docs,'semantic-definition',t['semanticDefinitionRef']) if t else None;path=paths_.get(s['equipmentInstanceId'])
+  if sem is None or path is None:continue
+  names_ok=distinct.setdefault(key(sem),distinct_names(sem))
+  for m in s['mappings']:
+   try:leaf=ls.resolve(sem,m['memberPath'])
+   except ls.StructureError:continue
+   v=m['valueRef'];src=find(docs,'source-definition',v.get('sourceRef') or {}) if v['kind']=='source' else None
+   a=(src or {}).get('access') or {};ident=a.get('identifier') if a.get('kind')=='opcua-node' else None
+   require(m['mappingId'] not in out,'mapping.duplicate-id')
+   out[m['mappingId']]={'set':key(s),'path':path,'leaf':leaf,'one':len(m['memberPath'])==1,'distinct':names_ok,'identifier':None if ident is None else str(ident)}
+ return out
+def typed(rule,ref,path,value_type):
+ x=rule.get(ref);return x is not None and x['path']==path and x['leaf']['valueType']==value_type
+def check(r,docs,read):
+ """One rule, the spec's attribution.* codes in Bifrost's order; the first failure stops it."""
+ h=find(docs,'equipment-hierarchy',r['equipmentRef']);require(h is not None,'attribution.hierarchy-missing')
+ paths_=paths(h);known=set(paths_.values());stations=list(r['stations'])
+ for s in stations:require(s in known,'attribution.station-unresolved')
+ for a in stations:
+  for b in stations:require(not b.startswith(a+':'),'attribution.station-nested')
+ bundle=members(docs,paths_);rule={};slots=set()
+ require(len(r['members'])>0,'attribution.member-unresolved')
+ for m in r['members']:
+  x=bundle.get(m['mappingId']);metric=m['metric']
+  require(x is not None and x['set']==key(m['mappingSetRef']) and x['one'] and x['distinct'] and x['leaf']['name']==metric and x['leaf']['semanticId']==m['semanticId']
+          and (x['identifier'] is None or x['identifier'].endswith('.'+metric)) and m['mappingId'] not in rule and (x['path'],metric) not in slots,'attribution.member-unresolved')
+  rule[m['mappingId']]=x;slots.add((x['path'],metric))
+  require(within(stations,x['path']),'attribution.member-equipment')
+ active=set()
+ for a in r['activity']:
+  x=rule.get(a['memberRef']);p=a['equipmentPath']
+  require(x is not None and x['path']==p and within(stations,p) and x['leaf']['valueType']=='Boolean' and p not in active,'attribution.activity-member');active.add(p)
+ e=find(docs,'evidence-artifact',r['occupancyBindingRef'])
+ require(e is not None and e['schemaVersion']=='1.1.0','attribution.binding-unresolved')
+ require(e['id'].startswith(PREFIX) and e['file']['mediaType']==MEDIA,'attribution.binding-profile')
+ occupancy_profile(read(e['file']['path']),'attribution.binding-profile')
+ # Task 11 inserts the plc-stamped identity checks here (spec 132 roles, 135 coverage and member types).
+ t=r['temporal'];require(t['outOfOrdernessMs']<=t['allowedLatenessMs']<=t['horizonMs'],'attribution.temporal-order')
+def validate(docs,read):
+ """docs: every document in one package; read(path) returns a data file's bytes."""
+ docs=list(docs)
+ for r in docs:
+  if r.get('kind')==KIND:check(r,docs,read)

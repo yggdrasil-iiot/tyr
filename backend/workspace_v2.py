@@ -80,6 +80,13 @@ def build(state,folder,legacy_build):
         for i,d in enumerate(state["commandBindings"]):
             rel="command-bindings/"+str(i)+".json";vc.save(folder/rel,d)
             p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
+    for section,directory in (("attributionRules","attribution-rules"),("impactRules","impact-rules")):
+        if state.get(section):
+            (folder/directory).mkdir(exist_ok=True)
+            p["schemaVersion"]="2.27.0"
+            for i,d in enumerate(state[section]):
+                rel=directory+"/"+str(i)+".json";vc.save(folder/rel,d)
+                p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
     # Spec 2.27 row 1 (rule.envelope): a 2.27.0 document, a typed String source included, travels only in a 2.27.0 proposal.
     if any(r["definition"].get("schemaVersion")=="2.27.0" for r in state["sources"]):p["schemaVersion"]="2.27.0"
     vc.save(folder/"proposal.json",p)
@@ -155,6 +162,16 @@ def check(state,legacy_check,legacy_build):
     if "occupancyBindings" in state or "incidentBindings" in state:
         import binding_profiles
         binding_profiles.check(state,equip)
+    for section,module in (("attributionRules","attribution_rule"),("impactRules","impact_rule")):
+        if section in state:
+            mod=__import__(module);docs=state[section]
+            if not isinstance(docs,list) or len(docs)>64:raise ValueError(mod.KIND+".limit")
+            ids=set()
+            for d in docs:
+                # Tyr writes 2.27.0 rules only; the schema is Bifrost's byte copy.
+                if d.get("schemaVersion")!=mod.VERSION or p3.schema_errors(mod.KIND,d):raise ValueError(mod.KIND+": schema validation failed")
+                if d["id"] in ids:raise ValueError(mod.KIND+": duplicate id")
+                ids.add(d["id"])
     if "commandBindings" in state:
         import command_binding as cb
         cs=state["commandBindings"]

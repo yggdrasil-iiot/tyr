@@ -17,6 +17,8 @@ import record_mappings
 import equipment_hierarchy
 import metric_definition
 import command_binding
+import attribution_rule
+import impact_rule
 ROOT=vc.ROOT
 NEW={"mapping-proposal","mapping-set","target-instance","value-graph"}
 OLD={"source-definition","semantic-definition","evidence-artifact","source-observation"}
@@ -113,12 +115,17 @@ def validate_package(root):
     if any(d["kind"] in mapping_templates.KINDS for d in docs.values()):
         try:mapping_templates.validate(docs.values())
         except ValueError as e:add(str(e),"mapping-template")
-    try:equipment_hierarchy.validate(docs.values())
-    except ValueError as e:add(str(e),equipment_hierarchy.KIND)
+    try:equipment_hierarchy.validate(docs.values());hierarchy_ok=True
+    except ValueError as e:add(str(e),equipment_hierarchy.KIND);hierarchy_ok=False
     try:metric_definition.validate(docs.values())
     except ValueError as e:add(str(e),metric_definition.KIND)
     try:command_binding.validate(docs.values(),lambda p:vc.safe(root,p).read_bytes())
     except (OSError,ValueError) as e:add(str(e) if isinstance(e,ValueError) else "command-binding.unresolved",command_binding.KIND)
+    # Spec 130: an invalid hierarchy keeps its own refusal; the rule validators run on a hierarchy that passed, as Bifrost's
+    # fail-first bundle check implies.
+    if hierarchy_ok:
+        try:attribution_rule.validate(docs.values(),lambda p:vc.safe(root,p).read_bytes())
+        except (OSError,ValueError) as e:add(str(e) if isinstance(e,ValueError) else "attribution.binding-profile",attribution_rule.KIND)
     concepts={};targets={};members={}
     for key,d in docs.items():
         path=d["kind"]+":"+d["id"]

@@ -192,4 +192,79 @@ class BindingProfiles(unittest.TestCase):
  def test_without_profiles_unchanged(self):
   state=self.base();del state['occupancyBindings'],state['incidentBindings'];server.check_state(state)
   with tempfile.TemporaryDirectory() as t:self.assertFalse(any(e['id'].startswith((ar.PREFIX,ir.PREFIX)) for e in package(state,Path(t))['files']))
+class AttributionRule(unittest.TestCase):
+ """Spec 119-154 on the occupancy-join workspace: acceptance, packaging at 2.27.0, every attribution.* code reachable here."""
+ def refused(self,state,code):self.assertRaisesRegex(ValueError,code,server.check_state,state)
+ def test_accepted_and_packaged_at_2_27(self):
+  state=w();server.check_state(state);self.assertEqual(server.findings_for(state),[])
+  with tempfile.TemporaryDirectory() as t:
+   p=package(state,Path(t));self.assertEqual(p['schemaVersion'],'2.27.0')
+   self.assertEqual([e['path'] for e in p['files'] if e['kind']==ar.KIND],['attribution-rules/0.json']);self.assertEqual([e['path'] for e in p['files'] if e['kind']==ir.KIND],['impact-rules/0.json'])
+   self.assertEqual(server.v2.p3.validate_package(Path(t))[0],[])
+ def test_without_rules_and_profiles_2_23_unchanged(self):
+  state=w();del state['attributionRules'],state['impactRules'],state['occupancyBindings'],state['incidentBindings'];self.assertEqual(server.findings_for(state),[])
+  with tempfile.TemporaryDirectory() as t:self.assertEqual(package(state,Path(t))['schemaVersion'],'2.23.0')
+ # spec 130-131
+ def test_hierarchy_missing(self):self.refused(ruled(lambda r:r['equipmentRef'].update(version='9.9.9')),'attribution.hierarchy-missing')
+ def test_an_invalid_hierarchy_keeps_its_own_refusal_and_runs_no_rule_check(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);package(w(),root);h=load(root/'hierarchy/0.json');next(n for n in h['nodes'] if n['equipmentInstanceId']=='station1')['parentEquipmentInstanceId']='nutrunner1'
+   server.contracts.save(root/'hierarchy/0.json',h);repinned(root);codes=[x['ruleCode'] for x in server.v2.p3.validate_package(root)[0]]
+   self.assertIn('hierarchy.cycle',codes);self.assertEqual([c for c in codes if c.startswith(('attribution.','impact.'))],[])
+   self.assertRaisesRegex(ValueError,'hierarchy.cycle',ar.paths,h)   # never a loop or a KeyError
+ def test_station_unresolved(self):self.refused(ruled(lambda r:r['stations'].__setitem__(1,'synthetic-site:line2:station9')),'attribution.station-unresolved')
+ def test_station_nested(self):self.refused(ruled(lambda r:r['stations'].append('synthetic-site:line2:station1:nutrunner1')),'attribution.station-nested')
+ def test_duplicate_or_empty_stations_are_schema_refusals(self):
+  self.refused(ruled(lambda r:r['stations'].append(r['stations'][0])),'attribution-rule: schema validation failed');self.refused(ruled(lambda r:r.update(stations=[])),'attribution-rule: schema validation failed')
+ # spec 132
+ def test_empty_members(self):self.refused(ruled(lambda r:r.update(members=[])),'attribution.member-unresolved')
+ def test_member_set_unresolved(self):self.refused(ruled(lambda r:r['members'][0]['mappingSetRef'].update(version='9.9.9')),'attribution.member-unresolved')
+ def test_member_mapping_unresolved(self):self.refused(ruled(lambda r:r['members'][0].update(mappingId='nutrunner1-angle')),'attribution.member-unresolved')
+ def test_member_of_another_set(self):self.refused(ruled(lambda r:r['members'][0]['mappingSetRef'].update(id='station1-mapping')),'attribution.member-unresolved')
+ def test_member_metric_must_equal_the_leaf_name(self):self.refused(ruled(lambda r:r['members'][0].update(metric='torque')),'attribution.member-unresolved')
+ def test_member_semantic_id_must_equal_the_leaf(self):self.refused(ruled(lambda r:r['members'][0].update(semanticId='urn:bifrost:sem:Tool/Angle')),'attribution.member-unresolved')
+ def test_member_listed_twice(self):self.refused(ruled(lambda r:r['members'].append(copy.deepcopy(r['members'][0]))),'attribution.member-unresolved')
+ def test_member_source_identifier_must_end_with_the_metric(self):
+  state=w();next(s for s in state['sources'] if s['definition']['id']=='nutrunner1-torque')['definition']['access']['identifier']='Line2/Station1/Nutrunner1.TorqueValue';self.refused(state,'attribution.member-unresolved')
+ def test_duplicate_leaf_names_in_one_definition_are_refused(self):
+  state=w();next(s for s in state['semantics'] if s['id']=='tool-model')['members'][1]['name']='Torque';self.refused(state,'attribution.member-unresolved')
+ def test_a_station_and_a_tool_may_each_have_a_member_named_running(self):server.check_state(w())
+ def test_member_equipment_outside_the_stations(self):self.refused(ruled(lambda r:(r.update(stations=['synthetic-site:line2:station2']),r['activity'].__delitem__(slice(0,4)),r['activity'].append({'equipmentPath':'synthetic-site:line2:station2','memberRef':'station2-running','activeWhen':True}))),'attribution.member-equipment')
+ # spec 133
+ def test_activity_member_unresolved(self):self.refused(ruled(lambda r:r['activity'][0].update(memberRef='station1-torque')),'attribution.activity-member')
+ def test_activity_member_must_be_boolean(self):self.refused(ruled(lambda r:r['activity'][2].update(memberRef='nutrunner1-torque')),'attribution.activity-member')
+ def test_activity_member_must_belong_to_its_equipment(self):self.refused(ruled(lambda r:r['activity'][0].update(memberRef='nutrunner1-running')),'attribution.activity-member')
+ def test_activity_equipment_must_be_a_station_or_below(self):self.refused(ruled(lambda r:r['activity'][0].update(equipmentPath='synthetic-site:line2')),'attribution.activity-member')
+ def test_two_activity_entries_for_one_equipment(self):self.refused(ruled(lambda r:r['activity'].append(copy.deepcopy(r['activity'][0]))),'attribution.activity-member')
+ def test_an_equipment_without_an_activity_entry_is_accepted(self):server.check_state(ruled(lambda r:r['activity'].pop(3)))
+ def test_empty_activity_is_a_schema_refusal(self):self.refused(ruled(lambda r:r.update(activity=[])),'attribution-rule: schema validation failed')
+ # spec 134, 192, 204
+ def test_binding_unresolved(self):self.refused(ruled(lambda r:r['occupancyBindingRef'].update(version='9.9.9')),'attribution.binding-unresolved')
+ def test_binding_must_be_an_artifact_1_1_0(self):self.refused(ruled(lambda r:r['occupancyBindingRef'].update(id='manual-nutrunner1-torque')),'attribution.binding-unresolved')
+ def test_binding_artifact_must_carry_the_prefix_and_media_type(self):self.refused(ruled(lambda r:r['occupancyBindingRef'].update(id='hierarchy-plant-register')),'attribution.binding-profile')
+ def test_binding_scope_is_not_compared_with_the_stations(self):server.check_state(profiled(lambda r:r.update(scope=['station1'])))
+ def test_binding_profile_refused_on_the_package_alone(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);package(w(),root);(root/'data/occupancy-binding-0.json').write_bytes(b'{}\n');repinned(root)
+   self.assertIn('attribution.binding-profile',[x['ruleCode'] for x in server.v2.p3.validate_package(root)[0]])
+ # spec 135 under occupancy-join
+ def test_identity_entries_are_schema_bound_to_plc_stamped(self):self.refused(ruled(lambda r:r['identity'].update(members=[])),'attribution-rule: schema validation failed')
+ def test_a_namespace_and_cross_check_occupancy_are_allowed_under_occupancy_join(self):server.check_state(ruled(lambda r:r['identity'].update(namespace='urn:line2:visits',crossCheck='occupancy')))
+ # spec 136-138
+ def test_temporal_order(self):
+  self.refused(ruled(lambda r:r['temporal'].update(outOfOrdernessMs=800000)),'attribution.temporal-order');self.refused(ruled(lambda r:r['temporal'].update(horizonMs=600000)),'attribution.temporal-order')
+  server.check_state(ruled(lambda r:r['temporal'].update(outOfOrdernessMs=720000,horizonMs=720000)))
+ def test_expected_period_zero_is_a_schema_refusal(self):self.refused(ruled(lambda r:r['coverage'].update(expectedPeriodMs=0)),'attribution-rule: schema validation failed')
+ # workspace record rules
+ def test_duplicate_id(self):
+  state=w();state['attributionRules'].append(copy.deepcopy(state['attributionRules'][0]));self.refused(state,'attribution-rule: duplicate id')
+ def test_older_version_is_not_written(self):self.refused(ruled(lambda r:r.update(schemaVersion='2.26.0')),'attribution-rule: schema validation failed')
+ def test_older_envelope_refused(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);package(w(),root);p=load(root/'proposal.json');p['schemaVersion']='2.26.0';server.contracts.save(root/'proposal.json',p)
+   self.assertEqual([e['ruleCode'] for e in server.v2.p3.validate_package(root)[0]],['schema'])   # 2.26.0 cannot list the kinds
+ def test_package_checks_without_workspace(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);package(w(),root);r=load(root/'attribution-rules/0.json');r['stations'][1]='synthetic-site:line2:station9';server.contracts.save(root/'attribution-rules/0.json',r);repinned(root)
+   self.assertIn('attribution.station-unresolved',[x['ruleCode'] for x in server.v2.p3.validate_package(root)[0]])
 if __name__=='__main__':unittest.main()
