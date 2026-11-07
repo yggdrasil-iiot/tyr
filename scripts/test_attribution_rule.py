@@ -3,7 +3,7 @@ binding profiles, every attribution.* refusal, publication closure, receiver par
 import sys,copy,json,shutil,subprocess,tempfile,unittest
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];sys.path[:0]=[str(R/'backend'),str(R/'scripts')]
-import server,publication
+import server,publication,attribution_rule as ar
 FIX=R/'fixtures/attribution-rule'
 BUNDLE=FIX/'bundle'
 PLC_BUNDLE=FIX/'plc-stamped-bundle'
@@ -106,4 +106,54 @@ class StringSource(unittest.TestCase):
   plc=next(l for l in mixed.splitlines() if "if(kind==='plc'){const r=draftBeforeMixed()" in l)
   self.assertIn("schemaVersion:r.definition.rawRepresentation?.valueType==='String'?'2.27.0':'2.7.0'",plc)
   with urllib_served(self) as get:self.assertIn(b'"String"]',get('/app.js'));self.assertIn(b"'2.27.0':'2.7.0'",get('/mixed.js'))
+PROFILE={'profileVersion':'0.1.0','topic':'mfg.occupancy','format':{'schemaId':'urn:forseti:schema:occupancy:1.0.0','schemaSha256':'0'*63+'1'},
+         'identity':{'scheme':'mes-unit-id','pattern':'[A-Z0-9]{17}'},'enter':{'bizStep':'urn:epcglobal:cbv:bizstep:arriving'},'leave':{'bizStep':'urn:epcglobal:cbv:bizstep:departing'},
+         'correction':{'errorDeclaration':'reissue-same-event-id','reasons':['urn:epcglobal:cbv:er:did_not_occur','urn:epcglobal:cbv:er:incorrect_data']},'timestampBasis':'eventTime','sources':['mes-line2']}
+def raw(profile):return (json.dumps(profile,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
+def changed(f):
+ p=copy.deepcopy(PROFILE);f(p);return raw(p)
+class OccupancyProfile(unittest.TestCase):
+ """Spec 206-215, 224-226 read with Tyr's own parser at the strictness of Bifrost's OccupancyBindingProfile."""
+ def test_accepted(self):self.assertEqual(ar.occupancy_profile(raw(PROFILE))['topic'],'mfg.occupancy')
+ def refused(self,raw_bytes,code='attribution.binding-profile'):self.assertRaisesRegex(ValueError,code,ar.occupancy_profile,raw_bytes)
+ def test_field_set(self):
+  self.refused(changed(lambda p:p.update(note='x')));self.refused(changed(lambda p:p.pop('sources')));self.refused(b'not json');self.refused(b'[]')
+  self.refused(changed(lambda p:p['format'].update(extra=1)));self.refused(changed(lambda p:p['identity'].pop('pattern')));self.refused(changed(lambda p:p['enter'].update(disposition='x')))
+ def test_constants_and_empty_values(self):
+  self.refused(changed(lambda p:p.update(profileVersion='0.2.0')));self.refused(changed(lambda p:p.update(timestampBasis='recordTime')));self.refused(changed(lambda p:p.update(topic='')))
+  self.refused(changed(lambda p:p['format'].update(schemaId='urn:forseti:schema:occupancy:1.1.0')));self.refused(changed(lambda p:p['identity'].update(scheme='gs1-sgtin')))
+  self.refused(changed(lambda p:p['enter'].update(bizStep='')));self.refused(changed(lambda p:p['correction'].update(errorDeclaration='new-event-id')))
+ def test_digest_form(self):
+  self.refused(changed(lambda p:p['format'].update(schemaSha256='0'*64+'0')));self.refused(changed(lambda p:p['format'].update(schemaSha256='A'*64)));self.refused(changed(lambda p:p['format'].update(schemaSha256=1)))
+ def test_reasons_and_sources(self):
+  self.refused(changed(lambda p:p['correction'].update(reasons=[])));self.refused(changed(lambda p:p['correction'].update(reasons=['urn:epcglobal:cbv:er:did_not_occur']*2)))
+  self.refused(changed(lambda p:p['correction'].update(reasons=['urn:epcglobal:cbv:er:other'])));ar.occupancy_profile(changed(lambda p:p['correction'].update(reasons=['urn:epcglobal:cbv:er:incorrect_data'])))
+  self.refused(changed(lambda p:p.update(sources=[])));self.refused(changed(lambda p:p.update(sources=['a','a'])));self.refused(changed(lambda p:p.update(sources=['a',''])));self.refused(changed(lambda p:p.update(sources='mes')))
+ def test_other_code_is_the_callers(self):self.assertRaisesRegex(ValueError,'occupancy-binding.profile',ar.occupancy_profile,b'{}','occupancy-binding.profile')
+ def test_duplicate_json_keys_are_refused(self):   # Bifrost's MappingJson reads with STRICT_DUPLICATE_DETECTION; Python's json would keep the last value
+  self.refused(raw(PROFILE).replace(b'"topic": "mfg.occupancy"',b'"topic": "ignored", "topic": "mfg.occupancy"'))
+ def test_utf8_bom_is_accepted_as_bifrost_accepts_it(self):self.assertEqual(ar.occupancy_profile(b'\xef\xbb\xbf'+raw(PROFILE))['topic'],'mfg.occupancy')   # Jackson's byte reader skips it; json.loads on bytes detects utf-8-sig
+ def test_deep_nesting_is_refused_not_a_crash(self):   # Jackson's 1,000-level limit makes it a reader exception in Bifrost; Python raises RecursionError, mapped to the code
+  self.refused(b'['*10000+b'0'+b']'*10000);self.refused(b'['*1500+b'0'+b']'*1500)
+ def test_enter_equal_to_leave_is_accepted_as_bifrost_accepts_it(self):ar.occupancy_profile(changed(lambda p:p['leave'].update(bizStep=p['enter']['bizStep'])))   # Open point 1
+class Pattern(unittest.TestCase):
+ """Spec 225 plus Bifrost's extra limits (forseti spec PR of Task 1): the syntax common to Java and ECMA-262, nothing else."""
+ def test_accepted(self):
+  for p in ('[A-Z0-9]{17}','VIN-[0-9]{6}','(?:A|B)[0-9]+','a.c','x*y+z?','[^-]{1,3}','\\-\\.\\+','[a\\]b]','(?:(?:a))','a{2}','a{2,}','[0-9A-Fa-f]{32}','(?:a+)+'):self.assertTrue(ar.pattern_accepted(p),p)
+ def test_refused(self):
+  for p in ('','^A$','(A)','(?<n>A)','(?=A)','(?!A)','\\d+','\\w','\\p{Lu}','[[:alpha:]]','A*?','A++','A{','A{2,1}','A{,3}','\\1','(?i)A','[a&&[b]]','[]','[a','a)','(?:a','\\','\\A','a{2}{3}','a**','[z-a]'):self.assertFalse(ar.pattern_accepted(p),p)
+ def test_surrogates_and_supplementary_characters_are_refused(self):
+  self.assertFalse(ar.pattern_accepted('A\U0001F600'));self.assertFalse(ar.pattern_accepted('A\ud83d'))   # Java reads a pair as one code point, ECMA-262 as two
+ def test_group_depth_is_bounded(self):
+  self.assertTrue(ar.pattern_accepted('(?:'*ar.MAX_DEPTH+'a'+')'*ar.MAX_DEPTH));self.assertFalse(ar.pattern_accepted('(?:'*(ar.MAX_DEPTH+1)+'a'+')'*(ar.MAX_DEPTH+1)))
+ def test_quantifier_bounds_follow_java(self):
+  for p in ('a{2147483647}','a{0,2147483647}','a{2147483647,}'):self.assertTrue(ar.pattern_accepted(p),p)
+  # Java Pattern.compile: "Illegal repetition range" above Integer.MAX_VALUE; Python's re alone would accept the first and fourth and raise OverflowError on the others
+  for p in ('a{2147483648}','a{4294967296}','a{99999999999999999999}','a{1,2147483648}','a{2147483648,}','a{1,99999999999999999999}','a{99999999999999999999,1}'):self.assertFalse(ar.pattern_accepted(p),p)
+ def test_leading_zeros_are_javas_value(self):
+  # Bifrost does not parse {m}; Pattern.compile accumulates leading zeros, so 4,500 zeros before a 1 are a valid repetition of 1;
+  # Python's int() and re would refuse more than 4,300 digits, so Tyr strips the zeros first (no new length cap: Open point 4)
+  for p in ('a{0001}','a{00,0002}','a{'+'0'*4500+'1}','a{'+'0'*4500+'1,'+'0'*4500+'2}'):self.assertTrue(ar.pattern_accepted(p),p[:24])
+  for p in ('a{'+'0'*4500+'1,0}','a{'+'9'*4500+'}'):self.assertFalse(ar.pattern_accepted(p),p[:24])   # inverted range; a bound no engine holds
+ def test_profile_with_a_refused_pattern(self):self.assertRaisesRegex(ValueError,'attribution.binding-profile',ar.occupancy_profile,changed(lambda p:p['identity'].update(pattern='^[A-Z]+$')))
 if __name__=='__main__':unittest.main()
