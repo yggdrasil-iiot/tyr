@@ -267,4 +267,28 @@ class AttributionRule(unittest.TestCase):
   with tempfile.TemporaryDirectory() as t:
    root=Path(t);package(w(),root);r=load(root/'attribution-rules/0.json');r['stations'][1]='synthetic-site:line2:station9';server.contracts.save(root/'attribution-rules/0.json',r);repinned(root)
    self.assertIn('attribution.station-unresolved',[x['ruleCode'] for x in server.v2.p3.validate_package(root)[0]])
+class Publication(unittest.TestCase):
+ """Rules travel with every mapping set they read; the impact rule with its attribution rule; profiles follow their references."""
+ def test_publication_carries_both_rules_both_profiles_and_the_hierarchy(self):
+  with tempfile.TemporaryDirectory() as t:
+   p,findings=publish(w(),Path(t)/'b');self.assertEqual(findings,[]);self.assertEqual(p['schemaVersion'],'2.27.0')
+   ids={(e['kind'],e['id']) for e in p['files']}
+   for k in ((ar.KIND,'line2-attribution'),(ir.KIND,'line2-impact'),('evidence-artifact','occupancy-binding-line2'),('evidence-artifact','incident-binding-line2'),('equipment-hierarchy','line2-plant'),('evidence-artifact','hierarchy-plant-register')):self.assertIn(k,ids)
+   for f in ('data/occupancy-binding-0.json','data/incident-binding-0.json','attribution-rules/0.json','impact-rules/0.json','submission.json'):self.assertTrue((Path(t)/'b'/f).is_file(),f)
+   self.assertEqual(load(Path(t)/'b/submission.json')['streamId'],'line2');self.assertEqual(len(tree(Path(t)/'b')),39)
+ def test_rule_stays_out_when_one_of_its_mapping_sets_is_not_published(self):
+  with tempfile.TemporaryDirectory() as t:
+   p,findings=publish(w(),Path(t)/'b',SETS[:3]);self.assertEqual(findings,[])
+   kinds={e['kind'] for e in p['files']};self.assertNotIn(ar.KIND,kinds);self.assertNotIn(ir.KIND,kinds)
+   self.assertFalse(any(e['id'].startswith((ar.PREFIX,ir.PREFIX)) for e in p['files']))
+ def test_impact_rule_stays_out_without_its_attribution_rule(self):
+  state=w();del state['attributionRules']
+  with tempfile.TemporaryDirectory() as t:
+   p,findings=publish(state,Path(t)/'b');self.assertEqual(findings,[]);self.assertNotIn(ir.KIND,{e['kind'] for e in p['files']})
+ def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
+  with tempfile.TemporaryDirectory() as t:
+   publish(w(),Path(t)/'b');self.assertEqual(tree(Path(t)/'b'),tree(BUNDLE))
+ def test_bifrost_receiver_validates_the_bundle(self):
+  with tempfile.TemporaryDirectory() as t:
+   v=publication.Adapter(JAR,Path(t)/'registry').call('validate',BUNDLE);self.assertTrue(v['accepted'],v);self.assertEqual(v['findings'],[])
 if __name__=='__main__':unittest.main()
