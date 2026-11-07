@@ -24,6 +24,7 @@ NUMERIC={"Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Double",
 INTEGER={"Int16":16,"UInt16":16,"Int32":32,"UInt32":32,"Int64":64}
 def schema_errors(kind,doc):
     v=doc.get("schemaVersion")
+    if v=='2.27.0' and kind in ('mapping-proposal','attribution-rule','impact-rule','source-definition'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v in ('2.25.0','2.26.0') and kind in ('mapping-proposal','command-binding'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v=='2.24.0' and kind in ('mapping-proposal','metric-definition'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v=='2.23.0' and kind in ('mapping-proposal','equipment-hierarchy'):return list(vc.schema_validator(kind,v).iter_errors(doc))
