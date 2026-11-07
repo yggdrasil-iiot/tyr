@@ -187,7 +187,22 @@ def check(r,docs,read):
  require(e is not None and e['schemaVersion']=='1.1.0','attribution.binding-unresolved')
  require(e['id'].startswith(PREFIX) and e['file']['mediaType']==MEDIA,'attribution.binding-profile')
  occupancy_profile(read(e['file']['path']),'attribution.binding-profile')
- # Task 11 inserts the plc-stamped identity checks here (spec 132 roles, 135 coverage and member types).
+ ident=r['identity']
+ if ident['mode']=='plc-stamped':
+  # roles by reference (spec 132): named by activity = activity member, named by an identity entry = identity member, every other
+  # entry = measurement member; the equipment with measurement or activity members are the activity entries' paths plus the
+  # paths of every members[] entry no identity entry names (an identity-only equipment is not covered: spec 135).
+  refs=('unitMemberRef','visitMemberRef','presentMemberRef')
+  named={x[k] for x in ident['members'] for k in refs}
+  involved={a['equipmentPath'] for a in r['activity']}|{x['path'] for i,x in rule.items() if i not in named}
+  covered=set()
+  for x in ident['members']:require(x['equipmentPath'] not in covered,'attribution.identity-equipment');covered.add(x['equipmentPath'])
+  require(covered==involved,'attribution.identity-equipment')
+  roles={a['memberRef'] for a in r['activity']}
+  for x in ident['members']:
+   for k in refs:require(x[k] not in roles,'attribution.identity-member');roles.add(x[k])
+  for x in ident['members']:
+   p=x['equipmentPath'];require(typed(rule,x['unitMemberRef'],p,'String') and typed(rule,x['visitMemberRef'],p,'String') and typed(rule,x['presentMemberRef'],p,'Boolean'),'attribution.identity-member')
  t=r['temporal'];require(t['outOfOrdernessMs']<=t['allowedLatenessMs']<=t['horizonMs'],'attribution.temporal-order')
 def validate(docs,read):
  """docs: every document in one package; read(path) returns a data file's bytes."""

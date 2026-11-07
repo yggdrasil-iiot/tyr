@@ -291,4 +291,52 @@ class Publication(unittest.TestCase):
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',BUNDLE);self.assertTrue(v['accepted'],v);self.assertEqual(v['findings'],[])
+def stamped(f):
+ state=plc();f(state['attributionRules'][0]);return state
+IDENTITY_SOURCES=(('station1-unit','station1','sim-opcua-station1','Line2/Station1.UnitId','String'),('station1-visit','station1','sim-opcua-station1','Line2/Station1.VisitId','String'),('station1-present','station1','sim-opcua-station1','Line2/Station1.VisitPresent','Boolean'),
+                  ('nutrunner1-unit','nutrunner1','sim-opcua-nutrunner1','Line2/Station1/Nutrunner1.UnitId','String'),('nutrunner1-visit','nutrunner1','sim-opcua-nutrunner1','Line2/Station1/Nutrunner1.VisitId','String'),('nutrunner1-present','nutrunner1','sim-opcua-nutrunner1','Line2/Station1/Nutrunner1.VisitPresent','Boolean'))
+class PlcStamped(unittest.TestCase):
+ """Spec 132 and 135 under plc-stamped: coverage (identity-equipment), one role per mappingId and member types (identity-member)."""
+ def refused(self,state,code):self.assertRaisesRegex(ValueError,code,server.check_state,state)
+ def test_accepted_and_packaged_with_typed_string_sources(self):
+  state=plc();server.check_state(state);self.assertEqual(server.findings_for(state),[])
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);p=package(state,root);self.assertEqual(p['schemaVersion'],'2.27.0');self.assertEqual(server.v2.p3.validate_package(root)[0],[])
+   strings=[load(root/e['path']) for e in p['files'] if e['kind']=='source-definition' and load(root/e['path'])['rawRepresentation']['valueType']=='String']
+   self.assertEqual(sorted(s['id'] for s in strings),['nutrunner1-unit','nutrunner1-visit','station1-unit','station1-visit']);self.assertTrue(all(s['schemaVersion']=='2.27.0' for s in strings))
+   self.assertEqual(sorted(e['id'] for e in p['files'] if e['kind']=='semantic-definition'),['station-model','station-stamped-model','tool-model','tool-stamped-model'])
+ def test_identity_sources_are_what_the_plc_form_writes(self):
+  state=plc()
+  for id,eq,con,node,vt in IDENTITY_SOURCES:
+   expected=string_source({'sources':[]},id,eq,con,node,vt)['sources'][0];actual=next(s for s in state['sources'] if s['definition']['id']==id)
+   self.assertEqual(actual['definition'],expected['definition']);self.assertEqual(set(actual),set(expected))
+ def test_identity_equipment_missing(self):self.refused(stamped(lambda r:r['identity']['members'].pop(1)),'attribution.identity-equipment')
+ def test_identity_equipment_duplicate(self):self.refused(stamped(lambda r:r['identity']['members'].append(copy.deepcopy(r['identity']['members'][0]))),'attribution.identity-equipment')
+ def test_identity_entry_for_an_equipment_without_members_is_refused(self):
+  self.refused(stamped(lambda r:r['identity']['members'].append(dict(r['identity']['members'][0],equipmentPath='synthetic-site:line2:station2'))),'attribution.identity-equipment')
+ def test_identity_only_equipment_may_not_carry_an_identity_entry(self):
+  def f(r):
+   r['members']=[m for m in r['members'] if m['mappingId'] not in ('nutrunner1-torque','nutrunner1-running')];r['activity']=[a for a in r['activity'] if a['memberRef']!='nutrunner1-running']
+  self.refused(stamped(f),'attribution.identity-equipment')
+ def test_identity_unit_member_must_be_string(self):self.refused(stamped(lambda r:r['identity']['members'][0].update(unitMemberRef='station1-present')),'attribution.identity-member')
+ def test_identity_present_member_must_be_boolean(self):self.refused(stamped(lambda r:r['identity']['members'][0].update(presentMemberRef='station1-visit')),'attribution.identity-member')
+ def test_identity_member_unresolved(self):self.refused(stamped(lambda r:r['identity']['members'][0].update(unitMemberRef='station1-angle')),'attribution.identity-member')
+ def test_identity_member_must_belong_to_the_entrys_equipment(self):
+  def f(r):
+   r['identity']['members'][0].update(unitMemberRef='nutrunner1-unit');r['identity']['members'][1].update(unitMemberRef='station1-unit')
+  self.refused(stamped(f),'attribution.identity-member')
+ def test_identity_present_ref_naming_the_activity_member_is_refused(self):self.refused(stamped(lambda r:r['identity']['members'][0].update(presentMemberRef='station1-running')),'attribution.identity-member')
+ def test_identity_ref_shared_across_two_entries_is_refused(self):self.refused(stamped(lambda r:r['identity']['members'][1].update(visitMemberRef='station1-visit')),'attribution.identity-member')
+ def test_identity_entry_order_does_not_matter(self):server.check_state(stamped(lambda r:r['identity']['members'].reverse()))
+ def test_cross_check_none_is_allowed_under_plc_stamped(self):server.check_state(stamped(lambda r:r['identity'].update(crossCheck='none')))
+ def test_plc_stamped_needs_a_namespace_and_entries(self):
+  self.refused(stamped(lambda r:r['identity'].pop('namespace')),'attribution-rule: schema validation failed');self.refused(stamped(lambda r:r['identity'].update(members=[])),'attribution-rule: schema validation failed')
+ def test_two_activity_entries_with_different_members_for_one_equipment(self):
+  self.refused(stamped(lambda r:r['activity'].append({'equipmentPath':'synthetic-site:line2:station1','memberRef':'station1-present','activeWhen':True})),'attribution.activity-member')
+ def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
+  with tempfile.TemporaryDirectory() as t:
+   publish(plc(),Path(t)/'b',id='attribution-plc-stamped-fixture');self.assertEqual(tree(Path(t)/'b'),tree(PLC_BUNDLE));self.assertEqual(len(tree(PLC_BUNDLE)),59)
+ def test_bifrost_receiver_validates_the_bundle(self):
+  with tempfile.TemporaryDirectory() as t:
+   v=publication.Adapter(JAR,Path(t)/'registry').call('validate',PLC_BUNDLE);self.assertTrue(v['accepted'],v)
 if __name__=='__main__':unittest.main()
