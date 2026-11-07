@@ -86,6 +86,13 @@ class StringSource(unittest.TestCase):
  def test_a_2_7_source_cannot_declare_string(self):
   state=string_source(self.base(),'mixer1-unit','mixer1','sim-opcua','Line1/Mixer1.UnitId');state['sources'][-1]['definition']['schemaVersion']='2.7.0'
   self.assertRaisesRegex(ValueError,'source-definition',server.check_state,state)
+ def test_a_legacy_package_refuses_a_2_27_source_as_it_refuses_2_7(self):   # validate_contracts serves the 1.x package path (migrate, --package)
+  for v in ('2.7.0','2.27.0'):
+   with tempfile.TemporaryDirectory() as t:
+    b=Path(t)/'m';shutil.copytree(R/'fixtures/packages/motor',b);vc=server.contracts;prop=vc.load(b/'proposal.json')
+    e=next(e for e in prop['files'] if e['kind']=='source-definition');d=vc.load(b/e['path'])
+    d.update(schemaVersion=v,sourceKind='plc',accessMode='read');vc.save(b/e['path'],d);e['sha256']=vc.hashed(b/e['path']);vc.save(b/'proposal.json',prop)
+    self.assertIn('source.mixed-legacy-unsupported',[f['ruleCode'] for f in vc.validate_package(b)],v)
  def test_a_2_27_source_needs_a_2_27_proposal(self):
   state=string_source(self.base(),'mixer1-unit','mixer1','sim-opcua','Line1/Mixer1.UnitId')
   with tempfile.TemporaryDirectory() as t:
@@ -258,6 +265,9 @@ class AttributionRule(unittest.TestCase):
  # workspace record rules
  def test_duplicate_id(self):
   state=w();state['attributionRules'].append(copy.deepcopy(state['attributionRules'][0]));self.refused(state,'attribution-rule: duplicate id')
+ def test_a_rule_item_that_is_not_an_object_is_a_schema_refusal(self):   # not a crash: the authoring endpoints pass list items through
+  state=w();state['attributionRules']=['x'];self.refused(state,'attribution-rule: schema validation failed')
+  state=w();state['impactRules']=[1];self.refused(state,'impact-rule: schema validation failed')
  def test_older_version_is_not_written(self):self.refused(ruled(lambda r:r.update(schemaVersion='2.26.0')),'attribution-rule: schema validation failed')
  def test_older_envelope_refused(self):
   with tempfile.TemporaryDirectory() as t:

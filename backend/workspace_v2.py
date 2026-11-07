@@ -169,7 +169,7 @@ def check(state,legacy_check,legacy_build):
             ids=set()
             for d in docs:
                 # Tyr writes 2.27.0 rules only; the schema is Bifrost's byte copy.
-                if d.get("schemaVersion")!=mod.VERSION or p3.schema_errors(mod.KIND,d):raise ValueError(mod.KIND+": schema validation failed")
+                if not isinstance(d,dict) or d.get("schemaVersion")!=mod.VERSION or p3.schema_errors(mod.KIND,d):raise ValueError(mod.KIND+": schema validation failed")
                 if d["id"] in ids:raise ValueError(mod.KIND+": duplicate id")
                 ids.add(d["id"])
     if "commandBindings" in state:

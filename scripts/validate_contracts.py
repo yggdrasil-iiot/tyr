@@ -152,7 +152,7 @@ def validate_package(root):
             except (OSError,ValueError):add("evidence.unreadable",path)
         elif kind=="source-definition":
             if "fixedArray" in d:add("array.legacy-unsupported",path)
-            if d.get("schemaVersion") in ("2.7.0","2.10.0","2.21.0"):add("source.mixed-legacy-unsupported",path)
+            if d.get("schemaVersion") in ("2.7.0","2.10.0","2.21.0","2.27.0"):add("source.mixed-legacy-unsupported",path)
             for rule in source_rules(d):add(rule,path)
             if d["viewOf"] is not None and resolve("source-definition",d["viewOf"]) is None:pass
         elif kind=="semantic-definition":

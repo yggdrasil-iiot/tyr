@@ -116,6 +116,8 @@ Bifrost는 선행 풀 리퀘스트(forseti#3) 사양에 기록된 바와 같이 
 
 `incident-binding`에도 동일한 의미를 나타내는 다섯 가지 코드(`incident-binding.schema`, `incident-binding.duplicate`, `incident-binding.scope`, `incident-binding.limit`, `incident-binding.version-required`)가 적용된다.
 
+작업공간의 모든 작성 프로필은 규칙의 참조 여부와 관계없이 Tyr의 프로필 파서로도 읽으며, 실패한 프로필은 사양 코드(`attribution.binding-profile` 또는 `impact.binding-profile`)로 거부하고, Bifrost는 규칙이 참조할 때만 프로필을 읽는다.
+
 Tyr는 Bifrost의 리더가 파일 바이트를 읽는 방식과 동일한 절차로 프로필을 파싱한다. 바이트 맨 앞의 UTF-8 BOM은 건너뛰고, JSON 내부에 중복된 키가 있으면 거부하며, 깊은 중첩 구조가 입력되어도 프로세스 비정상 종료 없이 정해진 프로필 거부 코드를 내며 안전하게 처리를 중단한다.
 
 ## Tyr 검사
@@ -179,7 +181,7 @@ Tyr는 다음을 Bifrost에 맡긴다. 2키 영수증 승인, in-toto/DSSE 증�
 
 화면 목록에는 규칙에서 지정할 수 있는 멤버 목록(매핑 세트, `mappingId`, 설비 경로, metric, `semanticId`, 데이터 타입), 설비 계층 구조 트리, 인용 가능한 evidence 문서 목록을 빠짐없이 표시한다. 사용자가 편집하는 현재 프로필과 규칙은 JSON 블록 형태로 화면에 나타나며, 직접 수정할 수 있다.
 
-계획 수립과 저장 반영은 엄격한 절차를 거친다. `POST /api/attribution-rule-plan`은 패키지 검증과 완전히 동일한 검사 로직을 실행하여 변경안의 유효성을 검사한다. `POST /api/attribution-rule-apply`는 사전에 계획 검사를 거친 뒤 내용이 전혀 변경되지 않은 계획만을 작업공간에 반영한다. 미리 계획 검사를 거치지 않은 요청에는 `attribution-rule.plan-required` 오류를 내고, 계획 검사 이후 내용이 달라졌으면 `attribution-rule.plan-changed` 오류를 낸다. 요청 형식 자체가 어긋난 경우에는 `attribution-rule.plan-request` 코드로 거부한다.
+`POST /api/attribution-rule-plan`은 편집된 블록에 패키지 검증과 동일한 검사를 실행하고 요청의 리비전과 네 섹션의 다이제스트인 `planSha256`과 함께 결과를 반환한다. `POST /api/attribution-rule-apply`는 요청에 `planSha256`을 요구하며, 빠져 있으면 `attribution-rule.plan-required`로 거부하고 계획 이후 블록이 변경되어 수신한 요청의 다이제스트와 일치하지 않으면 `attribution-rule.plan-changed`로 거부한다. 저장 자체가 전체 작업공간 검사(및 버전 전이)를 다시 실행하므로 검사를 통과하지 못한 작업공간을 결코 저장하지 않으며, 형식이 잘못된 요청은 `attribution-rule.plan-request`로 거부한다.
 
 작업공간에 규칙을 저장하는 일은 작성 행위일 뿐이며 승인 권한은 Bifrost에 머무른다. 목록 응답(`GET /api/attribution-rule`)에는 `approvalAuthority: bifrost` 필드가 담겨 승인 권한이 Bifrost에 있음을 명확하게 알린다.
 
@@ -205,13 +207,13 @@ Bifrost 자체의 1단계 픽스처(`attribution-impact`, `attribution-plc-stamp
 
 ## 시험
 
-`scripts/test_attribution_rule.py` 파일에는 총 100개의 시험이 들어 있다.
+`scripts/test_attribution_rule.py` 파일에는 총 102개의 시험이 들어 있다.
 - `Contract`: 2개 시험
-- `StringSource`: 6개 시험
+- `StringSource`: 7개 시험
 - `OccupancyProfile`: 10개 시험
 - `Pattern`: 7개 시험
 - `BindingProfiles`: 4개 시험
-- `AttributionRule`: 38개 시험
+- `AttributionRule`: 39개 시험
 - `Publication`: 5개 시험
 - `PlcStamped`: 18개 시험
 - `Parity`: 2개 시험
