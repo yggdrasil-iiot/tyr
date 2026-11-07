@@ -78,6 +78,8 @@ def build(state,folder,legacy_build):
         for i,d in enumerate(state["commandBindings"]):
             rel="command-bindings/"+str(i)+".json";vc.save(folder/rel,d)
             p["files"].append({"path":rel,"kind":d["kind"],"id":d["id"],"version":d["version"],"sha256":vc.hashed(folder/rel)})
+    # Spec 2.27 row 1 (rule.envelope): a 2.27.0 document, a typed String source included, travels only in a 2.27.0 proposal.
+    if any(r["definition"].get("schemaVersion")=="2.27.0" for r in state["sources"]):p["schemaVersion"]="2.27.0"
     vc.save(folder/"proposal.json",p)
 def findings(state,legacy_build):
     if not any(state[k] for k in ("sources","semantics","targets","graphs","mappings")) and not state.get("imports") and not state.get("writes"):return [{"ruleCode":"workspace.empty","path":None}]

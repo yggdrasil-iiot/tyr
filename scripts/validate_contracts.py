@@ -61,6 +61,8 @@ def safe(root,path):
     if not resolved.is_relative_to(root.resolve()): raise ValueError("Path escapes package")
     return resolved
 def source_rules(s):
+    if s.get("schemaVersion")=="2.27.0":
+        d=copy.deepcopy(s);d["schemaVersion"]="2.7.0";return source_rules(d)
     if s.get("schemaVersion")=="2.21.0":
         d=copy.deepcopy(s);d['schemaVersion']='2.7.0';d.pop('recordField',None);return source_rules(d)
     if s.get("schemaVersion")=="2.10.0":

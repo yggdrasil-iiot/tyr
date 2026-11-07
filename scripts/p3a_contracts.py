@@ -64,14 +64,16 @@ def validate_package(root):
             docs[key]=d
         except (OSError,ValueError):add("bundle.unreadable",e["path"])
     if any(d.get('schemaVersion')=='2.21.0' for d in docs.values()):
-        if proposal['schemaVersion'] not in ('2.21.0','2.22.0','2.23.0','2.24.0','2.25.0','2.26.0'):add('record-field.envelope','proposal.json')
+        if proposal['schemaVersion'] not in ('2.21.0','2.22.0','2.23.0','2.24.0','2.25.0','2.26.0','2.27.0'):add('record-field.envelope','proposal.json')
         try:
             import record_fields
             record_fields.validate(docs.values())
         except ValueError as e:add(str(e),'record-field')
-    if any(d.get('schemaVersion')=='2.22.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.22.0','2.23.0','2.24.0','2.25.0','2.26.0'):add('broadcast.envelope','proposal.json')
+    if any(d.get('schemaVersion')=='2.22.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.22.0','2.23.0','2.24.0','2.25.0','2.26.0','2.27.0'):add('broadcast.envelope','proposal.json')
     # As Bifrost: a 2.26.0 document travels only in a 2.26.0 proposal, whose links all name their server.
-    if any(d.get('schemaVersion')=='2.26.0' for d in docs.values()) and proposal['schemaVersion']!='2.26.0':add('command-binding.envelope','proposal.json')
+    if any(d.get('schemaVersion')=='2.26.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.26.0','2.27.0'):add('command-binding.envelope','proposal.json')
+    # As Bifrost (rule.envelope): a 2.27.0 document, rule or source definition, travels only in a 2.27.0 proposal.
+    if any(d.get('schemaVersion')=='2.27.0' for d in docs.values()) and proposal['schemaVersion']!='2.27.0':add('rule.envelope','proposal.json')
     if errors:return errors,{}
     def resolve(kind,ref,path):
         d=docs.get((kind,ref["id"],ref["version"]))

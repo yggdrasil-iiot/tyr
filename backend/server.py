@@ -183,7 +183,7 @@ def check_state(state):
         try:return v2.check(state,legacy_check_state,legacy_build_package)
         except ValueError as e:raise Invalid(str(e)) from e
     result=legacy_check_state(state)
-    require(not any(r["definition"].get("schemaVersion") in ("2.7.0","2.10.0") for r in state["sources"]),"Mixed/access-mode sources require the 2.0 authoring workspace")
+    require(not any(r["definition"].get("schemaVersion") in ("2.7.0","2.10.0","2.27.0") for r in state["sources"]),"Mixed/access-mode sources require the 2.0 authoring workspace")
     require(not any("fixedArray" in r["definition"] for r in state["sources"]),"Fixed arrays require the 2.0 authoring workspace")
     return result
 
