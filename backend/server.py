@@ -237,6 +237,7 @@ class Store:
             __import__("hierarchy_evidence").transition(json.loads(current_body),state)
             __import__("read_bindings").transition(json.loads(current_body),state)
             __import__("server_certificates").transition(json.loads(current_body),state)
+            __import__("binding_profiles").transition(json.loads(current_body),state)
             try:import_workflow.check_transition(json.loads(current_body),state)
             except ValueError as e:raise Invalid(str(e)) from e
             cursor = c.execute("UPDATE workspace SET revision=revision+1,body=?,updated_at=? WHERE id=1 AND revision=?",

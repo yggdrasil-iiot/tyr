@@ -3,7 +3,7 @@ binding profiles, every attribution.* refusal, publication closure, receiver par
 import sys,copy,json,shutil,subprocess,tempfile,unittest
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];sys.path[:0]=[str(R/'backend'),str(R/'scripts')]
-import server,publication,attribution_rule as ar
+import server,publication,binding_profiles as bp,attribution_rule as ar,impact_rule as ir
 FIX=R/'fixtures/attribution-rule'
 BUNDLE=FIX/'bundle'
 PLC_BUNDLE=FIX/'plc-stamped-bundle'
@@ -156,4 +156,40 @@ class Pattern(unittest.TestCase):
   for p in ('a{0001}','a{00,0002}','a{'+'0'*4500+'1}','a{'+'0'*4500+'1,'+'0'*4500+'2}'):self.assertTrue(ar.pattern_accepted(p),p[:24])
   for p in ('a{'+'0'*4500+'1,0}','a{'+'9'*4500+'}'):self.assertFalse(ar.pattern_accepted(p),p[:24])   # inverted range; a bound no engine holds
  def test_profile_with_a_refused_pattern(self):self.assertRaisesRegex(ValueError,'attribution.binding-profile',ar.occupancy_profile,changed(lambda p:p['identity'].update(pattern='^[A-Z]+$')))
+def record(profile,id='line2',scope=('mixer1','mixer2'),version='1.0.0'):
+ return {'id':id,'version':version,'label':'Line 2 binding','origin':'synthetic','capturedAt':'2026-11-07T00:00:00Z','reviewer':'fixture-reviewer','product':None,'scope':list(scope),'profile':copy.deepcopy(profile)}
+class BindingProfiles(unittest.TestCase):
+ """Authored profiles: a workspace record whose profile object Tyr serializes; the artifact wrapper pins those bytes."""
+ def base(self):
+  state=load('fixtures/command-binding/workspace.json');del state['commandBindings'],state['readBindings'],state['serverCertificates']
+  state['occupancyBindings']=[record(PROFILE)];state['incidentBindings']=[record({'profileVersion':'0.1.0','topic':'mfg.incidents','format':{'schemaId':'urn:forseti:schema:incident:1.0.0','schemaSha256':'0'*63+'2'},'kinds':['tool-check-failed'],'equipmentRefBasis':'isa95-path'})];return state
+ def refused(self,state,code):self.assertRaisesRegex(ValueError,code,server.check_state,state)
+ def test_packaged_as_evidence_artifacts_with_the_spec_prefix_and_media_type(self):
+  state=self.base();server.check_state(state)
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);p=package(state,root)
+   for prefix,media,data in ((ar.PREFIX,ar.MEDIA,'data/occupancy-binding-0.json'),(ir.PREFIX,ir.MEDIA,'data/incident-binding-0.json')):
+    art=next(load(root/e['path']) for e in p['files'] if e['id']==prefix+'line2')
+    self.assertEqual((art['schemaVersion'],art['file']['path'],art['file']['mediaType'],art['scope'],art['origin']),('1.1.0',data,media,['mixer1','mixer2'],'synthetic'))
+    self.assertEqual(art['file']['sha256'],server.contracts.hashed(root/data))
+   self.assertEqual((root/'data/occupancy-binding-0.json').read_bytes(),raw(PROFILE))   # vc.save bytes: indent 2, LF, final newline
+   self.assertEqual(p['schemaVersion'],'2.23.0')   # a profile alone is an evidence artifact and raises no envelope: base() dropped the links, so the hierarchy's 2.23.0 (workspace_v2.build lines 63-68) stands
+ def test_record_refusals(self):
+  self.refused(profiled(lambda r:r.update(note='x'),state=self.base()),'occupancy-binding.schema')
+  self.refused(profiled(lambda r:r.update(scope=[]),state=self.base()),'occupancy-binding.schema')
+  self.refused(profiled(lambda r:r.update(scope=['mixer9']),state=self.base()),'occupancy-binding.scope')
+  state=self.base();state['occupancyBindings'].append(record(PROFILE));self.refused(state,'occupancy-binding.duplicate')
+  state=self.base();state['incidentBindings'].append(record(state['incidentBindings'][0]['profile']));self.refused(state,'incident-binding.duplicate')
+  self.refused(profiled(lambda r:r['profile'].update(timestampBasis='recordTime'),state=self.base()),'attribution.binding-profile')
+  self.refused(profiled(lambda r:r['profile']['identity'].update(pattern='^A$'),state=self.base()),'attribution.binding-profile')
+  self.refused(profiled(lambda r:r['profile'].update(kinds=[]),'incidentBindings',self.base()),'impact.binding-profile')
+  state=self.base();state['occupancyBindings']='x';self.refused(state,'occupancy-binding.limit')
+ def test_changed_profile_needs_a_new_version(self):
+  before=self.base();after=profiled(lambda r:r['profile'].update(topic='mfg.occupancy.v2'),state=self.base())
+  self.assertRaisesRegex(ValueError,'occupancy-binding.version-required',bp.transition,before,after)
+  after['occupancyBindings'][0]['version']='1.1.0';bp.transition(before,after)
+  after=profiled(lambda r:r.update(scope=['mixer1']),'incidentBindings',self.base());self.assertRaisesRegex(ValueError,'incident-binding.version-required',bp.transition,before,after)
+ def test_without_profiles_unchanged(self):
+  state=self.base();del state['occupancyBindings'],state['incidentBindings'];server.check_state(state)
+  with tempfile.TemporaryDirectory() as t:self.assertFalse(any(e['id'].startswith((ar.PREFIX,ir.PREFIX)) for e in package(state,Path(t))['files']))
 if __name__=='__main__':unittest.main()

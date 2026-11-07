@@ -60,6 +60,8 @@ def build(state,folder,legacy_build):
     read_bindings.build(state,folder,p)
     import server_certificates
     server_certificates.build(state,folder,p)
+    import binding_profiles
+    binding_profiles.build(state,folder,p)
     if state.get("equipmentHierarchies"):
         (folder/"hierarchy").mkdir(exist_ok=True)
         p["schemaVersion"]="2.23.0"
@@ -90,7 +92,7 @@ def findings(state,legacy_build):
 
 def check(state,legacy_check,legacy_build):
     keys={"workspaceVersion","equipment","connections","sources","semantics","mappings","targets","graphs"}
-    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence","metricDefinitions","readBindings","serverCertificates","commandBindings"}:raise ValueError("workspace: unexpected/missing fields")
+    if not keys<=set(state) or set(state)-keys-{"imports","writes","semanticLifecycles","mappingTemplates","templateApplications","recordMappings","resultSchemas","equipmentHierarchies","hierarchyEvidence","metricDefinitions","readBindings","serverCertificates","commandBindings","occupancyBindings","incidentBindings","attributionRules","impactRules"}:raise ValueError("workspace: unexpected/missing fields")
     if state["workspaceVersion"]!=VERSION:raise ValueError("Unsupported workspaceVersion")
     for k in keys-{"workspaceVersion"}:
         if not isinstance(state[k],list) or len(state[k])>1000:raise ValueError(k+": expected list")
@@ -150,6 +152,9 @@ def check(state,legacy_check,legacy_build):
     if "serverCertificates" in state:
         import server_certificates
         server_certificates.check(state,equip)
+    if "occupancyBindings" in state or "incidentBindings" in state:
+        import binding_profiles
+        binding_profiles.check(state,equip)
     if "commandBindings" in state:
         import command_binding as cb
         cs=state["commandBindings"]
