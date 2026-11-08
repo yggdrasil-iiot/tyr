@@ -52,7 +52,7 @@ def schema_validator(kind,version):
     return Draft202012Validator(s,registry=registry,format_checker=FormatChecker())
 def validate_schema(kind,value):
     version=value.get("schemaVersion","1.0.0")
-    if version not in ("1.0.0","1.1.0") and not (version=="2.1.0" and kind=="source-definition") and not (version=="2.2.0" and kind in ("source-definition","semantic-definition")) and not (version in ("2.4.0","2.7.0","2.10.0","2.21.0") and kind=="source-definition"):return ["unsupported schemaVersion"]
+    if version not in ("1.0.0","1.1.0") and not (version=="2.1.0" and kind=="source-definition") and not (version=="2.2.0" and kind in ("source-definition","semantic-definition")) and not (version in ("2.4.0","2.7.0","2.10.0","2.21.0","2.27.0") and kind=="source-definition"):return ["unsupported schemaVersion"]
     return sorted(schema_validator(kind,version).iter_errors(value),key=lambda e:str(list(e.path)))
 def safe(root,path):
     if not isinstance(path,str) or "\\" in path or ":" in path or path.startswith("/") or any(x in ("",".","..") for x in path.split("/")):
@@ -61,6 +61,8 @@ def safe(root,path):
     if not resolved.is_relative_to(root.resolve()): raise ValueError("Path escapes package")
     return resolved
 def source_rules(s):
+    if s.get("schemaVersion")=="2.27.0":
+        d=copy.deepcopy(s);d["schemaVersion"]="2.7.0";return source_rules(d)
     if s.get("schemaVersion")=="2.21.0":
         d=copy.deepcopy(s);d['schemaVersion']='2.7.0';d.pop('recordField',None);return source_rules(d)
     if s.get("schemaVersion")=="2.10.0":
@@ -150,7 +152,7 @@ def validate_package(root):
             except (OSError,ValueError):add("evidence.unreadable",path)
         elif kind=="source-definition":
             if "fixedArray" in d:add("array.legacy-unsupported",path)
-            if d.get("schemaVersion") in ("2.7.0","2.10.0","2.21.0"):add("source.mixed-legacy-unsupported",path)
+            if d.get("schemaVersion") in ("2.7.0","2.10.0","2.21.0","2.27.0"):add("source.mixed-legacy-unsupported",path)
             for rule in source_rules(d):add(rule,path)
             if d["viewOf"] is not None and resolve("source-definition",d["viewOf"]) is None:pass
         elif kind=="semantic-definition":

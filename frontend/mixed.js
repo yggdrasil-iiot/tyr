@@ -24,7 +24,7 @@ sourceView=function(){
 };
 draftSource=function(){
  const kind=$('mixed-source-kind')?val('mixed-source-kind'):'plc';
- if(kind==='plc'){const r=draftBeforeMixed();r.definition={...r.definition,schemaVersion:'2.7.0',sourceKind:'plc',accessMode:val('mixed-source-mode')||'read'};return r;}
+ if(kind==='plc'){const r=draftBeforeMixed();r.definition={...r.definition,schemaVersion:r.definition.rawRepresentation?.valueType==='String'?'2.27.0':'2.7.0',sourceKind:'plc',accessMode:val('mixed-source-mode')||'read'};return r;}
  const id=val('source-id'),old=state.sources.find(r=>r.definition.id===id),type=val('mixed-type'),mode=val('mixed-source-mode');
  let access,address,profile;
  if(kind==='constant'){const text=type==='String'?$('mixed-value').value:val('mixed-value');if(type==='Boolean'&&!['true','false'].includes(text))throw Error('Boolean 상수는 true 또는 false로 입력하세요.');access={kind,value:type==='Boolean'?text==='true':text};address='constant:'+id;profile='constant-v1';}

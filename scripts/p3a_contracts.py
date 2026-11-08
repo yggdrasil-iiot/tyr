@@ -17,6 +17,8 @@ import record_mappings
 import equipment_hierarchy
 import metric_definition
 import command_binding
+import attribution_rule
+import impact_rule
 ROOT=vc.ROOT
 NEW={"mapping-proposal","mapping-set","target-instance","value-graph"}
 OLD={"source-definition","semantic-definition","evidence-artifact","source-observation"}
@@ -24,6 +26,7 @@ NUMERIC={"Int16","UInt16","Int32","UInt32","Int64","Float32","Float64","Double",
 INTEGER={"Int16":16,"UInt16":16,"Int32":32,"UInt32":32,"Int64":64}
 def schema_errors(kind,doc):
     v=doc.get("schemaVersion")
+    if v=='2.27.0' and kind in ('mapping-proposal','attribution-rule','impact-rule','source-definition'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v in ('2.25.0','2.26.0') and kind in ('mapping-proposal','command-binding'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v=='2.24.0' and kind in ('mapping-proposal','metric-definition'):return list(vc.schema_validator(kind,v).iter_errors(doc))
     if v=='2.23.0' and kind in ('mapping-proposal','equipment-hierarchy'):return list(vc.schema_validator(kind,v).iter_errors(doc))
@@ -63,14 +66,16 @@ def validate_package(root):
             docs[key]=d
         except (OSError,ValueError):add("bundle.unreadable",e["path"])
     if any(d.get('schemaVersion')=='2.21.0' for d in docs.values()):
-        if proposal['schemaVersion'] not in ('2.21.0','2.22.0','2.23.0','2.24.0','2.25.0','2.26.0'):add('record-field.envelope','proposal.json')
+        if proposal['schemaVersion'] not in ('2.21.0','2.22.0','2.23.0','2.24.0','2.25.0','2.26.0','2.27.0'):add('record-field.envelope','proposal.json')
         try:
             import record_fields
             record_fields.validate(docs.values())
         except ValueError as e:add(str(e),'record-field')
-    if any(d.get('schemaVersion')=='2.22.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.22.0','2.23.0','2.24.0','2.25.0','2.26.0'):add('broadcast.envelope','proposal.json')
+    if any(d.get('schemaVersion')=='2.22.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.22.0','2.23.0','2.24.0','2.25.0','2.26.0','2.27.0'):add('broadcast.envelope','proposal.json')
     # As Bifrost: a 2.26.0 document travels only in a 2.26.0 proposal, whose links all name their server.
-    if any(d.get('schemaVersion')=='2.26.0' for d in docs.values()) and proposal['schemaVersion']!='2.26.0':add('command-binding.envelope','proposal.json')
+    if any(d.get('schemaVersion')=='2.26.0' for d in docs.values()) and proposal['schemaVersion'] not in ('2.26.0','2.27.0'):add('command-binding.envelope','proposal.json')
+    # As Bifrost (rule.envelope): a 2.27.0 document, rule or source definition, travels only in a 2.27.0 proposal.
+    if any(d.get('schemaVersion')=='2.27.0' for d in docs.values()) and proposal['schemaVersion']!='2.27.0':add('rule.envelope','proposal.json')
     if errors:return errors,{}
     def resolve(kind,ref,path):
         d=docs.get((kind,ref["id"],ref["version"]))
@@ -110,12 +115,19 @@ def validate_package(root):
     if any(d["kind"] in mapping_templates.KINDS for d in docs.values()):
         try:mapping_templates.validate(docs.values())
         except ValueError as e:add(str(e),"mapping-template")
-    try:equipment_hierarchy.validate(docs.values())
-    except ValueError as e:add(str(e),equipment_hierarchy.KIND)
+    try:equipment_hierarchy.validate(docs.values());hierarchy_ok=True
+    except ValueError as e:add(str(e),equipment_hierarchy.KIND);hierarchy_ok=False
     try:metric_definition.validate(docs.values())
     except ValueError as e:add(str(e),metric_definition.KIND)
     try:command_binding.validate(docs.values(),lambda p:vc.safe(root,p).read_bytes())
     except (OSError,ValueError) as e:add(str(e) if isinstance(e,ValueError) else "command-binding.unresolved",command_binding.KIND)
+    # Spec 130: an invalid hierarchy keeps its own refusal; the rule validators run on a hierarchy that passed, as Bifrost's
+    # fail-first bundle check implies.
+    if hierarchy_ok:
+        try:attribution_rule.validate(docs.values(),lambda p:vc.safe(root,p).read_bytes())
+        except (OSError,ValueError) as e:add(str(e) if isinstance(e,ValueError) else "attribution.binding-profile",attribution_rule.KIND)
+        try:impact_rule.validate(docs.values(),lambda p:vc.safe(root,p).read_bytes())
+        except (OSError,ValueError) as e:add(str(e) if isinstance(e,ValueError) else "impact.binding-profile",impact_rule.KIND)
     concepts={};targets={};members={}
     for key,d in docs.items():
         path=d["kind"]+":"+d["id"]

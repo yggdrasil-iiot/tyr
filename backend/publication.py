@@ -6,6 +6,8 @@ import sample_quality as sq
 import p3a_contracts as p3
 import validate_contracts as vc
 import command_binding as cb
+import attribution_rule as ar
+import impact_rule as ir
 ID=re.compile(r"^[a-z][a-z0-9._-]{0,127}$")
 def require(v,message):
     if not v:raise ValueError(message)
@@ -68,6 +70,10 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             b=read_binding(c["readBindingRef"])
             return None if b is None else ("mapping-set",b["mappingSetRef"]["id"],b["mappingSetRef"]["version"])
         selected|={k for k,d in docs.items() if k[0]==cb.KIND and read_set(d) in selected}
+        # An attribution rule travels only when every mapping set its members read is selected (Bifrost resolves each member in
+        # the bundle); occupancyBindingRef then brings its profile. An impact rule travels with its attribution rule.
+        selected|={k for k,d in docs.items() if k[0]==ar.KIND and all(("mapping-set",m["mappingSetRef"]["id"],m["mappingSetRef"]["version"]) in selected for m in d["members"])}
+        selected|={k for k,d in docs.items() if k[0]==ir.KIND and (ar.KIND,d["attributionRuleRef"]["id"],d["attributionRuleRef"]["version"]) in selected}
         def include_application(a):
             include("template-application",a);include_template(a["templateRef"])
             if a["previousApplicationRef"] is not None:include_application(include("template-application",a["previousApplicationRef"]))
@@ -75,7 +81,7 @@ def build(state,folder,id,stream,by,base,mapping_ids,include_writes,build_packag
             include_application(a)
             for g in a["generated"]:include(g["kind"],g)
             for s in a["sourceSnapshots"]:include("source-definition",s)
-        refs={"recordMappingRef":"record-mapping","sourceRef":"source-definition","destinationRef":"source-definition","graphRef":"value-graph","targetInstanceRef":"target-instance","semanticDefinitionRef":"semantic-definition","viewOf":"source-definition","previousBatchRef":"import-batch","readBindingRef":"evidence-artifact","certificateRef":"evidence-artifact"}
+        refs={"recordMappingRef":"record-mapping","sourceRef":"source-definition","destinationRef":"source-definition","graphRef":"value-graph","targetInstanceRef":"target-instance","semanticDefinitionRef":"semantic-definition","viewOf":"source-definition","previousBatchRef":"import-batch","readBindingRef":"evidence-artifact","certificateRef":"evidence-artifact","occupancyBindingRef":"evidence-artifact","incidentBindingRef":"evidence-artifact","attributionRuleRef":"attribution-rule"}
         def visit(v):
             if isinstance(v,dict):
                 for name,x in v.items():
