@@ -7,6 +7,8 @@ import server,publication,binding_profiles as bp,attribution_rule as ar,impact_r
 FIX=R/'fixtures/attribution-rule'
 BUNDLE=FIX/'bundle'
 PLC_BUNDLE=FIX/'plc-stamped-bundle'
+BIFROST_COPY=R.parent/'bifrost/core/src/test/resources/mapping-fixtures/tyr-attribution-impact'
+PLC_BIFROST_COPY=R.parent/'bifrost/core/src/test/resources/mapping-fixtures/tyr-attribution-plc-stamped'
 JAR=R.parent/'bifrost/gates/target/bifrost-gates.jar'
 SETS=('station1-mapping','station2-mapping','nutrunner1-mapping','nutrunner2-mapping')
 def load(p):return server.contracts.load(R/p)
@@ -297,7 +299,7 @@ class Publication(unittest.TestCase):
    p,findings=publish(state,Path(t)/'b');self.assertEqual(findings,[]);self.assertNotIn(ir.KIND,{e['kind'] for e in p['files']})
  def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
   with tempfile.TemporaryDirectory() as t:
-   publish(w(),Path(t)/'b');self.assertEqual(tree(Path(t)/'b'),tree(BUNDLE))
+   publish(w(),Path(t)/'b');self.assertEqual(tree(Path(t)/'b'),tree(BUNDLE));self.assertEqual(tree(BIFROST_COPY),tree(BUNDLE))
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',BUNDLE);self.assertTrue(v['accepted'],v);self.assertEqual(v['findings'],[])
@@ -345,7 +347,7 @@ class PlcStamped(unittest.TestCase):
   self.refused(stamped(lambda r:r['activity'].append({'equipmentPath':'synthetic-site:line2:station1','memberRef':'station1-present','activeWhen':True})),'attribution.activity-member')
  def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
   with tempfile.TemporaryDirectory() as t:
-   publish(plc(),Path(t)/'b',id='attribution-plc-stamped-fixture');self.assertEqual(tree(Path(t)/'b'),tree(PLC_BUNDLE));self.assertEqual(len(tree(PLC_BUNDLE)),59)
+   publish(plc(),Path(t)/'b',id='attribution-plc-stamped-fixture');self.assertEqual(tree(Path(t)/'b'),tree(PLC_BUNDLE));self.assertEqual(len(tree(PLC_BUNDLE)),59);self.assertEqual(tree(PLC_BIFROST_COPY),tree(PLC_BUNDLE))
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',PLC_BUNDLE);self.assertTrue(v['accepted'],v)
