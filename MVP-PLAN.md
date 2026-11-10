@@ -290,15 +290,15 @@ Mimir를 화면 도구로 다시 만들거나 Muninn에 작성 기능을 추가�
 
 기준 루트는 로컬 Yggdrasil 작업 폴더이며 Tyr와 Bifrost는 그 아래 형제 디렉터리다.
 
-- mimir/src/main/java/dev/krillin/mimir/DefinitionDeriver.java
-- mimir/src/main/java/dev/krillin/mimir/BrowsedMember.java
+- mimir/src/main/java/yggdrasil/mimir/DefinitionDeriver.java
+- mimir/src/main/java/yggdrasil/mimir/BrowsedMember.java
 - bifrost/core/src/main/resources/schema/definition.schema.json
-- bifrost/core/src/main/java/dev/krillin/bifrost/core/schema/CompatibilityChecker.java
-- bifrost/core/src/main/java/dev/krillin/bifrost/core/vendor/ModelReconciler.java
-- bifrost/core/src/main/java/dev/krillin/bifrost/core/conformance/adapter/IgnitionUdtAdapter.java
-- bifrost/gates/src/main/java/dev/krillin/bifrost/gates/ProvenancePublish.java
+- bifrost/core/src/main/java/yggdrasil/bifrost/core/schema/CompatibilityChecker.java
+- bifrost/core/src/main/java/yggdrasil/bifrost/core/vendor/ModelReconciler.java
+- bifrost/core/src/main/java/yggdrasil/bifrost/core/conformance/adapter/IgnitionUdtAdapter.java
+- bifrost/gates/src/main/java/yggdrasil/bifrost/gates/ProvenancePublish.java
 - bifrost/docs/ADOPTION.md
-- muninn/src/main/java/dev/krillin/muninn/EgressValidator.java
+- muninn/src/main/java/yggdrasil/muninn/EgressValidator.java
 
 ## P0와 P1 실행 결과
 
