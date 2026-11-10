@@ -106,7 +106,7 @@ class Receiver(unittest.TestCase):
         other=R.parent/"bifrost/core/src/main/resources/mapping-contracts"
         for p in (R/"contracts").rglob("*.schema.json"):self.assertEqual(p.read_bytes(),(other/p.relative_to(R/"contracts")).read_bytes())
     def test_no_shared_source(self):
-        files=sorted((R.parent/"bifrost/core/src/main/java/dev/krillin/bifrost/core/mapping").glob("*.java"))
+        files=sorted((R.parent/"bifrost/core/src/main/java/yggdrasil/bifrost/core/mapping").glob("*.java"))
         self.assertTrue(files,"no Bifrost mapping sources: this check needs a sibling Bifrost checkout")
         for p in files:
             code=java_code(p.read_text(encoding="utf-8")).lower()
