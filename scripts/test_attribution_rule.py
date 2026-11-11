@@ -299,8 +299,7 @@ class Publication(unittest.TestCase):
    p,findings=publish(state,Path(t)/'b');self.assertEqual(findings,[]);self.assertNotIn(ir.KIND,{e['kind'] for e in p['files']})
  def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
   with tempfile.TemporaryDirectory() as t:
-   publish(w(),Path(t)/'b');self.assertEqual(tree(Path(t)/'b'),tree(BUNDLE))
-   # tree(BIFROST_COPY)==tree(BUNDLE) returns after the Bifrost copy PR (precedent: tyr #22 -> bifrost #56 -> tyr #23)
+   publish(w(),Path(t)/'b');self.assertEqual(tree(Path(t)/'b'),tree(BUNDLE));self.assertEqual(tree(BIFROST_COPY),tree(BUNDLE))
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',BUNDLE);self.assertTrue(v['accepted'],v);self.assertEqual(v['findings'],[])
@@ -356,8 +355,7 @@ class PlcStamped(unittest.TestCase):
   self.refused(stamped(lambda r:r['activity'].append({'equipmentPath':'synthetic-site:line2:station1','memberRef':'station1-present','activeWhen':True})),'attribution.activity-member')
  def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
   with tempfile.TemporaryDirectory() as t:
-   publish(plc(),Path(t)/'b',stream='line2-plc',id='attribution-plc-stamped-fixture');self.assertEqual(tree(Path(t)/'b'),tree(PLC_BUNDLE));self.assertEqual(len(tree(PLC_BUNDLE)),64)
-   # tree(PLC_BIFROST_COPY)==tree(PLC_BUNDLE) returns after the Bifrost copy PR (precedent: tyr #22 -> bifrost #56 -> tyr #23)
+   publish(plc(),Path(t)/'b',stream='line2-plc',id='attribution-plc-stamped-fixture');self.assertEqual(tree(Path(t)/'b'),tree(PLC_BUNDLE));self.assertEqual(len(tree(PLC_BUNDLE)),64);self.assertEqual(tree(PLC_BIFROST_COPY),tree(PLC_BUNDLE))
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',PLC_BUNDLE);self.assertTrue(v['accepted'],v)
