@@ -24,6 +24,10 @@
     {
       "id": "nutrunner2",
       "label": "Nutrunner 2"
+    },
+    {
+      "id": "station3",
+      "label": "Station 3"
     }
   ],
   "connections": [
@@ -49,6 +53,12 @@
       "id": "sim-opcua-nutrunner2",
       "label": "Bifrost OPC-UA sim",
       "equipmentInstanceId": "nutrunner2",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "sim-opcua-station3",
+      "label": "Bifrost OPC-UA sim",
+      "equipmentInstanceId": "station3",
       "accessProfileRef": "s7-1500-opcua-v1"
     }
   ],
@@ -582,6 +592,50 @@
       "note": "Line2/Station1/Nutrunner1.VisitPresent, Boolean",
       "origin": "synthetic",
       "capturedAt": "2026-11-07T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "station3-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "station3",
+        "connectionProfileRef": "sim-opcua-station3",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station3.Running",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station3.Running"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-station3-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "station3-running",
+      "note": "Station3 running: nsu=urn:bifrost:opcua:sim;s=Line2/Station3.Running, Boolean",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
     }
   ],
   "semantics": [
@@ -848,6 +902,27 @@
       "evidenceRefs": [
         {
           "artifactId": "manual-nutrunner2-torque",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "station3",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station3",
+      "label": "Station 3",
+      "semanticDefinitionRef": {
+        "id": "station-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-station3-running",
           "locator": {
             "kind": "text-line",
             "line": 1
@@ -1393,6 +1468,58 @@
           }
         }
       ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "station3-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station3",
+      "targetInstanceRef": {
+        "id": "station3",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "station3-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "station3-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-station3-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
     }
   ],
   "equipmentHierarchies": [
@@ -1493,6 +1620,21 @@
               }
             }
           ]
+        },
+        {
+          "equipmentInstanceId": "station3",
+          "label": "Station 3",
+          "equipmentLevel": "WORKCELL_6",
+          "parentEquipmentInstanceId": "line2",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 8
+              }
+            }
+          ]
         }
       ],
       "evidenceRefs": []
@@ -1504,8 +1646,8 @@
       "version": "1.0.0",
       "label": "Synthetic plant register, line 2",
       "format": "csv",
-      "bytesBase64": "ZXF1aXBtZW50SW5zdGFuY2VJZCxsYWJlbCxlcXVpcG1lbnRMZXZlbCxwYXJlbnQKc3ludGhldGljLXNpdGUsU3ludGhldGljIHNpdGUsU0lURV8xLApsaW5lMixMaW5lIDIsUFJPRFVDVElPTkxJTkVfNSxzeW50aGV0aWMtc2l0ZQpzdGF0aW9uMSxTdGF0aW9uIDEsV09SS0NFTExfNixsaW5lMgpzdGF0aW9uMixTdGF0aW9uIDIsV09SS0NFTExfNixsaW5lMgpudXRydW5uZXIxLE51dHJ1bm5lciAxLFdPUktVTklUXzExLHN0YXRpb24xCm51dHJ1bm5lcjIsTnV0cnVubmVyIDIsV09SS1VOSVRfMTEsc3RhdGlvbjEK",
-      "sha256": "afb8a6ddc0e9a8eb8c703ba83bb354b66259b904c86e07666a343822035b3aa3",
+      "bytesBase64": "ZXF1aXBtZW50SW5zdGFuY2VJZCxsYWJlbCxlcXVpcG1lbnRMZXZlbCxwYXJlbnQKc3ludGhldGljLXNpdGUsU3ludGhldGljIHNpdGUsU0lURV8xLApsaW5lMixMaW5lIDIsUFJPRFVDVElPTkxJTkVfNSxzeW50aGV0aWMtc2l0ZQpzdGF0aW9uMSxTdGF0aW9uIDEsV09SS0NFTExfNixsaW5lMgpzdGF0aW9uMixTdGF0aW9uIDIsV09SS0NFTExfNixsaW5lMgpudXRydW5uZXIxLE51dHJ1bm5lciAxLFdPUktVTklUXzExLHN0YXRpb24xCm51dHJ1bm5lcjIsTnV0cnVubmVyIDIsV09SS1VOSVRfMTEsc3RhdGlvbjEKc3RhdGlvbjMsU3RhdGlvbiAzLFdPUktDRUxMXzYsbGluZTIK",
+      "sha256": "a8c71ff576f380c6fe301b1bff10597a67994035f3d01d8eb57b700fb47f6859",
       "origin": "synthetic",
       "capturedAt": "2026-11-07T00:00:00Z",
       "reviewer": "fixture-reviewer",
@@ -1516,7 +1658,8 @@
         "station1",
         "station2",
         "nutrunner1",
-        "nutrunner2"
+        "nutrunner2",
+        "station3"
       ]
     }
   ],
@@ -1531,14 +1674,15 @@
       "product": null,
       "scope": [
         "station1",
-        "station2"
+        "station2",
+        "station3"
       ],
       "profile": {
         "profileVersion": "0.1.0",
         "topic": "mfg.occupancy",
         "format": {
           "schemaId": "urn:forseti:schema:occupancy:1.0.0",
-          "schemaSha256": "0000000000000000000000000000000000000000000000000000000000000001"
+          "schemaSha256": "e97cd7c97b1ab5e2d63d5b06e6057415945b82cff6d2ca0345106d2daf9d29dc"
         },
         "identity": {
           "scheme": "mes-unit-id",
@@ -1575,14 +1719,15 @@
       "product": null,
       "scope": [
         "station1",
-        "station2"
+        "station2",
+        "station3"
       ],
       "profile": {
         "profileVersion": "0.1.0",
-        "topic": "mfg.incidents",
+        "topic": "quality.incidents",
         "format": {
           "schemaId": "urn:forseti:schema:incident:1.0.0",
-          "schemaSha256": "0000000000000000000000000000000000000000000000000000000000000002"
+          "schemaSha256": "7141c3115d90812f16b22049c66bfaa64942ebacf854b343fb99b3dce168fb34"
         },
         "kinds": [
           "tool-check-failed",
@@ -1606,7 +1751,8 @@
       },
       "stations": [
         "synthetic-site:line2:station1",
-        "synthetic-site:line2:station2"
+        "synthetic-site:line2:station2",
+        "synthetic-site:line2:station3"
       ],
       "members": [
         {

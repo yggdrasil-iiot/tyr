@@ -10,7 +10,7 @@ PLC_BUNDLE=FIX/'plc-stamped-bundle'
 BIFROST_COPY=R.parent/'bifrost/core/src/test/resources/mapping-fixtures/tyr-attribution-impact'
 PLC_BIFROST_COPY=R.parent/'bifrost/core/src/test/resources/mapping-fixtures/tyr-attribution-plc-stamped'
 JAR=R.parent/'bifrost/gates/target/bifrost-gates.jar'
-SETS=('station1-mapping','station2-mapping','nutrunner1-mapping','nutrunner2-mapping')
+SETS=('station1-mapping','station2-mapping','nutrunner1-mapping','nutrunner2-mapping','station3-mapping')
 def load(p):return server.contracts.load(R/p)
 def w():return load('fixtures/attribution-rule/workspace.json')
 def plc():return load('fixtures/attribution-rule/plc-stamped-workspace.json')
@@ -238,7 +238,7 @@ class AttributionRule(unittest.TestCase):
  def test_duplicate_leaf_names_in_one_definition_are_refused(self):
   state=w();next(s for s in state['semantics'] if s['id']=='tool-model')['members'][1]['name']='Torque';self.refused(state,'attribution.member-unresolved')
  def test_a_station_and_a_tool_may_each_have_a_member_named_running(self):server.check_state(w())
- def test_member_equipment_outside_the_stations(self):self.refused(ruled(lambda r:(r.update(stations=['synthetic-site:line2:station2']),r['activity'].__delitem__(slice(0,4)),r['activity'].append({'equipmentPath':'synthetic-site:line2:station2','memberRef':'station2-running','activeWhen':True}))),'attribution.member-equipment')
+ def test_member_equipment_outside_the_stations(self):self.refused(ruled(lambda r:(r.update(stations=['synthetic-site:line2:station2']),r['activity'].__delitem__(slice(0,5)),r['activity'].append({'equipmentPath':'synthetic-site:line2:station2','memberRef':'station2-running','activeWhen':True}))),'attribution.member-equipment')
  # spec 133
  def test_activity_member_unresolved(self):self.refused(ruled(lambda r:r['activity'][0].update(memberRef='station1-torque')),'attribution.activity-member')
  def test_activity_member_must_be_boolean(self):self.refused(ruled(lambda r:r['activity'][2].update(memberRef='nutrunner1-torque')),'attribution.activity-member')
@@ -287,7 +287,7 @@ class Publication(unittest.TestCase):
    ids={(e['kind'],e['id']) for e in p['files']}
    for k in ((ar.KIND,'line2-attribution'),(ir.KIND,'line2-impact'),('evidence-artifact','occupancy-binding-line2'),('evidence-artifact','incident-binding-line2'),('equipment-hierarchy','line2-plant'),('evidence-artifact','hierarchy-plant-register')):self.assertIn(k,ids)
    for f in ('data/occupancy-binding-0.json','data/incident-binding-0.json','attribution-rules/0.json','impact-rules/0.json','submission.json'):self.assertTrue((Path(t)/'b'/f).is_file(),f)
-   self.assertEqual(load(Path(t)/'b/submission.json')['streamId'],'line2');self.assertEqual(len(tree(Path(t)/'b')),39)
+   self.assertEqual(load(Path(t)/'b/submission.json')['streamId'],'line2');self.assertEqual(len(tree(Path(t)/'b')),44)
  def test_rule_stays_out_when_one_of_its_mapping_sets_is_not_published(self):
   with tempfile.TemporaryDirectory() as t:
    p,findings=publish(w(),Path(t)/'b',SETS[:3]);self.assertEqual(findings,[])
@@ -299,10 +299,19 @@ class Publication(unittest.TestCase):
    p,findings=publish(state,Path(t)/'b');self.assertEqual(findings,[]);self.assertNotIn(ir.KIND,{e['kind'] for e in p['files']})
  def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
   with tempfile.TemporaryDirectory() as t:
-   publish(w(),Path(t)/'b');self.assertEqual(tree(Path(t)/'b'),tree(BUNDLE));self.assertEqual(tree(BIFROST_COPY),tree(BUNDLE))
+   publish(w(),Path(t)/'b');self.assertEqual(tree(Path(t)/'b'),tree(BUNDLE))
+   # tree(BIFROST_COPY)==tree(BUNDLE) returns after the Bifrost copy PR (precedent: tyr #22 -> bifrost #56 -> tyr #23)
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',BUNDLE);self.assertTrue(v['accepted'],v);self.assertEqual(v['findings'],[])
+ def test_committed_bundles_carry_forsetis_schema_digests_topic_and_streams(self):
+  # raw-byte SHA-256 of forseti's committed schemas/occupancy-1.0.0 and incident-1.0.0 (forseti main a3a9381)
+  for bundle,stream in ((BUNDLE,'line2'),(PLC_BUNDLE,'line2-plc')):
+   occ,inc=load(bundle/OCC),load(bundle/INC)
+   self.assertEqual(occ['format']['schemaSha256'],'e97cd7c97b1ab5e2d63d5b06e6057415945b82cff6d2ca0345106d2daf9d29dc',bundle.name)
+   self.assertEqual((inc['format']['schemaSha256'],inc['topic']),('7141c3115d90812f16b22049c66bfaa64942ebacf854b343fb99b3dce168fb34','quality.incidents'),bundle.name)
+   self.assertEqual(load(bundle/'submission.json')['streamId'],stream,bundle.name)
+   self.assertEqual(load(bundle/RULE)['stations'],['synthetic-site:line2:station'+n for n in '123'],bundle.name)
 def stamped(f):
  state=plc();f(state['attributionRules'][0]);return state
 IDENTITY_SOURCES=(('station1-unit','station1','sim-opcua-station1','Line2/Station1.UnitId','String'),('station1-visit','station1','sim-opcua-station1','Line2/Station1.VisitId','String'),('station1-present','station1','sim-opcua-station1','Line2/Station1.VisitPresent','Boolean'),
@@ -347,7 +356,8 @@ class PlcStamped(unittest.TestCase):
   self.refused(stamped(lambda r:r['activity'].append({'equipmentPath':'synthetic-site:line2:station1','memberRef':'station1-present','activeWhen':True})),'attribution.activity-member')
  def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
   with tempfile.TemporaryDirectory() as t:
-   publish(plc(),Path(t)/'b',id='attribution-plc-stamped-fixture');self.assertEqual(tree(Path(t)/'b'),tree(PLC_BUNDLE));self.assertEqual(len(tree(PLC_BUNDLE)),59);self.assertEqual(tree(PLC_BIFROST_COPY),tree(PLC_BUNDLE))
+   publish(plc(),Path(t)/'b',stream='line2-plc',id='attribution-plc-stamped-fixture');self.assertEqual(tree(Path(t)/'b'),tree(PLC_BUNDLE));self.assertEqual(len(tree(PLC_BUNDLE)),64)
+   # tree(PLC_BIFROST_COPY)==tree(PLC_BUNDLE) returns after the Bifrost copy PR (precedent: tyr #22 -> bifrost #56 -> tyr #23)
  def test_bifrost_receiver_validates_the_bundle(self):
   with tempfile.TemporaryDirectory() as t:
    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',PLC_BUNDLE);self.assertTrue(v['accepted'],v)
@@ -398,7 +408,7 @@ PARITY=[
  ('impact.binding-unresolved',BUNDLE,edit(IMPACT,lambda r:r['incidentBindingRef'].update(version='9.9.9')),'impact.binding-unresolved'),
  ('impact.binding-profile-artifact',BUNDLE,edit(IMPACT,lambda r:r['incidentBindingRef'].update(id='occupancy-binding-line2')),'impact.binding-profile'),
  ('impact.binding-profile-kinds',BUNDLE,profile_edit(INC,lambda p:p.update(kinds=[])),'impact.binding-profile'),
- ('impact.binding-profile-duplicate-key',BUNDLE,raw_edit(INC,lambda b:b.replace(b'"topic": "mfg.incidents"',b'"topic": "ignored",\n  "topic": "mfg.incidents"')),'impact.binding-profile'),
+ ('impact.binding-profile-duplicate-key',BUNDLE,raw_edit(INC,lambda b:b.replace(b'"topic": "quality.incidents"',b'"topic": "ignored",\n  "topic": "quality.incidents"')),'impact.binding-profile'),
  ('impact.binding-profile-deep-json',BUNDLE,raw_edit(INC,lambda b:b'['*10000+b'0'+b']'*10000),'impact.binding-profile'),
  ('impact.retention-order',BUNDLE,edit(IMPACT,lambda r:r['retention'].update(workRecordsMs=3600000)),'impact.retention-order'),
 ]
@@ -438,13 +448,13 @@ class Parity(unittest.TestCase):
     self.assertEqual(server.v2.p3.validate_package(b)[0],[],rel);v=publication.Adapter(JAR,Path(t)/'registry').call('validate',b);self.assertTrue(v['accepted'],rel)
 class Approval(unittest.TestCase):
  """Owner decision Q1 / spec row 2: Bifrost's two-key approval of the committed bundles Tyr built, through the CLI Tyr's CI builds."""
- def approves(self,bundle):
+ def approves(self,bundle,stream='line2'):
   with tempfile.TemporaryDirectory() as t:
-   reg,receipt=approved(bundle,Path(t))
-   self.assertEqual(receipt.get('kind'),'mapping-approval',receipt);self.assertEqual((receipt['payload']['streamId'],receipt['payload']['execution']),('line2','excluded'))
+   reg,receipt=approved(bundle,Path(t),stream)
+   self.assertEqual(receipt.get('kind'),'mapping-approval',receipt);self.assertEqual((receipt['payload']['streamId'],receipt['payload']['execution']),(stream,'excluded'))
    self.assertTrue((reg/'mappings/approvals/approval-1.json').is_file());self.assertTrue((reg/'mappings/attestations/approval-1.dsse.json').is_file())
  def test_bifrost_approves_the_occupancy_join_bundle(self):self.approves(BUNDLE)
- def test_bifrost_approves_the_plc_stamped_bundle(self):self.approves(PLC_BUNDLE)
+ def test_bifrost_approves_the_plc_stamped_bundle(self):self.approves(PLC_BUNDLE,'line2-plc')
  def test_a_refused_bundle_leaves_no_receipt(self):
   with tempfile.TemporaryDirectory() as t:
    b=case_bundle(Path(t),BUNDLE,edit(IMPACT,lambda r:r['retention'].update(workRecordsMs=3600000)))

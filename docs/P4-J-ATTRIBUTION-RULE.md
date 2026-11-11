@@ -72,7 +72,7 @@ PLC 소스 폼은 타입 지정 접근 프로필(예를 들어 OPC UA를 거쳐 
 - `kinds`: 비어 있지 않고 중복 없는 고유한 문자열 배열(`kinds[]`)이다. Bifrost는 이 배열이 비어 있지 않고 중복이 없다는 점만 검사한다.
 - `equipmentRefBasis`: 상수 `isa95-path`이다.
 
-아티팩트의 `scope`는 프로필이 포괄하는 스테이션 ID(설비 인스턴스 ID) 목록으로 지정된다. `format.schemaSha256`은 64자의 소문자 16진수 문자열이어야 한다. 이 값은 forseti의 스키마가 확정되는 3단계 전까지 픽스처 안에서 자리표시자 역할을 한다.
+아티팩트의 `scope`는 프로필이 포괄하는 스테이션 ID(설비 인스턴스 ID) 목록으로 지정된다. `format.schemaSha256`은 64자의 소문자 16진수 문자열이어야 한다. 픽스처의 값은 forseti가 커밋한 `schemas/occupancy-1.0.0.schema.json`과 `schemas/incident-1.0.0.schema.json`의 원시 바이트 SHA-256이다.
 
 `identity.pattern` 정규식은 유닛 ID 전체와 일치해야 한다. 구문 검사에서는 Java와 ECMA-262 공통 문법만 받아들인다. 구문 검사에서 통과되는 문법 요소는 다음과 같다.
 - 리터럴 문자
@@ -173,7 +173,7 @@ Tyr는 다음을 Bifrost에 맡긴다. 2키 영수증 승인, in-toto/DSSE 증�
 
 발행 범위(`backend/publication.py`)는 다음 조건으로 정한다. 귀속 규칙은 소속 멤버가 읽어 들이는 모든 매핑 세트가 발행 대상으로 함께 선택되었을 때만 발행에 들어간다. 필요한 매핑 세트가 하나라도 빠지면 귀속 규칙은 발행 목록에서 제외된다. 영향 규칙은 자신이 가리키는 귀속 규칙과 항상 함께 묶여 발행된다. 가리키는 귀속 규칙이 발행되지 않으면 영향 규칙도 함께 빠진다. 프로필 문서는 각 규칙의 참조 관계(`occupancyBindingRef`, `incidentBindingRef`)를 따라 패키지에 들어온다. 설비 계층 구조는 매핑 세트나 규칙 선택 여부와 관계없이 언제나 패키지 발행 목록에 들어간다.
 
-테스트 픽스처는 `line2` 스트림을 발행한다. 저장소에 커밋되어 관리되는 번들인 `fixtures/attribution-rule/bundle/`(39개 파일)과 `fixtures/attribution-rule/plc-stamped-bundle/`(59개 파일)은 두 픽스처 작업공간(`workspace.json`, `plc-stamped-workspace.json`)을 빌드한 결과물이다. 시험 단계에서는 이들 작업공간을 다시 빌드한 뒤 기존 파일과 바이트 단위로 대조하여 내용이 완전히 일치하는지 확인한다.
+테스트 픽스처는 `line2` 스트림(`bundle/`)과 `line2-plc` 스트림(`plc-stamped-bundle/`)을 발행한다. 저장소에 커밋되어 관리되는 번들인 `fixtures/attribution-rule/bundle/`(44개 파일)과 `fixtures/attribution-rule/plc-stamped-bundle/`(64개 파일)은 두 픽스처 작업공간(`workspace.json`, `plc-stamped-workspace.json`)을 빌드한 결과물이다. 시험 단계에서는 이들 작업공간을 다시 빌드한 뒤 기존 파일과 바이트 단위로 대조하여 내용이 완전히 일치하는지 확인한다.
 
 ## 작성 화면
 
@@ -189,7 +189,7 @@ Tyr는 다음을 Bifrost에 맡긴다. 2키 영수증 승인, in-toto/DSSE 증�
 
 Tyr와 Bifrost 사이에는 공유 코드가 전혀 없다. Tyr는 Bifrost나 forseti의 코드를 단 한 줄도 임포트하지 않는다. Bifrost의 `AttributionRules`, `ImpactRules`, `OccupancyBindingProfile`, `IncidentBindingProfile` 검증기는 Tyr와 완전히 동일한 스키마 바이트를 읽어 들여 독립으로 유효성을 검증한다.
 
-완료 관문은 Bifrost의 `gates mapping approve` 명령이다. 커밋된 두 번들 모두 로컬 환경과 Tyr CI에서 승인되어 `line2` 스트림의 승인 영수증과 DSSE 증명을 받는다. CI 작업에서는 인접 체크아웃 디렉터리에서 Bifrost gates jar 파일을 직접 빌드하여 이 관문을 실행한다.
+완료 관문은 Bifrost의 `gates mapping approve` 명령이다. 커밋된 두 번들 모두 로컬 환경과 Tyr CI에서 승인되어 각 스트림(`line2`, `line2-plc`)의 승인 영수증과 DSSE 증명을 받는다. CI 작업에서는 인접 체크아웃 디렉터리에서 Bifrost gates jar 파일을 직접 빌드하여 이 관문을 실행한다.
 
 패리티 매트릭스는 거부 코드별로 번들을 하나씩 변형하여 만든 26개 행으로 구성된다. 각 행마다 Bifrost의 jar(`mapping validate`)가 지정된 바로 그 거부 코드로 거부하는지 확인하고, Tyr 또한 동일한 코드를 보고하는지 대조한다.
 
@@ -207,14 +207,14 @@ Bifrost 자체의 1단계 픽스처(`attribution-impact`, `attribution-plc-stamp
 
 ## 시험
 
-`scripts/test_attribution_rule.py` 파일에는 총 102개의 시험이 들어 있다.
+`scripts/test_attribution_rule.py` 파일에는 총 103개의 시험이 들어 있다.
 - `Contract`: 2개 시험
 - `StringSource`: 7개 시험
 - `OccupancyProfile`: 10개 시험
 - `Pattern`: 7개 시험
 - `BindingProfiles`: 4개 시험
 - `AttributionRule`: 39개 시험
-- `Publication`: 5개 시험
+- `Publication`: 6개 시험
 - `PlcStamped`: 18개 시험
 - `Parity`: 2개 시험
 - `Approval`: 3개 시험
