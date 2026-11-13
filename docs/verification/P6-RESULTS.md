@@ -55,7 +55,7 @@ A11 검사/승인 후 파일 변경에 따른 이전 승인 재사용 거부, A1
 
 registry identity/policy·파일시스템은 운영자가 보호할 trust root다. 여러 독립 스트림을 가로지르는 전역 semantic catalog, 외부 anchor/rollback-evidence, 운영 IAM/bootstrap/배포, crash staging GC 및 전원 손실 durability는 후속이다. 실제 현장 원본·독립 담당자 PoV도 아직 없다.
 
-Bifrost 작업은 codex/tyr-p6-mapping-release 로컬 feature 브랜치에 있다. main 변경·commit·push·merge는 하지 않았다. hash가 고정된 schema/fixture에는 Git newline normalization 방지 속성을 추가했다.
+Bifrost 작업은 로컬 feature 브랜치에 있다. main 변경·commit·push·merge는 하지 않았다. hash가 고정된 schema/fixture에는 Git newline normalization 방지 속성을 추가했다.
 
 [설계·사용](../P6-BIFROST-PUBLICATION.md) · [MVP 계획](../../MVP-PLAN.md). 다음 주 단계는 P7 오프라인 수용 및 실제 자료 PoV다.
 
