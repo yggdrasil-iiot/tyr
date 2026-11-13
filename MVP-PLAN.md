@@ -456,7 +456,7 @@ B/C fixture는 pending을 유지하며 A 완료를 위해 모두 구현할 필�
 - [x] Tyr 선택 매핑 복수 export/ZIP·SQLite 제출 이력·CLI 검사/서명 승인/발행 상태 조회, 13 화면.
 - [x] Tyr 신규 37 + 회귀 664, Bifrost 기존 614 + 신규 47 직접 검증. A11/A12/A16 오프라인 경계 및 실제 두 앱 seam.
 
-[설계·권위 경계](docs/P6-BIFROST-PUBLICATION.md) · [fixture](fixtures/p6/README.md) · [검증](docs/verification/P6-RESULTS.md). Bifrost는 codex/tyr-p6-mapping-release 로컬 feature 브랜치에서 변경했으며 commit/push/merge는 하지 않았다.
+[설계·권위 경계](docs/P6-BIFROST-PUBLICATION.md) · [fixture](fixtures/p6/README.md) · [검증](docs/verification/P6-RESULTS.md). Bifrost는 로컬 feature 브랜치에서 변경했으며 commit/push/merge는 하지 않았다.
 
 완료 범위는 별도 로컬 registry에서의 파일 승인/발행이다. 운영 IAM/bootstrap, 외부 anchor/rollback-evidence, 전원 손실 durability는 후속이다. 여러 스트림의 의미 카탈로그는 아래 P6 후속에서 하나의 registry 전체 보존 이력 범위로 수용했다. registry 간 연합은 별도다. 프로세스 중단 복구·보수적 GC는 아래 P6 후속 수용에서 별도로 완료했다. 다음 주 단계는 P7 오프라인 수용과 실제 문서/담당자의 PoV이며 실제 자료 확보는 미완료다. 장치 통신·외부 SQL·쓰기 실행은 계속 제외한다.
 
