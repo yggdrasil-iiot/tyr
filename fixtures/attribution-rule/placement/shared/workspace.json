@@ -1,0 +1,1305 @@
+{
+  "workspaceVersion": "2.0.0",
+  "equipment": [
+    {
+      "id": "site-019",
+      "label": "Placement site 019 (shared)"
+    },
+    {
+      "id": "line2",
+      "label": "Line 2"
+    },
+    {
+      "id": "station1",
+      "label": "Station 1"
+    },
+    {
+      "id": "station2",
+      "label": "Station 2"
+    },
+    {
+      "id": "nutrunner1",
+      "label": "Nutrunner 1"
+    },
+    {
+      "id": "nutrunner2",
+      "label": "Nutrunner 2"
+    },
+    {
+      "id": "station3",
+      "label": "Station 3"
+    }
+  ],
+  "connections": [
+    {
+      "id": "sim-opcua-station1",
+      "label": "Bifrost OPC-UA sim",
+      "equipmentInstanceId": "station1",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "sim-opcua-station2",
+      "label": "Bifrost OPC-UA sim",
+      "equipmentInstanceId": "station2",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "sim-opcua-nutrunner1",
+      "label": "Bifrost OPC-UA sim",
+      "equipmentInstanceId": "nutrunner1",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "sim-opcua-nutrunner2",
+      "label": "Bifrost OPC-UA sim",
+      "equipmentInstanceId": "nutrunner2",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    },
+    {
+      "id": "sim-opcua-station3",
+      "label": "Bifrost OPC-UA sim",
+      "equipmentInstanceId": "station3",
+      "accessProfileRef": "s7-1500-opcua-v1"
+    }
+  ],
+  "sources": [
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "station1-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "station1",
+        "connectionProfileRef": "sim-opcua-station1",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station1.Running",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station1.Running"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-station1-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "station1-running",
+      "note": "Station1 running: nsu=urn:bifrost:opcua:sim;s=Line2/Station1.Running, Boolean",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "station2-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "station2",
+        "connectionProfileRef": "sim-opcua-station2",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station2.Running",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station2.Running"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-station2-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "station2-running",
+      "note": "Station2 running: nsu=urn:bifrost:opcua:sim;s=Line2/Station2.Running, Boolean",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "nutrunner1-torque",
+        "version": "1.0.0",
+        "equipmentInstanceId": "nutrunner1",
+        "connectionProfileRef": "sim-opcua-nutrunner1",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner1.Torque",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station1/Nutrunner1.Torque"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float64"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "N.m"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-nutrunner1-torque",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "nutrunner1-torque",
+      "note": "Nutrunner1 torque: nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner1.Torque, Double, N.m",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "nutrunner1-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "nutrunner1",
+        "connectionProfileRef": "sim-opcua-nutrunner1",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner1.Running",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station1/Nutrunner1.Running"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-nutrunner1-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "nutrunner1-running",
+      "note": "Nutrunner1 running: nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner1.Running, Boolean",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "nutrunner2-torque",
+        "version": "1.0.0",
+        "equipmentInstanceId": "nutrunner2",
+        "connectionProfileRef": "sim-opcua-nutrunner2",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner2.Torque",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station1/Nutrunner2.Torque"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Float64"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "known",
+          "code": "N.m"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-nutrunner2-torque",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "nutrunner2-torque",
+      "note": "Nutrunner2 torque: nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner2.Torque, Double, N.m",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "nutrunner2-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "nutrunner2",
+        "connectionProfileRef": "sim-opcua-nutrunner2",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner2.Running",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station1/Nutrunner2.Running"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-nutrunner2-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "nutrunner2-running",
+      "note": "Nutrunner2 running: nsu=urn:bifrost:opcua:sim;s=Line2/Station1/Nutrunner2.Running, Boolean",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
+    },
+    {
+      "definition": {
+        "kind": "source-definition",
+        "schemaVersion": "2.7.0",
+        "id": "station3-running",
+        "version": "1.0.0",
+        "equipmentInstanceId": "station3",
+        "connectionProfileRef": "sim-opcua-station3",
+        "accessProfileRef": "s7-1500-opcua-v1",
+        "status": "ready",
+        "rawAddressText": "nsu=urn:bifrost:opcua:sim;s=Line2/Station3.Running",
+        "addressRadix": null,
+        "access": {
+          "kind": "opcua-node",
+          "namespaceUri": "urn:bifrost:opcua:sim",
+          "identifierType": "string",
+          "identifier": "Line2/Station3.Running"
+        },
+        "rawRepresentation": {
+          "mode": "typed",
+          "valueType": "Boolean"
+        },
+        "inputStage": "already-engineered",
+        "unit": {
+          "status": "not-applicable"
+        },
+        "evidenceRefs": [
+          {
+            "artifactId": "manual-station3-running",
+            "locator": {
+              "kind": "text-line",
+              "line": 1
+            }
+          }
+        ],
+        "viewOf": null,
+        "sourceKind": "plc",
+        "accessMode": "read"
+      },
+      "label": "station3-running",
+      "note": "Station3 running: nsu=urn:bifrost:opcua:sim;s=Line2/Station3.Running, Boolean",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z"
+    }
+  ],
+  "semantics": [
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.12.0",
+      "id": "station-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "running",
+          "name": "Running",
+          "semanticId": "urn:bifrost:sem:Station/Running",
+          "description": "Station is working",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        }
+      ]
+    },
+    {
+      "kind": "semantic-definition",
+      "schemaVersion": "2.12.0",
+      "id": "tool-model",
+      "version": "1.0.0",
+      "members": [
+        {
+          "memberId": "torque",
+          "name": "Torque",
+          "semanticId": "urn:bifrost:sem:Tool/Torque",
+          "description": "Tightening torque",
+          "valueType": "Double",
+          "unit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "role": "measurement",
+          "range": {
+            "low": "0",
+            "high": "100"
+          }
+        },
+        {
+          "memberId": "running",
+          "name": "Running",
+          "semanticId": "urn:bifrost:sem:Tool/Running",
+          "description": "Tool is working",
+          "valueType": "Boolean",
+          "unit": {
+            "status": "not-applicable"
+          },
+          "role": "status",
+          "range": null
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "station1",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station1",
+      "label": "Station 1",
+      "semanticDefinitionRef": {
+        "id": "station-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-station1-running",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "station2",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station2",
+      "label": "Station 2",
+      "semanticDefinitionRef": {
+        "id": "station-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-station2-running",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "nutrunner1",
+      "version": "1.0.0",
+      "equipmentInstanceId": "nutrunner1",
+      "label": "Nutrunner 1",
+      "semanticDefinitionRef": {
+        "id": "tool-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-nutrunner1-torque",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "nutrunner2",
+      "version": "1.0.0",
+      "equipmentInstanceId": "nutrunner2",
+      "label": "Nutrunner 2",
+      "semanticDefinitionRef": {
+        "id": "tool-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-nutrunner2-torque",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    },
+    {
+      "kind": "target-instance",
+      "schemaVersion": "2.0.0",
+      "id": "station3",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station3",
+      "label": "Station 3",
+      "semanticDefinitionRef": {
+        "id": "station-model",
+        "version": "1.0.0"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-station3-running",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "graphs": [],
+  "mappings": [
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "station1-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station1",
+      "targetInstanceRef": {
+        "id": "station1",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "station1-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "station1-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-station1-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "station2-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station2",
+      "targetInstanceRef": {
+        "id": "station2",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "station2-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "station2-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-station2-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "nutrunner1-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "nutrunner1",
+      "targetInstanceRef": {
+        "id": "nutrunner1",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "nutrunner1-torque",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "nutrunner1-torque",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "torque"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-nutrunner1-torque",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        },
+        {
+          "mappingId": "nutrunner1-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "nutrunner1-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-nutrunner1-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "nutrunner2-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "nutrunner2",
+      "targetInstanceRef": {
+        "id": "nutrunner2",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "nutrunner2-torque",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "nutrunner2-torque",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "torque"
+            }
+          ],
+          "transform": [
+            {
+              "op": "cast",
+              "to": "Double",
+              "rounding": "exact",
+              "overflow": "error"
+            }
+          ],
+          "outputUnit": {
+            "status": "known",
+            "code": "N.m"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-nutrunner2-torque",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        },
+        {
+          "mappingId": "nutrunner2-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "nutrunner2-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-nutrunner2-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "mapping-set",
+      "schemaVersion": "2.12.0",
+      "id": "station3-mapping",
+      "version": "1.0.0",
+      "equipmentInstanceId": "station3",
+      "targetInstanceRef": {
+        "id": "station3",
+        "version": "1.0.0"
+      },
+      "mappings": [
+        {
+          "mappingId": "station3-running",
+          "valueRef": {
+            "kind": "source",
+            "sourceRef": {
+              "id": "station3-running",
+              "version": "1.0.0"
+            }
+          },
+          "memberPath": [
+            {
+              "kind": "member",
+              "memberId": "running"
+            }
+          ],
+          "transform": [],
+          "outputUnit": {
+            "status": "not-applicable"
+          },
+          "invalidValuePolicy": "bad-quality",
+          "evidenceRefs": [
+            {
+              "artifactId": "manual-station3-running",
+              "locator": {
+                "kind": "text-line",
+                "line": 1
+              }
+            }
+          ],
+          "temporalPolicy": {
+            "timestampBasis": "source",
+            "maxAgeMs": 5000,
+            "maxSkewMs": 0,
+            "uncertainInput": "reject",
+            "missingInput": "reject",
+            "badInput": "propagate",
+            "assembly": "latest"
+          }
+        }
+      ]
+    }
+  ],
+  "equipmentHierarchies": [
+    {
+      "kind": "equipment-hierarchy",
+      "schemaVersion": "2.23.0",
+      "id": "line2-plant",
+      "version": "1.0.0",
+      "label": "Synthetic plant, line 2",
+      "levelVocabulary": "opc-10030-1.00-isa95-equipment-element-level-enum",
+      "nodes": [
+        {
+          "equipmentInstanceId": "site-019",
+          "label": "Placement site 019 (shared)",
+          "equipmentLevel": "SITE_1",
+          "parentEquipmentInstanceId": null,
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 2
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "line2",
+          "label": "Line 2",
+          "equipmentLevel": "PRODUCTIONLINE_5",
+          "parentEquipmentInstanceId": "site-019",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 3
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "station1",
+          "label": "Station 1",
+          "equipmentLevel": "WORKCELL_6",
+          "parentEquipmentInstanceId": "line2",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 4
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "station2",
+          "label": "Station 2",
+          "equipmentLevel": "WORKCELL_6",
+          "parentEquipmentInstanceId": "line2",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 5
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "nutrunner1",
+          "label": "Nutrunner 1",
+          "equipmentLevel": "WORKUNIT_11",
+          "parentEquipmentInstanceId": "station1",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 6
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "nutrunner2",
+          "label": "Nutrunner 2",
+          "equipmentLevel": "WORKUNIT_11",
+          "parentEquipmentInstanceId": "station1",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 7
+              }
+            }
+          ]
+        },
+        {
+          "equipmentInstanceId": "station3",
+          "label": "Station 3",
+          "equipmentLevel": "WORKCELL_6",
+          "parentEquipmentInstanceId": "line2",
+          "evidenceRefs": [
+            {
+              "artifactId": "hierarchy-plant-register",
+              "locator": {
+                "kind": "text-line",
+                "line": 8
+              }
+            }
+          ]
+        }
+      ],
+      "evidenceRefs": []
+    }
+  ],
+  "hierarchyEvidence": [
+    {
+      "id": "plant-register",
+      "version": "1.0.0",
+      "label": "Synthetic plant register, line 2",
+      "format": "csv",
+      "bytesBase64": "ZXF1aXBtZW50SW5zdGFuY2VJZCxsYWJlbCxlcXVpcG1lbnRMZXZlbCxwYXJlbnQKc2l0ZS0wMTksUGxhY2VtZW50IHNpdGUgMDE5IChzaGFyZWQpLFNJVEVfMSwKbGluZTIsTGluZSAyLFBST0RVQ1RJT05MSU5FXzUsc2l0ZS0wMTkKc3RhdGlvbjEsU3RhdGlvbiAxLFdPUktDRUxMXzYsbGluZTIKc3RhdGlvbjIsU3RhdGlvbiAyLFdPUktDRUxMXzYsbGluZTIKbnV0cnVubmVyMSxOdXRydW5uZXIgMSxXT1JLVU5JVF8xMSxzdGF0aW9uMQpudXRydW5uZXIyLE51dHJ1bm5lciAyLFdPUktVTklUXzExLHN0YXRpb24xCnN0YXRpb24zLFN0YXRpb24gMyxXT1JLQ0VMTF82LGxpbmUyCg==",
+      "sha256": "7dfb7c3977a3994c0e87f6a2286512bd78451200b1dc7625cee9322e9129a0ed",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z",
+      "reviewer": "fixture-reviewer",
+      "product": null,
+      "scope": [
+        "site-019",
+        "line2",
+        "station1",
+        "station2",
+        "nutrunner1",
+        "nutrunner2",
+        "station3"
+      ]
+    }
+  ],
+  "occupancyBindings": [
+    {
+      "id": "line2",
+      "version": "1.0.0",
+      "label": "Line 2 MES occupancy",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z",
+      "reviewer": "fixture-reviewer",
+      "product": null,
+      "scope": [
+        "station1",
+        "station2",
+        "station3"
+      ],
+      "profile": {
+        "profileVersion": "0.1.0",
+        "topic": "mfg.occupancy",
+        "format": {
+          "schemaId": "urn:forseti:schema:occupancy:1.0.0",
+          "schemaSha256": "e97cd7c97b1ab5e2d63d5b06e6057415945b82cff6d2ca0345106d2daf9d29dc"
+        },
+        "identity": {
+          "scheme": "mes-unit-id",
+          "pattern": "[A-Z0-9]{17}"
+        },
+        "enter": {
+          "bizStep": "urn:epcglobal:cbv:bizstep:arriving"
+        },
+        "leave": {
+          "bizStep": "urn:epcglobal:cbv:bizstep:departing"
+        },
+        "correction": {
+          "errorDeclaration": "reissue-same-event-id",
+          "reasons": [
+            "urn:epcglobal:cbv:er:did_not_occur",
+            "urn:epcglobal:cbv:er:incorrect_data"
+          ]
+        },
+        "timestampBasis": "eventTime",
+        "sources": [
+          "mes-line2"
+        ]
+      }
+    }
+  ],
+  "incidentBindings": [
+    {
+      "id": "line2",
+      "version": "1.0.0",
+      "label": "Line 2 quality incidents",
+      "origin": "synthetic",
+      "capturedAt": "2026-11-07T00:00:00Z",
+      "reviewer": "fixture-reviewer",
+      "product": null,
+      "scope": [
+        "station1",
+        "station2",
+        "station3"
+      ],
+      "profile": {
+        "profileVersion": "0.1.0",
+        "topic": "quality.incidents",
+        "format": {
+          "schemaId": "urn:forseti:schema:incident:1.0.0",
+          "schemaSha256": "7141c3115d90812f16b22049c66bfaa64942ebacf854b343fb99b3dce168fb34"
+        },
+        "kinds": [
+          "tool-check-failed",
+          "gauge-drift"
+        ],
+        "equipmentRefBasis": "isa95-path"
+      }
+    }
+  ],
+  "attributionRules": [
+    {
+      "kind": "attribution-rule",
+      "schemaVersion": "2.27.0",
+      "id": "line2-attribution",
+      "version": "1.0.0",
+      "label": "Line 2 occupancy-join attribution",
+      "description": "Joins nutrunner torque samples with MES occupancy at station 1, station 2 and station 3 by event time.",
+      "equipmentRef": {
+        "id": "line2-plant",
+        "version": "1.0.0"
+      },
+      "stations": [
+        "site-019:line2:station1",
+        "site-019:line2:station2",
+        "site-019:line2:station3"
+      ],
+      "members": [
+        {
+          "mappingSetRef": {
+            "id": "nutrunner1-mapping",
+            "version": "1.0.0"
+          },
+          "mappingId": "nutrunner1-torque",
+          "semanticId": "urn:bifrost:sem:Tool/Torque",
+          "metric": "Torque"
+        },
+        {
+          "mappingSetRef": {
+            "id": "nutrunner2-mapping",
+            "version": "1.0.0"
+          },
+          "mappingId": "nutrunner2-torque",
+          "semanticId": "urn:bifrost:sem:Tool/Torque",
+          "metric": "Torque"
+        },
+        {
+          "mappingSetRef": {
+            "id": "station1-mapping",
+            "version": "1.0.0"
+          },
+          "mappingId": "station1-running",
+          "semanticId": "urn:bifrost:sem:Station/Running",
+          "metric": "Running"
+        },
+        {
+          "mappingSetRef": {
+            "id": "station2-mapping",
+            "version": "1.0.0"
+          },
+          "mappingId": "station2-running",
+          "semanticId": "urn:bifrost:sem:Station/Running",
+          "metric": "Running"
+        },
+        {
+          "mappingSetRef": {
+            "id": "nutrunner1-mapping",
+            "version": "1.0.0"
+          },
+          "mappingId": "nutrunner1-running",
+          "semanticId": "urn:bifrost:sem:Tool/Running",
+          "metric": "Running"
+        },
+        {
+          "mappingSetRef": {
+            "id": "nutrunner2-mapping",
+            "version": "1.0.0"
+          },
+          "mappingId": "nutrunner2-running",
+          "semanticId": "urn:bifrost:sem:Tool/Running",
+          "metric": "Running"
+        },
+        {
+          "mappingSetRef": {
+            "id": "station3-mapping",
+            "version": "1.0.0"
+          },
+          "mappingId": "station3-running",
+          "semanticId": "urn:bifrost:sem:Station/Running",
+          "metric": "Running"
+        }
+      ],
+      "activity": [
+        {
+          "equipmentPath": "site-019:line2:station1",
+          "memberRef": "station1-running",
+          "activeWhen": true
+        },
+        {
+          "equipmentPath": "site-019:line2:station2",
+          "memberRef": "station2-running",
+          "activeWhen": true
+        },
+        {
+          "equipmentPath": "site-019:line2:station1:nutrunner1",
+          "memberRef": "nutrunner1-running",
+          "activeWhen": true
+        },
+        {
+          "equipmentPath": "site-019:line2:station1:nutrunner2",
+          "memberRef": "nutrunner2-running",
+          "activeWhen": true
+        },
+        {
+          "equipmentPath": "site-019:line2:station3",
+          "memberRef": "station3-running",
+          "activeWhen": true
+        }
+      ],
+      "occupancyBindingRef": {
+        "id": "occupancy-binding-line2",
+        "version": "1.0.0"
+      },
+      "identity": {
+        "mode": "occupancy-join",
+        "crossCheck": "none"
+      },
+      "temporal": {
+        "timestampBasis": "source",
+        "outOfOrdernessMs": 30000,
+        "allowedLatenessMs": 720000,
+        "horizonMs": 86400000,
+        "enterToleranceMs": 45000,
+        "leaveToleranceMs": 45000
+      },
+      "quality": {
+        "uncertainInput": "reject",
+        "maxBadShare": 0.1
+      },
+      "coverage": {
+        "expectedPeriodMs": 1000,
+        "maxMissingPeriods": 3
+      },
+      "overlap": {
+        "policy": "reject-ambiguous"
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-nutrunner1-torque",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ],
+  "impactRules": [
+    {
+      "kind": "impact-rule",
+      "schemaVersion": "2.27.0",
+      "id": "line2-impact",
+      "version": "1.0.0",
+      "label": "Line 2 tool incident impact",
+      "description": "Marks visits in which a nutrunner shows activity inside an incident's suspect interval.",
+      "attributionRuleRef": {
+        "id": "line2-attribution",
+        "version": "1.0.0"
+      },
+      "incidentScope": [
+        "site-019:line2:station1:nutrunner1",
+        "site-019:line2:station1:nutrunner2"
+      ],
+      "incidentBindingRef": {
+        "id": "incident-binding-line2",
+        "version": "1.0.0"
+      },
+      "interval": {
+        "start": "suspectFrom",
+        "overlap": "any-overlap",
+        "openEnd": "provisional-until-closed"
+      },
+      "evidence": {
+        "match": "equipment-evidence",
+        "onBasisRetracted": "by-cause",
+        "onWithdrawn": "not-affected"
+      },
+      "retention": {
+        "workRecordsMs": 604800000
+      },
+      "evidenceRefs": [
+        {
+          "artifactId": "manual-nutrunner1-torque",
+          "locator": {
+            "kind": "text-line",
+            "line": 1
+          }
+        }
+      ]
+    }
+  ]
+}
