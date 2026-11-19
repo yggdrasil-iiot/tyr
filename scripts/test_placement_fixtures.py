@@ -1,7 +1,9 @@
 """forseti step 5 placement fixtures: the two Line2 workspaces under a different site id, so that Kafka's default
 partitioner (murmur2 of the UTF-8 device path, positive, mod 6) puts the five devices on the raw partitions a placement
 needs. Each variant changes only the site node (id, label, its plant-register line) and is published under its own stream
-and submission id; the bundles are Tyr builds, checked byte for byte, by Tyr's receiver and by Bifrost's jar."""
+and submission id; the bundles are Tyr builds, checked byte for byte, by Tyr's receiver and by Bifrost's jar. forseti step 6
+adds two starvation variants (injection 24): the dedicated and shared variants with the starved station3 in the impact rule's
+incidentScope, each under its own stream and submission id."""
 import base64,copy,hashlib,json,tempfile,unittest
 from pathlib import Path
 import test_attribution_rule as base
@@ -17,6 +19,13 @@ VARIANTS={
  'shared-plc':('plc-stamped-workspace.json','site-019','Placement site 019 (shared)','line2-shared-plc','attribution-plc-stamped-shared-fixture'),
 }
 DEVICES=('line2:station1','line2:station1:nutrunner1','line2:station1:nutrunner2','line2:station2','line2:station3')
+# forseti step 6, injection 24 (spec 681): the starved station3 also accepts incidents. Starvation variant -> (placement variant
+# it derives from, stream, submission id); the impact rule's incidentScope gains the station3 path and nothing else changes.
+STARVED='line2:station3'
+STARVATION={
+ 'dedicated-starvation':('dedicated','line2-dedicated-starvation','attribution-dedicated-starvation-fixture'),
+ 'shared-starvation':('shared','line2-shared-starvation','attribution-shared-starvation-fixture'),
+}
 def placed(state,site,label):
  """The base workspace with the site id and label replaced: every equipment path is re-rooted, the plant register's CSV
  bytes are rewritten line for line and re-digested. Nothing else changes."""
@@ -36,6 +45,11 @@ def placed(state,site,label):
 def dumps(state):return (json.dumps(state,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
 def expected_workspace(name):
  src,site,label,_,_=VARIANTS[name];return dumps(placed(json.loads((FIX/src).read_bytes()),site,label))
+def starved(state,site):
+ """The placement workspace with the starved station's path appended to the impact rule's incidentScope. Nothing else changes."""
+ out=copy.deepcopy(state);out['impactRules'][0]['incidentScope'].append(site+':'+STARVED);return out
+def expected_starvation_workspace(name):
+ src=STARVATION[name][0];return dumps(starved(json.loads((PLACEMENT/src/'workspace.json').read_bytes()),VARIANTS[src][1]))
 def murmur2(data):
  """Kafka's org.apache.kafka.common.utils.Utils.murmur2 (seed 0x9747b28c), as an unsigned 32-bit value."""
  m,h=0x5bd1e995,(0x9747b28c^len(data))&0xffffffff;n=len(data)//4*4
@@ -102,6 +116,39 @@ class Fixtures(unittest.TestCase):
   for name,(src,*_) in VARIANTS.items():
    old,new=tree(FIX/('bundle' if src=='workspace.json' else 'plc-stamped-bundle')),tree(PLACEMENT/name/'bundle')
    self.assertEqual(sorted(k for k in old if old[k]!=new[k]),sorted(['attribution-rules/0.json','data/hierarchy-0.csv','evidence/hierarchy-0.json','hierarchy/0.json','impact-rules/0.json','proposal.json','submission.json']),name)
+class Starvation(unittest.TestCase):
+ """The two starvation variants: their placement variant's workspace with station3 in the incident scope, published under their
+ own stream and submission id; the placement is the placement variant's."""
+ def test_workspace_is_the_placement_workspace_with_only_station3_added_to_the_incident_scope(self):
+  for name,(src,_,_) in STARVATION.items():
+   committed=(PLACEMENT/name/'workspace.json').read_bytes();self.assertEqual(committed,expected_starvation_workspace(name),name)
+   old,new=json.loads((PLACEMENT/src/'workspace.json').read_bytes()),json.loads(committed)
+   self.assertEqual([k for k in old if old[k]!=new[k]],['impactRules'],name)
+   self.assertEqual(new['impactRules'][0]['incidentScope'],old['impactRules'][0]['incidentScope']+[VARIANTS[src][1]+':'+STARVED],name)
+ def test_fixture_bundle_is_the_build_of_the_fixture_workspace(self):
+  for name,(src,stream,id) in STARVATION.items():
+   with self.subTest(name),tempfile.TemporaryDirectory() as t:
+    p,findings=publish(load(PLACEMENT/name/'workspace.json'),Path(t)/'b',stream=stream,id=id);self.assertEqual(findings,[],name)
+    self.assertEqual(tree(Path(t)/'b'),tree(PLACEMENT/name/'bundle'),name)
+ def test_tyr_receiver_validates_the_bundle(self):
+  for name in STARVATION:self.assertEqual(server.v2.p3.validate_package(PLACEMENT/name/'bundle')[0],[],name)
+ def test_only_the_impact_rule_and_its_pins_differ_from_the_placement_bundle(self):
+  for name,(src,stream,id) in STARVATION.items():
+   old,new=tree(PLACEMENT/src/'bundle'),tree(PLACEMENT/name/'bundle');self.assertEqual(sorted(old),sorted(new),name)
+   self.assertEqual(sorted(k for k in old if old[k]!=new[k]),['impact-rules/0.json','proposal.json','submission.json'],name)
+   a,b=json.loads(old['impact-rules/0.json']),json.loads(new['impact-rules/0.json']);site=VARIANTS[src][1]
+   self.assertEqual(b['incidentScope'],[site+':line2:station1:nutrunner1',site+':line2:station1:nutrunner2',site+':'+STARVED],name)
+   b['incidentScope']=a['incidentScope'];self.assertEqual(a,b,name)
+   s=load(PLACEMENT/name/'bundle'/'submission.json');self.assertEqual((s['streamId'],s['id']),(stream,id),name)
+ def test_the_placement_is_the_placement_variants(self):
+  for name,(src,_,_) in STARVATION.items():
+   self.assertEqual(placement(PLACEMENT/name/'bundle'),placement(PLACEMENT/src/'bundle'),name)
+ def test_bifrost_validates_and_approves_the_bundle(self):
+  for name,(_,stream,_) in STARVATION.items():
+   with self.subTest(name),tempfile.TemporaryDirectory() as t:
+    v=publication.Adapter(JAR,Path(t)/'registry').call('validate',PLACEMENT/name/'bundle');self.assertTrue(v['accepted'],v);self.assertEqual(v['findings'],[],name)
+    reg,receipt=approved(PLACEMENT/name/'bundle',Path(t)/'a',stream)
+    self.assertEqual(receipt.get('kind'),'mapping-approval',receipt);self.assertEqual((receipt['payload']['streamId'],receipt['payload']['execution']),(stream,'excluded'))
 class Bifrost(unittest.TestCase):
  def test_bifrost_receiver_validates_the_bundle(self):
   for name in VARIANTS:
@@ -112,9 +159,10 @@ class Bifrost(unittest.TestCase):
    with self.subTest(name),tempfile.TemporaryDirectory() as t:
     reg,receipt=approved(PLACEMENT/name/'bundle',Path(t),stream)
     self.assertEqual(receipt.get('kind'),'mapping-approval',receipt);self.assertEqual((receipt['payload']['streamId'],receipt['payload']['execution']),(stream,'excluded'))
- def test_one_registry_publishes_the_six_bundles(self):
-  """The two existing streams and the four placement streams side by side: approve and publish each under its stream."""
-  bundles=[(FIX/'bundle','line2'),(FIX/'plc-stamped-bundle','line2-plc')]+[(PLACEMENT/n/'bundle',v[3]) for n,v in VARIANTS.items()]
+ def test_one_registry_publishes_the_eight_bundles(self):
+  """The two existing streams, the four placement streams and the two starvation streams side by side: approve and publish each
+  under its stream."""
+  bundles=[(FIX/'bundle','line2'),(FIX/'plc-stamped-bundle','line2-plc')]+[(PLACEMENT/n/'bundle',v[3]) for n,v in VARIANTS.items()]+[(PLACEMENT/n/'bundle',v[1]) for n,v in STARVATION.items()]
   with tempfile.TemporaryDirectory() as t:
    t=Path(t);reg=t/'registry';keys=t/'keys';(reg/'identity').mkdir(parents=True)
    lines=[java('identity','keygen',who,'--out',keys) for who in ('proposer','approver')]
